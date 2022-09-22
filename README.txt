@@ -1,4 +1,4 @@
-##### Goal : non-commercial, I study Front And Back End Service
+##### Goal : non-commercial, only study
 
 ##### Design Source : https://html5up.net/future-imperfect
 
