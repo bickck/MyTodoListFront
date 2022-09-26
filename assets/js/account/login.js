@@ -1,26 +1,26 @@
-const email = document.querySelector("#email");
-const password = document.querySelector("#password");
-
-const registerBtn = document.querySelector("#");
+const loginBtn = document.querySelector("#login_button");
 
 function login(event) {
     event.preventDefault();
-    const url = register.action;
-    const id_register = document.querySelector("#register-form #username");
-    const password_register = document.querySelector("#register-form #userpassword");
+
+    const url = document.querySelector("#login_form").action;
+    const id = document.querySelector("#email");
+    const password = document.querySelector("#password");
+    
     var result = fetch(url, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            username: `${id_register.value}`,
-            password: `${password_register.value}`,
+            username: `${id.value}`,
+            password: `${password.value}`,
         }),
     }).then(Response => {
         if (Response.status.toString() === "200") {
             alert("저장 성공");
-            window.location.href = "http://127.0.0.1:5501/";
+            window.sessionStorage.setItem("_key",Response);
+            window.location.href = "http://127.0.0.1:5500/";
         }
 
     }).catch((error)=> {
@@ -28,4 +28,7 @@ function login(event) {
     });
 }
 
-registerBtn.addEventListener("click", register);
+loginBtn.addEventListener("click", login);
+
+
+console.dir( document.querySelector("#login_form"));
