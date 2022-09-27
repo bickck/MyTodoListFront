@@ -1,10 +1,10 @@
-class auth {
+export class Auth {
 
-    getKey() {
-        return window.sessionStorage.getKey("_jwt");
+    getJsonToken() {
+        return window.sessionStorage.getItem("_jwt");
     }
 
-    setKey(token) {
+    setJsonToken(token) {
         window.sessionStorage.setItem("_jwt", token);
     }
 }

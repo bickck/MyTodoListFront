@@ -1,4 +1,12 @@
+import { Auth } from "./Auth";
+
+export class Login {
+
+}
+
 const loginBtn = document.querySelector("#login_button");
+
+const auth = new Auth(); 
 
 function login(event) {
     event.preventDefault();
@@ -6,7 +14,7 @@ function login(event) {
     const url = document.querySelector("#login_form").action;
     const id = document.querySelector("#email");
     const password = document.querySelector("#password");
-    
+
     var result = fetch(url, {
         method: 'POST',
         headers: {
@@ -19,7 +27,7 @@ function login(event) {
     }).then(Response => {
         if (Response.status.toString() === "200") {
             alert("저장 성공");
-            window.sessionStorage.setItem("_key",Response);
+            auth.setKey(Response);
             window.location.href = "http://127.0.0.1:5500/";
         }
 

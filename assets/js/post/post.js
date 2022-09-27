@@ -3,7 +3,7 @@
  * 포스트에 컨테이너를 생성하고 데이터를 넣는 클래스
  */
 
-class post {
+export class Post {
     // <article class="post">
     // 		<header>
     // 			<div class="title">
