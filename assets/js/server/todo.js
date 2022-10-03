@@ -25,10 +25,30 @@ export class Todo {
         });
     }
 
+    requestUserTodByTodoId(event,arg) {
+        //event.preventDefault();
+        const url = `http://localhost:8080/todo/api/${id}`;
+        var result = fetch(url, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+
+            }),
+        }).then(Response => {
+            data(Response);
+
+        }).catch((error) => {
+
+            alert("서버 연결에 에러가 발생했습니다.");
+        });
+    }
+
     requestUserTodoInsert() {
-        const url = "http://localhost:8080/user/api/intro";
+        const url = `http://localhost:8080/todo/manage/save`;
             var result = fetch(url, {
-                method: 'GET',
+                method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -43,15 +63,15 @@ export class Todo {
             });
     }
 
-    requestUserTodoUpdate() {
-        const url = "http://localhost:8080/user/api/intro";
+    requestUserTodoUpdate(arg) {
+        const url = `http://localhost:8080/todo/manage/update/${id}`;
             var result = fetch(url, {
-                method: 'GET',
+                method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-    
+                    "" : ""
                 }),
             }).then(Response => {
                 
@@ -62,7 +82,7 @@ export class Todo {
     }
 
     requestUserTodoDelete() {
-        const url = "http://localhost:8080/user/api/intro";
+        const url = `http://localhost:8080/todo/manage/delete/${id}`;
             var result = fetch(url, {
                 method: 'GET',
                 headers: {
@@ -79,6 +99,12 @@ export class Todo {
             });
     }
 }
+// /todo/manage/save
+// /todo/manage/update
+// /todo/manage/delete
+// 
+
+//
 
 // function init() {
 //     requestMainPosts();

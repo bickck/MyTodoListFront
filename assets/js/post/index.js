@@ -7,7 +7,7 @@ import {
 
 import {
     Todo
-} from "../server/todo.js"
+} from "../server/Todo.js"
 
 import {
     User
@@ -20,36 +20,13 @@ const user = new User();
 const mainPost = document.querySelector("#main");
 
 function init() {
-   
-    //authDisabledCheck();
-    //requestMainPosts();
+
+    authDisabledCheck();
+    requestMainPosts();
     userDetailInfo();
 }
 
-function requestMainPosts(event) {
-    event.preventDefault();
-    mainTodos.requestMainPosts();
-    userDetailInfo();
-    // event.preventDefault();
-    // const url = "";
-    // var result = fetch(url, {
-    //     method: 'GET',
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
 
-    //     }),
-    // }).then(Response => {
-    //     data(Response);
-
-    // }).catch((error) => {
-    //     alert("서버 연결에 에러가 발생했습니다.");
-    // });
-}
-function requestUserDetails() {
-
-}
 
 function authDisabledCheck() {
     var token = auth.getJsonToken();
@@ -73,10 +50,48 @@ function authDisabledCheck() {
     }
 }
 
-function userDetailInfo() {
+function requestMainPosts(event) {
+    event.preventDefault();
+    const url = "/todo/api/mainpost";
+    var result = fetch(url, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+        },
+
+    }).then(Response => {
+
+        console.log(Response);
+        //post.createMainPost(Response);
+
+    }).catch((error) => {
+        alert("서버 연결에 에러가 발생했습니다.");
+        console.log(error);
+    });
+}
+
+function userDetailInfo(event) {
+    event.preventDefault();
     const userInfoArea = document.querySelector(".user");
-    const userIntroData = "REQUEST SERVER USER INTRO";
-    user.postUserIntroData(userIntroData,userInfoArea);
+    //    const userIntroData = "REQUEST SERVER USER INTRO";
+    const url = "/user/api/intro";
+    var result = fetch(url, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "authorization": auth.getJsonToken(),
+        },
+        // body: JSON.stringify({
+
+        // }),
+    }).then(Response => {
+        console.log(Response);
+        user.postUserIntroData(Response, userInfoArea);
+
+    }).catch((error) => {
+        alert("서버 연결에 에러가 발생했습니다.");
+    });
+    //user.postUserIntroData(userIntroData,userInfoArea);
 
 }
 
