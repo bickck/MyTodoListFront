@@ -7,7 +7,7 @@
 	$.fn.navList = function() {
 
 		var	$this = $(this);
-			$a = $this.find('a'),
+			$a = $this.find('a')
 			b = [];
 
 		$a.each(function() {
@@ -30,8 +30,8 @@
 
 		});
 
-		return b.join('');
-
+		//return b.join('');
+		return b;
 	};
 
 	/**

@@ -12,7 +12,7 @@ const headerTagId = document.querySelector("#header");
 //     var childLiSearch = document.createElement("li");
 //     var searchForm = document.createElement("form");
 //     var childLiMenu = document.createElement("li");
-    
+
 //      logoLink.setAttribute("href","index.html");
 //      mainLogoTag.appendChild(logoLink);
 
@@ -38,15 +38,28 @@ const headerTagId = document.querySelector("#header");
 
 //const links = headerTagId.children[1];
 
+// console.log(navList());
+
+var requestPage = {
+    todoPage: frontEndServerAddress + "/assets/html/todo.html",
+    quotePage: frontEndServerAddress + "/assets/html/quote.html",
+    imagePage: frontEndServerAddress + "",
+    communityPage: frontEndServerAddress + "",
+    length : 4
+};
+var lists = $(".page").navList();
+
+
+console.log(requestPage.length);
+
 
 function header() {
-    links[0].innerText = "Quote";
-    console.dir(links[0]);
-    console.log(links[1]);
-    console.log(links[2]);
-    console.log(links[3]);
-    console.log(links[4]);
- 
-}
+    lists[0] = '<li>' + lists[0].replace("#", requestPage.todoPage) + '</li>';
+    lists[1] = '<li>' + lists[1].replace("#", requestPage.quotePage) + '</li>';
+    lists[2] = '<li>' + lists[2].replace("#", requestPage.imagePage) + '</li>';
+    lists[3] = '<li>' + lists[3].replace("#", requestPage.communityPage) + '</li>';
 
-// header();
+    $(".lists li").remove();
+    $(".lists").append(lists);
+}
+header();

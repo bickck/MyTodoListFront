@@ -22,9 +22,9 @@ const mainPost = document.querySelector("#main");
 
 function init() {
 
-    authDisabledCheck();
-    requestMainPosts();
-    userDetailInfo();
+    // authDisabledCheck();
+    // requestMainPosts();
+    // userDetailInfo();
 }
 
 
