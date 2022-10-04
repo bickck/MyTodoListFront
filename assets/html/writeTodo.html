@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/main.css">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/assets/css/main.css">
+	<script type="text/javascript" src="/assets/js/config.js"></script>
+	<title>Document</title>
 </head>
+
 <body class="single is-preload">
 
 	<!-- Wrapper -->
@@ -51,38 +54,46 @@
 
 			<!-- Links -->
 			<section>
-				<ul class="links">
-					<li>
-						<a href="#">
-							<h3>Lorem ipsum</h3>
-							<p>Feugiat tempus veroeros dolor</p>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<h3>Dolor sit amet</h3>
-							<p>Sed vitae justo condimentum</p>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<h3>Feugiat veroeros</h3>
-							<p>Phasellus sed ultricies mi congue</p>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<h3>Etiam sed consequat</h3>
-							<p>Porta lectus amet ultricies</p>
-						</a>
-					</li>
-				</ul>
-			</section>
+                <ul class="links">
+                    <li>
+                        <a href="/user/api/info">
+                            <h3>User Manage</h3>
+                            <p>Feugiat tempus veroeros dolor</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/todo/api/">
+                            <h3>User Todo</h3>
+                            <p>Sed vitae justo condimentum</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/quote/api/">
+                            <h3>User Quote</h3>
+                            <p>Phasellus sed ultricies mi congue</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h3>Write Community</h3>
+                            <p>Porta lectus amet ultricies</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h3>Write Community</h3>
+                            <p>Porta lectus amet ultricies</p>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
 
 			<!-- Actions -->
 			<section>
 				<ul class="actions stacked">
-					<li><a href="#" class="button large fit">Log In</a></li>
+					<li class="auth"><a href="" class="button large fit">유저 정보</a></li>
+					<li class="non-auth"><a href="/page/login" class="button large fit">Log In</a></li>
 				</ul>
 			</section>
 
@@ -93,31 +104,38 @@
 
 			<!-- Post -->
 			<section class="post">
-                <h3>Todo Write</h3>
-                <form method="post" action="#">
-                    <div class="row gtr-uniform">
-                        <div class="col-6 col-12-xsmall">
-                            <input type="text" name="demo-name" id="demo-name" value="" placeholder="Title" autocomplete="off"/>
-                        </div>
-                        <div class="col-12">
-                            <textarea name="content" id="content" placeholder="Enter your message" rows="6" autocomplete="off"></textarea>
-                        </div>
-                        <div class="col-4 col-12-small">
-                            <input type="radio" id="public" name="demo-priority" checked>
-                            <label for="demo-priority-low">공개</label>
-                        </div>
-                        <div class="col-4 col-12-small">
-                            <input type="radio" id="non-public" name="demo-priority">
-                            <label for="demo-priority-normal">비공개</label>
-                        </div>
-                        <div class="col-12">
-                            <ul class="actions">
-                                <li><input type="submit" value="Send Message"/></li>
-                                <!-- <li><input type="reset" value="Reset" /></li> -->
-                            </ul>
-                        </div>
-                    </div>
-                </form>
+				<h3>Todo Write</h3>
+				<form id="todo_save" method="post">
+					<div class="row gtr-uniform">
+						<div class="col-8 col-12-xsmall">
+							<input type="text" name="Title" id="title" value="" placeholder="Title"
+								autocomplete="off" />
+						</div>
+						
+						<div class="col-12">
+							<textarea name="content" id="content" value="" placeholder="Enter your message" rows="6"
+								autocomplete="off"></textarea>
+						</div>
+
+						<div class="col-6 col-12-small">
+							<input type="checkbox" id="non-public" name="demo-copy" value="non-public">
+							<label for="non-public" style="user-select: none;">비공개</label>
+						</div>
+
+						<!-- <div class="col-12">
+							<ul class="actions">
+								<li><button class="button"  id="save_button" type="submit" value="Send Message">Send Message</button></li>
+								<li><input type="file" class="button icon solid fa-upload"></input></li>
+							</ul>
+						</div> -->
+					</div>
+				</form>
+				<div class="col-12">
+					<ul class="actions">
+						<li><button id="save_button" type="button" value="Send Message">Send Message</button></li>
+						<li><input type="file" class="button icon solid fa-upload"></input></li>
+					</ul>
+				</div>
 
 		</div>
 
@@ -137,11 +155,14 @@
 	</div>
 
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/browser.min.js"></script>
+	<script src="/assets/js/breakpoints.min.js"></script>
+	<script src="/assets/js/util.js"></script>
+	<script src="/assets/js/main.js"></script>
+	<!-- <script src="/assets/js/config.js"></script> -->
+	<script type="module" src="/assets/js/function/TodoWrite.js"></script>
 
 </body>
+
 </html>

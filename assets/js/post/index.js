@@ -13,6 +13,7 @@ import {
     User
 } from "./User.js"
 
+
 const mainTodos = new Todo();
 const auth = new Auth();
 const post = new Post();
@@ -51,7 +52,7 @@ function authDisabledCheck() {
 }
 
 function requestMainPosts(event) {
-    event.preventDefault();
+    //event.preventDefault();
     const url = "/todo/api/mainpost";
     var result = fetch(url, {
         method: 'GET',
@@ -71,7 +72,7 @@ function requestMainPosts(event) {
 }
 
 function userDetailInfo(event) {
-    event.preventDefault();
+    //event.preventDefault();
     const userInfoArea = document.querySelector(".user");
     //    const userIntroData = "REQUEST SERVER USER INTRO";
     const url = "/user/api/intro";

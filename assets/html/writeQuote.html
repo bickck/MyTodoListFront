@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/main.css">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/assets/css/main.css">
+	<title>Document</title>
 </head>
+
 <body class="single is-preload">
 
 	<!-- Wrapper -->
@@ -53,13 +55,13 @@
 			<section>
 				<ul class="links">
 					<li>
-						<a href="#">
+						<a href="/page/quote">
 							<h3>Lorem ipsum</h3>
 							<p>Feugiat tempus veroeros dolor</p>
 						</a>
 					</li>
 					<li>
-						<a href="#">
+						<a href="/page/todo">
 							<h3>Dolor sit amet</h3>
 							<p>Sed vitae justo condimentum</p>
 						</a>
@@ -79,10 +81,12 @@
 				</ul>
 			</section>
 
+
 			<!-- Actions -->
 			<section>
 				<ul class="actions stacked">
-					<li><a href="#" class="button large fit">Log In</a></li>
+					<li class="auth"><a href="" class="button large fit">유저 정보</a></li>
+					<li class="non-auth"><a href="/page/login" class="button large fit">Log In</a></li>
 				</ul>
 			</section>
 
@@ -93,33 +97,36 @@
 
 			<!-- Post -->
 			<section class="post">
-                <h3>Quote Write</h3>
-                <form method="post" action="/todo/manage/save">
-                    <div class="row gtr-uniform">
-                        <div class="col-12 col-12-xsmall">
-                            <input type="text" name="quote" id="quote" value="" placeholder="Your message" autocomplete="off"/>
-                        </div>
+				<h3>Quote Write</h3>
+				<form id="quote_form" method="post">
+					<div class="row gtr-uniform">
 						<div class="col-12 col-12-xsmall">
-                            <input type="text" name="author" id="author" value="" placeholder="Your Name" autocomplete="off"/>
-                        </div>
-                        <!-- <div class="col-12">
-                            <textarea name="content" id="content" placeholder="Enter your message" rows="6" autocomplete="off"></textarea>
-                        </div>
-                        <div class="col-4 col-12-small">
-                            <input type="radio" id="public" name="demo-priority" checked>
-                            <label for="demo-priority-low">공개</label>
-                        </div>
-                        <div class="col-4 col-12-small">
-                            <input type="radio" id="non-public" name="demo-priority">
-                            <label for="demo-priority-normal">비공개</label>
-                        </div> -->
-                        <div class="col-12">
-                            <ul class="actions">
-                                <li><input type="submit" value="Send Message"/></li>
-                            </ul>
-                        </div>
-                    </div>
-                </form>
+							<input type="text" name="quote" id="quote" value="" placeholder="Your message"
+								autocomplete="off" />
+						</div>
+						<div class="col-12 col-12-xsmall">
+							<input type="text" name="author" id="author" value="" placeholder="Your Name"
+								autocomplete="off" />
+						</div>
+				
+						<div class="col-6 col-12-small">
+							<input type="checkbox" id="non-public" name="isPublic" value="non-public">
+							<label for="non-public" style="user-select: none;">비공개</label>
+						</div>
+
+						<!-- <div class="col-12">
+							<ul class="actions">
+								<li><input id="save_button" type="submit" value="Send Message" /></li>
+							</ul>
+						</div> -->
+					</div>
+				</form>
+
+				<div class="col-12">
+					<ul class="actions">
+						<li><input id="save_button" type="submit" value="Send Message" /></li>
+					</ul>
+				</div>
 
 		</div>
 
@@ -139,11 +146,13 @@
 	</div>
 
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/browser.min.js"></script>
+	<script src="/assets/js/breakpoints.min.js"></script>
+	<script src="/assets/js/util.js"></script>
+	<script src="/assets/js/main.js"></script>
+	<script src="/assets/js/function/QuoteWrite.js"></script>
+	<script src="/assets/js/account/Auth.js"></script>
 </body>
+
 </html>
