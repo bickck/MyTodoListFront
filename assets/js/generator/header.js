@@ -1,4 +1,4 @@
-const headerTagId = document.querySelector("#header");
+//const headerTagId = document.querySelector("#header");
 // const links = document.querySelectorAll(".link");
 // function header() {
 //     var mainLogoTag = document.createElement("h1");
@@ -47,11 +47,10 @@ var requestPage = {
     communityPage: frontEndServerAddress + "",
     length : 4
 };
+
 var lists = $(".page").navList();
-
-
-console.log(requestPage.length);
-
+var loginPageContainer = $(".loginPage")[0].children[0];
+var loginPageLink = loginPageContainer.href;
 
 function header() {
     lists[0] = '<li>' + lists[0].replace("#", requestPage.todoPage) + '</li>';
@@ -61,5 +60,12 @@ function header() {
 
     $(".lists li").remove();
     $(".lists").append(lists);
+
+    console.log(loginPageLink);
+    loginPageLink = loginPageLink.replace("/index.html#", "/assets/html/login.html");
+    loginPageContainer.href = loginPageLink;
+    
+    
 }
+
 header();

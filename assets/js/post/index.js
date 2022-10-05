@@ -21,34 +21,8 @@ const user = new User();
 const mainPost = document.querySelector("#main");
 
 function init() {
-
-    // authDisabledCheck();
     // requestMainPosts();
     // userDetailInfo();
-}
-
-
-
-function authDisabledCheck() {
-    var token = auth.getJsonToken();
-    var nonAuthClazz = document.getElementsByClassName("non-auth");
-    var authClazz = document.getElementsByClassName("auth");
-
-    if (token == null || token == "undefined") {
-        for (var i = 0; i < nonAuthClazz.length; i++) {
-            nonAuthClazz[i].style.display = "block";
-        }
-        for (var i = 0; i < authClazz.length; i++) {
-            authClazz[i].style.display = "none";
-        }
-    } else {
-        for (var i = 0; i < nonAuthClazz.length; i++) {
-            nonAuthClazz[i].style.display = "none";
-        }
-        for (var i = 0; i < authClazz.length; i++) {
-            authClazz[i].style.display = "block";
-        }
-    }
 }
 
 function requestMainPosts(event) {

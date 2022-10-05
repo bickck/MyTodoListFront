@@ -9,7 +9,7 @@
 	<script src="/assets/js/jquery.min.js"></script>
 	<script src="/assets/js/browser.min.js"></script>
 	<script src="/assets/js/breakpoints.min.js"></script>
-	
+
 	<script type="text/javascript" src="../js/config.js"></script>
 	<script src="/assets/js/account/Auth.js"></script>
 	<title>Document</title>
@@ -22,7 +22,7 @@
 
 		<!-- Header -->
 		<header id="header">
-			<h1><a href="index.html">Future Imperfect</a></h1>
+			<h1><a href="../../index.html">Future Imperfect</a></h1>
 			<nav class="links page">
 				<ul class="lists">
 					<li><a href="#">Todo</a></li>
@@ -58,47 +58,81 @@
 			</section>
 
 			<!-- Links -->
-			<section>
-                <ul class="links">
-                    <li>
-                        <a href="/user/api/info">
-                            <h3>User Manage</h3>
-                            <p>Feugiat tempus veroeros dolor</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/todo/api/">
-                            <h3>User Todo</h3>
-                            <p>Sed vitae justo condimentum</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/quote/api/">
-                            <h3>User Quote</h3>
-                            <p>Phasellus sed ultricies mi congue</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h3>Write Community</h3>
-                            <p>Porta lectus amet ultricies</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h3>Write Community</h3>
-                            <p>Porta lectus amet ultricies</p>
-                        </a>
-                    </li>
-                </ul>
-            </section>
-
+			<section class="auth">
+				<ul class="links">
+					<li>
+						<a href="/user/api/info">
+							<h3>User Manage</h3>
+							<p>Feugiat tempus veroeros dolor</p>
+						</a>
+					</li>
+					<li>
+						<a href="/todo/api/">
+							<h3>User Todo</h3>
+							<p>Sed vitae justo condimentum</p>
+						</a>
+					</li>
+					<li>
+						<a href="/quote/api/">
+							<h3>User Quote</h3>
+							<p>Phasellus sed ultricies mi congue</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<h3>Write Community</h3>
+							<p>Porta lectus amet ultricies</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<h3>Write Community</h3>
+							<p>Porta lectus amet ultricies</p>
+						</a>
+					</li>
+				</ul>
+			</section>
+			<!-- Links -->
+			<section class="non-auth">
+				<ul class="links">
+					<li>
+						<a href="/page/quote">
+							<h3>Lorem ipsum</h3>
+							<p>Feugiat tempus veroeros dolor</p>
+						</a>
+					</li>
+					<li>
+						<a href="/page/todo">
+							<h3>Dolor sit amet</h3>
+							<p>Sed vitae justo condimentum</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<h3>Feugiat veroeros</h3>
+							<p>Phasellus sed ultricies mi congue</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<h3>Etiam sed consequat</h3>
+							<p>Porta lectus amet ultricies</p>
+						</a>
+					</li>
+				</ul>
+			</section>
 
 			<!-- Actions -->
-			<section>
+			<section class="auth">
 				<ul class="actions stacked">
-					<li class="auth"><a href="" class="button large fit">유저 정보</a></li>
-					<li class="non-auth"><a href="/page/login" class="button large fit">Log In</a></li>
+					<li><a href="" class="button large fit">유저 정보</a></li>
+				</ul>
+			</section>
+
+			<!-- Actions -->
+			<section class="non-auth">
+				<ul class="actions stacked">
+					<li class="loginPage"><a href="#" class="button large fit">Log In</a></li>
 				</ul>
 			</section>
 
@@ -116,7 +150,7 @@
 							<input type="text" name="Title" id="title" value="" placeholder="Title"
 								autocomplete="off" />
 						</div>
-						
+
 						<div class="col-12">
 							<textarea name="content" id="content" value="" placeholder="Enter your message" rows="6"
 								autocomplete="off"></textarea>
@@ -162,11 +196,11 @@
 	<!-- Scripts -->
 	<script src="/assets/js/util.js"></script>
 	<script src="/assets/js/main.js"></script>
-    
-	
+
+
 	<script src="/assets/js/generator/header.js"></script>
 	<script type="module" src="/assets/js/function/TodoWrite.js"></script>
-	
+	<script type="module" src="/assets/js/generator/footer.js"></script>
 </body>
 </body>
 

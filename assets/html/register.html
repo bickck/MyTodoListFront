@@ -8,11 +8,19 @@
     <title>Document</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <style>
-        .input-area {
+        /* .input-area {
             width: 500px;
-        }
+        } */
+
+        /* .row {
+            width: 500px;
+        } */
+        /* .post {
+            width: 800px;
+        } */
     </style>
 </head>
+
 <body class="single">
     <div id="wrapper">
         <article class="post">
@@ -22,24 +30,37 @@
                     <form method="post" action="#">
                         <div class="row gtr-uniform">
                             <div class="col-12">
-                                <div class="input-area">
-                                    <input type="email" name="demo-name" id="demo-name" value="" placeholder="Email"/>
-                                </div>
-                            </div>
 
+                                <!-- <ul class="actions">
+                                    <li class=""><input type="text" name="username" id="username" value="" placeholder="UserName" /></li>
+                                    <li><button class="button fit medium"></button></li>
+                                </ul> -->
+                                <div class="col-6">
+                                    <input type="text" name="username" id="username" value="" placeholder="UserName" />
+                                </div>
+                                <!-- <div class="col-6">
+                                    <button class="button fit small"></button>
+                                </div> -->
+                            </div>
                             <div class="col-12">
                                 <div class="input-area">
-                                    <input type="password" name="demo-name" id="demo-name" value="" placeholder="password" />
+                                    <input type="email" name="email" id="email" value="" placeholder="Email" />
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-area">
+                                    <input type="password" name="password" id="password" value=""
+                                        placeholder="password" />
                                 </div>
                             </div>
                         </div>
                     </form>
 
                     <div class="col-12">
-                        <ul class="actions">
-                            <li><input type="submit" value="Send Message" /></li>
-                            <li><input type="reset" value="Reset" /></li>
+                        <ul class="actions stacked">
+                            <li><button class="button fit large" id="register_button">Sign Up</button></li>
                         </ul>
+
                     </div>
                 </section>
             </section>
