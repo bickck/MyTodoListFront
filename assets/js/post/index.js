@@ -22,7 +22,7 @@ const mainPost = document.querySelector("#main");
 
 function init() {
     // requestMainPosts();
-    // userDetailInfo();
+    userDetailInfo();
 }
 
 function requestMainPosts(event) {
@@ -46,26 +46,41 @@ function requestMainPosts(event) {
 }
 
 function userDetailInfo(event) {
-    //event.preventDefault();
+
     const userInfoArea = document.querySelector(".user");
     //    const userIntroData = "REQUEST SERVER USER INTRO";
-    const url = "/user/api/intro";
-    var result = fetch(url, {
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json",
-            "authorization": auth.getJsonToken(),
-        },
-        // body: JSON.stringify({
+    const url = backEndServerAddress + "/user/api/intro";
+    // fetch(url, {
+    //     method: 'GET',
+    //     mode: 'no-cors',
+    //     headers: {
+    //         // "Access-Control-Allow-Origin" : "http://localhost:8080/",
+    //         "Content-Type": "application/json",
+    //         "Authorization": auth.getJsonToken(),
+    //     },
+    // }).then((response) => {
+    //     response.json()
+    // }).catch((error) => {
+    //     console(error);
+    // });
 
-        // }),
-    }).then(Response => {
-        console.log(Response);
-        user.postUserIntroData(Response, userInfoArea);
+    console.log(auth.getJsonToken());
+    fetch(url, {
+            method: 'GET', // 또는 'PUT'
+            mode: 'no-cors',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": auth.getJsonToken(),
+            },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('성공:', data);
+        })
+        .catch((error) => {
+            console.error('실패:', error);
+        });
 
-    }).catch((error) => {
-        alert("서버 연결에 에러가 발생했습니다.");
-    });
     //user.postUserIntroData(userIntroData,userInfoArea);
 
 }
