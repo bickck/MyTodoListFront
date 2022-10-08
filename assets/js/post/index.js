@@ -20,69 +20,64 @@ const post = new Post();
 const user = new User();
 const mainPost = document.querySelector("#main");
 
-function init() {
-    // requestMainPosts();
-    userDetailInfo();
+window.onload = function init(event) {
+    event.preventDefault();
+    requestMainPosts();
+    if(auth.getJsonToken == null) {
+        userDetailInfo();
+    }
+    //userDetailInfo();
 }
 
-function requestMainPosts(event) {
-    //event.preventDefault();
-    const url = "/todo/api/mainpost";
-    var result = fetch(url, {
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json",
-        },
 
-    }).then(Response => {
-
-        console.log(Response);
-        //post.createMainPost(Response);
-
-    }).catch((error) => {
-        alert("서버 연결에 에러가 발생했습니다.");
-        console.log(error);
-    });
-}
-
-function userDetailInfo(event) {
-
-    const userInfoArea = document.querySelector(".user");
-    //    const userIntroData = "REQUEST SERVER USER INTRO";
-    const url = backEndServerAddress + "/user/api/intro";
-    // fetch(url, {
-    //     method: 'GET',
-    //     mode: 'no-cors',
-    //     headers: {
-    //         // "Access-Control-Allow-Origin" : "http://localhost:8080/",
-    //         "Content-Type": "application/json",
-    //         "Authorization": auth.getJsonToken(),
-    //     },
-    // }).then((response) => {
-    //     response.json()
-    // }).catch((error) => {
-    //     console(error);
-    // });
-
-    console.log(auth.getJsonToken());
+function requestMainPosts() {
+    const url = backEndServerAddress + "/todo/api/mainpost";
     fetch(url, {
-            method: 'GET', // 또는 'PUT'
-            mode: 'no-cors',
+            method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": auth.getJsonToken(),
             },
         })
-        .then((response) => response.json())
+        .then(Response => Response.json())
         .then((data) => {
-            console.log('성공:', data);
+
+            console.log(data);
+            if(data != null) {
+                 //post.createMainPost(data);
+            }
+            post.createMainPost(data);
         })
-        .catch((error) => {
-            console.error('실패:', error);
-        });
-
-    //user.postUserIntroData(userIntroData,userInfoArea);
-
+    // .catch((error) => {
+    //     console.log("서버 연결에 에러가 발생했습니다.");
+    //     console.error(error);
+    // });
 }
 
-init();
+function userDetailInfo() {
+    const url = backEndServerAddress + "/user/api/intro";
+    const introSection = document.querySelector("#intro.auth");
+    fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": `${auth.getJsonToken()}`,
+            },
+        })
+        .then((Response) => Response.json())
+        .then((data) => {
+            console.log(data);
+            postUserIntroData(data, introSection);
+        })
+        // .catch((error) => {
+        //     // console.log("서버 연결에 에러가 발생했습니다.");
+        //     console.error(error);
+        // });
+}
+
+function postUserIntroData(data, introSection) {
+    const username = document.querySelector("#username");
+    const userComment = document.querySelector("#usercomment");
+   
+    username.innerText = data.username;
+    userComment.innerText = data.introComment;
+}

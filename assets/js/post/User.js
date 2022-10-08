@@ -3,11 +3,12 @@
  */
 export class User {
 
-    postUserIntroData(userdata,userSection) {
+    postUserIntroData(data, introSection) {
+        console.log(argument);
         var userIntroArea = userSection.childNodes[3];
         var username = userIntroArea.childNodes[1];
         var userComment = userIntroArea.childNodes[3];
-        username.innerText = userdata;
-        userComment.innerText = userdata;
+        username.innerText = userdata.username;
+        userComment.innerText = userdata.introComment;
     }
 }
