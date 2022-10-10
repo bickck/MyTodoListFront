@@ -12,45 +12,49 @@
 //     var childLiSearch = document.createElement("li");
 //     var searchForm = document.createElement("form");
 //     var childLiMenu = document.createElement("li");
-
 //      logoLink.setAttribute("href","index.html");
 //      mainLogoTag.appendChild(logoLink);
-
 //      linksNav.setAttribute("class","links");
-
 //      //-- li --
-
-
 //      //-- li --
-
-
 //      linksNav.appendChild(linksUl);
-
 //      mainNav.setAttribute("class","main");
-
-
-
 //      mainUl.appendChild(childLiSearch);
 //      mainUl.appendChild(childLiMenu);
-
-
 // }
-
 //const links = headerTagId.children[1];
-
 // console.log(navList());
+
+var lists = $(".page").navList();
+var loginPageContainer = $(".loginPage")[0].children[0];
+var loginPageLink = loginPageContainer.href;
 
 var requestPage = {
     todoPage: frontEndServerAddress + "/assets/html/todo.html",
     quotePage: frontEndServerAddress + "/assets/html/quote.html",
     imagePage: frontEndServerAddress + "",
     communityPage: frontEndServerAddress + "",
-    length : 4
+    length: 4
 };
 
-var lists = $(".page").navList();
-var loginPageContainer = $(".loginPage")[0].children[0];
-var loginPageLink = loginPageContainer.href;
+var requestAuthLinkMenu = {
+    userTodoPage: backEndServerAddress + "/todo/api/",
+    userQuotePage: backEndServerAddress + "/quote/api/",
+    userManagePage: backEndServerAddress + "/user/api/info",
+}
+
+var requestNonAuthLinkMenu = {
+    todoPage: backEndServerAddress + "/page/quote",
+    quotePage: backEndServerAddress + "/page/todo",
+    // userManagePage: backEndServerAddress + "",
+}
+
+function init() {
+
+    header();
+    linksAuthMenu();
+    linksNonAuthMenu();
+}
 
 function header() {
     lists[0] = '<li>' + lists[0].replace("#", requestPage.todoPage) + '</li>';
@@ -61,11 +65,29 @@ function header() {
     $(".lists li").remove();
     $(".lists").append(lists);
 
-    console.log(loginPageLink);
     loginPageLink = loginPageLink.replace("/index.html#", "/assets/html/login.html");
     loginPageContainer.href = loginPageLink;
-    
+}
+
+function linksAuthMenu() {
+    var authSection = document.querySelectorAll(".auth .links")[0];
+    var userAPIInfoLink = authSection.children[0].children[0];
+    var todoAPILink = authSection.children[1].children[0];
+    var quoteAPILink = authSection.children[2].children[0];
+   
+    userAPIInfoLink.href = requestAuthLinkMenu.userManagePage;
+    todoAPILink.href = requestAuthLinkMenu.userTodoPage;
+    quoteAPILink.href = requestAuthLinkMenu.userQuotePage;
+}
+
+function linksNonAuthMenu() {
+    var nonAuthSection = document.querySelectorAll(".non-auth .links")[0];
+    var todoPageLink = nonAuthSection.children[0].children[0];
+    var quotePageLink = nonAuthSection.children[1].children[0];
+
+    todoPageLink.href = requestNonAuthLinkMenu.todoPage;
+    quotePageLink.href = requestNonAuthLinkMenu.quotePage;
     
 }
 
-header();
+init();

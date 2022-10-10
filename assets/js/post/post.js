@@ -39,17 +39,19 @@ export class Post {
         /* title div */
         let headerTitle = document.createElement("div");
         headerTitle.setAttribute("class", "title");
-
+        
         let titleContainer = document.createElement("h2");
-
         let titleLink = document.createElement("a");
-        titleLink.setAttribute("href", "");
-
+        titleLink.setAttribute("href", "#");   
         let titleWord = document.createElement("p");
-        titleWord.innerText = "";
+        
+         
+        titleLink.innerText = "Test"   
+        titleWord.innerText = "hi";
 
         titleContainer.appendChild(titleLink);
-        titleContainer.appendChild(titleWord);
+        headerTitle.appendChild(titleContainer);
+        headerTitle.appendChild(titleWord);
 
         /* title div */
 
@@ -59,19 +61,23 @@ export class Post {
 
         let timeContainer = document.createElement("time");
         timeContainer.setAttribute("class", "published");
-        timeContainer.setAttribute("datetime", "");
+        timeContainer.setAttribute("datetime", "2022");
+        timeContainer.innerText = "2022"
 
         let userInfoLink = document.createElement("a");
-        userInfoLink.setAttribute("class", "autohr");
+        userInfoLink.setAttribute("href","#");
+        userInfoLink.setAttribute("class", "author");
+
         let userinfo = document.createElement("span");
         userinfo.setAttribute("class", "name");
+        userinfo.innerText = "user info ";
 
         let userImg = document.createElement("img");
-        userImg.setAttribute();
+        userImg.setAttribute("src","images/avatar.jpg");
+        userImg.setAttribute("alt","");
 
         userInfoLink.appendChild(userinfo);
         userInfoLink.appendChild(userImg);
-
         metaContainer.appendChild(timeContainer);
         metaContainer.appendChild(userInfoLink);
         /* meta div */
@@ -83,20 +89,41 @@ export class Post {
 
         /* main area */
         let pageLink = document.createElement("a");
+        let pageImages = document.createElement("img");
+        pageImages.setAttribute("src","#");
+        pageImages.setAttribute("alt","#");
+        pageLink.appendChild(pageImages);
         let mainWord = document.createElement("p");
+
+        pageLink.setAttribute("href","#");
+        pageLink.setAttribute("class","image featured");
+        
+        mainWord.innerText = "Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. ";
+
         /* main area */
 
         /* footer */
         let footerContainer = document.createElement("footer");
-
         let ulActions = document.createElement("ul");
-        ulActions.setAttribute("class", "actions");
-
         let ulStats = document.createElement("ul");
+
+        ulActions.setAttribute("class", "actions");        
         ulStats.setAttribute("class", "stats");
 
         let liHeart = document.createElement("li");
+        let aHeart = document.createElement("a"); 
+        aHeart.setAttribute("href","#");
+        aHeart.setAttribute("class","icon solid fa-heart");
+        aHeart.innerText = "140";
+        liHeart.appendChild(aHeart);
+        
         let liComment = document.createElement("li");
+        let aComment = document.createElement("a");
+        aComment.setAttribute("href","#");
+        aComment.setAttribute("class","icon solid fa-comment");
+        aComment.innerText = "120";
+        liComment.appendChild(aComment);
+
         ulStats.appendChild(liHeart);
         ulStats.appendChild(liComment);
 
@@ -108,6 +135,8 @@ export class Post {
         articleContainer.appendChild(pageLink);
         articleContainer.appendChild(mainWord);
         articleContainer.appendChild(footerContainer);
+
+        return articleContainer;
     }
 
 // <section>

@@ -23,7 +23,7 @@ const mainPost = document.querySelector("#main");
 window.onload = function init(event) {
     event.preventDefault();
     requestMainPosts();
-    if(auth.getJsonToken == null) {
+    if (auth.getJsonToken == null) {
         userDetailInfo();
     }
     //userDetailInfo();
@@ -42,15 +42,18 @@ function requestMainPosts() {
         .then((data) => {
 
             console.log(data);
-            if(data != null) {
-                 //post.createMainPost(data);
+            if (data != null) {
+                //post.createMainPost(data);
             }
-            post.createMainPost(data);
+            // no exsist post
+
+            var postResult = post.createMainPost(data);
+            mainPost.appendChild(postResult);
         })
-    // .catch((error) => {
-    //     console.log("서버 연결에 에러가 발생했습니다.");
-    //     console.error(error);
-    // });
+        .catch((error) => {
+            //console.log("서버 연결에 에러가 발생했습니다.");
+            console.error(error);
+        });
 }
 
 function userDetailInfo() {
@@ -68,16 +71,16 @@ function userDetailInfo() {
             console.log(data);
             postUserIntroData(data, introSection);
         })
-        // .catch((error) => {
-        //     // console.log("서버 연결에 에러가 발생했습니다.");
-        //     console.error(error);
-        // });
+        .catch((error) => {
+            // console.log("서버 연결에 에러가 발생했습니다.");
+            console.error(error);
+        });
 }
 
 function postUserIntroData(data, introSection) {
     const username = document.querySelector("#username");
     const userComment = document.querySelector("#usercomment");
-   
+
     username.innerText = data.username;
     userComment.innerText = data.introComment;
 }
