@@ -47,17 +47,17 @@
             </nav>
         </header>
 
-        <!-- Menu -->
-        <section id="menu">
+       <!-- Menu -->
+		<section id="menu">
 
-            <!-- Search -->
-            <section>
-                <form class="search" method="get" action="#">
-                    <input type="text" name="query" placeholder="Search" />
-                </form>
-            </section>
+			<!-- Search -->
+			<section>
+				<form class="search" method="get" action="#">
+					<input type="text" name="query" placeholder="Search" />
+				</form>
+			</section>
 
-            <!-- Links -->
+			<!-- Links -->
 			<section class="auth">
 				<ul class="links">
 					<li>
@@ -78,45 +78,22 @@
 							<p>Phasellus sed ultricies mi congue</p>
 						</a>
 					</li>
-					<li>
-						<a href="#">
-							<h3>Write Community</h3>
-							<p>Porta lectus amet ultricies</p>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<h3>Write Community</h3>
-							<p>Porta lectus amet ultricies</p>
-						</a>
-					</li>
+
 				</ul>
 			</section>
 			<!-- Links -->
 			<section class="non-auth">
 				<ul class="links">
 					<li>
-						<a href="/page/quote">
-							<h3>Lorem ipsum</h3>
+						<a href="/page/todo">
+							<h3>Todo</h3>
 							<p>Feugiat tempus veroeros dolor</p>
 						</a>
 					</li>
 					<li>
-						<a href="/page/todo">
-							<h3>Dolor sit amet</h3>
+						<a href="/page/quote">
+							<h3>Quote</h3>
 							<p>Sed vitae justo condimentum</p>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<h3>Feugiat veroeros</h3>
-							<p>Phasellus sed ultricies mi congue</p>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<h3>Etiam sed consequat</h3>
-							<p>Porta lectus amet ultricies</p>
 						</a>
 					</li>
 				</ul>
@@ -125,7 +102,7 @@
 			<!-- Actions -->
 			<section class="auth">
 				<ul class="actions stacked">
-					<li><a href="" class="button large fit">유저 정보</a></li>
+					<li><a href="#" class="button large fit">유저 정보</a></li>
 				</ul>
 			</section>
 
@@ -135,30 +112,33 @@
 					<li class="loginPage"><a href="#" class="button large fit">Log In</a></li>
 				</ul>
 			</section>
-
-        </section>
+		</section>
 
         <!-- Main -->
         <div id="main">
 
-            <section class="non-auth">
+            <section class="title">
                 <h2>Todo</h2>
-				<div class="actions">
-					<div class="loginPage"><a href="#" class="button medium fit">Write Todo</a></div>
-				</div>
+				<!-- <div class="actions">
+					<div class="move-action auth"><button type="button" class="button medium fit">Write Todo</butt></div>
+				</div> -->
 			</section>
 
             <!-- Post -->
             <article class="post">
                 <header>
+                    <div id="post_id" value="" hidden>
+
+                    </div>
                     <div class="title">
                         <h2><a href="#">Magna sed adipiscing</a></h2>
                         <p>Lorem ipsum dolor amet nullam consequat etiam feugiat</p>
                     </div>
                     <div class="meta">
                         <time class="published" datetime="2015-11-01">November 1, 2015</time>
-                        <a href="#" class="author"><span class="name">Jane Doe</span><img src="images/avatar.jpg"
-                                alt="" /></a>
+                        <a href="#" class="author"><span class="name">Jane Doe</span>
+                            <img src="images/avatar.jpg"alt="" />
+                        </a>
                     </div>
                 </header>
                 <span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
@@ -176,14 +156,14 @@
                     mattis nunc sit amet tortor pellentesque, non placerat neque viverra. </p>
                 <footer>
                     <ul class="stats">
-                        <li><a href="#">General</a></li>
                         <li><a href="#" class="icon solid fa-heart">28</a></li>
                         <li><a href="#" class="icon solid fa-comment">128</a></li>
+                        <li class=""><a id="delete_button">Delete</a></li>
                     </ul>
                 </footer>
                 <ul class="actions pagination">
-                    <li><a href="" class="disabled button large previous">Previous Page</a></li>
-                    <li><a href="#" class="button large next">Next Page</a></li>
+                    <li><button class="disabled button large previous">Previous Page</button></li>
+                    <li><button class="button large next">Next Page</button></li>
                 </ul>
             </article>
 
@@ -209,7 +189,13 @@
     <script src="/assets/js/main.js"></script>
 
 
-    <script src="/assets/js/generator/header.js"></script>
+    <script type="module" src="/assets/js/server/todo.js"></script>
+    <script type="module" src="/assets/js/post/Todo.js"></script>
+    <!-- <script type="module" src="/assets/js/generator/TodoGenerator.js"></script> -->
+    <script type="module" src="/assets/js/function/todoWrite.js"></script>
+    <!-- <script type="module" src="/assets/js/post/Todo.js"></script> -->
+    <script type="module" src="/assets/js/function/action.js"></script>
+    <script type="modeul" src="/assets/js/generator/header.js"></script>
     <script type="module" src="/assets/js/generator/footer.js"></script>
 </body>
 

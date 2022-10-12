@@ -4,63 +4,29 @@ const mainPost = document.querySelector("#main");
  */
 export class Todo { 
 
-    //메인 데이터 요청
-    requestMainPosts(event) {
-        //event.preventDefault();
-        const url = "http://localhost:8080/todo/api/todoData";
-        var result = fetch(url, {
-            method: 'GET',
+    requestUserTodoInsert(arg) {
+        const url = `http://localhost:8080/user/todo/manage/save`;
+        fetch(url, {
+            method: 'POST',
             headers: {
                 "Content-Type": "application/json",
+                "authorization" : arg.userToken,
             },
             body: JSON.stringify({
-
+                title: `${arg.title}`,
+                cotent: `${arg.content}`,
+                isChekcPuhlic: `${arg.isCheckPublic}`
             }),
         }).then(Response => {
-            data(Response);
-
-        }).catch((error) => {
-
-            alert("서버 연결에 에러가 발생했습니다.");
-        });
-    }
-
-    requestUserTodByTodoId(event,arg) {
-        //event.preventDefault();
-        const url = `http://localhost:8080/todo/api/${id}`;
-        var result = fetch(url, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-
-            }),
-        }).then(Response => {
-            data(Response);
-
-        }).catch((error) => {
-
-            alert("서버 연결에 에러가 발생했습니다.");
-        });
-    }
-
-    requestUserTodoInsert() {
-        const url = `http://localhost:8080/todo/manage/save`;
-            var result = fetch(url, {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
+            if (Response.status.toString() === "200") {
+                alert("저장 성공");
+                window.location.href = mainPageAddress;
+            }
     
-                }),
-            }).then(Response => {
-                
-            }).catch((error) => {
-    
-                alert("서버 연결에 에러가 발생했습니다.");
-            });
+        }).catch((error) => {
+            console.log("서버 연결에 에러가 발생했습니다.");
+            alert(error);
+        });
     }
 
     requestUserTodoUpdate(arg) {
@@ -99,33 +65,45 @@ export class Todo {
             });
     }
 }
-// /todo/manage/save
-// /todo/manage/update
-// /todo/manage/delete
-// 
 
-//
 
-// function init() {
-//     requestMainPosts();
-// }
+  //메인 데이터 
+    // requestMainPosts(event) {
+    //     //event.preventDefault();
+    //     const url = "http://localhost:8080/todo/api/todoData";
+    //     var result = fetch(url, {
+    //         method: 'GET',
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
 
-// function requestMainPosts(event) {
-//     event.preventDefault();
-//     const url = "";
-//     var result = fetch(url, {
-//         method: 'GET',
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
+    //         }),
+    //     }).then(Response => {
+    //         data(Response);
 
-//         }),
-//     }).then(Response => {
-//         data(Response);
+    //     }).catch((error) => {
 
-//     }).catch((error) => {
+    //         alert("서버 연결에 에러가 발생했습니다.");
+    //     });
+    // }
 
-//         alert("서버 연결에 에러가 발생했습니다.");
-//     });
-// }
+    // requestUserTodByTodoId(event,arg) {
+    //     //event.preventDefault();
+    //     const url = `http://localhost:8080/todo/api/${id}`;
+    //     var result = fetch(url, {
+    //         method: 'GET',
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+
+    //         }),
+    //     }).then(Response => {
+    //         data(Response);
+
+    //     }).catch((error) => {
+
+    //         alert("서버 연결에 에러가 발생했습니다.");
+    //     });
+    // }

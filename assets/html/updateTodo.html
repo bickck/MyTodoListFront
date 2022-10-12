@@ -6,13 +6,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/assets/css/main.css">
-	<!-- init script -->
 	<script src="/assets/js/jquery.min.js"></script>
 	<script src="/assets/js/browser.min.js"></script>
 	<script src="/assets/js/breakpoints.min.js"></script>
+
 	<script type="text/javascript" src="../js/config.js"></script>
-	<script src="/assets/js/account/Auth.js"></script>
-	<!-- init script -->
+	<script type="module" src="/assets/js/account/Auth.js"></script>
 	<title>Document</title>
 </head>
 
@@ -137,7 +136,6 @@
 				</ul>
 			</section>
 
-
 		</section>
 
 		<!-- Main -->
@@ -145,34 +143,38 @@
 
 			<!-- Post -->
 			<section class="post">
-				<h3>Quote Write</h3>
-				<form id="quote_form" method="post">
+				<h3>Todo Update</h3>
+				<form id="todo_update" method="post">
 					<div class="row gtr-uniform">
-						<div class="col-12 col-12-xsmall">
-							<input type="text" name="quote" id="quote" value="" placeholder="Your message"
-								autocomplete="off" />
+                        <div class="col-8 col-12-xsmall" hidden>
+							<input type="text" name="id" id="id" value=""/>
 						</div>
-						<div class="col-12 col-12-xsmall">
-							<input type="text" name="author" id="author" value="" placeholder="Your Name or Author"
-								autocomplete="off" />
+						<div class="col-8 col-12-xsmall">
+							<input type="text" name="Title" id="title" value="" autocomplete="off" />
 						</div>
-				
+
+						<div class="col-12">
+							<textarea name="content" id="content" value="" rows="6"
+								autocomplete="off"></textarea>
+						</div>
+
 						<div class="col-6 col-12-small">
-							<input type="checkbox" id="non-public" name="isPublic" value="non-public">
+							<input type="checkbox" id="non-public" name="demo-copy" value="public">
 							<label for="non-public" style="user-select: none;">비공개</label>
 						</div>
 
 						<!-- <div class="col-12">
 							<ul class="actions">
-								<li><input id="save_button" type="submit" value="Send Message" /></li>
+								<li><button class="button"  id="save_button" type="submit" value="Send Message">Send Message</button></li>
+								<li><input type="file" class="button icon solid fa-upload"></input></li>
 							</ul>
 						</div> -->
 					</div>
 				</form>
-
 				<div class="col-12">
 					<ul class="actions">
-						<li><button id="save_button" type="button" value="Send Message">Send Message</button></li>
+						<li><button id="update_button" type="button" value="Send Message">Send Message</button></li>
+						<li><input type="file" class="button icon solid fa-upload"></input></li>
 					</ul>
 				</div>
 
@@ -196,11 +198,15 @@
 	<!-- Scripts -->
 	<script src="/assets/js/util.js"></script>
 	<script src="/assets/js/main.js"></script>
- 
-	
+
 	<script src="/assets/js/generator/header.js"></script>
-	<script src="/assets/js/function/QuoteWrite.js"></script>
+	<script type="module" src="/assets/js/function/todoWrite.js"></script>
 	<script type="module" src="/assets/js/generator/footer.js"></script>
+
+    <script src="">
+        
+    </script>
+</body>
 </body>
 
 </html>

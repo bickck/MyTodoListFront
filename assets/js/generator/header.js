@@ -25,6 +25,9 @@
 //const links = headerTagId.children[1];
 // console.log(navList());
 
+// import { Auth } from "../account/Auth.js";
+
+// const auth = new Auth();
 var lists = $(".page").navList();
 var loginPageContainer = $(".loginPage")[0].children[0];
 var loginPageLink = loginPageContainer.href;
@@ -54,6 +57,7 @@ function init() {
     header();
     linksAuthMenu();
     linksNonAuthMenu();
+    // authDisabledCheck();
 }
 
 function header() {
@@ -65,8 +69,9 @@ function header() {
     $(".lists li").remove();
     $(".lists").append(lists);
 
-    loginPageLink = loginPageLink.replace("/index.html#", "/assets/html/login.html");
-    loginPageContainer.href = loginPageLink;
+    
+    //loginPageLink = loginPageLink.replace("/index.html#", "/assets/html/login.html");
+    loginPageContainer.href = frontEndServerAddress + "/assets/html/login.html";
 }
 
 function linksAuthMenu() {
@@ -89,5 +94,27 @@ function linksNonAuthMenu() {
     quotePageLink.href = requestNonAuthLinkMenu.quotePage;
     
 }
+
+// function authDisabledCheck() {
+//     var token = auth.getJsonToken();
+//     var nonAuthClazz = document.getElementsByClassName("non-auth");
+//     var authClazz = document.getElementsByClassName("auth");
+
+//     if (token == null || token == "undefined") {
+//         for (var i = 0; i < nonAuthClazz.length; i++) {
+//             nonAuthClazz[i].style.display = "block";
+//         }
+//         for (var i = 0; i < authClazz.length; i++) {
+//             authClazz[i].style.display = "none";
+//         }
+//     } else {
+//         for (var i = 0; i < nonAuthClazz.length; i++) {
+//             nonAuthClazz[i].style.display = "none";
+//         }
+//         for (var i = 0; i < authClazz.length; i++) {
+//             authClazz[i].style.display = "block";
+//         }
+//     }
+// }
 
 init();
