@@ -148,6 +148,9 @@
 				<h3>Quote Update</h3>
 				<form id="quote_form" method="post">
 					<div class="row gtr-uniform">
+						<div class="col-12 col-12-xsmall" hidden>
+							<input type="text" name="id" id="id" value="" autocomplete="off" />
+						</div>
 						<div class="col-12 col-12-xsmall">
 							<input type="text" name="quote" id="quote" value="" autocomplete="off" />
 						</div>
@@ -197,8 +200,27 @@
  
 	
 	<script src="/assets/js/generator/header.js"></script>
-	<script src="/assets/js/function/QuoteWrite.js"></script>
+	<script src="/assets/js/function/quoteWrite.js"></script>
 	<script type="module" src="/assets/js/generator/footer.js"></script>
+
+	<script>
+		var quoteTemp = window.localStorage.getItem("quoteTemp");
+		window.localStorage.clear();
+		const quoteId = document.querySelector("#id");
+		const quote = document.querySelector("#quote");
+		const author = document.querySelector("#author");
+		const isPublic = document.querySelector("#non-public");
+
+		quoteId.value = quoteTemp.quoteId;
+		quote.value = quoteTemp.quote;
+		author.value = quoteTemp.author;
+
+		if(quoteTemp.isPublic == "private"){
+			isPublic.checked = true;
+		}
+		console.dir(isPublic);
+
+	</script>
 </body>
 
 </html>

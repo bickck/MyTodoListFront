@@ -13,6 +13,10 @@ const save_btn = document.querySelector("#save_button");
 const update_btn = document.querySelector("#update_button");
 const delete_btn = document.querySelector("#delete_button");
 
+window.onload = function init() {
+    
+}
+
 function todoSave() {
     const requestUrl = backEndServerAddress + "/user/todo/manage/save";
     const title = document.querySelector("#title").value;
@@ -111,8 +115,6 @@ function todoDelete() {
 }
 
 // pagination 필요
-
-console.log(delete_btn);
 
 if(delete_btn != null) {
     delete_btn.addEventListener("click",todoDelete);

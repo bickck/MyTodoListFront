@@ -1,4 +1,4 @@
-.fa-heart {
-
-    border: none;
+.delete:hover {
+    border-bottom-color: transparent;
+    color: rgb(201, 64, 64) !important;
 }

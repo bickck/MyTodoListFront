@@ -203,9 +203,24 @@
 	<script type="module" src="/assets/js/function/todoWrite.js"></script>
 	<script type="module" src="/assets/js/generator/footer.js"></script>
 
-    <script src="">
-        
-    </script>
+    <script>
+		var todoTemp = window.localStorage.getItem("todoTemp");
+		window.localStorage.clear();
+		const todoId = document.querySelector("#id");
+		const title = document.querySelector("#title");
+		const content = document.querySelector("#content");
+		const isPublic = document.querySelector("#non-public");
+
+		todoId.value = todoTemp.todoId;
+		title.value = todoTemp.title;
+		content.value = todoTemp.content;
+
+		if(todoTemp.isPublic == "private"){
+			isPublic.checked = true;
+		}
+		console.dir(isPublic);
+
+	</script>
 </body>
 </body>
 
