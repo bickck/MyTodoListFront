@@ -1,6 +1,12 @@
-const backEndServerAddress = "http://localhost:8080";
-const frontEndServerAddress = "http://127.0.0.1:5501";
-const mainPageAddress = "http://127.0.0.1:5501/index.html";
+// product IP
+const backEndServerAddress="";
+const frontEndServerAddress="https://bickck.github.io/MyTodoListFront/"
+const mainPageAddress = "https://bickck.github.io/MyTodoListFront/";
+
+// local dev IP
+// const backEndServerAddress = "http://localhost:8080";
+// const frontEndServerAddress = "http://127.0.0.1:5501";
+// const mainPageAddress = "http://127.0.0.1:5501/index.html";
 
 const updateTodoURL = "user/todo/manage/update/{id}"
 const deleteTodoURL = "/user/todo/manage/delete/{id}"

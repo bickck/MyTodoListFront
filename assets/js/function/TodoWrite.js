@@ -91,30 +91,28 @@ function todoDelete() {
     
     console.log(id);
 
-    // fetch(requestUrl, {
-    //     method: 'POST',
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //         "authorization" : auth.getJsonToken(),
-    //     },
-    //     body: JSON.stringify({
-    //         title: `${title}`,
-    //         content: `${content}`,
-    //         isChekcPuhlic: `${isCheckPublic.value}`
-    //     }),
-    // }).then(Response => {
-    //     if (Response.status.toString() === "200") {
-    //         alert("삭제 성공");
-    //         window.location.href = mainPageAddress;
-    //     }
+    fetch(requestUrl, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "authorization" : auth.getJsonToken(),
+        },
+        body: JSON.stringify({
+            title: `${title}`,
+            content: `${content}`,
+            isChekcPuhlic: `${isCheckPublic.value}`
+        }),
+    }).then(Response => {
+        if (Response.status.toString() === "200") {
+            alert("삭제 성공");
+            window.location.href = mainPageAddress;
+        }
 
-    // }).catch((error) => {
-    //     console.log("서버 연결에 에러가 발생했습니다.");
-    //     alert(error);
-    // });
+    }).catch((error) => {
+        console.log("서버 연결에 에러가 발생했습니다.");
+        alert(error);
+    });
 }
-
-// pagination 필요
 
 if(delete_btn != null) {
     delete_btn.addEventListener("click",todoDelete);
@@ -125,5 +123,4 @@ if(update_btn != null) {
 if(save_btn != null) {
     save_btn.addEventListener("click", todoSave);
 }
-//console.dir(document.querySelector("#todo_save"));
 

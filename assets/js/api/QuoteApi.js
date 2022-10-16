@@ -1,42 +1,32 @@
 export class QuoteApi {
 
-    requestMainPosts(event) {
-        event.preventDefault();
-        const url = "";
-        var result = fetch(url, {
+    async requestMainPosts() {
+        const url = "/quote/api/mainQuote";
+        var result = await fetch(url, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                
-            }),
-        }).then(Response => {
-            data(Response);
-    
+            }
         }).catch((error)=> {
-           
+            console.log(error);
             alert("서버 연결에 에러가 발생했습니다.");
         });
+
+        return result.json();
     }
 
-    requestSearchUserQuoteById(event,arg) {
-        event.preventDefault();
-        const url = "";
-        var result = fetch(url, {
+    async requestSearchUserQuoteById(arg) {
+        const url = `/quote/api/${arg.id}`;
+        var result = await fetch(url, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                
-            }),
-        }).then(Response => {
-            data(Response);
-    
         }).catch((error)=> {
-           
+            console.log(error);
             alert("서버 연결에 에러가 발생했습니다.");
         });
+
+        return result.json();
     }
 }

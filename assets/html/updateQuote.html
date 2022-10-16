@@ -11,7 +11,7 @@
 	<script src="/assets/js/browser.min.js"></script>
 	<script src="/assets/js/breakpoints.min.js"></script>
 	<script type="text/javascript" src="../js/config.js"></script>
-	<script src="/assets/js/account/Auth.js"></script>
+	<script type="module" src="/assets/js/account/Auth.js"></script>
 	<!-- init script -->
 	<title>Document</title>
 </head>
@@ -149,7 +149,7 @@
 				<form id="quote_form" method="post">
 					<div class="row gtr-uniform">
 						<div class="col-12 col-12-xsmall" hidden>
-							<input type="text" name="id" id="id" value="" autocomplete="off" />
+							<input type="text" name="id" id="post_id" value="" autocomplete="off" />
 						</div>
 						<div class="col-12 col-12-xsmall">
 							<input type="text" name="quote" id="quote" value="" autocomplete="off" />
@@ -157,17 +157,11 @@
 						<div class="col-12 col-12-xsmall">
 							<input type="text" name="author" id="author" value="" autocomplete="off" />
 						</div>
-				
+
 						<div class="col-6 col-12-small">
 							<input type="checkbox" id="non-public" name="isPublic" value="non-public">
 							<label for="non-public" style="user-select: none;">비공개</label>
 						</div>
-
-						<!-- <div class="col-12">
-							<ul class="actions">
-								<li><input id="save_button" type="submit" value="Send Message" /></li>
-							</ul>
-						</div> -->
 					</div>
 				</form>
 
@@ -176,7 +170,7 @@
 						<li><button id="update_button" type="button" value="Send Message">Send Message</button></li>
 					</ul>
 				</div>
-
+			</section>
 		</div>
 
 		<!-- Footer -->
@@ -197,29 +191,27 @@
 	<!-- Scripts -->
 	<script src="/assets/js/util.js"></script>
 	<script src="/assets/js/main.js"></script>
- 
-	
+
+
 	<script src="/assets/js/generator/header.js"></script>
 	<script src="/assets/js/function/quoteWrite.js"></script>
 	<script type="module" src="/assets/js/generator/footer.js"></script>
 
 	<script>
-		var quoteTemp = window.localStorage.getItem("quoteTemp");
+		var quoteTemp = JSON.parse(window.localStorage.getItem("quoteTemp"));
 		window.localStorage.clear();
-		const quoteId = document.querySelector("#id");
+		const quoteId = document.querySelector("#post_id");
 		const quote = document.querySelector("#quote");
 		const author = document.querySelector("#author");
 		const isPublic = document.querySelector("#non-public");
 
-		quoteId.value = quoteTemp.quoteId;
+		quoteId.value = quoteTemp.id;
 		quote.value = quoteTemp.quote;
 		author.value = quoteTemp.author;
 
-		if(quoteTemp.isPublic == "private"){
+		if (quoteTemp.isPublic == "private") {
 			isPublic.checked = true;
 		}
-		console.dir(isPublic);
-
 	</script>
 </body>
 

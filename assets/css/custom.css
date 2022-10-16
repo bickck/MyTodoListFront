@@ -1,4 +1,10 @@
-.delete:hover {
+
+
+#delete_button:hover {
     border-bottom-color: transparent;
     color: rgb(201, 64, 64) !important;
+}
+
+.custom-style {
+    cursor: pointer;
 }

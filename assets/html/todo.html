@@ -144,22 +144,22 @@
                     </div>
                 </header>
                 <span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
-                <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
+                <p id="title">Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
                     placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non
                     congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta
                     lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                <p>Nunc quis dui scelerisque, scelerisque urna ut, dapibus orci. Sed vitae condimentum lectus, ut
+                <!-- <p>Nunc quis dui scelerisque, scelerisque urna ut, dapibus orci. Sed vitae condimentum lectus, ut
                     imperdiet quam. Maecenas in justo ut nulla aliquam sodales vel at ligula. Sed blandit diam odio, sed
                     fringilla lectus molestie sit amet. Praesent eu tortor viverra lorem mattis pulvinar feugiat in
                     turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
                     Fusce ullamcorper tellus sit amet mattis dignissim. Phasellus ut metus ligula. Curabitur nec leo
                     turpis. Ut gravida purus quis erat pretium, sed pellentesque massa elementum. Fusce vestibulum porta
                     augue, at mattis justo. Integer sed sapien fringilla, dapibus risus id, faucibus ante. Pellentesque
-                    mattis nunc sit amet tortor pellentesque, non placerat neque viverra. </p>
+                    mattis nunc sit amet tortor pellentesque, non placerat neque viverra. </p> -->
                 <footer>
                     <ul class="stats">
-                        <li><a href="#" class="icon solid fa-heart">28</a></li>
-                        <li><a href="#" class="icon solid fa-comment">128</a></li>
+                        <li><a href="#" class="icon solid fa-heart">0</a></li>
+                        <li><a href="#" class="icon solid fa-comment">0</a></li>
                         <li class=" update"><a id="update_button">Update</a></li>
                         <li class=" delete"><a id="delete_button">Delete</a></li>
                     </ul>
@@ -192,9 +192,24 @@
     <script src="/assets/js/main.js"></script>
 
 
+    <script>
+        const update_btn = document.querySelector("#update_button");
+        function pageMoveTodoUpdate() {
+
+            var todoTemp = {
+                id: document.querySelector("#post_id").value,
+                quote: document.querySelector("#quote").value,
+                author: document.querySelector("#author").value,
+                isPublic: document.querySelector("#non-public").value
+            } 
+
+            window.localStorage.setItem("todoTemp", JSON.stringify(todoTemp));
+            window.location.href = "http://127.0.0.1:5501/assets/html/updateTodo.html";
+        }
+        update_btn.addEventListener("click", pageMoveTodoUpdate);
+    </script>
     <script type="module" src="/assets/js/server/todo.js"></script>
     <script type="module" src="/assets/js/post/Todo.js"></script>
-    <!-- <script type="module" src="/assets/js/generator/TodoGenerator.js"></script> -->
     <script type="module" src="/assets/js/function/todoWrite.js"></script>
     <!-- <script type="module" src="/assets/js/post/Todo.js"></script> -->
     <script type="module" src="/assets/js/function/action.js"></script>
