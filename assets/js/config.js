@@ -1,7 +1,7 @@
 // product IP
 const backEndServerAddress="";
-const frontEndServerAddress="https://bickck.github.io/MyTodoListFront/"
-const mainPageAddress = "https://bickck.github.io/MyTodoListFront/";
+const frontEndServerAddress="https://bickck.github.io/MyTodoListFront"
+const mainPageAddress = "https://bickck.github.io/MyTodoListFront";
 
 // local dev IP
 // const backEndServerAddress = "http://localhost:8080";

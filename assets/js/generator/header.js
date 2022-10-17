@@ -40,6 +40,14 @@ var requestPage = {
     length: 4
 };
 
+// var requestPage = {
+//     todoPage: frontEndServerAddress + "./assets/html/todo.html",
+//     quotePage: frontEndServerAddress + "assets/html/quote.html",
+//     imagePage: frontEndServerAddress + "",
+//     communityPage: frontEndServerAddress + "",
+//     length: 4
+// };
+
 var requestAuthLinkMenu = {
     userTodoPage: backEndServerAddress + "/todo/api/",
     userQuotePage: backEndServerAddress + "/quote/api/",
