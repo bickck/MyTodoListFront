@@ -58,7 +58,7 @@ function init() {
     header();
     linksAuthMenu();
     linksNonAuthMenu();
-    mainLink.href = "https://bickck.github.io/MyTodoListFront";
+    mainLink.href = "https://bickck.github.io/MyTodoListFront/";
     // authDisabledCheck();
 }
 

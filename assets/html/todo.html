@@ -59,82 +59,82 @@
             </nav>
         </header>
 
-       <!-- Menu -->
-		<section id="menu">
+        <!-- Menu -->
+        <section id="menu">
 
-			<!-- Search -->
-			<section>
-				<form class="search" method="get" action="#">
-					<input type="text" name="query" placeholder="Search" />
-				</form>
-			</section>
+            <!-- Search -->
+            <section>
+                <form class="search" method="get" action="#">
+                    <input type="text" name="query" placeholder="Search" />
+                </form>
+            </section>
 
-			<!-- Links -->
-			<section class="auth">
-				<ul class="links">
-					<li>
-						<a href="/user/api/info">
-							<h3>User Manage</h3>
-							<p>Feugiat tempus veroeros dolor</p>
-						</a>
-					</li>
-					<li>
-						<a href="/todo/api/">
-							<h3>User Todo</h3>
-							<p>Sed vitae justo condimentum</p>
-						</a>
-					</li>
-					<li>
-						<a href="/quote/api/">
-							<h3>User Quote</h3>
-							<p>Phasellus sed ultricies mi congue</p>
-						</a>
-					</li>
+            <!-- Links -->
+            <section class="auth">
+                <ul class="links">
+                    <li>
+                        <a href="/user/api/info">
+                            <h3>User Manage</h3>
+                            <p>Feugiat tempus veroeros dolor</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/todo/api/">
+                            <h3>User Todo</h3>
+                            <p>Sed vitae justo condimentum</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/quote/api/">
+                            <h3>User Quote</h3>
+                            <p>Phasellus sed ultricies mi congue</p>
+                        </a>
+                    </li>
 
-				</ul>
-			</section>
-			<!-- Links -->
-			<section class="non-auth">
-				<ul class="links">
-					<li>
-						<a href="/page/todo">
-							<h3>Todo</h3>
-							<p>Feugiat tempus veroeros dolor</p>
-						</a>
-					</li>
-					<li>
-						<a href="/page/quote">
-							<h3>Quote</h3>
-							<p>Sed vitae justo condimentum</p>
-						</a>
-					</li>
-				</ul>
-			</section>
+                </ul>
+            </section>
+            <!-- Links -->
+            <section class="non-auth">
+                <ul class="links">
+                    <li>
+                        <a href="/page/todo">
+                            <h3>Todo</h3>
+                            <p>Feugiat tempus veroeros dolor</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/page/quote">
+                            <h3>Quote</h3>
+                            <p>Sed vitae justo condimentum</p>
+                        </a>
+                    </li>
+                </ul>
+            </section>
 
-			<!-- Actions -->
-			<section class="auth">
-				<ul class="actions stacked">
-					<li><a href="#" class="button large fit">유저 정보</a></li>
-				</ul>
-			</section>
+            <!-- Actions -->
+            <section class="auth">
+                <ul class="actions stacked">
+                    <li><a href="#" class="button large fit">유저 정보</a></li>
+                </ul>
+            </section>
 
-			<!-- Actions -->
-			<section class="non-auth">
-				<ul class="actions stacked">
-					<li class="loginPage"><a href="#" class="button large fit">Log In</a></li>
-				</ul>
-			</section>
-		</section>
+            <!-- Actions -->
+            <section class="non-auth">
+                <ul class="actions stacked">
+                    <li class="loginPage"><a href="#" class="button large fit">Log In</a></li>
+                </ul>
+            </section>
+        </section>
 
         <!-- Main -->
         <div id="main">
 
             <section class="title">
                 <h2>Todo</h2>
-				<!-- <div class="actions">
+                <!-- <div class="actions">
 					<div class="move-action auth"><button type="button" class="button medium fit">Write Todo</butt></div>
 				</div> -->
-			</section>
+            </section>
 
             <!-- Post -->
             <article class="post">
@@ -149,12 +149,13 @@
                     <div class="meta">
                         <time class="published" datetime="2015-11-01">November 1, 2015</time>
                         <a href="#" class="author"><span class="name">Jane Doe</span>
-                            <img src="images/avatar.jpg"alt="" />
+                            <img src="images/avatar.jpg" alt="" />
                         </a>
                     </div>
                 </header>
                 <span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
-                <p id="title">Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
+                <p id="title">Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id
+                    lorem euismod
                     placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non
                     congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta
                     lectus vitae, ultricies congue gravida diam non fringilla.</p>
@@ -225,14 +226,15 @@
     <script type="module" src="/assets/js/function/action.js"></script>
     <script type="modeul" src="/assets/js/generator/header.js"></script>
     <script type="module" src="/assets/js/generator/footer.js"></script> -->
- 
+
     <!-- product -->
     <script src="./../js/util.js"></script>
     <script src="./..//js/main.js"></script>
 
 
-    <script type="text/javascript"> 
+    <script type="text/javascript">
         const update_btn = document.querySelector("#update_button");
+
         function pageMoveTodoUpdate() {
 
             var todoTemp = {
@@ -240,7 +242,7 @@
                 quote: document.querySelector("#quote").value,
                 author: document.querySelector("#author").value,
                 isPublic: document.querySelector("#non-public").value
-            } 
+            }
 
             window.localStorage.setItem("todoTemp", JSON.stringify(todoTemp));
             window.location.href = "http://127.0.0.1:5501/assets/html/updateTodo.html";
@@ -248,13 +250,12 @@
         update_btn.addEventListener("click", pageMoveTodoUpdate);
     </script>
 
-
+    <script type="modeul" src="./../js/generator/header.js"></script>
+    <script type="module" src="./../js/generator/footer.js"></script>
     <script type="module" src="./../js/server/todo.js"></script>
     <script type="module" src="./../js/post/Todo.js"></script>
     <script type="module" src="./../js/function/todoWrite.js"></script>
     <script type="module" src="./../js/function/action.js"></script>
-    <script type="modeul" src="./../js/generator/header.js"></script>
-    <script type="module" src="./../js/generator/footer.js"></script>
-</body>
 
+</body>
 </html>
