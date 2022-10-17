@@ -5,14 +5,24 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="/assets/css/main.css">
-	<!-- init script -->
+	
+
+	<!-- dev -->
+	<!-- <link rel="stylesheet" href="/assets/css/main.css">
 	<script src="/assets/js/jquery.min.js"></script>
 	<script src="/assets/js/browser.min.js"></script>
 	<script src="/assets/js/breakpoints.min.js"></script>
 	<script type="text/javascript" src="../js/config.js"></script>
-	<script type="module" src="/assets/js/account/Auth.js"></script>
-	<!-- init script -->
+	<script type="module" src="/assets/js/account/Auth.js"></script> -->
+
+	<!-- prodcut -->
+	<link rel="stylesheet" href="./assets/css/main.css">
+	<script type="text/javascript" src="./assets/js/jquery.min.js"></script>
+	<script type="text/javascript" src="./assets/js/browser.min.js"></script>
+	<script type="text/javascript" src="./assets/js/breakpoints.min.js"></script>
+	<script type="text/javascript" src="./assets/js/config.js"></script>
+	<script type="module" src="./assets/js/account/Auth.js"></script>
+
 	<title>Document</title>
 </head>
 
@@ -188,8 +198,8 @@
 
 	</div>
 
-	<!-- Scripts -->
-	<script src="/assets/js/util.js"></script>
+	<!-- dev -->
+	<!-- <script src="/assets/js/util.js"></script>
 	<script src="/assets/js/main.js"></script>
 
 
@@ -198,6 +208,32 @@
 	<script type="module" src="/assets/js/generator/footer.js"></script>
 
 	<script>
+		var quoteTemp = JSON.parse(window.localStorage.getItem("quoteTemp"));
+		window.localStorage.clear();
+		const quoteId = document.querySelector("#post_id");
+		const quote = document.querySelector("#quote");
+		const author = document.querySelector("#author");
+		const isPublic = document.querySelector("#non-public");
+
+		quoteId.value = quoteTemp.id;
+		quote.value = quoteTemp.quote;
+		author.value = quoteTemp.author;
+
+		if (quoteTemp.isPublic == "private") {
+			isPublic.checked = true;
+		}
+	</script> -->
+
+	<!-- product -->
+	<script type="text/javascript" src="./assets/js/util.js"></script>
+	<script type="text/javascript" src="./assets/js/main.js"></script>
+
+
+	<script type="text/javascript" src="./assets/js/generator/header.js"></script>
+	<script type="text/javascript" src="./assets/js/function/quoteWrite.js"></script>
+	<script type="module" src="./assets/js/generator/footer.js"></script>
+
+	<script type="text/javascript">
 		var quoteTemp = JSON.parse(window.localStorage.getItem("quoteTemp"));
 		window.localStorage.clear();
 		const quoteId = document.querySelector("#post_id");
