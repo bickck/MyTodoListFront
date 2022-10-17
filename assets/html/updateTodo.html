@@ -5,13 +5,24 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!-- dev -->
+	<!-- <link rel="stylesheet" href="/assets/css/main.css">
 	<script src="/assets/js/jquery.min.js"></script>
 	<script src="/assets/js/browser.min.js"></script>
 	<script src="/assets/js/breakpoints.min.js"></script>
-
 	<script type="text/javascript" src="../js/config.js"></script>
-	<script type="module" src="/assets/js/account/Auth.js"></script>
+	<script type="module" src="/assets/js/account/Auth.js"></script> -->
+
+	<!-- product -->
+
+	<link rel="stylesheet" href="./assets/css/main.css">
+	<script type="text/javascript" src="./assets/js/jquery.min.js"></script>
+	<script type="text/javascript" src="./assets/js/browser.min.js"></script>
+	<script type="text/javascript" src="./assets/js/breakpoints.min.js"></script>
+	<script type="text/javascript" src="./assets/js/config.js"></script>
+	<script type="module" src="./assets/js/account/Auth.js"></script>
+
 	<title>Document</title>
 </head>
 
@@ -195,8 +206,8 @@
 
 	</div>
 
-	<!-- Scripts -->
-	<script src="/assets/js/util.js"></script>
+	<!-- dev -->
+	<!-- <script src="/assets/js/util.js"></script>
 	<script src="/assets/js/main.js"></script>
 	
 	<script src="/assets/js/generator/header.js"></script>
@@ -219,9 +230,33 @@
 			isPublic.checked = true;
 		}
 		console.dir(isPublic);
+	</script> -->
 
+	<!-- product -->
+	<script type="text/javascript" src="./assets/js/util.js"></script>
+	<script type="text/javascript" src="./assets/js/main.js"></script>
+	
+	<script type="text/javascript" src="./assets/js/generator/header.js"></script>
+	<script type="module" src="./assets/js/function/todoWrite.js"></script>
+	<script type="module" src="./assets/js/generator/footer.js"></script>
+
+    <script type="text/javascript">
+		var todoTemp = window.localStorage.getItem("todoTemp");
+		window.localStorage.clear();
+		const todoId = document.querySelector("#id");
+		const title = document.querySelector("#title");
+		const content = document.querySelector("#content");
+		const isPublic = document.querySelector("#non-public");
+
+		todoId.value = todoTemp.todoId;
+		title.value = todoTemp.title;
+		content.value = todoTemp.content;
+
+		if(todoTemp.isPublic == "private"){
+			isPublic.checked = true;
+		}
+		console.dir(isPublic);
 	</script>
-</body>
-</body>
 
+</body>
 </html>

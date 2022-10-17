@@ -6,14 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <!-- dev -->
+    <!-- <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/custom.css">
 
+    
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/browser.min.js"></script>
     <script src="/assets/js/breakpoints.min.js"></script>
 
-    <script type="text/javascript" src="../js/config.js"></script>
+    <script type="text/javascript" src="../js/config.js"></script> -->
+
+    <!-- product -->
+
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/custom.css">
+
+    
+    <script type="text/javascript" src="./assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="./assets/js/browser.min.js"></script>
+    <script type="text/javascript" src="./assets/js/breakpoints.min.js"></script>
+
+    <script type="text/javascript" src="./assets/js/config.js"></script>
 
 </head>
 
@@ -194,8 +209,8 @@
 
     </div>
 
-    <!-- Scripts -->
-    <script src="/assets/js/util.js"></script>
+    <!-- dev -->
+    <!-- <script src="/assets/js/util.js"></script>
     <script src="/assets/js/main.js"></script>
 
     <script>
@@ -220,8 +235,36 @@
     <script src="/assets/js/function/quoteRead.js"></script>
     <script src="/assets/js/function/quoteWrite.js"></script>
     <script src="/assets/js/generator/header.js"></script>
-    <script type="module" src="/assets/js/generator/footer.js"></script>
+    <script type="module" src="/assets/js/generator/footer.js"></script> -->
 
+    <!-- product -->
+
+    <script src="./assets/js/util.js"></script>
+    <script src="./assets/js/main.js"></script>
+
+    <script type="text/javascript">
+        const pageMoveBtn = document.querySelector("#update_button");
+
+        function pageMoveQuoteUpdate() {
+
+            var quoteTemp = {
+                id: document.querySelector("#post_id").value,
+                quote: document.querySelector("#quote").value,
+                author: document.querySelector("#author").value,
+                isPublic: document.querySelector("#non-public").value
+            }
+
+            window.localStorage.setItem("quoteTemp", JSON.stringify(quoteTemp));
+            window.location.href = "http://127.0.0.1:5501/assets/html/updateQuote.html";
+
+        }
+        pageMoveBtn.addEventListener("click", pageMoveQuoteUpdate);
+    </script>
+
+    <script type="text/javascript" src="./assets/js/function/quoteRead.js"></script>
+    <script type="text/javascript" src="./assets/js/function/quoteWrite.js"></script>
+    <script type="text/javascript" src="./assets/js/generator/header.js"></script>
+    <script type="module" src="./assets/js/generator/footer.js"></script>
 
 </body>
 
