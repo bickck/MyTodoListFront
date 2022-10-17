@@ -1,9 +1,14 @@
+/**
+ *  action 을 호출하는 파일
+ */
+
 const stats = document.querySelector(".stats");
 
 
 
 async function comment() {
 
+    
     const requestUrl = "";
     fetch(requestUrl, {
         method: 'POST',

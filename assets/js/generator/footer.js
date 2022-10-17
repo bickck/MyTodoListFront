@@ -1,5 +1,10 @@
+/**
+ * 
+ */
+
 import { Auth } from "../account/auth.js";
 const auth = new Auth();
+
 
 
 function authDisabledCheck() {

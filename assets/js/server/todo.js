@@ -1,8 +1,9 @@
 //const mainPost = document.querySelector("#main");
 /**
- * 유저의 TODO API를 호출하는 클래스
+ * 유저의 TODO API를 호출하는 파일
  */
 export class Todo {
+
 
     requestUserTodoInsert(arg) {
         const url = `http://localhost:8080/user/todo/manage/save`;

@@ -1,5 +1,6 @@
 export class Auth {
 
+    
     getJsonToken() {
         return window.sessionStorage.getItem("_jwt");
     }

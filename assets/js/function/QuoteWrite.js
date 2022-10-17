@@ -1,3 +1,7 @@
+/**
+ * 
+ */
+
 const save_btn = document.querySelector("#save_button");
 const update_btn = document.querySelector("#update_button");
 const delete_btn = document.querySelector("#delete_button");
@@ -11,6 +15,7 @@ function quoteSave() {
     if (isCheckPublic.checked == false) {
         isCheckPublic.value = "public";
     }
+
 
 
     var result = fetch(requestUrl, {

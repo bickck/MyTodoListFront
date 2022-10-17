@@ -1,4 +1,10 @@
+/**
+ * 
+ */
+
+
 class quoteInjector {
+
     quoteInjector(arg) {
         const id = document.querySelector("#post_id");
         const quote = document.querySelector("#quote");

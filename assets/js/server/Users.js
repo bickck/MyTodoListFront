@@ -1,3 +1,7 @@
+/**
+ * 유저의 정보 API를 호출하는 파일
+ */
+
 export class Users {
     // 유저 정보 요청
     requestUserDetails() {

@@ -1,5 +1,6 @@
-
-
+/**
+ * 유저의 Quote API를 호출하는 파일
+ */
 export class Quote {
 
     requestUserQuoteSave(event) {

@@ -1,4 +1,10 @@
+/**
+ *  Quote API를 호출하는 파일
+ */
+
+
 export class QuoteApi {
+
 
     async requestMainPosts() {
         const url = "/quote/api/mainQuote";

@@ -1,3 +1,8 @@
+/**
+ * 
+ */
+
+
 //const headerTagId = document.querySelector("#header");
 // const links = document.querySelectorAll(".link");
 // function header() {
@@ -28,6 +33,7 @@
 // import { Auth } from "../account/Auth.js";
 
 // const auth = new Auth();
+
 const mainLink = document.querySelector("header #mainLink");
 var lists = $(".page").navList();
 var loginPageContainer = $(".loginPage")[0].children[0];

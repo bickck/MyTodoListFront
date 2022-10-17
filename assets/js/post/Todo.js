@@ -1,8 +1,14 @@
+/**
+ * 
+ */
+
+
 import {
     TodoApi
 } from "../api/todoapi.js"
 
 const todo = new TodoApi();
+
 
 const paginationPrev = document.querySelector(".pagination li .previous");
 const paginationNext = document.querySelector(".pagination li .next");
