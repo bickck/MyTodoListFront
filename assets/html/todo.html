@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- dev -->
     <link rel="stylesheet" href="/assets/css/custom.css">
     <link rel="stylesheet" href="/assets/css/main.css">
     
@@ -12,6 +14,16 @@
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/browser.min.js"></script>
     <script src="/assets/js/breakpoints.min.js"></script>
+    <script type="text/javascript" src="../js/config.js"></script>
+
+    <!-- product -->
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    
+
+    <script type="text/javascript" src="/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/browser.min.js"></script>
+    <script type="text/javascript" src="/assets/js/breakpoints.min.js"></script>
     <script type="text/javascript" src="../js/config.js"></script>
 
     <title>Document</title>
@@ -187,12 +199,12 @@
 
     </div>
 
-    <!-- Scripts -->
-    <script src="/assets/js/util.js"></script>
+    <!-- dev -->
+    <!-- <script src="/assets/js/util.js"></script>
     <script src="/assets/js/main.js"></script>
 
 
-    <script>
+    <script type="text/javascript"> 
         const update_btn = document.querySelector("#update_button");
         function pageMoveTodoUpdate() {
 
@@ -208,10 +220,39 @@
         }
         update_btn.addEventListener("click", pageMoveTodoUpdate);
     </script>
+
     <script type="module" src="/assets/js/server/todo.js"></script>
     <script type="module" src="/assets/js/post/Todo.js"></script>
     <script type="module" src="/assets/js/function/todoWrite.js"></script>
-    <!-- <script type="module" src="/assets/js/post/Todo.js"></script> -->
+    <script type="module" src="/assets/js/function/action.js"></script>
+    <script type="modeul" src="/assets/js/generator/header.js"></script>
+    <script type="module" src="/assets/js/generator/footer.js"></script> -->
+ 
+    <!-- product -->
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+
+    <script type="text/javascript"> 
+        const update_btn = document.querySelector("#update_button");
+        function pageMoveTodoUpdate() {
+
+            var todoTemp = {
+                id: document.querySelector("#post_id").value,
+                quote: document.querySelector("#quote").value,
+                author: document.querySelector("#author").value,
+                isPublic: document.querySelector("#non-public").value
+            } 
+
+            window.localStorage.setItem("todoTemp", JSON.stringify(todoTemp));
+            window.location.href = "http://127.0.0.1:5501/assets/html/updateTodo.html";
+        }
+        update_btn.addEventListener("click", pageMoveTodoUpdate);
+    </script>
+
+    <script type="module" src="/assets/js/server/todo.js"></script>
+    <script type="module" src="/assets/js/post/Todo.js"></script>
+    <script type="module" src="/assets/js/function/todoWrite.js"></script>
     <script type="module" src="/assets/js/function/action.js"></script>
     <script type="modeul" src="/assets/js/generator/header.js"></script>
     <script type="module" src="/assets/js/generator/footer.js"></script>
