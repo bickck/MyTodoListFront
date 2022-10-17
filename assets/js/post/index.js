@@ -12,7 +12,7 @@ import {
 
 import {
     Todo
-} from "./todo.js";
+} from "../post/todo.js";
 
 import {
     Users
