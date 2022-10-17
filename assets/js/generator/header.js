@@ -58,7 +58,7 @@ function init() {
     header();
     linksAuthMenu();
     linksNonAuthMenu();
-    mainLink.href = "https://bickck.github.io/MyTodoListFront/";
+    
     // authDisabledCheck();
 }
 
@@ -74,6 +74,8 @@ function header() {
     
     //loginPageLink = loginPageLink.replace("/index.html#", "/assets/html/login.html");
     loginPageContainer.href = frontEndServerAddress + "/assets/html/login.html";
+    console.log(mainLink);
+    mainLink.href = "https://bickck.github.io/MyTodoListFront/";
 }
 
 function linksAuthMenu() {
