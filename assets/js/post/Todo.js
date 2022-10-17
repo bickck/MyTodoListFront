@@ -1,6 +1,6 @@
 import {
     TodoApi
-} from "../api/TodoApi.js"
+} from "../api/todoapi.js"
 
 const todo = new TodoApi();
 
