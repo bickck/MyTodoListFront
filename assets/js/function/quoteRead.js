@@ -1,3 +1,8 @@
+/**
+ *  화면에 보여주기 위한 데이터 삽입
+ */
+
+
 window.onload = function init() {
 
     mainQuoteApi();
@@ -8,6 +13,7 @@ function quoteInjector(arg) {
     const quote = document.querySelector("#quote");
     const author = document.querySelector("#author");
     const heart = document.querySelector(".fa-heart");
+
 
     id.innerText = arg.id;
     quote.innerText = arg.quote;
