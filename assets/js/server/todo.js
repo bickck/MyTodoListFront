@@ -1,4 +1,4 @@
-const mainPost = document.querySelector("#main");
+//const mainPost = document.querySelector("#main");
 /**
  * 유저의 TODO API를 호출하는 클래스
  */

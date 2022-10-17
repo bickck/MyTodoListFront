@@ -10,14 +10,14 @@ import {
 } from "../server/Todo.js"
 
 import {
-    User
-} from "../server/User.js"
+    Users
+} from "../server/Users.js"
 
 
 const mainTodos = new Todo();
 const auth = new Auth();
 const post = new Post();
-const user = new User();
+const user = new Users();
 const mainPost = document.querySelector("#main");
 
 window.onload = function init(event) {

@@ -1,4 +1,4 @@
-class Users {
+export class Users {
     // 유저 정보 요청
     requestUserDetails() {
         const url = "http://localhost:8080/user/api/intro";
