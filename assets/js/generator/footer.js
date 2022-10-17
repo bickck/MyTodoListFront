@@ -1,5 +1,4 @@
-import { Auth } from "./account/Auth.js";
-
+import { Auth } from "../account/Auth.js";
 const auth = new Auth();
 
 

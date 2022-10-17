@@ -1,6 +1,6 @@
 import {
     Post
-} from "./Post.js";
+} from "../generator/Post.js";
 import {
     Auth
 } from "../account/Auth.js";
@@ -11,7 +11,7 @@ import {
 
 import {
     User
-} from "./User.js"
+} from "../server/User.js"
 
 
 const mainTodos = new Todo();
