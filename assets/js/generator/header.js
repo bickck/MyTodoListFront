@@ -28,6 +28,7 @@
 // import { Auth } from "../account/Auth.js";
 
 // const auth = new Auth();
+const mainLink = document.querySelector("header #mainLink");
 var lists = $(".page").navList();
 var loginPageContainer = $(".loginPage")[0].children[0];
 var loginPageLink = loginPageContainer.href;
@@ -39,14 +40,6 @@ var requestPage = {
     communityPage: frontEndServerAddress + "",
     length: 4
 };
-
-// var requestPage = {
-//     todoPage: frontEndServerAddress + "./assets/html/todo.html",
-//     quotePage: frontEndServerAddress + "assets/html/quote.html",
-//     imagePage: frontEndServerAddress + "",
-//     communityPage: frontEndServerAddress + "",
-//     length: 4
-// };
 
 var requestAuthLinkMenu = {
     userTodoPage: backEndServerAddress + "/todo/api/",
@@ -65,6 +58,7 @@ function init() {
     header();
     linksAuthMenu();
     linksNonAuthMenu();
+    mainLink.href = "https://bickck.github.io/MyTodoListFront";
     // authDisabledCheck();
 }
 
