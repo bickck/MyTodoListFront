@@ -31,8 +31,13 @@
 // console.log(navList());
 
 // import { Auth } from "../account/Auth.js";
-
 // const auth = new Auth();
+
+import {
+    Auth
+} from "../account/auth.js";
+const auth = new Auth();
+
 
 const mainLink = document.querySelector("header #mainLink");
 var lists = $(".page").navList();
@@ -60,15 +65,12 @@ var requestNonAuthLinkMenu = {
 }
 
 function init() {
-
-    header();
-    linksAuthMenu();
-    linksNonAuthMenu();
-    
-    // authDisabledCheck();
+    headerLinkInjector();
+    authLinkMenuInjection();
+    nonAuthLinkMenuInjection();
 }
 
-function header() {
+function headerLinkInjector() {
     lists[0] = '<li>' + lists[0].replace("#", requestPage.todoPage) + '</li>';
     lists[1] = '<li>' + lists[1].replace("#", requestPage.quotePage) + '</li>';
     lists[2] = '<li>' + lists[2].replace("#", requestPage.imagePage) + '</li>';
@@ -77,32 +79,33 @@ function header() {
     $(".lists li").remove();
     $(".lists").append(lists);
 
-    
+
     //loginPageLink = loginPageLink.replace("/index.html#", "/assets/html/login.html");
-    loginPageContainer.href = frontEndServerAddress + "/assets/html/login.html";
-    console.log(mainLink);
-    mainLink.href = "https://bickck.github.io/MyTodoListFront/";
+    loginPageContainer.href = frontEndServerAddress + loginPageURL;
+    mainLink.href = frontEndServerAddress;
 }
 
-function linksAuthMenu() {
+function authLinkMenuInjection() {
     var authSection = document.querySelectorAll(".auth .links")[0];
-    var userAPIInfoLink = authSection.children[0].children[0];
-    var todoAPILink = authSection.children[1].children[0];
-    var quoteAPILink = authSection.children[2].children[0];
-   
-    userAPIInfoLink.href = requestAuthLinkMenu.userManagePage;
-    todoAPILink.href = requestAuthLinkMenu.userTodoPage;
-    quoteAPILink.href = requestAuthLinkMenu.userQuotePage;
+
+    var userInfoPageLink = authSection.children[0].children[0];
+    var userTodoAPIPageLink = authSection.children[1].children[0];
+    var userQuoteAPIPageLink = authSection.children[2].children[0];
+
+    userInfoPageLink.href = frontEndServerAddress + requestAuthLinkMenu.userManagePage;
+    userTodoAPIPageLink.href = frontEndServerAddress + requestAuthLinkMenu.userTodoPage;
+    userQuoteAPIPageLink.href = frontEndServerAddress + requestAuthLinkMenu.userQuotePage;
 }
 
-function linksNonAuthMenu() {
+function nonAuthLinkMenuInjection() {
     var nonAuthSection = document.querySelectorAll(".non-auth .links")[0];
+
     var todoPageLink = nonAuthSection.children[0].children[0];
     var quotePageLink = nonAuthSection.children[1].children[0];
 
-    todoPageLink.href = requestNonAuthLinkMenu.todoPage;
-    quotePageLink.href = requestNonAuthLinkMenu.quotePage;
-    
+    todoPageLink.href = frontEndServerAddress + requestNonAuthLinkMenu.todoPage;
+    quotePageLink.href = frontEndServerAddress + requestNonAuthLinkMenu.quotePage;
+
 }
 
 // function authDisabledCheck() {
@@ -127,4 +130,5 @@ function linksNonAuthMenu() {
 //     }
 // }
 
+// authDisabledCheck();
 init();

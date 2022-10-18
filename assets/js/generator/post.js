@@ -31,234 +31,197 @@ export class Post {
     // 	</article>
 
     createMainPost(params) {
-        let articleContainer = document.createElement("article");
+        var articleContainer = document.createElement("article");
+        var headerContainer = document.createElement("header");
+        var headerTitle = document.createElement("div");
+        var titleContainer = document.createElement("h2");
+        var titleLink = document.createElement("a");
+        var titleWord = document.createElement("p");
+        var metaContainer = document.createElement("div");
+        var timeContainer = document.createElement("time");
+        var userInfoLink = document.createElement("a");
+        var userinfo = document.createElement("span");
+        var userImg = document.createElement("img");
+        var pageLink = document.createElement("a");
+        var pageImages = document.createElement("img");
+        var mainWord = document.createElement("p");
+        var footerContainer = document.createElement("footer");
+        var ulActions = document.createElement("ul");
+        var ulStats = document.createElement("ul");
+        var liHeart = document.createElement("li");
+        var aHeart = document.createElement("a");
+        var liComment = document.createElement("li");
+        var aComment = document.createElement("a");
+
         articleContainer.setAttribute("class", "post");
-
-        /* header */
-        let headerContainer = document.createElement("header");
-
-        /* title div */
-        let headerTitle = document.createElement("div");
         headerTitle.setAttribute("class", "title");
-        
-        let titleContainer = document.createElement("h2");
-        let titleLink = document.createElement("a");
-        titleLink.setAttribute("href", "#");   
-        let titleWord = document.createElement("p");
-        
-         
-        titleLink.innerText = "Test"   
-        titleWord.innerText = "hi";
+        titleLink.setAttribute("href", "#");
+        metaContainer.setAttribute("class", "meta");
+        timeContainer.setAttribute("class", "published");
+        timeContainer.setAttribute("datetime", "2022");
+        userInfoLink.setAttribute("href", "#");
+        userInfoLink.setAttribute("class", "author");
+        userinfo.setAttribute("class", "name");
+        userImg.setAttribute("src", "images/avatar.jpg");
+        userImg.setAttribute("alt", "");
+        pageImages.setAttribute("src", "#");
+        pageImages.setAttribute("alt", "#");
+        pageLink.setAttribute("href", "#");
+        pageLink.setAttribute("class", "image featured");
+        ulActions.setAttribute("class", "actions");
+        ulStats.setAttribute("class", "stats");
+        aHeart.setAttribute("href", "#");
+        aHeart.setAttribute("class", "icon solid fa-heart");
+        aComment.setAttribute("href", "#");
+        aComment.setAttribute("class", "icon solid fa-comment");
 
         titleContainer.appendChild(titleLink);
         headerTitle.appendChild(titleContainer);
         headerTitle.appendChild(titleWord);
-
-        /* title div */
-
-        /* meta div */
-        let metaContainer = document.createElement("div");
-        metaContainer.setAttribute("class", "meta");
-
-        let timeContainer = document.createElement("time");
-        timeContainer.setAttribute("class", "published");
-        timeContainer.setAttribute("datetime", "2022");
-        timeContainer.innerText = "2022"
-
-        let userInfoLink = document.createElement("a");
-        userInfoLink.setAttribute("href","#");
-        userInfoLink.setAttribute("class", "author");
-
-        let userinfo = document.createElement("span");
-        userinfo.setAttribute("class", "name");
-        userinfo.innerText = "user info ";
-
-        let userImg = document.createElement("img");
-        userImg.setAttribute("src","images/avatar.jpg");
-        userImg.setAttribute("alt","");
-
         userInfoLink.appendChild(userinfo);
         userInfoLink.appendChild(userImg);
         metaContainer.appendChild(timeContainer);
         metaContainer.appendChild(userInfoLink);
-        /* meta div */
-
-
-        /* header */
         headerContainer.appendChild(headerTitle);
         headerContainer.appendChild(metaContainer);
-
-        /* main area */
-        let pageLink = document.createElement("a");
-        let pageImages = document.createElement("img");
-        pageImages.setAttribute("src","#");
-        pageImages.setAttribute("alt","#");
         pageLink.appendChild(pageImages);
-        let mainWord = document.createElement("p");
-
-        pageLink.setAttribute("href","#");
-        pageLink.setAttribute("class","image featured");
-        
-        mainWord.innerText = "Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. ";
-
-        /* main area */
-
-        /* footer */
-        let footerContainer = document.createElement("footer");
-        let ulActions = document.createElement("ul");
-        let ulStats = document.createElement("ul");
-
-        ulActions.setAttribute("class", "actions");        
-        ulStats.setAttribute("class", "stats");
-
-        let liHeart = document.createElement("li");
-        let aHeart = document.createElement("a"); 
-        aHeart.setAttribute("href","#");
-        aHeart.setAttribute("class","icon solid fa-heart");
-        aHeart.innerText = "140";
         liHeart.appendChild(aHeart);
-        
-        let liComment = document.createElement("li");
-        let aComment = document.createElement("a");
-        aComment.setAttribute("href","#");
-        aComment.setAttribute("class","icon solid fa-comment");
-        aComment.innerText = "120";
         liComment.appendChild(aComment);
-
         ulStats.appendChild(liHeart);
         ulStats.appendChild(liComment);
-
         footerContainer.appendChild(ulActions);
         footerContainer.appendChild(ulStats);
-        /* footer */
-
         articleContainer.appendChild(headerContainer);
         articleContainer.appendChild(pageLink);
         articleContainer.appendChild(mainWord);
         articleContainer.appendChild(footerContainer);
 
+        titleLink.innerText = "Test"
+        titleWord.innerText = "hi";
+        timeContainer.innerText = "2022"
+        userinfo.innerText = "user info ";
+        mainWord.innerText = "Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. ";
+        aHeart.innerText = "140";
+        aComment.innerText = "120";
+
         return articleContainer;
     }
 
-// <section>
-//     <div class="mini-posts">
+    // <section>
+    //     <div class="mini-posts">
 
-//         <!-- Mini Post -->
-//             <article class="mini-post">
-//                 <header>
-//                     <h3><a href="single.html">Vitae sed condimentum</a></h3>
-//                     <time class="published" datetime="2015-10-20">October 20, 2015</time>
-//                     <a href="#" class="author"><img src="images/avatar.jpg" alt="" /></a>
-//                 </header>
-//                 <a href="single.html" class="image"><img src="images/pic04.jpg" alt="" /></a>
-//             </article>
+    //         <!-- Mini Post -->
+    //             <article class="mini-post">
+    //                 <header>
+    //                     <h3><a href="single.html">Vitae sed condimentum</a></h3>
+    //                     <time class="published" datetime="2015-10-20">October 20, 2015</time>
+    //                     <a href="#" class="author"><img src="images/avatar.jpg" alt="" /></a>
+    //                 </header>
+    //                 <a href="single.html" class="image"><img src="images/pic04.jpg" alt="" /></a>
+    //             </article>
+    //     </div>
+    // </section>
 
-//         <!-- Mini Post -->
-//             <article class="mini-post">
-//                 <header>
-//                     <h3><a href="single.html">Rutrum neque accumsan</a></h3>
-//                     <time class="published" datetime="2015-10-19">October 19, 2015</time>
-//                     <a href="#" class="author"><img src="images/avatar.jpg" alt="" /></a>
-//                 </header>
-//                 <a href="single.html" class="image"><img src="images/pic05.jpg" alt="" /></a>
-//             </article>
+    crateMiniPost(params) {
+        var articleContainer = document.createElement("article");
+        var headerContainer = document.createElement("header");
+        var titleContainer = document.createElement("h3");
+        var titleLink = document.createElement("a");
+        var time = document.createElement("time");
+        var author = document.createElement("a");
+        var authorImage = document.createElement("img");
+        var postImageContainer = document.createElement("a");
+        var postImage = document.createElement("img");
 
-//         <!-- Mini Post -->
-//             <article class="mini-post">
-//                 <header>
-//                     <h3><a href="single.html">Odio congue mattis</a></h3>
-//                     <time class="published" datetime="2015-10-18">October 18, 2015</time>
-//                     <a href="#" class="author"><img src="images/avatar.jpg" alt="" /></a>
-//                 </header>
-//                 <a href="single.html" class="image"><img src="images/pic06.jpg" alt="" /></a>
-//             </article>
+        articleContainer.setAttribute("class", "mini-post");
+        titleLink.setAttribute("href", "");
+        time.setAttribute("class", "published");
+        time.setAttribute("datatime", "");
+        author.setAttribute("href", "#");
+        author.setAttribute("class", "author");
+        authorImage.setAttribute("src", "");
+        authorImage.setAttribute("alt", "");
+        postImageContainer.setAttribute("href", "#");
+        postImageContainer.setAttribute("class", "image");
+        postImage.setAttribute("src", "");
+        postImage.setAttribute("alt", "");
 
-//         <!-- Mini Post -->
-//             <article class="mini-post">
-//                 <header>
-//                     <h3><a href="single.html">Enim nisl veroeros</a></h3>
-//                     <time class="published" datetime="2015-10-17">October 17, 2015</time>
-//                     <a href="#" class="author"><img src="images/avatar.jpg" alt="" /></a>
-//                 </header>
-//                 <a href="single.html" class="image"><img src="images/pic07.jpg" alt="" /></a>
-//             </article>
+        postImageContainer.appendChild(postImage);
+        titleContainer.appendChild(titleLink);
+        author.appendChild(authorImage);
+        headerContainer.appendChild(titleContainer);
+        headerContainer.appendChild(time);
+        headerContainer.appendChild(author);
+        articleContainer.appendChild(headerContainer);
+        articleContainer.appendChild(postImageContainer);
 
-//     </div>
-// </section>
-
-    setMiniPost(params) {
-        let miniArticleContainer = document.createElement("article");
-        miniArticleContainer.setAttribute("class","mini-post");
-
-        let miniHeaderContainer = document.createElement("header");
-        let miniPostTitle = document.createElement("h3");
-        let miniPostLink = document.createElement("a");
-
-        miniPostTitle.appendChild(miniPostLink);
-        
-        let miniPostDate = document.createElement("time");
-        let miniPostAuthorLink = document.createElement("a");
-        miniPostAuthorLink.setAttribute("href","");
-        miniPostAuthorLink.setAttribute("class","author");
-
-        miniHeaderContainer.appendChild(miniHeaderContainer);
-        miniHeaderContainer.appendChild(miniPostDate);
-        miniHeaderContainer.appendChild(miniPostAuthorLink);
+        return articleContainer;
 
     };
 
-/* <section>
-    <ul class="posts">
-        <li>
-            <article>
-                <header>
-                    <h3><a href="single.html">Lorem ipsum fermentum ut nisl vitae</a></h3>
-                    <time class="published" datetime="2015-10-20">October 20, 2015</time>
-                </header>
-                <a href="single.html" class="image"><img src="images/pic08.jpg" alt="" /></a>
-            </article>
-        </li>
-        <li>
-            <article>
-                <header>
-                    <h3><a href="single.html">Convallis maximus nisl mattis nunc id lorem</a></h3>
-                    <time class="published" datetime="2015-10-15">October 15, 2015</time>
-                </header>
-                <a href="single.html" class="image"><img src="images/pic09.jpg" alt="" /></a>
-            </article>
-        </li>
-        <li>
-            <article>
-                <header>
-                    <h3><a href="single.html">Euismod amet placerat vivamus porttitor</a></h3>
-                    <time class="published" datetime="2015-10-10">October 10, 2015</time>
-                </header>
-                <a href="single.html" class="image"><img src="images/pic10.jpg" alt="" /></a>
-            </article>
-        </li>
-        <li>
-            <article>
-                <header>
-                    <h3><a href="single.html">Magna enim accumsan tortor cursus ultricies</a></h3>
-                    <time class="published" datetime="2015-10-08">October 8, 2015</time>
-                </header>
-                <a href="single.html" class="image"><img src="images/pic11.jpg" alt="" /></a>
-            </article>
-        </li>
-        <li>
-            <article>
-                <header>
-                    <h3><a href="single.html">Congue ullam corper lorem ipsum dolor</a></h3>
-                    <time class="published" datetime="2015-10-06">October 7, 2015</time>
-                </header>
-                <a href="single.html" class="image"><img src="images/pic12.jpg" alt="" /></a>
-            </article>
-        </li>
-    </ul>
-</section> */
-    setPostList(params) {
+    /* <section>
+        <ul class="posts">
+            <li>
+                <article>
+                    <header>
+                        <h3><a href="single.html">Lorem ipsum fermentum ut nisl vitae</a></h3>
+                        <time class="published" datetime="2015-10-20">October 20, 2015</time>
+                    </header>
+                    <a href="single.html" class="image"><img src="images/pic08.jpg" alt="" /></a>
+                </article>
+            </li>
+        </ul>
+    </section> */
+    createPostList(params) {
+        var li = document.createElement("li");
+        var articleContainer = document.createElement("article");
+        var header = document.createElement("header");
+        var title = document.createElement("h3");
+        var titleLink = document.createElement("a");
+        var createTime = document.createElement("time");
+        var postImageContainer = document.createElement("a");
+        var postImage = document.createElement("img");
 
+
+        titleLink.setAttribute("href", "");
+        createTime.setAttribute("class", "published");
+        createTime.setAttribute("datetime", "");
+        postImageContainer.setAttribute("href", "");
+        postImageContainer.setAttribute("class", "image");
+        postImage.setAttribute("src", "");
+        postImage.setAttribute("alt", "");
+
+        title.appendChild(titleLink);
+        header.appendChild(title);
+        header.appendChild(createTime);
+        postImageContainer.appendChild(postImage);
+        articleContainer.appendChild(header);
+        articleContainer.appendChild(postImageContainer);
+        li.appendChild(articleContainer);
+
+        return li;
     }
 
+    createBlurd(params){
+        var blurdSection = document.createElement("section");
+        var h2 = document.createElement("h2");
+        var content = document.createElement("p");
+        var ulActions = document.createElement("ul");
+        var liAction = document.createElement("li");
+        var aAction = document.createElement("a");
+
+        blurdSection.setAttribute("class","blurb");
+        ulActions.setAttribute("class","actions")
+        aAction.setAttribute("href","");
+        aAction.setAttribute("class","button");
+
+        ulActions.appendChild(liAction);
+
+        blurdSection.appendChild(h2);
+        blurdSection.appendChild(content);
+        blurdSection.appendChild(ulActions);
+
+        return blurdSection;
+    }
 
 }

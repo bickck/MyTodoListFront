@@ -28,9 +28,13 @@ const user = new Users();
 
 const mainPost = document.querySelector("#main");
 
+const miniPosts = document.querySelector(".mini-posts");
+
 window.onload = function init(event) {
     event.preventDefault();
     requestMainPosts();
+    var miniPost = createMiniPost();
+    miniPosts.appendChild(miniPost);
     if (auth.getJsonToken == null) {
         userDetailInfo();
     }
