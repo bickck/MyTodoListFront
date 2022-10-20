@@ -5,9 +5,9 @@
 export class Todo {
 
 
-    requestUserTodoInsert(arg) {
-        const url = `http://localhost:8080/user/todo/manage/save`;
-        fetch(url, {
+    async requestUserTodoInsert(arg) {
+        const url = arg.url;
+        var result = await fetch(url, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -28,32 +28,40 @@ export class Todo {
             console.log("서버 연결에 에러가 발생했습니다.");
             alert(error);
         });
+
+        return result.json();
     }
 
-    requestUserTodoUpdate(arg) {
-        const url = `http://localhost:8080/todo/manage/update/${id}`;
-        var result = fetch(url, {
+    async requestUserTodoUpdate(arg) {
+        const url = arg.url;
+        var result = await fetch(url, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
+                "authorization": arg.userToken
             },
             body: JSON.stringify({
-                "": ""
+                title: `${arg.title}`,
+                cotent: `${arg.content}`,
+                isChekcPuhlic: `${arg.isCheckPublic}`
             }),
         }).then(Response => {
 
         }).catch((error) => {
-
-            alert("서버 연결에 에러가 발생했습니다.");
+            console.log("서버 연결에 에러가 발생했습니다.");
+            alert(error);
         });
+        
+        return result.json();
     }
 
-    requestUserTodoDelete() {
-        const url = `http://localhost:8080/todo/manage/delete/${id}`;
-        var result = fetch(url, {
-            method: 'GET',
+    async requestUserTodoDelete(arg) {
+        const url = arg.url;
+        var result = await fetch(url, {
+            method: 'POST',
             headers: {
                 "Content-Type": "application/json",
+                "authorization": arg.userToken
             },
             body: JSON.stringify({
 
@@ -61,53 +69,10 @@ export class Todo {
         }).then(Response => {
 
         }).catch((error) => {
-
-            alert("서버 연결에 에러가 발생했습니다.");
+            console.log("서버 연결에 에러가 발생했습니다.");
+            alert(error);
         });
+
+        return result.json();
     }
-
-    //메인 데이터 
-    requestMainPosts() {
-        //event.preventDefault();
-        const url = "http://localhost:8080/todo/api/todoData";
-        var result = fetch(url, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-
-            }),
-        }).then(Response => {
-            data(Response);
-
-        }).catch((error) => {
-
-            alert("서버 연결에 에러가 발생했습니다.");
-        });
-    }
-
-    requestUserTodByTodoId(id) {
-    //event.preventDefault();
-    const url = `http://localhost:8080/todo/api/${id}`;
-    var result = fetch(url, {
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        // body: JSON.stringify({
-
-        // }),
-    }).then(Response => {
-        data(Response);
-
-    }).catch((error) => {
-
-        alert("서버 연결에 에러가 발생했습니다.");
-    });
 }
-
-}
-
-
-

@@ -2,33 +2,35 @@
  * 
  */
 
-
 import {
-    Post
+    PostGenerator
 } from "../generator/post.js";
 import {
     Auth
 } from "../account/auth.js";
-
-// import {
-//     Todo
-// } from "../post/todo.js";
-
 import {
     Users
 } from "../server/users.js";
-
+import {
+    TodoApi
+} from "../api/todoapi.js";
+import {
+    QuoteApi,
+    TodoApi
+} from "../api/quoteapi";
 
 
 // const mainTodos = new Todo();
 const auth = new Auth();
-const post = new Post();
+const post = new PostGenerator();
 const user = new Users();
+const todoapi = new TodoApi();
+const quoteapi = new QuoteApi();
 
 
 const mainPost = document.querySelector("#main");
-
 const miniPosts = document.querySelector(".mini-posts");
+const postList = document.querySelector(".posts")
 
 window.onload = function init(event) {
     event.preventDefault();

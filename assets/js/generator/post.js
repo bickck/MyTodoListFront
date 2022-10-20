@@ -4,7 +4,7 @@
  */
 
 
-export class Post {
+export class PostGenerator {
     // <article class="post">
     // 		<header>
     // 			<div class="title">
@@ -221,6 +221,9 @@ export class Post {
         blurdSection.appendChild(content);
         blurdSection.appendChild(ulActions);
 
+        h2.innerText = params.title;
+        content.innerText = params.content;
+        
         return blurdSection;
     }
 

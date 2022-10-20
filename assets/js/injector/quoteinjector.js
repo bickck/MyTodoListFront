@@ -3,9 +3,9 @@
  */
 
 
-class quoteInjector {
+export class QuoteInjector {
 
-    quoteInjector(arg) {
+    quoteInjector(arg,section) {
         const id = document.querySelector("#post_id");
         const quote = document.querySelector("#quote");
         const author = document.querySelector("#author");

@@ -10,13 +10,18 @@ function quoteSave() {
     const requestUrl = backEndServerAddress + "/user/quote/manage/save";
     const quote = document.querySelector("#quote").value;
     const author = document.querySelector("#author").value;
-    var isCheckPublic = document.querySelector("#non-public");
+    var isCheckPublic = document.querySelector("#non-public").value;
 
     if (isCheckPublic.checked == false) {
         isCheckPublic.value = "public";
     }
 
-
+    // var arg = {
+    //     url : backEndServerAddress + "/user/quote/manage/save",
+    //     quote : document.querySelector("#quote").value,
+    //     author : document.querySelector("#author").value,
+    //     isCheckPublic : document.querySelector("#non-public").value
+    // };
 
     var result = fetch(requestUrl, {
         method: 'POST',
@@ -49,6 +54,13 @@ function quoteUpdate() {
     const author = document.querySelector("#author").value;
     var isCheckPublic = document.querySelector("#non-public");
 
+    // var arg = {
+    //     url : backEndServerAddress + "/user/quote/manage/update",
+    //     quote : document.querySelector("#quote").value,
+    //     author : document.querySelector("#author").value,
+    //     isCheckPublic : document.querySelector("#non-public").value
+    // };
+
     if (isCheckPublic.checked == false) {
         isCheckPublic.value = "public";
     }
@@ -79,14 +91,21 @@ function quoteUpdate() {
 
 
 function quoteDelete() {
-    const requestUrl = backEndServerAddress + "/user/quote/manage/dekete";
+    const requestUrl = backEndServerAddress + "/user/quote/manage/delete";
     const quote = document.querySelector("#quote").value;
     const author = document.querySelector("#author").value;
-    var isCheckPublic = document.querySelector("#non-public");
+    var isCheckPublic = document.querySelector("#non-public").value;
 
     if (isCheckPublic.checked == false) {
         isCheckPublic.value = "public";
     }
+
+    // var arg = {
+    //     url : backEndServerAddress + "/user/quote/manage/delete",
+    //     quote : document.querySelector("#quote").value,
+    //     author : document.querySelector("#author").value,
+    //     isCheckPublic : document.querySelector("#non-public").value
+    // };
 
 
     var result = fetch(requestUrl, {

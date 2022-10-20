@@ -3,11 +3,9 @@
  */
 
 
-export class User {
+export class UserInjector {
 
-
-    postUserIntroData(data, introSection) {
-        console.log(argument);
+    postUserIntroData(data, section) {
         var userIntroArea = userSection.childNodes[3];
         var username = userIntroArea.childNodes[1];
         var userComment = userIntroArea.childNodes[3];

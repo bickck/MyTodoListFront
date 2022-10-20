@@ -1,5 +1,5 @@
 // product IP
-const ipAddress = "";
+const ipAddress = "3.39.190.174";
 const backEndServerAddress = `https://${ipAddress}:8080`;
 const frontEndServerAddress = "https://bickck.github.io/MyTodoListFront"
 const mainPageAddress = "https://bickck.github.io/MyTodoListFront";

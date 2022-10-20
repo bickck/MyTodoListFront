@@ -3,64 +3,71 @@
  */
 export class Quote {
 
-    requestUserQuoteSave(event) {
-        event.preventDefault();
-        const url = `/quote/manage/save`;
-        var result = fetch(url, {
+    async requestUserQuoteSave(arg) {
+        const url = arg.url;
+        var result = await fetch(url, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
+                "authorization": arg.userToken
             },
             body: JSON.stringify({
-                
+                quote: `${arg.quote}`,
+                author: `${arg.author}`,
+                isCheckPublic: `${arg.isCheckPublic}`
             }),
         }).then(Response => {
-            data(Response);
-    
-        }).catch((error)=> {
-           
-            alert("서버 연결에 에러가 발생했습니다.");
+
+        }).catch((error) => {
+            console.log("서버 연결에 에러가 발생했습니다.");
+            alert(error);
         });
+
+        return result.json();
     }
 
-    requestUserQuoteUpdate(event) {
-        event.preventDefault();
-        const url = `/quote/manage/update/${id}`;
-        var result = fetch(url, {
+    async requestUserQuoteUpdate(arg) {
+        const url = arg.url;
+        var result = await fetch(url, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
+                "authorization": arg.userToken
             },
             body: JSON.stringify({
-                
+                quote: `${arg.quote}`,
+                author: `${arg.author}`,
+                isCheckPublic: `${arg.isCheckPublic}`
             }),
         }).then(Response => {
-            data(Response);
-    
-        }).catch((error)=> {
-           
-            alert("서버 연결에 에러가 발생했습니다.");
+
+        }).catch((error) => {
+            console.log("서버 연결에 에러가 발생했습니다.");
+            alert(error);
         });
+
+        return result.json();
     }
 
-    requestUserQuoteDelete(event) {
-        event.preventDefault();
-        const url = `/quote/manage/delete/${id}`;
-        var result = fetch(url, {
+    async requestUserQuoteDelete(arg) {
+        const url = arg.url;
+        var result = await fetch(url, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
+                "authorization": arg.userToken
             },
             body: JSON.stringify({
-                
+
             }),
         }).then(Response => {
-            data(Response);
-    
-        }).catch((error)=> {
-           
-            alert("서버 연결에 에러가 발생했습니다.");
+
+        }).catch((error) => {
+            console.log("서버 연결에 에러가 발생했습니다.");
+            alert(error);
         });
+
+        return result.json();
     }
 }
 

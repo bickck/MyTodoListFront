@@ -4,58 +4,64 @@
 
 export class Users {
     // 유저 정보 요청
-    requestUserDetails() {
-        const url = "http://localhost:8080/user/api/intro";
-        var result = fetch(url, {
+    async requestUserDetails(arg) {
+        const url = arg.url;
+        var result = await fetch(url, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
+                "authorization": `${arg.authorization}`
             },
-            // body: JSON.stringify({
-
-            // }),
         }).then(Response => {
 
         }).catch((error) => {
-
+            console.log(error);
             alert("서버 연결에 에러가 발생했습니다.");
         });
+        
+        return result.json();
     }
 
-    requestUserUpdate() {
-        const url = `http://localhost:8080/user/api/intro/${id}`;
-        var result = fetch(url, {
+    async requestUserUpdate(arg) {
+        const url = arg.url;
+        var result = await fetch(url, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
+                "authorization": `${arg.authorization}`
             },
-            // body: JSON.stringify({
+            body: JSON.stringify({
 
-            // }),
+            }),
         }).then(Response => {
 
         }).catch((error) => {
-
+            console.log(error);
             alert("서버 연결에 에러가 발생했습니다.");
         });
+
+        return result.json();
     }
 
-    requestUserDelete() {
-        const url = "http://localhost:8080/user/api/intro";
-        var result = fetch(url, {
+    async requestUserDelete(arg) {
+        const url = arg.url;
+        var result = await fetch(url, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
+                "authorization": `${arg.authorization}`
             },
-            // body: JSON.stringify({
+            body: JSON.stringify({
 
-            // }),
+            }),
         }).then(Response => {
 
         }).catch((error) => {
-
+            console.log(error);
             alert("서버 연결에 에러가 발생했습니다.");
         });
+
+        return result.json();
     }
 }
 
