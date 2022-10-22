@@ -19,42 +19,35 @@ export class TodoApi {
             headers: {
                 "Content-Type": "application/json",
             },
-            // body: JSON.stringify({
-
-            // }),
         })
-        // .then(Response => Response.json())
-        // .then((data)=>{
-        //     console.log(data);
-        //     result = data;
-
-        // })
         .catch((error) => {
             console.log(error);
-            alert("서버 연결에 에러가 발생했습니다.");
+            console.log("서버 연결에 에러가 발생했습니다.");
         });
 
-        return await response.json();
+        return  response.json();
     }
 
-    async requestUserTodByTodoId(event, arg) {
+    /**
+     * 
+     * @param {*} arg todo id number
+     * @returns requestUserTodoByTodoId
+     */
+
+    async requestUserTodoByTodoId(arg) {
         //event.preventDefault();
         const url = `http://localhost:8080/todo/api/${id}`;
-        var result = fetch(url, {
+        var result = await fetch(url, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-
-            }),
-        }).then(Response => {
-            data(Response);
-
-        }).catch((error) => {
-
-            alert("서버 연결에 에러가 발생했습니다.");
+        })
+        .catch((error) => {
+            console.log("서버 연결에 에러가 발생했습니다.");
         });
+
+        return result.json();
     }
 
     async requestRecommandTodoApi() {

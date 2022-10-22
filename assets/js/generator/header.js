@@ -33,10 +33,10 @@
 // import { Auth } from "../account/Auth.js";
 // const auth = new Auth();
 
-import {
-    Auth
-} from "../account/auth.js";
-const auth = new Auth();
+// import {
+//     Auth
+// } from "../account/auth.js";
+// const auth = new Auth();
 
 
 const mainLink = document.querySelector("header #mainLink");

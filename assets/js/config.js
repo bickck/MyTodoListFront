@@ -1,18 +1,22 @@
 // product IP
-const ipAddress = "3.39.190.174";
-const backEndServerAddress = `https://${ipAddress}:8080`;
-const frontEndServerAddress = "https://bickck.github.io/MyTodoListFront"
-const mainPageAddress = "https://bickck.github.io/MyTodoListFront";
+// const ipAddress = "3.39.190.174";
+// const backEndServerAddress = `https://${ipAddress}:8080`;
+// const frontEndServerAddress = "https://bickck.github.io/MyTodoListFront"
+// const mainPageAddress = "https://bickck.github.io/MyTodoListFront";
 
 // local dev IP
-// const backEndServerAddress = "http://localhost:8080";
-// const frontEndServerAddress = "http://127.0.0.1:5501";
-// const mainPageAddress = "http://127.0.0.1:5501/index.html";
+const backEndServerAddress = "http://localhost:8080";
+const frontEndServerAddress = "http://127.0.0.1:5501";
+const mainPageAddress = "http://127.0.0.1:5501/index.html";
 
-// const updateTodoURL = "user/todo/manage/update/{id}"
-// const deleteTodoURL = "/user/todo/manage/delete/{id}"
-// const recommandTodoAddURL = "/user/todo/manage/comment/add/{id}"
-// const heartTodoURL = "/user/todo/manage/heart/{id}"
+const updateTodoURL = "user/todo/manage/update/{id}"
+const deleteTodoURL = "/user/todo/manage/delete/{id}"
+const recommandTodoAddURL = "/user/todo/manage/comment/add/{id}"
+const heartTodoURL = "/user/todo/manage/heart/{id}"
+
+const mainPostURL = "/todo/api/mainpost"
+const addHeartURL = "";
+const addCommentURL="";
 
 
 const loginPageURL = "/assets/html/login.html";

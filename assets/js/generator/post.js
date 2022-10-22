@@ -31,6 +31,9 @@ export class PostGenerator {
     // 	</article>
 
     createMainPost(params) {
+
+        console.log(params);
+        console.log(params.userImg)
         var articleContainer = document.createElement("article");
         var headerContainer = document.createElement("header");
         var headerTitle = document.createElement("div");
@@ -62,7 +65,7 @@ export class PostGenerator {
         userInfoLink.setAttribute("href", "#");
         userInfoLink.setAttribute("class", "author");
         userinfo.setAttribute("class", "name");
-        userImg.setAttribute("src", "images/avatar.jpg");
+        userImg.setAttribute("src", "");
         userImg.setAttribute("alt", "");
         pageImages.setAttribute("src", "#");
         pageImages.setAttribute("alt", "#");
@@ -79,12 +82,12 @@ export class PostGenerator {
         headerTitle.appendChild(titleContainer);
         headerTitle.appendChild(titleWord);
         userInfoLink.appendChild(userinfo);
-        userInfoLink.appendChild(userImg);
+        // userInfoLink.appendChild(userImg);
         metaContainer.appendChild(timeContainer);
         metaContainer.appendChild(userInfoLink);
         headerContainer.appendChild(headerTitle);
         headerContainer.appendChild(metaContainer);
-        pageLink.appendChild(pageImages);
+        // pageLink.appendChild(pageImages);
         liHeart.appendChild(aHeart);
         liComment.appendChild(aComment);
         ulStats.appendChild(liHeart);
@@ -96,13 +99,20 @@ export class PostGenerator {
         articleContainer.appendChild(mainWord);
         articleContainer.appendChild(footerContainer);
 
-        titleLink.innerText = "Test"
-        titleWord.innerText = "hi";
-        timeContainer.innerText = "2022"
-        userinfo.innerText = "user info ";
-        mainWord.innerText = "Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. ";
-        aHeart.innerText = "140";
-        aComment.innerText = "120";
+        if (params.userImg != null && typeof params.userImg != "undefined") {
+            userInfoLink.appendChild(userImg);
+        }
+        if (params.postImg != null && typeof params.userImg != "undefined") {
+            pageLink.appendChild(pageImages);
+        }
+
+        titleLink.innerText = params.title;
+        titleWord.innerText = params.subtitle;
+        timeContainer.innerText = params.date;
+        userinfo.innerText = params.username;
+        mainWord.innerText = params.content;
+        aHeart.innerText = params.heart;
+        aComment.innerText = params.comment;
 
         return articleContainer;
     }
@@ -146,14 +156,26 @@ export class PostGenerator {
         postImage.setAttribute("src", "");
         postImage.setAttribute("alt", "");
 
-        postImageContainer.appendChild(postImage);
+        if (params.postImg != null) {
+            postImageContainer.appendChild(postImage);
+        }
+        if (params.userImg != null) {
+            author.appendChild(authorImage);
+        }
+        titleLink.innerText = params.title;
+        time.innerText = params.date;
+
+
+
+        // postImageContainer.appendChild(postImage);
         titleContainer.appendChild(titleLink);
         author.appendChild(authorImage);
         headerContainer.appendChild(titleContainer);
         headerContainer.appendChild(time);
         headerContainer.appendChild(author);
         articleContainer.appendChild(headerContainer);
-        articleContainer.appendChild(postImageContainer);
+        // articleContainer.appendChild(postImageContainer);
+
 
         return articleContainer;
 
@@ -191,10 +213,17 @@ export class PostGenerator {
         postImage.setAttribute("src", "");
         postImage.setAttribute("alt", "");
 
+        titleLink.innerText = params.title;
+        createTime.innerText = params.date;
+
+        if (params.postImg != null) {
+            postImageContainer.appendChild(postImage);
+        }
+
         title.appendChild(titleLink);
         header.appendChild(title);
         header.appendChild(createTime);
-        postImageContainer.appendChild(postImage);
+        // postImageContainer.appendChild(postImage);
         articleContainer.appendChild(header);
         articleContainer.appendChild(postImageContainer);
         li.appendChild(articleContainer);
@@ -202,7 +231,7 @@ export class PostGenerator {
         return li;
     }
 
-    createBlurd(params){
+    createBlurd(params) {
         var blurdSection = document.createElement("section");
         var h2 = document.createElement("h2");
         var content = document.createElement("p");
@@ -210,10 +239,10 @@ export class PostGenerator {
         var liAction = document.createElement("li");
         var aAction = document.createElement("a");
 
-        blurdSection.setAttribute("class","blurb");
-        ulActions.setAttribute("class","actions")
-        aAction.setAttribute("href","");
-        aAction.setAttribute("class","button");
+        blurdSection.setAttribute("class", "blurb");
+        ulActions.setAttribute("class", "actions")
+        aAction.setAttribute("href", "");
+        aAction.setAttribute("class", "button");
 
         ulActions.appendChild(liAction);
 
@@ -223,7 +252,7 @@ export class PostGenerator {
 
         h2.innerText = params.title;
         content.innerText = params.content;
-        
+
         return blurdSection;
     }
 

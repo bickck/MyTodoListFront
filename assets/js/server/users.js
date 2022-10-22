@@ -7,7 +7,7 @@ export class Users {
     async requestUserDetails(arg) {
         const url = arg.url;
         var result = await fetch(url, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 "Content-Type": "application/json",
                 "authorization": `${arg.authorization}`
@@ -16,7 +16,7 @@ export class Users {
 
         }).catch((error) => {
             console.log(error);
-            alert("서버 연결에 에러가 발생했습니다.");
+            console.log("서버 연결에 에러가 발생했습니다.");
         });
         
         return result.json();
@@ -37,7 +37,7 @@ export class Users {
 
         }).catch((error) => {
             console.log(error);
-            alert("서버 연결에 에러가 발생했습니다.");
+            console.log("서버 연결에 에러가 발생했습니다.");
         });
 
         return result.json();
@@ -58,7 +58,7 @@ export class Users {
 
         }).catch((error) => {
             console.log(error);
-            alert("서버 연결에 에러가 발생했습니다.");
+            console.log("서버 연결에 에러가 발생했습니다.");
         });
 
         return result.json();
