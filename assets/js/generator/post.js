@@ -2,7 +2,9 @@
  * 
  * 포스트에 컨테이너를 생성하고 데이터를 넣는 클래스
  */
+import {ConvertDate} from "../util/date.js";
 
+const convert = new ConvertDate();
 
 export class PostGenerator {
     // <article class="post">
@@ -32,8 +34,11 @@ export class PostGenerator {
 
     createMainPost(params) {
 
-        console.log(params);
-        console.log(params.userImg)
+        var returnArg = {
+            articleContainer,
+            userImg,
+            postImg
+        }
         var articleContainer = document.createElement("article");
         var headerContainer = document.createElement("header");
         var headerTitle = document.createElement("div");
@@ -46,7 +51,7 @@ export class PostGenerator {
         var userinfo = document.createElement("span");
         var userImg = document.createElement("img");
         var pageLink = document.createElement("a");
-        var pageImages = document.createElement("img");
+        var postImg = document.createElement("img");
         var mainWord = document.createElement("p");
         var footerContainer = document.createElement("footer");
         var ulActions = document.createElement("ul");
@@ -65,10 +70,10 @@ export class PostGenerator {
         userInfoLink.setAttribute("href", "#");
         userInfoLink.setAttribute("class", "author");
         userinfo.setAttribute("class", "name");
-        userImg.setAttribute("src", "");
-        userImg.setAttribute("alt", "");
-        pageImages.setAttribute("src", "#");
-        pageImages.setAttribute("alt", "#");
+        userImg.setAttribute("src", "#");
+        userImg.setAttribute("alt", "#");
+        postImg.setAttribute("src", "#");
+        postImg.setAttribute("alt", "#");
         pageLink.setAttribute("href", "#");
         pageLink.setAttribute("class", "image featured");
         ulActions.setAttribute("class", "actions");
@@ -99,22 +104,30 @@ export class PostGenerator {
         articleContainer.appendChild(mainWord);
         articleContainer.appendChild(footerContainer);
 
-        if (params.userImg != null && typeof params.userImg != "undefined") {
+        // is check user img generator
+        if (params.userImgCount != null && typeof params.userImgCount != "undefined" && params.userImgCount != 0) {
             userInfoLink.appendChild(userImg);
+
         }
-        if (params.postImg != null && typeof params.userImg != "undefined") {
-            pageLink.appendChild(pageImages);
+        // is check post img generator
+        if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
+            pageLink.appendChild(postImg);
         }
+        console.log(params);
 
         titleLink.innerText = params.title;
         titleWord.innerText = params.subtitle;
-        timeContainer.innerText = params.date;
+        timeContainer.innerText = convert.convertViewDate(params.createTimeStamp);
         userinfo.innerText = params.username;
         mainWord.innerText = params.content;
         aHeart.innerText = params.heart;
         aComment.innerText = params.comment;
 
-        return articleContainer;
+        returnArg.articleContainer = articleContainer;
+        returnArg.postImg = postImg;
+        returnArg.userImg = userImg;
+
+        return returnArg;
     }
 
     // <section>
@@ -156,10 +169,10 @@ export class PostGenerator {
         postImage.setAttribute("src", "");
         postImage.setAttribute("alt", "");
 
-        if (params.postImg != null) {
+        if (params.userImgCount != null && typeof params.userImgCount != "undefined" && params.userImgCount != 0) {
             postImageContainer.appendChild(postImage);
         }
-        if (params.userImg != null) {
+        if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
             author.appendChild(authorImage);
         }
         titleLink.innerText = params.title;
@@ -194,6 +207,12 @@ export class PostGenerator {
             </li>
         </ul>
     </section> */
+
+    /**
+     * 
+     * @param {*} params 
+     * @returns 
+     */
     createPostList(params) {
         var li = document.createElement("li");
         var articleContainer = document.createElement("article");
@@ -216,20 +235,103 @@ export class PostGenerator {
         titleLink.innerText = params.title;
         createTime.innerText = params.date;
 
-        if (params.postImg != null) {
+        if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
             postImageContainer.appendChild(postImage);
         }
 
         title.appendChild(titleLink);
         header.appendChild(title);
         header.appendChild(createTime);
-        // postImageContainer.appendChild(postImage);
         articleContainer.appendChild(header);
         articleContainer.appendChild(postImageContainer);
         li.appendChild(articleContainer);
 
         return li;
     }
+
+    // <ul class="posts quote">
+    //     <li>
+    //     <article>
+    //         <header>
+    //             <h3><a id="" href="single.html">Main QUote</a></h3>
+    //             <h4 id="author">-author-</h4>
+    //             <ul class="actions">
+    //                 <li><a href="#" class="icon solid fa-heart">0</a></li>
+    //                 <li><time class="published" datetime="2015-10-20">October 20, 2015</time></li>
+    //             </ul>
+    //           </header>
+    //         </article>
+    //     </li>
+    // </ul>
+
+
+    /**
+     * 
+     * @param {*} params 
+     * @returns 
+     */
+
+    createPostListQuote(params) {
+        var li = document.createElement("li");
+        var articleContainer = document.createElement("article");
+        var header = document.createElement("header");
+        var quoteContainer = document.createElement("h3");
+        var quote = document.createElement("a");
+        var author = document.createElement("h4");
+        var ulContainer = document.createElement("ul");
+        var liHeartContainer = document.createElement("li");
+        var heart = document.createElement("a");
+        var liCreateTimeContainer = document.createElement("li");
+        var createTime = document.createElement("time");
+
+        ulContainer.setAttribute("class", "stats");
+        heart.setAttribute("href", "#");
+        heart.setAttribute("class", "icon solid fa-heart");
+        author.setAttribute("id","author");
+        quote.setAttribute("id","quote");
+        quote.setAttribute("href", "#");
+        createTime.setAttribute("class", "published");
+        createTime.setAttribute("datetime", "");
+
+
+        quote.innerText = params.quote;
+        author.innerText = `- ${params.author} -`   
+        createTime.innerText = convert.convertViewDate(params.createTimestamp);
+        heart.innerText = params.heart;
+
+        quoteContainer.appendChild(quote);
+        liHeartContainer.appendChild(heart);
+        liCreateTimeContainer.appendChild(createTime);
+
+        ulContainer.appendChild(liHeartContainer);
+        ulContainer.appendChild(liCreateTimeContainer);
+        header.appendChild(quoteContainer);
+        header.appendChild(author);
+        header.appendChild(ulContainer);
+
+        articleContainer.appendChild(header);
+        li.appendChild(articleContainer);
+
+        return li;
+    }
+
+
+    // <!-- About -->
+    // <section class="blurb">
+    //     <h2>About</h2>
+    //     <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
+    //         amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.
+    //     </p>
+    //     <ul class="actions">
+    //         <li><a href="#" class="button">Learn More</a></li>
+    //     </ul>
+    // </section>
+
+    /**
+     * 
+     * @param {*} params 
+     * @returns 
+     */
 
     createBlurd(params) {
         var blurdSection = document.createElement("section");

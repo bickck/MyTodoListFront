@@ -18,6 +18,10 @@ import {
     QuoteApi
 } from "../api/quoteapi.js";
 
+import{
+    ImageApi
+} from "../api/imageapi.js";
+
 import {
     NonDataInjector
 } from "../util/page.js"
@@ -29,6 +33,7 @@ const post = new PostGenerator();
 const user = new Users();
 const todoapi = new TodoApi();
 const quoteapi = new QuoteApi();
+const imageapi = new ImageApi();
 const nonDataInjector = new NonDataInjector();
 
 
@@ -38,19 +43,18 @@ const postLists = document.querySelector(".posts")
 
 window.onload = function init(event) {
     event.preventDefault();
-    // var main = nonDataInjector.createNonMainPost();
-    // var miniPost = nonDataInjector.createNonMiniPost();
-    // var postList = nonDataInjector.createNonPosts();
 
-    // mainPost.appendChild(main)
-    // miniPosts.appendChild(miniPost);
-    // postLists.appendChild(postList);
     if (auth.getJsonToken() != null) {
         userDetailInfo();
     }
     requestMainPosts();
-    //userDetailInfo();
+    requestMainQuotes();
 }
+
+/**
+ * 
+ * Todo List를 Main에 넣는 함수
+ */
 
 function requestMainPosts() {
     const url = backEndServerAddress + "/todo/api/mainpost";
@@ -60,84 +64,111 @@ function requestMainPosts() {
     mainTodos.then((data) => {
 
         if (data == null || data == "undefined") {
-            mainPost.appendChild(nonDataInjector.createNonMainPost())
+            mainPost.appendChild(nonDataInjector.createNonMainPost());
+            return;
         }
 
         for (var i = 0; i < data.numberOfElements; i++) {
 
             var content = data.content[i];
-            mainPost.appendChild(post.createMainPost(content));
+            var container = post.createMainPost(content);
 
-            if(content.imgCount > 0) {
-                // request img 
+            if (content.postImgCount > 0) {
+                // request post img 
+                var postImage = container.postImg;
+                postImage.src = "";
+                console.log(postImage);
             }
+
+            if (content.userImgCount > 0) {
+                // request user img
+                var userImage = container.userImg;
+                userImage.src = "";
+                console.log(userImage);
+            }
+            mainPost.appendChild(container.articleContainer);
+        }
+    });
+}
+
+/**
+ * 
+ * Quote List를 Main에 넣는 함수
+ */
+
+function requestMainQuotes() {
+    const url = backEndServerAddress + "/quote/api/mainquote";
+
+    var mainQuotes = quoteapi.requestMainQuotes({
+        url : url
+    });
+
+    mainQuotes.then((data) => {
+
+        console.log(data);
+
+        if (data == null || data == "undefined") {
+            postLists.appendChild(nonDataInjector.createPostListQuote());
+            return;
         }
 
-        console.log(data);
+        for (var i = 0; i < data.numberOfElements; i++) {
 
+            var content = data.content[i];
+            var container = post.createPostListQuote(content);
 
+            
+            postLists.appendChild(container);
+        }
     });
-    // fetch(url, {
-    //         method: 'GET',
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //     })
-    //     .then(Response => Response.json())
-    //     .then((data) => {
-
-    //         console.log(data);
-    //         if (data != null) {
-    //             //post.createMainPost(data);
-    //         }
-    //         // no exsist post
-
-    //         var postResult = post.createMainPost(data);
-    //         mainPost.appendChild(postResult);
-    //     })
-    //     .catch((error) => {
-    //         //console.log("서버 연결에 에러가 발생했습니다.");
-    //         console.error(error);
-    //     });
 }
+
+/**
+ * 유저의 정보를 가져옴
+ */
 
 function userDetailInfo() {
-    const url = backEndServerAddress + "/user/api/intro";
-    const introSection = document.querySelector("#intro.auth");
 
-    var arg = {
+    var userIntroData = user.requestUserDetails({
         authorization: `${auth.getJsonToken()}`,
-        url: url
-    }
-
-    var userDetails = user.requestUserDetails(arg);
-
-    userDetails.then((data) => {
-        console.log(data);
-        postUserIntroData(data, introSection);
+        url: backEndServerAddress + "/user/api/intro"
     });
-    // fetch(url, {
-    //         method: 'POST',
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "authorization": `${auth.getJsonToken()}`,
-    //         },
-    //     })
-    //     .then((Response) => Response.json())
-    //     .then((data) => {
-    //         console.log(data);
-    //         postUserIntroData(data, introSection);
-    //     })
-    //     .catch((error) => {
-    //         // console.log("서버 연결에 에러가 발생했습니다.");
-    //         console.error(error);
-    //     });
+
+    userIntroData.then((data) => {
+        console.log(data);
+        postUserIntroData(data);
+    });
+
 }
 
-function postUserIntroData(data, introSection) {
+/**
+ * 유저의 이미지를 컨테이너안에 넣어줌
+ * 
+ * @param {*} introData 
+ */
+
+function postUserIntroData(introData) {
     const username = document.querySelector("#username");
     const userComment = document.querySelector("#usercomment");
+    const userImage = document.querySelector("#userImage");
 
-    username.innerText = data.username;
-    userComment.innerText = data.introComment;
+    if (introData.introComment.length < 1) {
+        userComment.innerText = "당신의 코멘트를 적어주세요.";
+        
+    } else {
+        userComment.innerText = introData.introComment;
+    }
+
+    if(introData.userImageCount == 0) {
+        userImage.setAttribute("hidden");
+    } else {
+        userImage.removeAttribute("hidden");
+        // var userIntroImage = imageapi.requestUserImageByUserId();
+
+        // userIntroImage.then((data)=>{
+        //     userImage.src=`${data.filePath}/${data.fileName}`;
+
+        // });
+    }
+    username.innerText = introData.username;
 }

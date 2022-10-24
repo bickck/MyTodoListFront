@@ -21,7 +21,28 @@ function login(event) {
             password: `${password.value}`,
         }),
     }).then(Response => Response.text()).then((data)=>{
-        console.log(data);
+        auth.setJsonToken(data);  
+        window.location.href = mainPageAddress;
+    }).catch((error)=> {
+        console.log(error);
+        console.log("서버 연결에 에러가 발생했습니다.");
+    });
+}
+
+
+function loginout(event) {
+    event.preventDefault();
+    
+    var result = fetch(url, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email: `${email.value}`,
+            password: `${password.value}`,
+        }),
+    }).then(Response => Response.text()).then((data)=>{
         auth.setJsonToken(data);  
         window.location.href = mainPageAddress;
     }).catch((error)=> {

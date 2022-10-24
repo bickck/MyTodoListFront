@@ -6,9 +6,9 @@
 export class QuoteApi {
 
 
-    async requestMainPosts() {
-        const url = "/quote/api/mainQuote";
-        var result = await fetch(url, {
+    async requestMainQuotes(arg) {
+        // const url = "/quote/api/mainQuote";
+        var result = await fetch(arg.url, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",

@@ -138,6 +138,7 @@
 			<section class="auth">
 				<ul class="actions stacked">
 					<li><a href="#" class="button large fit">유저 정보</a></li>
+					<li><a href="#" class="button large fit">LogOut</a></li>
 				</ul>
 			</section>
 
@@ -193,14 +194,33 @@
 				</header>
 			</section>
 			<section id="intro" class="auth user">
-				<a href="#" class="logo"><img src="images/logo.jpg" alt="" /></a>
+				<a href="#" class="logo"><img id="userImage" src="images/logo.jpg" alt="" /></a>
 				<header id="userIntroArea">
+					<div id="userid" hidden></div>
 					<h2 id="username"></h2>
 					<p id="usercomment"></p>
 				</header>
 			</section>
 
 			<!-- Mini Posts -->
+
+			<!-- <section>
+				<h2>recommand post</h2>
+				<section>
+					<section class="blurb">
+						<h2>quote</h2>
+						<p>
+							author
+						</p>
+						<ul class="actions">
+							<li><a href="#" class="icon solid fa-heart">0</a></li>
+							<li><time class="published" datetime="2015-10-20">October 20, 2015</time></li>
+						</ul>
+					</section>
+				</section>
+			</section> -->
+			
+
 			<section>
 				<h2>recommand post</h2>
 				<div class="mini-posts">
@@ -219,14 +239,17 @@
 			<!-- Posts List -->
 			<section>
 				<h2>Daily post</h2>
-				<ul class="posts">
+				<ul class="posts quote">
 					<!-- <li>
 						<article>
 							<header>
-								<h3><a href="single.html">데이터가 없습니다.</a></h3>
-								<time class="published" datetime="2015-10-20">October 20, 2015</time>
+								<h3><a id="quote" href="single.html">Main QUote</a></h3>
+								<h4 id="author">-author-</h4>
+								<ul class="stats">
+									<li><a href="#" class="icon solid fa-heart">0</a></li>
+									<li><time class="published" datetime="2015-10-20">October 20, 2015</time></li>
+								</ul>
 							</header>
-							<a href="single.html" class="image"><img src="images/pic08.jpg" alt="" /></a>
 						</article>
 					</li> -->
 				</ul>
