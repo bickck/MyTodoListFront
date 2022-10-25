@@ -31,7 +31,7 @@
 	<script type="module" src="./assets/js/server/Todo.js"></script> -->
 
 
-	
+
 </head>
 
 <body class="is-preload">
@@ -108,25 +108,19 @@
 							<!-- <p>Porta lectus amet ultricies</p> -->
 						</a>
 					</li>
-					<!-- <li>
-						<a href="#">
-							<h3>Community</h3>
-							<p>Porta lectus amet ultricies</p>
-						</a>
-					</li>  -->
 				</ul>
 			</section>
 			<!-- Links -->
 			<section class="non-auth">
 				<ul class="links">
 					<li>
-						<a href="/page/todo">
+						<a href="#pagetodo">
 							<h3>Todo</h3>
 							<p>Feugiat tempus veroeros dolor</p>
 						</a>
 					</li>
 					<li>
-						<a href="/page/quote">
+						<a href="#pagequote">
 							<h3>Quote</h3>
 							<p>Sed vitae justo condimentum</p>
 						</a>
@@ -137,8 +131,8 @@
 			<!-- Actions -->
 			<section class="auth">
 				<ul class="actions stacked">
-					<li><a href="#" class="button large fit">유저 정보</a></li>
-					<li><a href="#" class="button large fit">LogOut</a></li>
+					<li><a href="#userinfo" class="button large fit">유저 정보</a></li>
+					<li><a id="logout" class="button large fit">LogOut</a></li>
 				</ul>
 			</section>
 
@@ -154,7 +148,7 @@
 		<div id="main">
 
 			<!-- Post -->
-			 <!-- <article class="post">
+			<!-- <article class="post">
 				<header>
 					<div class="title">
 						<h2><a href="single.html">데이터가 없습니다.</a></h2>
@@ -196,49 +190,18 @@
 			<section id="intro" class="auth user">
 				<a href="#" class="logo"><img id="userImage" src="images/logo.jpg" alt="" /></a>
 				<header id="userIntroArea">
-					<div id="userid" hidden></div>
 					<h2 id="username"></h2>
-					<p id="usercomment"></p>
+					<div class="comment">
+						<p id="usercomment"></p>
+						<a id="commentEdit" class="icon solid fa-edit"></a>
+					</div>
 				</header>
 			</section>
 
 			<!-- Mini Posts -->
 
-			<!-- <section>
-				<h2>recommand post</h2>
-				<section>
-					<section class="blurb">
-						<h2>quote</h2>
-						<p>
-							author
-						</p>
-						<ul class="actions">
-							<li><a href="#" class="icon solid fa-heart">0</a></li>
-							<li><time class="published" datetime="2015-10-20">October 20, 2015</time></li>
-						</ul>
-					</section>
-				</section>
-			</section> -->
-			
-
 			<section>
-				<h2>recommand post</h2>
-				<div class="mini-posts">
-					<!-- Mini Post -->
-					<!-- <article class="mini-post">
-						<header>
-							<h3><a href="single.html">데이터가 없습니다.</a></h3>
-							<time class="published" datetime="2015-10-20">October 20, 2015</time>
-							<a href="#" class="author"><img src="images/avatar.jpg" alt="" /></a>
-						</header>
-						<a href="single.html" class="image"><img src="images/pic04.jpg" alt="" /></a>
-					</article> -->
-				</div>
-			</section>
-
-			<!-- Posts List -->
-			<section>
-				<h2>Daily post</h2>
+				<h2>Daily post <a class="icon solid fa-sync-alt"></a></h2>
 				<ul class="posts quote">
 					<!-- <li>
 						<article>
@@ -255,6 +218,24 @@
 				</ul>
 			</section>
 
+			<section>
+				<h2>recommand post <a class="icon solid fa-sync-alt"></a></h2>
+				<div class="mini-posts">
+					<!-- Mini Post -->
+					<!-- <article class="mini-post">
+						<header>
+							<h3><a href="single.html">데이터가 없습니다.</a></h3>
+							<time class="published" datetime="2015-10-20">October 20, 2015</time>
+							<a href="#" class="author"><img src="images/avatar.jpg" alt="" /></a>
+						</header>
+						<a href="single.html" class="image"><img src="images/pic04.jpg" alt="" /></a>
+					</article> -->
+				</div>
+			</section>
+
+			<!-- Posts List -->
+
+
 			<!-- About -->
 			<section class="blurb">
 				<h2>About</h2>
@@ -265,7 +246,7 @@
 					<li><a href="#" class="button">Learn More</a></li>
 				</ul>
 			</section>
-			
+
 
 			<!-- Footer -->
 			<section id="footer">
@@ -296,9 +277,10 @@
 	<script type="module" src="./assets/js/util/page.js"></script>
 	<script type="text/javascript" src="./assets/js/util.js"></script>
 	<script type="text/javascript" src="./assets/js/main.js"></script>
-	<script type="text/javascript" src="./assets/js/generator/header.js" ></script>
+	<script type="text/javascript" src="./assets/js/generator/menu.js"></script>
+	<script type="text/javascript" src="./assets/js/generator/header.js"></script>
 	<script type="module" src="./assets/js/generator/footer.js"></script>
 	<script type="module" src="./assets/js/post/index.js"></script>
-
 </body>
+
 </html>

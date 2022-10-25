@@ -27,7 +27,7 @@
     <title>Document</title>
 </head>
 
-<body class="single is-preload">
+<body class="is-preload">
 
     <!-- Wrapper -->
     <div id="wrapper">
@@ -128,72 +128,92 @@
 
         <!-- Main -->
         <div id="main">
-
-            <section class="title">
-                <h2>Todo</h2>
-                <!-- <div class="actions">
-					<div class="move-action auth"><button type="button" class="button medium fit">Write Todo</butt></div>
-				</div> -->
-            </section>
-
-            <!-- Post -->
+            <h2>Todos</h2>
             <article class="post">
                 <header>
-                    <div id="post_id" value="" hidden>
-
-                    </div>
                     <div class="title">
-                        <h2><a href="#">Magna sed adipiscing</a></h2>
+                        <h2><a href="single.html">데이터가 없습니다.</a></h2>
                         <p>Lorem ipsum dolor amet nullam consequat etiam feugiat</p>
                     </div>
                     <div class="meta">
                         <time class="published" datetime="2015-11-01">November 1, 2015</time>
-                        <a href="#" class="author"><span class="name">Jane Doe</span>
+                        <a href="#" class="author">
+                            <span class="name">user info</span>
                             <img src="images/avatar.jpg" alt="" />
                         </a>
                     </div>
                 </header>
-                <span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
-                <p id="title">Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id
-                    lorem euismod
-                    placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non
-                    congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta
-                    lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                <!-- <p>Nunc quis dui scelerisque, scelerisque urna ut, dapibus orci. Sed vitae condimentum lectus, ut
-                    imperdiet quam. Maecenas in justo ut nulla aliquam sodales vel at ligula. Sed blandit diam odio, sed
-                    fringilla lectus molestie sit amet. Praesent eu tortor viverra lorem mattis pulvinar feugiat in
-                    turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                    Fusce ullamcorper tellus sit amet mattis dignissim. Phasellus ut metus ligula. Curabitur nec leo
-                    turpis. Ut gravida purus quis erat pretium, sed pellentesque massa elementum. Fusce vestibulum porta
-                    augue, at mattis justo. Integer sed sapien fringilla, dapibus risus id, faucibus ante. Pellentesque
-                    mattis nunc sit amet tortor pellentesque, non placerat neque viverra. </p> -->
+                <a href="single.html" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+                <p>데이터가 없습니다.</p>
                 <footer>
+                    <ul class="actions">
+                        <li><a href="single.html" class="button large">Continue Reading</a></li>
+                    </ul>
                     <ul class="stats">
+                        <li><a href="#">General</a></li>
                         <li><a href="#" class="icon solid fa-heart">0</a></li>
                         <li><a href="#" class="icon solid fa-comment">0</a></li>
-                        <li class=" update"><a id="update_button">Update</a></li>
-                        <li class=" delete"><a id="delete_button">Delete</a></li>
                     </ul>
                 </footer>
-                <ul class="actions pagination">
-                    <li><button class="disabled button large previous">Previous Page</button></li>
-                    <li><button class="button large next">Next Page</button></li>
-                </ul>
             </article>
-
         </div>
 
-        <!-- Footer -->
-        <section id="footer">
-            <ul class="icons">
-                <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-                <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-                <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-                <li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
-                <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-            </ul>
-            <p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a
-                    href="http://unsplash.com">Unsplash</a>.</p>
+        <!-- Sidebar -->
+        <section id="sidebar">
+            <!-- Intro -->
+            <section class="blurb quote">
+                <h2> Write your history</h2>
+                <!-- <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
+                    amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.
+                </p> -->
+                <a href="#" class="button small fit">Write Todo</a>
+            </section>
+
+            <!-- Mini Posts -->
+
+            <section>
+                <h2>Daily Todos <a class="icon solid fa-sync-alt"></a></h2>
+                <ul class="posts quote">
+
+                </ul>
+            </section>
+
+            <section>
+                <h2>recommand Todos <a class="icon solid fa-sync-alt"></a></h2>
+                <div class="mini-posts">
+
+                </div>
+            </section>
+
+
+            <!-- Posts List -->
+
+
+            <!-- About -->
+            <section class="blurb">
+                <h2>About</h2>
+                <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
+                    amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.
+                </p>
+                <ul class="actions">
+                    <li><a href="#" class="button">Learn More</a></li>
+                </ul>
+            </section>
+
+
+
+            <!-- Footer -->
+            <section id="footer">
+                <ul class="icons">
+                    <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                    <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
+                    <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+                </ul>
+                <p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a
+                        href="http://unsplash.com">Unsplash</a>.</p>
+            </section>
         </section>
 
     </div>
@@ -253,9 +273,11 @@
     </script>
 
     <script type="module" src="./../js/server/todo.js"></script>
-    <script type="module" src="./../js/post/Todo.js"></script>
-    <script type="module" src="./../js/function/todoWrite.js"></script>
+    <script type="module" src="./../js/post/todo.js"></script>
+    <script type="module" src="./../js/function/todowrite.js"></script>
+    <script type="module" src="./../js/function/todoread.js"></script>
     <script type="module" src="./../js/function/action.js"></script>
 
 </body>
+
 </html>

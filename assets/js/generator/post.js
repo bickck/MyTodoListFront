@@ -36,23 +36,23 @@ export class PostGenerator {
 
         var returnArg = {
             articleContainer,
-            userImg,
-            postImg
+            userImage,
+            postImage
         }
         var articleContainer = document.createElement("article");
         var headerContainer = document.createElement("header");
         var headerTitle = document.createElement("div");
         var titleContainer = document.createElement("h2");
-        var titleLink = document.createElement("a");
-        var titleWord = document.createElement("p");
+        var title = document.createElement("a");
+        var subtitle = document.createElement("p");
         var metaContainer = document.createElement("div");
-        var timeContainer = document.createElement("time");
+        var createTime = document.createElement("time");
         var userInfoLink = document.createElement("a");
         var userinfo = document.createElement("span");
-        var userImg = document.createElement("img");
-        var pageLink = document.createElement("a");
-        var postImg = document.createElement("img");
-        var mainWord = document.createElement("p");
+        var userImage = document.createElement("img");
+        var postImageContainer = document.createElement("a");
+        var postImage = document.createElement("img");
+        var mainContent = document.createElement("p");
         var footerContainer = document.createElement("footer");
         var ulActions = document.createElement("ul");
         var ulStats = document.createElement("ul");
@@ -61,38 +61,52 @@ export class PostGenerator {
         var liComment = document.createElement("li");
         var aComment = document.createElement("a");
 
+        // articleContainer.setAttribute("id", "postId");
+        // title.setAttribute("id","title");
+        // subtitle.setAttribute("id","subtitle");
+        // createTime.setAttribute("id", "createTimeStamp");
+        // userInfoLink.setAttribute("id", "author");
+        // userinfo.setAttribute("id", "username");
+        // postImageContainer.setAttribute("id", "postImages");
+        // mainContent.setAttribute("id","content");
+        // aHeart.setAttribute("id", "#heart");
+        // aComment.setAttribute("id", "#comment");
+
         articleContainer.setAttribute("class", "post");
         headerTitle.setAttribute("class", "title");
-        titleLink.setAttribute("href", "#");
         metaContainer.setAttribute("class", "meta");
-        timeContainer.setAttribute("class", "published");
-        timeContainer.setAttribute("datetime", "2022");
-        userInfoLink.setAttribute("href", "#");
+        createTime.setAttribute("class", "published");
         userInfoLink.setAttribute("class", "author");
         userinfo.setAttribute("class", "name");
-        userImg.setAttribute("src", "#");
-        userImg.setAttribute("alt", "#");
-        postImg.setAttribute("src", "#");
-        postImg.setAttribute("alt", "#");
-        pageLink.setAttribute("href", "#");
-        pageLink.setAttribute("class", "image featured");
+        postImageContainer.setAttribute("class", "image featured");
         ulActions.setAttribute("class", "actions");
         ulStats.setAttribute("class", "stats");
-        aHeart.setAttribute("href", "#");
         aHeart.setAttribute("class", "icon solid fa-heart");
-        aComment.setAttribute("href", "#");
         aComment.setAttribute("class", "icon solid fa-comment");
 
-        titleContainer.appendChild(titleLink);
+        aHeart.setAttribute("href", "#heart");
+        userInfoLink.setAttribute("href", "#user");
+        title.setAttribute("href", "#");
+        postImageContainer.setAttribute("href", "#");
+        aComment.setAttribute("href", "#comment");
+
+        createTime.setAttribute("datetime", "2022");
+         
+        userImage.setAttribute("src", "#");
+        postImage.setAttribute("src", "#");
+
+        userImage.setAttribute("alt", "#");
+        postImage.setAttribute("alt", "#");
+
+        
+        titleContainer.appendChild(title);
         headerTitle.appendChild(titleContainer);
-        headerTitle.appendChild(titleWord);
+        headerTitle.appendChild(subtitle);
         userInfoLink.appendChild(userinfo);
-        // userInfoLink.appendChild(userImg);
-        metaContainer.appendChild(timeContainer);
+        metaContainer.appendChild(createTime);
         metaContainer.appendChild(userInfoLink);
         headerContainer.appendChild(headerTitle);
         headerContainer.appendChild(metaContainer);
-        // pageLink.appendChild(pageImages);
         liHeart.appendChild(aHeart);
         liComment.appendChild(aComment);
         ulStats.appendChild(liHeart);
@@ -100,32 +114,32 @@ export class PostGenerator {
         footerContainer.appendChild(ulActions);
         footerContainer.appendChild(ulStats);
         articleContainer.appendChild(headerContainer);
-        articleContainer.appendChild(pageLink);
-        articleContainer.appendChild(mainWord);
+        articleContainer.appendChild(postImageContainer);
+        articleContainer.appendChild(mainContent);
         articleContainer.appendChild(footerContainer);
 
         // is check user img generator
         if (params.userImgCount != null && typeof params.userImgCount != "undefined" && params.userImgCount != 0) {
-            userInfoLink.appendChild(userImg);
+            userInfoLink.appendChild(userImage);
 
         }
         // is check post img generator
         if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
-            pageLink.appendChild(postImg);
+            postImageContainer.appendChild(postImage);
         }
-        console.log(params);
+       
 
-        titleLink.innerText = params.title;
-        titleWord.innerText = params.subtitle;
-        timeContainer.innerText = convert.convertViewDate(params.createTimeStamp);
+        title.innerText = params.title;
+        subtitle.innerText = params.subtitle;
+        createTime.innerText = convert.convertViewDate(params.createTimeStamp);
         userinfo.innerText = params.username;
-        mainWord.innerText = params.content;
+        mainContent.innerText = params.content;
         aHeart.innerText = params.heart;
         aComment.innerText = params.comment;
 
         returnArg.articleContainer = articleContainer;
-        returnArg.postImg = postImg;
-        returnArg.userImg = userImg;
+        returnArg.postImage = postImage;
+        returnArg.userImage = userImage;
 
         return returnArg;
     }
@@ -149,25 +163,30 @@ export class PostGenerator {
         var articleContainer = document.createElement("article");
         var headerContainer = document.createElement("header");
         var titleContainer = document.createElement("h3");
-        var titleLink = document.createElement("a");
-        var time = document.createElement("time");
+        var title = document.createElement("a");
+        var createTime = document.createElement("time");
         var author = document.createElement("a");
         var authorImage = document.createElement("img");
         var postImageContainer = document.createElement("a");
         var postImage = document.createElement("img");
 
-        articleContainer.setAttribute("class", "mini-post");
-        titleLink.setAttribute("href", "");
-        time.setAttribute("class", "published");
-        time.setAttribute("datatime", "");
-        author.setAttribute("href", "#");
-        author.setAttribute("class", "author");
-        authorImage.setAttribute("src", "");
-        authorImage.setAttribute("alt", "");
+        title.setAttribute("href", "#title");
+        author.setAttribute("href", "#author");
         postImageContainer.setAttribute("href", "#");
+
+        createTime.setAttribute("datatime", "");
+
+        articleContainer.setAttribute("class", "mini-post");
+        author.setAttribute("class", "author");
         postImageContainer.setAttribute("class", "image");
+        createTime.setAttribute("class", "published");
+
         postImage.setAttribute("src", "");
+        authorImage.setAttribute("src", "");
+
         postImage.setAttribute("alt", "");
+        authorImage.setAttribute("alt", "");
+
 
         if (params.userImgCount != null && typeof params.userImgCount != "undefined" && params.userImgCount != 0) {
             postImageContainer.appendChild(postImage);
@@ -175,19 +194,17 @@ export class PostGenerator {
         if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
             author.appendChild(authorImage);
         }
-        titleLink.innerText = params.title;
-        time.innerText = params.date;
+        title.innerText = params.title;
+        createTime.innerText = params.date;
 
 
 
-        // postImageContainer.appendChild(postImage);
-        titleContainer.appendChild(titleLink);
+        titleContainer.appendChild(title);
         author.appendChild(authorImage);
         headerContainer.appendChild(titleContainer);
-        headerContainer.appendChild(time);
+        headerContainer.appendChild(createTime);
         headerContainer.appendChild(author);
         articleContainer.appendChild(headerContainer);
-        // articleContainer.appendChild(postImageContainer);
 
 
         return articleContainer;
@@ -284,13 +301,17 @@ export class PostGenerator {
         var liCreateTimeContainer = document.createElement("li");
         var createTime = document.createElement("time");
 
-        ulContainer.setAttribute("class", "stats");
-        heart.setAttribute("href", "#");
-        heart.setAttribute("class", "icon solid fa-heart");
+        heart.setAttribute("id", "heart");
         author.setAttribute("id","author");
         quote.setAttribute("id","quote");
+
+        heart.setAttribute("href", "#heart");
         quote.setAttribute("href", "#");
+
+        ulContainer.setAttribute("class", "stats");
+        heart.setAttribute("class", "icon solid fa-heart");
         createTime.setAttribute("class", "published");
+
         createTime.setAttribute("datetime", "");
 
 

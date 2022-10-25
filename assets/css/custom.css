@@ -8,6 +8,30 @@
 .custom-style {
     cursor: pointer;
 }
+.comment {
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+/* user info */
+.comment > p{
+    margin: 0;
+    padding: 0;
+}
+
+.comment > .icon{
+   color: rgba(160, 160, 160, 0.5);
+   padding-left: 0.75em;
+}
+
+/* sidebar title */
+
+#sidebar section > h2 > .icon{
+    color: rgba(160, 160, 160, 0.7);
+    font-size: 0.8em;
+}
+
+/* quote list */
 
 .quote > li > article > header > h4 {
     text-align : center;
@@ -54,5 +78,9 @@
             ul.quote > li > article > header > .stats li .published {
                 margin: 0;
                 margin-top: 0.5em;
-			} 
+			}
+
+.blurb.quote {
+    
+}
 				
