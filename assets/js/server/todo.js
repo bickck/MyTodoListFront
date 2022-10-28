@@ -4,9 +4,11 @@
  */
 export class Todo {
 
+    todoUrl = "/user/todo/manage";
 
     async requestUserTodoInsert(arg) {
-        const url = arg.url;
+        const url = backEndServerAddress  + todoUrl + `/save`;
+
         var result = await fetch(url, {
             method: 'POST',
             headers: {
@@ -33,7 +35,8 @@ export class Todo {
     }
 
     async requestUserTodoUpdate(arg) {
-        const url = arg.url;
+        const url = backEndServerAddress + todoUrl + `/update/${arg.id}`;
+
         var result = await fetch(url, {
             method: 'POST',
             headers: {
@@ -51,12 +54,12 @@ export class Todo {
             console.log("서버 연결에 에러가 발생했습니다.");
             alert(error);
         });
-        
+
         return result.json();
     }
 
     async requestUserTodoDelete(arg) {
-        const url = arg.url;
+        const url = backEndServerAddress + todoUrl + `/delete/${arg.id}`;
         var result = await fetch(url, {
             method: 'POST',
             headers: {
@@ -74,5 +77,44 @@ export class Todo {
         });
 
         return result.json();
+    }
+
+    async requestSaveTodoHeart(arg) {
+        const url = backEndServerAddress + todoUrl + `/heart/add/${arg.id}`;
+        var result = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": arg.userToken
+            },
+            body: JSON.stringify({
+                title: `${arg.title}`,
+                cotent: `${arg.content}`,
+                isChekcPuhlic: `${arg.isCheckPublic}`
+            }),
+        }).catch((error) => {
+            console.log("서버 연결에 에러가 발생했습니다.");
+            alert(error);
+        });
+    }
+
+    async requestChangePublish(arg) {
+        const url = backEndServerAddress + todoUrl + ``;
+
+        var result = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": arg.userToken
+            },
+            body: JSON.stringify({
+                title: `${arg.title}`,
+                cotent: `${arg.content}`,
+                isChekcPuhlic: `${arg.isCheckPublic}`
+            }),
+        }).catch((error) => {
+            console.log("서버 연결에 에러가 발생했습니다.");
+            alert(error);
+        });
     }
 }

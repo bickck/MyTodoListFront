@@ -2,9 +2,22 @@
  * 
  * 포스트에 컨테이너를 생성하고 데이터를 넣는 클래스
  */
-import {ConvertDate} from "../util/date.js";
+import {
+    ConvertDate
+} from "./../util/date.js";
+
+import {
+    Todo
+} from "./../server/todo.js"
+
+import {
+    Quote
+} from "./../server/quote.js";
 
 const convert = new ConvertDate();
+const quoteServer = new Quote();
+const todoServer = new Todo();
+
 
 export class PostGenerator {
     // <article class="post">
@@ -91,14 +104,14 @@ export class PostGenerator {
         aComment.setAttribute("href", "#comment");
 
         createTime.setAttribute("datetime", "2022");
-         
+
         userImage.setAttribute("src", "#");
         postImage.setAttribute("src", "#");
 
         userImage.setAttribute("alt", "#");
         postImage.setAttribute("alt", "#");
 
-        
+
         titleContainer.appendChild(title);
         headerTitle.appendChild(titleContainer);
         headerTitle.appendChild(subtitle);
@@ -127,7 +140,7 @@ export class PostGenerator {
         if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
             postImageContainer.appendChild(postImage);
         }
-       
+
 
         title.innerText = params.title;
         subtitle.innerText = params.subtitle;
@@ -183,15 +196,14 @@ export class PostGenerator {
 
         postImage.setAttribute("src", "");
         authorImage.setAttribute("src", "");
-
         postImage.setAttribute("alt", "");
         authorImage.setAttribute("alt", "");
 
 
-        if (params.userImgCount != null && typeof params.userImgCount != "undefined" && params.userImgCount != 0) {
+        if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
             postImageContainer.appendChild(postImage);
         }
-        if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
+        if (params.authorImage != null && typeof params.authorImage != "undefined" && params.authorImage != 0) {
             author.appendChild(authorImage);
         }
         title.innerText = params.title;
@@ -302,8 +314,8 @@ export class PostGenerator {
         var createTime = document.createElement("time");
 
         heart.setAttribute("id", "heart");
-        author.setAttribute("id","author");
-        quote.setAttribute("id","quote");
+        author.setAttribute("id", "author");
+        quote.setAttribute("id", "quote");
 
         heart.setAttribute("href", "#heart");
         quote.setAttribute("href", "#");
@@ -316,7 +328,7 @@ export class PostGenerator {
 
 
         quote.innerText = params.quote;
-        author.innerText = `- ${params.author} -`   
+        author.innerText = `- ${params.author} -`
         createTime.innerText = convert.convertViewDate(params.createTimestamp);
         heart.innerText = params.heart;
 
@@ -377,6 +389,128 @@ export class PostGenerator {
         content.innerText = params.content;
 
         return blurdSection;
+    }
+
+
+
+    // <article class="post quote">
+    //     <header>
+    //         <div class="title">
+    //             <h3><a href="single.html">Euismod et accumsan</a></h3>
+    //             <p>Lorem ipsum dolor amet nullam consequat etiam feugiat</p>
+    //         </div>
+    //         <div class="meta">
+    //             <time class="published" datetime="2015-11-01">November 1, 2015</time>
+    //             <a href="#" class="author">
+    //                 <span class="name">Jane Doe</span>
+    //                 <img src="images/avatar.jpg" alt="" />
+    //             </a>
+    //         </div>
+    //     </header>
+    //     <div class="col-6 col-12-small" hidden>
+    //         <input type="checkbox" id="non-public" name="public" value="public" disabled>
+    //         <label for="non-public" style="user-select: none;">비공개</label>
+    //     </div>
+    //     <footer>
+    //         <ul class="stats">
+    //             <li class="heart custom-style"><a class="icon solid fa-heart"></a></li>
+    //             <li class="update custom-style"><a id="update_button">Update</a></li>
+    //             <li class="delete custom-style"><a id="delete_button">Delete</a></li>
+    //         </ul>
+    //     </footer>
+    // </article>
+
+    createMainQuote(params) {
+
+        var articleContainer = document.createElement("article");
+        var headerContainer = document.createElement("header");
+        var headerTitle = document.createElement("div");
+        var quoteId = document.querySelector("p");
+        var quote = document.createElement("h3");
+        var author = document.createElement("p");
+        var isPublish = document.createElement("p");
+        var metaContainer = document.createElement("div");
+        var createTime = document.createElement("time");
+        var userInfoLink = document.createElement("a");
+        var userinfo = document.createElement("span");
+        var userImage = document.createElement("img");
+        var footerContainer = document.createElement("footer");
+        var ulStats = document.createElement("ul");
+        var liHeart = document.createElement("li");
+        var aHeart = document.createElement("a");
+
+
+        quoteId.setAttribute("hidden", "");
+        isPublish.setAttribute("hidden", "");
+        articleContainer.setAttribute("class", "post quote");
+        headerTitle.setAttribute("class", "title");
+        metaContainer.setAttribute("class", "meta");
+        createTime.setAttribute("class", "published");
+        userInfoLink.setAttribute("class", "author");
+        userinfo.setAttribute("class", "username");
+        ulStats.setAttribute("class", "stats");
+        aHeart.setAttribute("class", "icon solid fa-heart heart");
+        userInfoLink.setAttribute("href", "#user");
+        userImage.setAttribute("src", "#");
+        userImage.setAttribute("alt", "#");
+
+        headerTitle.appendChild(quoteId);
+        headerTitle.appendChild(quote);
+        headerTitle.appendChild(author);
+        headerTitle.appendChild(isPublish);
+        userInfoLink.appendChild(userinfo);
+        metaContainer.appendChild(createTime);
+        metaContainer.appendChild(userInfoLink);
+        headerContainer.appendChild(headerTitle);
+        headerContainer.appendChild(metaContainer);
+        liHeart.appendChild(aHeart);
+        ulStats.appendChild(liHeart);
+        footerContainer.appendChild(ulStats);
+        articleContainer.appendChild(headerContainer);
+        articleContainer.appendChild(footerContainer);
+
+
+        quoteId.setAttribute("id", "quoteId");
+        quote.setAttribute("id", "quote");
+        author.setAttribute("id", "author")
+        isPublish.setAttribute("class", "isPublish");
+
+        quoteId.setAttribute("value", params.id);
+        userinfo.setAttribute("value", params.username);
+        quote.setAttribute("value", params.quote);
+        isPublish.setAttribute("value", params.isPublish);
+        author.setAttribute("value", params.author);
+        createTime.setAttribute("datetime", params.createTimestamp);
+        aHeart.setAttribute("value", params.heart);
+
+        if (params.isPublish == "private") {
+            aHeart.innerText = "private";
+            aHeart.addEventListener("click", function changePublish() {
+                quoteServer.requestChangeQuotePublish({
+                    id: params.id
+                });
+
+            });
+        } else {
+            aHeart.innerText = params.heart;
+            aHeart.addEventListener("click", function addHeart() {
+                quoteServer.requestSaveQuoteHeart({
+                    id: params.id
+                });
+            });
+        }
+
+        if (params.userImgCount != null && typeof params.userImgCount != "undefined" && params.userImgCount != 0) {
+            userImage.appendChild(userImage);
+        }
+
+        quoteId.innerText = params.id;
+        quote.innerText = params.quote;
+        author.innerText = params.author;
+        createTime.innerText = convert.convertViewDate(params.createTimestamp);
+        userinfo.innerText = params.username;
+
+        return articleContainer;
     }
 
 }

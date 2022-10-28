@@ -156,13 +156,13 @@
 
         <!-- Main -->
         <div id="main">
-
+            <h2>Quotes</h2>
             <!-- Post -->
             <article class="post quote">
                 <header>
                     <div class="title">
-                        <h2><a href="single.html">Euismod et accumsan</a></h2>
-						<p>Lorem ipsum dolor amet nullam consequat etiam feugiat</p>
+                        <h3 id="quote">Euismod et accumsan</h3>
+                        <p id="author">Lorem ipsum dolor amet nullam consequat etiam feugiat</p>
                     </div>
                     <div class="meta">
                         <time class="published" datetime="2015-11-01">November 1, 2015</time>
@@ -172,26 +172,24 @@
                         </a>
                     </div>
                 </header>
-                <div class="col-6 col-12-small" hidden>
+                <!-- <div class="col-6 col-12-small">
                     <input type="checkbox" id="non-public" name="public" value="public" disabled>
                     <label for="non-public" style="user-select: none;">비공개</label>
-                </div>
+                </div> -->
                 <footer>
                     <ul class="stats">
                         <li class="heart custom-style"><a class="icon solid fa-heart"></a></li>
-                        <li class="update custom-style"><a id="update_button">Update</a></li>
-                        <li class="delete custom-style"><a id="delete_button">Delete</a></li>
+                        <!-- <li class="update custom-style"><a id="update_button">Update</a></li>
+                        <li class="delete custom-style"><a id="delete_button">Delete</a></li> -->
                     </ul>
                 </footer>
             </article>
-
-
         </div>
 
         <!-- Sidebar -->
         <section id="sidebar">
 
-            <section class="blurb quote">
+            <section class="blurb quote ">
                 <h2> Write your history</h2>
                 <!-- <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
                     amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.
@@ -227,7 +225,7 @@
                                 <h3><a id="quote" href="single.html">Main QUote</a></h3>
                                 <h4 id="author">-author-</h4>
                                 <ul class="stats">
-                                    <li><a href="#" class="icon solid fa-heart">0</a></li>
+                                    <li><a href="#heart" class="icon solid fa-heart">0</a></li>
                                     <li><time class="published" datetime="2015-10-20">October 20, 2015</time></li>
                                 </ul>
                             </header>
@@ -319,8 +317,7 @@
 
     <script type="text/javascript" src="./../js/generator/header.js"></script>
     <script type="module" src="./../js/generator/footer.js"></script>
-
-    <!-- <script type="text/javascript" src="./../js/function/quoteread.js"></script> -->
+    <script type="module" src="./../js/function/quoteread.js"></script>
     <script type="text/javascript" src="./../js/function/quotewrite.js"></script>
 
 </body>

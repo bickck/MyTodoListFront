@@ -34,7 +34,7 @@
 /* quote list */
 
 .quote > li > article > header > h4 {
-    text-align : center;
+    /* text-align : center; */
 }
 
 .quote > li > article > header > .stats {
@@ -82,5 +82,9 @@
 
 .blurb.quote {
     
+}
+
+.fa-heart.heart {
+    cursor: pointer;
 }
 				
