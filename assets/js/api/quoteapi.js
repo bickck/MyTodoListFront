@@ -39,7 +39,7 @@ export class QuoteApi {
     }
 
     async requestDailyQuotes() {
-        const url = backEndServerAddress  + "/quote/api/daily/quotes";
+        const url = backEndServerAddress  + "/quote/api/daily";
 
         var result = await fetch(url, {
             method: 'GET',
@@ -55,7 +55,7 @@ export class QuoteApi {
     }
 
     async requestRecommandQuotes() {
-        const url = backEndServerAddress  + "/quote/api/recommand/quotes";
+        const url = backEndServerAddress  + "/quote/api/recommand";
 
         var result = await fetch(url, {
             method: 'GET',

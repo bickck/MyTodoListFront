@@ -4,55 +4,59 @@
 
 const stats = document.querySelector(".stats");
 
+export class Action {
 
+    todoComment(id) {
+ 
+    }
 
-async function comment() {
+    todoHeart() {
 
+    }
+
+    todoHeart() {
+
+    }
     
-    const requestUrl = "";
-    fetch(requestUrl, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-            "authorization" : auth.getJsonToken(),
-        },
-        body: JSON.stringify({
-            title: `${title}`,
-            cotent: `${content}`,
-            isChekcPuhlic: `${isCheckPublic}`
-        }),
-    }).then(Response => {
-        if (Response.status.toString() === "200") {
-            alert("저장 성공");
-            window.location.href = mainPageAddress;
-        }
-
-    }).catch((error) => {
-        console.log("서버 연결에 에러가 발생했습니다.");
-        alert(error);
-    });
 }
 
-async function heart() {
 
-    const requestUrl = "/user/todo/manage/heart/add/{id}";
-    fetch(requestUrl, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-            "authorization" : auth.getJsonToken(),
-        },
-        body: JSON.stringify({
-            id : "",
-            user : ""
-        }),
-    }).then(Response => {
-        if (Response.status.toString() === "200") {
-            alert("저장 성공");
-        }
+import {
+    TodoApi
+} from "../api/todoapi.js"
 
-    }).catch((error) => {
-        console.log("서버 연결에 에러가 발생했습니다.");
-        alert(error);
-    });
-}
+const todo = new TodoApi();
+
+
+// const paginationPrev = document.querySelector(".pagination li .previous");
+// const paginationNext = document.querySelector(".pagination li .next");
+
+// const prev_btn = document.queryCommandIndeterm("#prev");
+// const next_btn = document.querySelector("#next");
+
+// window.onload = function() {
+//     init();
+//     var result = todo.requestMainPosts();
+//     console.log(result.then(data =>{
+//         console.log(data);
+//     }));
+// }
+
+// function prevPagination() {
+//     console.log("prevPagination")
+// }
+
+// function nextPaginatino() {
+//     console.log("nextPaginatino")
+// }
+
+// function reqeustTodoData() {
+//     todo.requestMainPosts();
+// }
+
+// function init() {
+
+// }
+
+// paginationPrev.addEventListener("click",prevPagination);
+// paginationNext.addEventListener("click",nextPaginatino);

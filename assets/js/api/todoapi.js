@@ -13,7 +13,7 @@ export class TodoApi {
 
     async requestMainPosts() {
         //event.preventDefault();
-        const url = "http://localhost:8080/todo/api/mainpost";
+        const url = backEndServerAddress +"/todo/api/mainpost";
         let response = await fetch(url, {
             method: 'GET',
             headers: {
@@ -36,7 +36,25 @@ export class TodoApi {
 
     async requestUserTodoByTodoId(arg) {
         //event.preventDefault();
-        const url = `http://localhost:8080/todo/api/${id}`;
+        const url =backEndServerAddress + `/todo/api/${id}`;
+        var result = await fetch(url, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .catch((error) => {
+            console.log(error);
+            console.log("서버 연결에 에러가 발생했습니다.");
+        });
+
+        return result.json();
+    }
+
+    async requestRecommandTodoApi() {
+
+        const url = backEndServerAddress +"/todo/api/recommand";
+
         var result = await fetch(url, {
             method: 'GET',
             headers: {
@@ -50,18 +68,25 @@ export class TodoApi {
         return result.json();
     }
 
-    async requestRecommandTodoApi() {
-
-        const url = "/recommand/todos"
-    }
-
     /**
      * TODO의 디테일을 보기위한 FUNCTION
      * param -
      * id : 게시글 고유 ID
      */
 
-    async requesTodoIdApi() {
-        const url = "/recommand/{id}"
+    async requestDailyTodoApi() {
+        const url = backEndServerAddress +"/todo/api/daily";
+
+        var result = await fetch(url, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .catch((error) => {
+            console.log("서버 연결에 에러가 발생했습니다.");
+        });
+
+        return result.json();
     }
 }

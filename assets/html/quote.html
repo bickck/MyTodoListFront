@@ -157,7 +157,12 @@
         <!-- Main -->
         <div id="main">
             <h2>Quotes</h2>
-            <!-- Post -->
+            
+        </div>
+        <!-- 
+        <div id="main">
+            <h2>Quotes</h2>
+           
             <article class="post quote">
                 <header>
                     <div class="title">
@@ -172,36 +177,34 @@
                         </a>
                     </div>
                 </header>
-                <!-- <div class="col-6 col-12-small">
+                <div class="col-6 col-12-small">
                     <input type="checkbox" id="non-public" name="public" value="public" disabled>
                     <label for="non-public" style="user-select: none;">비공개</label>
-                </div> -->
+                </div>
                 <footer>
                     <ul class="stats">
                         <li class="heart custom-style"><a class="icon solid fa-heart"></a></li>
-                        <!-- <li class="update custom-style"><a id="update_button">Update</a></li>
-                        <li class="delete custom-style"><a id="delete_button">Delete</a></li> -->
+                        <li class="update custom-style"><a id="update_button">Update</a></li>
+                        <li class="delete custom-style"><a id="delete_button">Delete</a></li>
                     </ul>
                 </footer>
             </article>
-        </div>
+        </div> -->
 
         <!-- Sidebar -->
         <section id="sidebar">
 
-            <section class="blurb quote ">
+            <section class="blurb quote auth">
                 <h2> Write your history</h2>
-                <!-- <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
-                    amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.
-                </p> -->
-                <a href="#" class="button small fit">Write Quote</a>
+               
+                <a href="#" class="button small fit write-quote">Write Quote</a>
             </section>
 
             <!-- Mini Posts -->
             <section>
                 <h2>Daily Quotes <a class="icon solid fa-sync-alt"></a></h2>
-                <ul class="posts quote">
-                    <li>
+                <ul class="posts quote quote-daily">
+                    <!-- <li>
                         <article>
                             <header>
                                 <h3><a id="quote" href="single.html">Main QUote</a></h3>
@@ -212,14 +215,14 @@
                                 </ul>
                             </header>
                         </article>
-                    </li>
+                    </li> -->
                 </ul>
             </section>
 
             <section>
                 <h2>recommand Quotes <a class="icon solid fa-sync-alt"></a></h2>
-                <ul class="posts quote">
-                    <li>
+                <ul class="posts quote quote-recommand">
+                    <!-- <li>
                         <article>
                             <header>
                                 <h3><a id="quote" href="single.html">Main QUote</a></h3>
@@ -230,7 +233,7 @@
                                 </ul>
                             </header>
                         </article>
-                    </li>
+                    </li> -->
                 </ul>
             </section>
 
@@ -317,7 +320,7 @@
 
     <script type="text/javascript" src="./../js/generator/header.js"></script>
     <script type="module" src="./../js/generator/footer.js"></script>
-    <script type="module" src="./../js/function/quoteread.js"></script>
+    <script type="module" src="./../js/index/quote.js"></script>
     <script type="text/javascript" src="./../js/function/quotewrite.js"></script>
 
 </body>

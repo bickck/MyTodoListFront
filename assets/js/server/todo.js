@@ -7,7 +7,7 @@ export class Todo {
     todoUrl = "/user/todo/manage";
 
     async requestUserTodoInsert(arg) {
-        const url = backEndServerAddress  + todoUrl + `/save`;
+        const url = backEndServerAddress  + "/user/todo/manage" + `/save`;
 
         var result = await fetch(url, {
             method: 'POST',
@@ -35,7 +35,7 @@ export class Todo {
     }
 
     async requestUserTodoUpdate(arg) {
-        const url = backEndServerAddress + todoUrl + `/update/${arg.id}`;
+        const url = backEndServerAddress + "/user/todo/manage" + `/update/${arg.id}`;
 
         var result = await fetch(url, {
             method: 'POST',
@@ -59,7 +59,7 @@ export class Todo {
     }
 
     async requestUserTodoDelete(arg) {
-        const url = backEndServerAddress + todoUrl + `/delete/${arg.id}`;
+        const url = backEndServerAddress + "/user/todo/manage" + `/delete/${arg.id}`;
         var result = await fetch(url, {
             method: 'POST',
             headers: {
@@ -80,7 +80,7 @@ export class Todo {
     }
 
     async requestSaveTodoHeart(arg) {
-        const url = backEndServerAddress + todoUrl + `/heart/add/${arg.id}`;
+        const url = backEndServerAddress + "/user/todo/manage" + `/heart/add/${arg.id}`;
         var result = await fetch(url, {
             method: 'POST',
             headers: {
@@ -99,7 +99,7 @@ export class Todo {
     }
 
     async requestChangePublish(arg) {
-        const url = backEndServerAddress + todoUrl + ``;
+        const url = backEndServerAddress + "/user/todo/manage" + ``;
 
         var result = await fetch(url, {
             method: 'POST',

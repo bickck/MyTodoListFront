@@ -127,9 +127,9 @@
         </section>
 
         <!-- Main -->
-        <div id="main">
+        <div id="main" class="main-todo">
             <h2>Todos</h2>
-            <article class="post">
+            <!-- <article class="post">
                 <header>
                     <div class="title">
                         <h2><a href="single.html">데이터가 없습니다.</a></h2>
@@ -155,32 +155,31 @@
                         <li><a href="#" class="icon solid fa-comment">0</a></li>
                     </ul>
                 </footer>
-            </article>
+            </article> -->
         </div>
 
         <!-- Sidebar -->
         <section id="sidebar">
             <!-- Intro -->
-            <section class="blurb quote">
+            <section class="blurb todos auth">
                 <h2> Write your history</h2>
                 <!-- <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
                     amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.
                 </p> -->
-                <a href="#" class="button small fit">Write Todo</a>
+                <a href="#" class="button small fit write-todo">Write Todo</a>
             </section>
 
             <!-- Mini Posts -->
-
             <section>
                 <h2>Daily Todos <a class="icon solid fa-sync-alt"></a></h2>
-                <ul class="posts quote">
+                <ul class="posts daliy-todos">
 
                 </ul>
             </section>
 
             <section>
                 <h2>recommand Todos <a class="icon solid fa-sync-alt"></a></h2>
-                <div class="mini-posts">
+                <div class="mini-posts recommand-todos">
 
                 </div>
             </section>
@@ -254,7 +253,7 @@
     <script type="module" src="./../js/generator/footer.js"></script>
 
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         const update_btn = document.querySelector("#update_button");
 
         function pageMoveTodoUpdate() {
@@ -270,12 +269,11 @@
             window.location.href = "http://127.0.0.1:5501/assets/html/updateTodo.html";
         }
         update_btn.addEventListener("click", pageMoveTodoUpdate);
-    </script>
+    </script> -->
 
     <script type="module" src="./../js/server/todo.js"></script>
-    <script type="module" src="./../js/post/todo.js"></script>
     <script type="module" src="./../js/function/todowrite.js"></script>
-    <script type="module" src="./../js/function/todoread.js"></script>
+    <script type="module" src="./../js/index/todo.js"></script>
     <script type="module" src="./../js/function/action.js"></script>
 
 </body>

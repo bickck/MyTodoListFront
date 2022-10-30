@@ -36,12 +36,7 @@ export class NonDataInjector {
         }
 
         var section = post.crateMiniPost(arg);
-        // var title = section.children[0].children[0].children[0];
-        // var time =  section.children[0].children[1];
        
-        // title.innerText = "데이터가 없어요";
-        // time.innerText = "none";
-
         return section;
     }
 
@@ -57,11 +52,21 @@ export class NonDataInjector {
         }
 
         var section = post.createPostList(arg);
-        // var title = section.children[0].children[0].children[0].children[0];
-        // var time = section.children[0].children[0].children[1];
+        
+        return section;
+    }
 
-        // title.innerText = "데이터가 없어요."
-        // time.innerText = "none"
+    /**
+     * 
+     * <ul class="posts quote">
+     */
+     createNonPostQuote() {
+
+        var arg = {
+            title : "데이터가 없어요."
+        }
+
+        var section = post.createPostListQuote(arg);
         
         return section;
     }

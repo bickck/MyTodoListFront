@@ -2,34 +2,6 @@
  * 
  */
 
-
-//const headerTagId = document.querySelector("#header");
-// const links = document.querySelectorAll(".link");
-// function header() {
-//     var mainLogoTag = document.createElement("h1");
-//     var logoLink = document.createElement("a");
-//     var linksNav = document.createElement("nav");
-//     var linksUl = document.createElement("ul");
-//     var linksLi = document.createElement("li");
-//     var aLink = document.createElement("a");
-//     var mainNav = document.createElement("nav");
-//     var mainUl = document.createElement("ul");
-//     var childLiSearch = document.createElement("li");
-//     var searchForm = document.createElement("form");
-//     var childLiMenu = document.createElement("li");
-//      logoLink.setAttribute("href","index.html");
-//      mainLogoTag.appendChild(logoLink);
-//      linksNav.setAttribute("class","links");
-//      //-- li --
-//      //-- li --
-//      linksNav.appendChild(linksUl);
-//      mainNav.setAttribute("class","main");
-//      mainUl.appendChild(childLiSearch);
-//      mainUl.appendChild(childLiMenu);
-// }
-//const links = headerTagId.children[1];
-// console.log(navList());
-
 // import { Auth } from "../account/Auth.js";
 // const auth = new Auth();
 
@@ -48,12 +20,13 @@ var requestPage = {
     todoPage: frontEndServerAddress + "/assets/html/todo.html",
     quotePage: frontEndServerAddress + "/assets/html/quote.html",
     imagePage: frontEndServerAddress + "/assets/html/image.html",
-    communityPage: frontEndServerAddress + "/assets/html/community.hmtl",
+    communityPage: frontEndServerAddress + "/assets/html/community.html",
     length: 4
 };
 
 function init() {
     headerLinkInjector();
+    writeLink();
 }
 
 function headerLinkInjector() {
@@ -67,6 +40,20 @@ function headerLinkInjector() {
 
     loginPageContainer.href = frontEndServerAddress + loginPageURL;
     mainLink.href = frontEndServerAddress;
+}
+
+function writeLink() {
+    var todoLink = document.querySelector(".write-todo");
+    var quoteLink = document.querySelector(".write-quote");
+
+    if (todoLink != null && quoteLink != "undefined") {
+        todoLink.href = frontEndServerAddress + "/assets/html/writetodo.html";
+    }
+
+    if (quoteLink != null && quoteLink != "undefined") {
+        quoteLink.href = frontEndServerAddress + "/assets/html/writequote.html";
+    }
+
 }
 
 init();
