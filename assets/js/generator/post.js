@@ -14,9 +14,14 @@ import {
     Quote
 } from "./../server/quote.js";
 
+import {
+    Action
+} from "./../function/action.js";
+
 const convert = new ConvertDate();
 const quoteServer = new Quote();
 const todoServer = new Todo();
+// const action = new Action();
 
 
 export class PostGenerator {
@@ -47,14 +52,15 @@ export class PostGenerator {
 
     createMainPost(params) {
 
-        var returnArg = {
-            articleContainer,
-            userImage,
-            postImage
-        }
+        // var returnArg = {
+        //     articleContainer,
+        //     userImage,
+        //     postImage
+        // }
         var articleContainer = document.createElement("article");
         var headerContainer = document.createElement("header");
         var headerTitle = document.createElement("div");
+        var todoId = document.createElement("p");
         var titleContainer = document.createElement("h2");
         var title = document.createElement("a");
         var subtitle = document.createElement("p");
@@ -70,7 +76,7 @@ export class PostGenerator {
         var ulActions = document.createElement("ul");
         var ulStats = document.createElement("ul");
         var liHeart = document.createElement("li");
-        var aHeart = document.createElement("a");
+        var heart = document.createElement("a");
         var liComment = document.createElement("li");
         var aComment = document.createElement("a");
 
@@ -94,25 +100,12 @@ export class PostGenerator {
         postImageContainer.setAttribute("class", "image featured");
         ulActions.setAttribute("class", "actions");
         ulStats.setAttribute("class", "stats");
-        aHeart.setAttribute("class", "icon solid fa-heart");
+        heart.setAttribute("class", "icon solid fa-heart");
         aComment.setAttribute("class", "icon solid fa-comment");
-
-        aHeart.setAttribute("href", "#heart");
-        userInfoLink.setAttribute("href", "#user");
-        title.setAttribute("href", "#");
-        postImageContainer.setAttribute("href", "#");
-        aComment.setAttribute("href", "#comment");
-
-        createTime.setAttribute("datetime", "2022");
-
-        userImage.setAttribute("src", "#");
-        postImage.setAttribute("src", "#");
-
-        userImage.setAttribute("alt", "#");
-        postImage.setAttribute("alt", "#");
 
 
         titleContainer.appendChild(title);
+        headerTitle.appendChild(todoId);
         headerTitle.appendChild(titleContainer);
         headerTitle.appendChild(subtitle);
         userInfoLink.appendChild(userinfo);
@@ -120,7 +113,7 @@ export class PostGenerator {
         metaContainer.appendChild(userInfoLink);
         headerContainer.appendChild(headerTitle);
         headerContainer.appendChild(metaContainer);
-        liHeart.appendChild(aHeart);
+        liHeart.appendChild(heart);
         liComment.appendChild(aComment);
         ulStats.appendChild(liHeart);
         ulStats.appendChild(liComment);
@@ -141,20 +134,66 @@ export class PostGenerator {
             postImageContainer.appendChild(postImage);
         }
 
+        if (params.isPublish == "private") {
+            heart.innerText = "private";
+            heart.addEventListener("click", function changePublish() {
+                quoteServer.requestChangeQuotePublish({
+                    id: params.id
+                });
+
+            });
+        } else {
+            heart.innerText = params.heart;
+            heart.addEventListener("click", function addHeart() {
+                quoteServer.requestSaveQuoteHeart({
+                    id: params.id
+                });
+            });
+        }
+
+        // heart.setAttribute("href", "#heart");
+        //userInfoLink.setAttribute("href", "#user");
+        // title.setAttribute("href", "#");
+
+        // click 시 user detail page로 이동
+        userInfoLink.addEventListener("click", function userDetailsPage() {
+
+            const url = backEndServerAddress + "";
+
+        })
+
+        // title click 시 todo detail page로 이동
+        title.addEventListener("click", function todoDetailsPage() {
+
+            const url = backEndServerAddress + "/assets/html/tododetails.html";
+
+            window.localStorage.setItem("todo_id", params.id);
+
+            window.location.href = url;
+
+        });
+
+        postImageContainer.setAttribute("href", "#");
+        aComment.setAttribute("href", "#comment");
+        userImage.setAttribute("src", "#");
+        postImage.setAttribute("src", "#");
+
+        todoId.setAttribute("value", params.id);
+        createTime.setAttribute("datetime", params.createTimeStamp);
+
+
+        userImage.setAttribute("alt", "#");
+        postImage.setAttribute("alt", "#");
 
         title.innerText = params.title;
         subtitle.innerText = params.subtitle;
         createTime.innerText = convert.convertViewDate(params.createTimeStamp);
         userinfo.innerText = params.username;
         mainContent.innerText = params.content;
-        aHeart.innerText = params.heart;
+        heart.innerText = params.heart;
         aComment.innerText = params.comment;
 
-        returnArg.articleContainer = articleContainer;
-        returnArg.postImage = postImage;
-        returnArg.userImage = userImage;
-
-        return returnArg;
+        return articleContainer;
     }
 
     // <section>
@@ -305,6 +344,7 @@ export class PostGenerator {
         var articleContainer = document.createElement("article");
         var header = document.createElement("header");
         var quoteContainer = document.createElement("h3");
+        var id = document.createElement("p");
         var quote = document.createElement("a");
         var author = document.createElement("h4");
         var ulContainer = document.createElement("ul");
@@ -317,14 +357,34 @@ export class PostGenerator {
         author.setAttribute("id", "author");
         quote.setAttribute("id", "quote");
 
-        heart.setAttribute("href", "#heart");
-        quote.setAttribute("href", "#");
+        // heart.setAttribute("href", "#heart");
+        // quote.setAttribute("href", "#");
 
         ulContainer.setAttribute("class", "stats");
         heart.setAttribute("class", "icon solid fa-heart");
         createTime.setAttribute("class", "published");
 
-        createTime.setAttribute("datetime", "");
+
+        quote.setAttribute("value", params.quote);
+        author.setAttribute("value", params.author);
+        createTime.setAttribute("datetime", params.createTimestamp);
+
+        if (params.isPublish == "private") {
+            heart.innerText = "private";
+            heart.addEventListener("click", function changePublish() {
+                quoteServer.requestChangeQuotePublish({
+                    id: params.id
+                });
+
+            });
+        } else {
+            heart.innerText = params.heart;
+            heart.addEventListener("click", function addHeart() {
+                quoteServer.requestSaveQuoteHeart({
+                    id: params.id
+                });
+            });
+        }
 
 
         quote.innerText = params.quote;
@@ -332,16 +392,15 @@ export class PostGenerator {
         createTime.innerText = convert.convertViewDate(params.createTimestamp);
         heart.innerText = params.heart;
 
+
         quoteContainer.appendChild(quote);
         liHeartContainer.appendChild(heart);
         liCreateTimeContainer.appendChild(createTime);
-
         ulContainer.appendChild(liHeartContainer);
         ulContainer.appendChild(liCreateTimeContainer);
         header.appendChild(quoteContainer);
         header.appendChild(author);
         header.appendChild(ulContainer);
-
         articleContainer.appendChild(header);
         li.appendChild(articleContainer);
 
@@ -437,7 +496,7 @@ export class PostGenerator {
         var footerContainer = document.createElement("footer");
         var ulStats = document.createElement("ul");
         var liHeart = document.createElement("li");
-        var aHeart = document.createElement("a");
+        var heart = document.createElement("a");
 
 
         quoteId.setAttribute("hidden", "");
@@ -449,7 +508,7 @@ export class PostGenerator {
         userInfoLink.setAttribute("class", "author");
         userinfo.setAttribute("class", "username");
         ulStats.setAttribute("class", "stats");
-        aHeart.setAttribute("class", "icon solid fa-heart heart");
+        heart.setAttribute("class", "icon solid fa-heart heart");
         userInfoLink.setAttribute("href", "#user");
         userImage.setAttribute("src", "#");
         userImage.setAttribute("alt", "#");
@@ -463,7 +522,7 @@ export class PostGenerator {
         metaContainer.appendChild(userInfoLink);
         headerContainer.appendChild(headerTitle);
         headerContainer.appendChild(metaContainer);
-        liHeart.appendChild(aHeart);
+        liHeart.appendChild(heart);
         ulStats.appendChild(liHeart);
         footerContainer.appendChild(ulStats);
         articleContainer.appendChild(headerContainer);
@@ -481,19 +540,19 @@ export class PostGenerator {
         isPublish.setAttribute("value", params.isPublish);
         author.setAttribute("value", params.author);
         createTime.setAttribute("datetime", params.createTimestamp);
-        aHeart.setAttribute("value", params.heart);
+        heart.setAttribute("value", params.heart);
 
         if (params.isPublish == "private") {
-            aHeart.innerText = "private";
-            aHeart.addEventListener("click", function changePublish() {
+            heart.innerText = "private";
+            heart.addEventListener("click", function changePublish() {
                 quoteServer.requestChangeQuotePublish({
                     id: params.id
                 });
 
             });
         } else {
-            aHeart.innerText = params.heart;
-            aHeart.addEventListener("click", function addHeart() {
+            heart.innerText = params.heart;
+            heart.addEventListener("click", function addHeart() {
                 quoteServer.requestSaveQuoteHeart({
                     id: params.id
                 });
