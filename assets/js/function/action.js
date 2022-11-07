@@ -2,30 +2,41 @@
  *  action 을 호출하는 파일
  */
 
+ import {
+    TodoApi
+} from "./../api/todoapi.js"
+import {
+    PostGenerator
+} from "./../generator/post.js";
+
+// const postGenerator = new PostGenerator();
+// const todo = new TodoApi();
+
 const stats = document.querySelector(".stats");
+const views = document.querySelector(".views");
 
 export class Action {
 
-    todoComment(id) {
+    createTodoCommentListContianer(id) {
  
     }
 
-    todoHeart() {
+    addTodoHeartAction() {
 
     }
 
-    todoHeart() {
+    addQuoteHeartAction() {
 
+    }
+
+    createImageContainerAction() {
+        
     }
     
 }
 
 
-import {
-    TodoApi
-} from "../api/todoapi.js"
 
-const todo = new TodoApi();
 
 
 // const paginationPrev = document.querySelector(".pagination li .previous");

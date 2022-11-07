@@ -2,48 +2,37 @@
  * 
  */
 
+import {Quote} from "./../server/quote.js";
+
+const quoteServer = new Quote();
+
 const save_btn = document.querySelector("#save_button");
 const update_btn = document.querySelector("#update_button");
 const delete_btn = document.querySelector("#delete_button");
 
 function quoteSave() {
-    const requestUrl = backEndServerAddress + "/user/quote/manage/save";
+
     const quote = document.querySelector("#quote").value;
     const author = document.querySelector("#author").value;
-    var isCheckPublic = document.querySelector("#non-public").value;
+    var isPublish = document.querySelector("#isPublish").value;
 
-    if (isCheckPublic.checked == false) {
-        isCheckPublic.value = "public";
+    if (isPublish.checked == false) {
+        isPublish.value = "publish";
     }
 
-    // var arg = {
-    //     url : backEndServerAddress + "/user/quote/manage/save",
-    //     quote : document.querySelector("#quote").value,
-    //     author : document.querySelector("#author").value,
-    //     isCheckPublic : document.querySelector("#non-public").value
-    // };
-
-    var result = fetch(requestUrl, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-            "authorization": auth.getJsonToken(),
-        },
-        body: JSON.stringify({
-            quote: `${quote}`,
-            author: `${author}`,
-            isCheckPublic: `${isCheckPublic}`
-        }),
-    }).then(Response => {
-        if (Response.status.toString() === "200") {
-            alert("저장 성공");
-            window.location.href = mainPageAddress;
-        }
-
-    }).catch((error) => {
-        console.log("서버 연결에 에러가 발생했습니다.");
-        alert(error);
+    var result = quoteServer.requestUserQuoteSave({
+        quote : quote,
+        author : author,
+        isPublish : isPublish
     });
+
+    result.then((data)=> {
+        if (data.status.toString() === "200") {
+            alert("저장 성공");
+            //window.location.href = mainPageAddress;
+        }
+    });
+
 }
 
 
@@ -85,7 +74,7 @@ function quoteUpdate() {
 
     }).catch((error) => {
         console.log("서버 연결에 에러가 발생했습니다.");
-        alert(error);
+        console.log(error);
     });
 }
 
@@ -99,14 +88,6 @@ function quoteDelete() {
     if (isCheckPublic.checked == false) {
         isCheckPublic.value = "public";
     }
-
-    // var arg = {
-    //     url : backEndServerAddress + "/user/quote/manage/delete",
-    //     quote : document.querySelector("#quote").value,
-    //     author : document.querySelector("#author").value,
-    //     isCheckPublic : document.querySelector("#non-public").value
-    // };
-
 
     var result = fetch(requestUrl, {
         method: 'POST',
@@ -127,7 +108,7 @@ function quoteDelete() {
 
     }).catch((error) => {
         console.log("서버 연결에 에러가 발생했습니다.");
-        alert(error);
+        console.log(error);
     });
 }
 

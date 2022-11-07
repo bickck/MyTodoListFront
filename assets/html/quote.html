@@ -36,122 +36,111 @@
     <!-- Wrapper -->
     <div id="wrapper">
 
-        <!-- Header -->
-        <header id="header">
-            <h1><a id="mainLink" href="#main">Future Imperfect</a></h1>
-            <nav class="links page">
-                <ul class="lists">
-                    <li><a href="#">Todo</a></li>
-                    <li><a href="#">Quote</a></li>
-                    <li><a href="#">Image</a></li>
-                    <li><a href="#">Community</a></li>
-                    <li><a href="#"></a></li>
-                </ul>
-            </nav>
-            <nav class="main">
-                <ul>
-                    <li class="search">
-                        <a class="fa-search" href="#search">Search</a>
-                        <form id="search" method="get" action="#">
-                            <input type="text" name="query" placeholder="Search" />
-                        </form>
-                    </li>
-                    <li class="menu">
-                        <a class="fa-bars" href="#menu">Menu</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+       <!-- Header -->
+		<header id="header">
+			<h1><a id="mainLink" href="#main">Future Imperfect</a></h1>
+			<nav class="links page">
+				<ul class="lists">
+					<li><a href="#">Todo</a></li>
+					<li><a href="#">Quote</a></li>
+					<li><a href="#">Image</a></li>
+					<li><a href="#">Community</a></li>
+					<li><a href="#"></a></li>
+				</ul>
+			</nav>
+			<nav class="main">
+				<ul>
+					<li class="search">
+						<a class="fa-search" href="#search">Search</a>
+						<form id="search" method="get" action="#">
+							<input type="text" name="query" placeholder="Search" />
+						</form>
+					</li>
+					<li class="menu">
+						<a class="fa-bars" href="#menu">Menu</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
 
-        <!-- Menu -->
-        <section id="menu">
+		<!-- Menu -->
+		<section id="menu">
 
-            <!-- Search -->
-            <section>
-                <form class="search" method="get" action="#">
-                    <input type="text" name="query" placeholder="Search" />
-                </form>
-            </section>
+			<!-- Search -->
+			<section>
+				<form class="search" method="get" action="#">
+					<input type="text" name="query" placeholder="Search" />
+				</form>
+			</section>
 
-            <!-- Links -->
-            <section class="auth">
-                <ul class="links">
-                    <li>
-                        <a href="/user/api/info">
-                            <h3>User Manage</h3>
-                            <p>Feugiat tempus veroeros dolor</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/todo/api/">
-                            <h3>User Todo</h3>
-                            <p>Sed vitae justo condimentum</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/quote/api/">
-                            <h3>User Quote</h3>
-                            <p>Phasellus sed ultricies mi congue</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h3>Write Community</h3>
-                            <p>Porta lectus amet ultricies</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h3>Write Community</h3>
-                            <p>Porta lectus amet ultricies</p>
-                        </a>
-                    </li>
-                </ul>
-            </section>
-            <!-- Links -->
-            <section class="non-auth">
-                <ul class="links">
-                    <li>
-                        <a href="/page/quote">
-                            <h3>Lorem ipsum</h3>
-                            <p>Feugiat tempus veroeros dolor</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/page/todo">
-                            <h3>Dolor sit amet</h3>
-                            <p>Sed vitae justo condimentum</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h3>Feugiat veroeros</h3>
-                            <p>Phasellus sed ultricies mi congue</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h3>Etiam sed consequat</h3>
-                            <p>Porta lectus amet ultricies</p>
-                        </a>
-                    </li>
-                </ul>
-            </section>
+			<!-- Links -->
+			<section class="auth">
+				<ul class="links">
+					<li>
+						<a href="#userManagePage">
+							<h3>User Manage</h3>
+							<!-- <p>Feugiat tempus veroeros dolor</p> -->
+						</a>
+					</li>
+					<li>
+						<a href="#userTodoPage">
+							<h3>User Todo</h3>
+							<!-- <p>Sed vitae justo condimentum</p> -->
+						</a>
+					</li>
+					<li>
+						<a href="#userQuotePage">
+							<h3>User Quote</h3>
+							<!-- <p>Phasellus sed ultricies mi congue</p> -->
+						</a>
+					</li>
+					<li>
+						<a href="#userTodoWritePage">
+							<h3>Todo Write</h3>
+							<!-- <p>Porta lectus amet ultricies</p> -->
+						</a>
+					</li>
+					<li>
+						<a href="#userQuoteWritePage">
+							<h3>Quote Write</h3>
+							<!-- <p>Porta lectus amet ultricies</p> -->
+						</a>
+					</li>
+				</ul>
+			</section>
+			<!-- Links -->
+			<section class="non-auth">
+				<ul class="links">
+					<li>
+						<a href="#pagetodo">
+							<h3>Todo</h3>
+							<p>Feugiat tempus veroeros dolor</p>
+						</a>
+					</li>
+					<li>
+						<a href="#pagequote">
+							<h3>Quote</h3>
+							<p>Sed vitae justo condimentum</p>
+						</a>
+					</li>
+				</ul>
+			</section>
 
-            <!-- Actions -->
-            <section class="auth">
-                <ul class="actions stacked">
-                    <li><a href="" class="button large fit">유저 정보</a></li>
-                </ul>
-            </section>
+			<!-- Actions -->
+			<section class="auth">
+				<ul class="actions stacked">
+					<li><a href="#userinfo" class="button large fit">유저 정보</a></li>
+					<li><a id="logout" class="button large fit">LogOut</a></li>
+				</ul>
+			</section>
 
-            <!-- Actions -->
-            <section class="non-auth">
-                <ul class="actions stacked">
-                    <li class="loginPage"><a href="#" class="button large fit">Log In</a></li>
-                </ul>
-            </section>
-        </section>
+			<!-- Actions -->
+			<section class="non-auth">
+				<ul class="actions stacked">
+					<li class="loginPage"><a href="#" class="button large fit">Log In</a></li>
+				</ul>
+			</section>
+		</section>
 
 
         <!-- Main -->

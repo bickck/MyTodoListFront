@@ -2,11 +2,14 @@
  *  이미지 API를 호출하는 파일
  */
 
+import {Auth} from "./../account/auth.js"
+
+const auth = new Auth();
 
 export class ImageApi {
 
     async requestTodoImageById(arg) {
-        // const url = backEndServerAddress + `/img/api/todo`;
+         const url = backEndServerAddress + `/img/api/todo`;
         
         var result = await fetch(arg.url, {
             method: 'GET',
@@ -15,22 +18,24 @@ export class ImageApi {
             }
         }).catch((error) => {
             console.log(error);
-            alert("서버 연결에 에러가 발생했습니다.");
+            console.log("서버 연결에 에러가 발생했습니다.");
         });
 
         return result.json();
     }
 
-    async requestUserImageByUserId(arg) {
-        // const url = `/img/api/${arg.id}`;
-        var result = await fetch(arg.url, {
-            method: 'GET',
+    async requestUserImage() {
+        
+        const url = backEndServerAddress + `/img/api/user`;
+        var result = await fetch(url, {
+            method: 'POST',
             headers: {
                 "Content-Type": "application/json",
+                "authorization" : auth.getJsonToken()
             }
         }).catch((error) => {
             console.log(error);
-            alert("서버 연결에 에러가 발생했습니다.");
+            console.log("서버 연결에 에러가 발생했습니다.");
         });
 
         return result.json();

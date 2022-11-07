@@ -19,6 +19,7 @@
     <!-- product -->
     <link rel="stylesheet" href="./../css/custom.css">
     <link rel="stylesheet" href="./../css/main.css">
+
     <script type="text/javascript" src="./../js/jquery.min.js"></script>
     <script type="text/javascript" src="./../js/browser.min.js"></script>
     <script type="text/javascript" src="./../js/breakpoints.min.js"></script>
@@ -61,7 +62,6 @@
 
         <!-- Menu -->
         <section id="menu">
-
             <!-- Search -->
             <section>
                 <form class="search" method="get" action="#">
@@ -73,37 +73,48 @@
             <section class="auth">
                 <ul class="links">
                     <li>
-                        <a href="/user/api/info">
+                        <a href="#userManagePage">
                             <h3>User Manage</h3>
-                            <p>Feugiat tempus veroeros dolor</p>
+                            <!-- <p>Feugiat tempus veroeros dolor</p> -->
                         </a>
                     </li>
                     <li>
-                        <a href="/todo/api/">
+                        <a href="#userTodoPage">
                             <h3>User Todo</h3>
-                            <p>Sed vitae justo condimentum</p>
+                            <!-- <p>Sed vitae justo condimentum</p> -->
                         </a>
                     </li>
                     <li>
-                        <a href="/quote/api/">
+                        <a href="#userQuotePage">
                             <h3>User Quote</h3>
-                            <p>Phasellus sed ultricies mi congue</p>
+                            <!-- <p>Phasellus sed ultricies mi congue</p> -->
                         </a>
                     </li>
-
+                    <li>
+                        <a href="#userTodoWritePage">
+                            <h3>Todo Write</h3>
+                            <!-- <p>Porta lectus amet ultricies</p> -->
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#userQuoteWritePage">
+                            <h3>Quote Write</h3>
+                            <!-- <p>Porta lectus amet ultricies</p> -->
+                        </a>
+                    </li>
                 </ul>
             </section>
             <!-- Links -->
             <section class="non-auth">
                 <ul class="links">
                     <li>
-                        <a href="/page/todo">
+                        <a href="#pagetodo">
                             <h3>Todo</h3>
                             <p>Feugiat tempus veroeros dolor</p>
                         </a>
                     </li>
                     <li>
-                        <a href="/page/quote">
+                        <a href="#pagequote">
                             <h3>Quote</h3>
                             <p>Sed vitae justo condimentum</p>
                         </a>
@@ -114,7 +125,8 @@
             <!-- Actions -->
             <section class="auth">
                 <ul class="actions stacked">
-                    <li><a href="#" class="button large fit">유저 정보</a></li>
+                    <li><a href="#userinfo" class="button large fit">유저 정보</a></li>
+                    <li><a id="logout" class="button large fit">LogOut</a></li>
                 </ul>
             </section>
 
@@ -129,33 +141,7 @@
         <!-- Main -->
         <div id="main" class="main-todo">
             <h2>Todos</h2>
-            <!-- <article class="post">
-                <header>
-                    <div class="title">
-                        <h2><a href="single.html">데이터가 없습니다.</a></h2>
-                        <p>Lorem ipsum dolor amet nullam consequat etiam feugiat</p>
-                    </div>
-                    <div class="meta">
-                        <time class="published" datetime="2015-11-01">November 1, 2015</time>
-                        <a href="#" class="author">
-                            <span class="name">user info</span>
-                            <img src="images/avatar.jpg" alt="" />
-                        </a>
-                    </div>
-                </header>
-                <a href="single.html" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-                <p>데이터가 없습니다.</p>
-                <footer>
-                    <ul class="actions">
-                        <li><a href="single.html" class="button large">Continue Reading</a></li>
-                    </ul>
-                    <ul class="stats">
-                        <li><a href="#">General</a></li>
-                        <li><a href="#" class="icon solid fa-heart">0</a></li>
-                        <li><a href="#" class="icon solid fa-comment">0</a></li>
-                    </ul>
-                </footer>
-            </article> -->
+
         </div>
 
         <!-- Sidebar -->
@@ -163,9 +149,6 @@
             <!-- Intro -->
             <section class="blurb todos auth">
                 <h2> Write your history</h2>
-                <!-- <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
-                    amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.
-                </p> -->
                 <a href="#" class="button small fit write-todo">Write Todo</a>
             </section>
 
@@ -173,7 +156,7 @@
             <section>
                 <h2>Daily Todos <a class="icon solid fa-sync-alt"></a></h2>
                 <ul class="posts daliy-todos">
-
+                    
                 </ul>
             </section>
 
@@ -181,63 +164,56 @@
                 <h2>recommand Todos <a class="icon solid fa-sync-alt"></a></h2>
                 <div class="mini-posts recommand-todos">
 
+                    <!-- Mini Post -->
+                    <!-- <article class="mini-post">
+                        <header>
+                            <h3><a href="single.html">Vitae sed condimentum</a></h3>
+                            <a href="#" class="icon solid fa-heart">0</a>
+                            <a href="#" class="icon solid fa-comment">0</a>
+                            <time class="published" datetime="2015-10-20">October 20, 2015</time>
+                            <a href="#" class="author"><img src="images/avatar.jpg" alt="" /></a>
+                        </header>
+                        <a href="single.html" class="image"><img src="images/pic04.jpg" alt="" /></a>
+                    </article> -->
                 </div>
             </section>
 
 
-            <!-- Posts List -->
+    <!-- Posts List -->
 
 
-            <!-- About -->
-            <section class="blurb">
-                <h2>About</h2>
-                <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
-                    amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.
-                </p>
-                <ul class="actions">
-                    <li><a href="#" class="button">Learn More</a></li>
-                </ul>
-            </section>
+    <!-- About -->
+    <section class="blurb">
+        <h2>About</h2>
+        <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
+            amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.
+        </p>
+        <ul class="actions">
+            <li><a href="#" class="button">Learn More</a></li>
+        </ul>
+    </section>
 
 
 
-            <!-- Footer -->
-            <section id="footer">
-                <ul class="icons">
-                    <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-                    <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-                    <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-                    <li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
-                    <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-                </ul>
-                <p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a
-                        href="http://unsplash.com">Unsplash</a>.</p>
-            </section>
-        </section>
+    <!-- Footer -->
+    <section id="footer">
+        <ul class="icons">
+            <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
+            <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+        </ul>
+        <p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a
+                href="http://unsplash.com">Unsplash</a>.</p>
+    </section>
+    </section>
 
     </div>
 
     <!-- dev -->
     <!-- <script src="/assets/js/util.js"></script>
     <script src="/assets/js/main.js"></script>
-
-
-    <script type="text/javascript"> 
-        const update_btn = document.querySelector("#update_button");
-        function pageMoveTodoUpdate() {
-
-            var todoTemp = {
-                id: document.querySelector("#post_id").value,
-                quote: document.querySelector("#quote").value,
-                author: document.querySelector("#author").value,
-                isPublic: document.querySelector("#non-public").value
-            } 
-
-            window.localStorage.setItem("todoTemp", JSON.stringify(todoTemp));
-            window.location.href = "http://127.0.0.1:5501/assets/html/updateTodo.html";
-        }
-        update_btn.addEventListener("click", pageMoveTodoUpdate);
-    </script>
 
     <script type="module" src="/assets/js/server/todo.js"></script>
     <script type="module" src="/assets/js/post/Todo.js"></script>
@@ -251,25 +227,6 @@
     <script src="./..//js/main.js"></script>
     <script type="module" src="./../js/generator/header.js"></script>
     <script type="module" src="./../js/generator/footer.js"></script>
-
-
-    <!-- <script type="text/javascript">
-        const update_btn = document.querySelector("#update_button");
-
-        function pageMoveTodoUpdate() {
-
-            var todoTemp = {
-                id: document.querySelector("#post_id").value,
-                quote: document.querySelector("#quote").value,
-                author: document.querySelector("#author").value,
-                isPublic: document.querySelector("#non-public").value
-            }
-
-            window.localStorage.setItem("todoTemp", JSON.stringify(todoTemp));
-            window.location.href = "http://127.0.0.1:5501/assets/html/updateTodo.html";
-        }
-        update_btn.addEventListener("click", pageMoveTodoUpdate);
-    </script> -->
 
     <script type="module" src="./../js/server/todo.js"></script>
     <script type="module" src="./../js/function/todowrite.js"></script>

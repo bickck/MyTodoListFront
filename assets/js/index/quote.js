@@ -58,7 +58,7 @@
          for (var i = 0; i < data.numberOfElements; i++) {
  
              var content = data.content[i];
-             var container = postGenerator.createPostListQuote(content);
+             var container = postGenerator.createQuoteList(content);
  
              
              dailyQuoteContinaer.appendChild(container);
@@ -81,7 +81,7 @@
          for (var i = 0; i < data.numberOfElements; i++) {
  
              var content = data.content[i];
-             var container = postGenerator.createPostListQuote(content);
+             var container = postGenerator.createQuoteList(content);
  
              
              recommandQuoteContainer.appendChild(container);

@@ -84,7 +84,73 @@
     
 }
 
-.fa-heart.heart {
+.fa-heart.heart,
+.comment,
+.author,
+.post-details {
     cursor: pointer;
 }
-				
+
+
+.recommand-todos > article > header > .icon {
+    color: rgba(160, 160, 160, 0.5);
+    display: inline-block;
+	font-family: "Raleway", Helvetica, sans-serif;
+	font-size: 0.7em;
+    font-weight: 400;
+	letter-spacing: 0.25em;
+	line-height: 1;
+	margin: 0 1.2em 0 0;
+	padding: 0 1.2em 0 0;
+    
+}
+    
+    .recommand-todos > article > header > .icon:before {
+        color: rgba(160, 160, 160, 0.3);
+        margin-right: 0.55em;
+    }
+
+        .recommand-todos > article > header > .published{
+            display: inline-block;
+            font-size: 0.3em;
+            text-align: center;
+        }
+
+.actions > li > .files {
+    display: none;
+}
+
+.views > li {
+    list-style: none;
+}
+
+.view-images > .title  {
+    display: flex;
+}
+
+.views > li > .image {
+    margin: 0;
+    width: 100px;
+    height: 100px;
+}
+
+.views > li > .icon::before {
+    padding: 0;
+    margin: 0;
+}
+
+.preViewImg {
+    width: 100px;
+    height: 100px;
+}
+
+/* .views > li:hover {
+    padding: 20px;
+} */
+
+/* .image {
+    background-color: red;
+    background-image: url();
+    background-repeat: none;
+    background-size: cover;
+} */

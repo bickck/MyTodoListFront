@@ -16,7 +16,11 @@ export class NonDataInjector {
     createNonMainPost() {
 
         var arg = {
-            title : "데이터가 없어요."
+            title : "데이터가 없어요.",
+            isPublish : "publish",
+            heart : 0,
+            comment : 0,
+            createTimeStamp : "2022-10-13"
         }
 
         var section = post.createMainPost(arg);
@@ -32,10 +36,14 @@ export class NonDataInjector {
     createNonMiniPost() {
 
         var arg = {
-            title : "데이터가 없어요."
+            title : "데이터가 없어요.",
+            isPublish : "publish",
+            heart : 0,
+            comment : 0,
+            createTimeStamp : "2022-10-13"
         }
 
-        var section = post.crateMiniPost(arg);
+        var section = post.createMiniTodos(arg);
        
         return section;
     }
@@ -48,7 +56,8 @@ export class NonDataInjector {
     createNonPosts() {
 
         var arg = {
-            title : "데이터가 없어요."
+            title : "데이터가 없어요.",
+            heart : ""
         }
 
         var section = post.createPostList(arg);

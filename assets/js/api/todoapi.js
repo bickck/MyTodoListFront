@@ -29,7 +29,7 @@ export class TodoApi {
     }
 
     /**
-     * 
+     * TODO의 디테일을 보기위한 함수
      * @param {*} arg todo id number
      * @returns requestUserTodoByTodoId
      */
@@ -51,6 +51,11 @@ export class TodoApi {
         return result.json();
     }
 
+    /**
+     * 
+     * @returns 
+     */
+
     async requestRecommandTodoApi() {
 
         const url = backEndServerAddress +"/todo/api/recommand";
@@ -69,9 +74,8 @@ export class TodoApi {
     }
 
     /**
-     * TODO의 디테일을 보기위한 FUNCTION
-     * param -
-     * id : 게시글 고유 ID
+     * 
+     * @returns 
      */
 
     async requestDailyTodoApi() {
@@ -88,5 +92,22 @@ export class TodoApi {
         });
 
         return result.json();
+    }
+
+    async requestTodoCommentsByTodoId(arg){
+        const url = backEndServerAddress +`/todo/api/comment/${arg.id}`;
+
+        var result = await fetch(url, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .catch((error) => {
+            console.log("서버 연결에 에러가 발생했습니다.");
+        });
+
+        return result.json();
+
     }
 }

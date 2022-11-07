@@ -1,5 +1,5 @@
 /**
- * 유저의 Quote API를 호출하는 파일
+ * 정보를 서버로 보내는 자바스크립트 파일
 */
 import {Auth} from "./../account/auth.js";
 const auth = new Auth();
@@ -18,12 +18,13 @@ export class Quote {
             body: JSON.stringify({
                 quote: `${arg.quote}`,
                 author: `${arg.author}`,
-                isCheckPublic: `${arg.isCheckPublic}`
+                isPublish: `${arg.isCheckPublic}`
             }),
         }).then(Response => {
 
+            console.log(Response);
+
         }).catch((error) => {
-            console.log("서버 연결에 에러가 발생했습니다.");
             console.log(error);
         });
 
@@ -47,7 +48,6 @@ export class Quote {
         }).then(Response => {
 
         }).catch((error) => {
-            console.log("서버 연결에 에러가 발생했습니다.");
             console.log(error);
         });
 
@@ -69,7 +69,6 @@ export class Quote {
         }).then(Response => {
 
         }).catch((error) => {
-            console.log("서버 연결에 에러가 발생했습니다.");
             console.log(error);
         });
 
@@ -85,7 +84,6 @@ export class Quote {
                 "authorization": auth.getJsonToken()
             }
         }).catch((error) => {
-            console.log("서버 연결에 에러가 발생했습니다.");
             console.log(error);
         });
         return result.text();
@@ -101,7 +99,6 @@ export class Quote {
                 "authorization": auth.getJsonToken()
             }
         }).catch((error) => {
-            console.log("서버 연결에 에러가 발생했습니다.");
             console.log(error);
         });
         return result.text();

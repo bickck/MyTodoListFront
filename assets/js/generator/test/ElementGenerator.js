@@ -30,3 +30,12 @@
 // quoteElement.userInfoLink.setAttribute("href", "#user");
 // quoteElement.userImage.setAttribute("src", "#");
 // quoteElement.userImage.setAttribute("alt", "#");
+
+
+class ElementGenerator {
+
+    ElementGenerator(generatorCode) {
+
+    }
+
+}
