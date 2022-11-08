@@ -9,9 +9,9 @@ const auth = new Auth();
 export class ImageApi {
 
     async requestTodoImageById(arg) {
-         const url = backEndServerAddress + `/img/api/todo`;
+         const url = backEndServerAddress + `/image/api/todo/${arg.id}`;
         
-        var result = await fetch(arg.url, {
+        var result = await fetch(url, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export class ImageApi {
 
     async requestUserImage() {
         
-        const url = backEndServerAddress + `/img/api/user`;
+        const url = backEndServerAddress + `/image/api/user`;
         var result = await fetch(url, {
             method: 'POST',
             headers: {

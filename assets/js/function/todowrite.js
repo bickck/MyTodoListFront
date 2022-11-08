@@ -44,6 +44,20 @@ window.onload = function init() {
     refreshEvent();
 }
 
+
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0,
+            v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
+function uuidv4_4() {
+
+    return uuidv4().replace("-", "").substring(0, 4);
+}
+
 /**
  * 
  */
@@ -58,12 +72,11 @@ function refreshEvent() {
 
     for (var i = 0; i < labelList.length; i++) {
 
-        if(files[i].files.length != 0){
+        if (files[i].files.length != 0 && files != "undefined") {
             labelList[i].addEventListener("mouseover", previewMouseOver);
             labelList[i].addEventListener("mouseout", previewMouseOut);
             labelList[i].addEventListener("click", deletePreviewImage);
         }
-        //labelList[i].addEventListener("mouseover", imageHover);
     }
 }
 
@@ -83,8 +96,9 @@ function deletePreviewImage(event) {
 
 function previewMouseOut(event) {
     var input = event.target.previousElementSibling;
-    input.removeAttribute("disabled");
-    console.dir(input);
+    if (input != null) {
+        input.removeAttribute("disabled");
+    }
 }
 
 /**
@@ -94,7 +108,9 @@ function previewMouseOut(event) {
 
 function previewMouseOver(event) {
     var input = event.target.previousElementSibling;
-    input.setAttribute("disabled","");
+    if (input != null) {
+        input.setAttribute("disabled", "");
+    }
 }
 
 
@@ -105,15 +121,16 @@ function previewMouseOver(event) {
 
 function tempImageSave(event) {
 
+    console.log(event);
     labelList = document.querySelectorAll(".views > li");
 
     // Next 이벤트 생성
     currImageCount++;
     if (currImageCount < imageSaveLimit) {
-        const imageContainer = postgenerator.createPreViewImageContainer();
+        const imageContainer = postgenerator.createPreViewImageContainer(uuidv4_4());
         imageView.appendChild(imageContainer);
 
-        viewFileList = document.querySelectorAll(".files");  
+        viewFileList = document.querySelectorAll(".files");
     }
 
     refreshEvent();
@@ -136,16 +153,18 @@ function tempImageSave(event) {
 
 function previewImageDelete(event) {
 
-    imageView.removeChild(event.target.parentElement);
-
+    // console.log("삭제 이벤트 발생");
+    // console.log(event);
     imageCount.innerText = --currImageCount;
-
-    if(currImageCount == 0) {
-        const imageContainer = postgenerator.createPreViewImageContainer();
+    imageView.removeChild(event.target.parentElement);
+    const viewChildCount = document.querySelector(".views").childElementCount;
+    if (currImageCount == 0 && viewChildCount < 1) {
+        const imageContainer = postgenerator.createPreViewImageContainer(uuidv4_4());
         imageView.appendChild(imageContainer);
         viewFileList = document.querySelectorAll(".files");
-        refreshEvent();
     }
+
+    refreshEvent();
 }
 
 /**
@@ -176,11 +195,19 @@ function todoSave() {
 
     const isPublish = document.querySelector("#isPublish");
 
+    var argFiles = [];
+    const file = document.querySelectorAll(".files");
+
+    for (var i = 0; i < file.length; i++) {
+        if(file[i].files.length != 0) {
+            argFiles[i] = file[i].files;
+        }
+    }
     var arg = {
         title: document.querySelector("#title").value,
         content: document.querySelector("#content").value,
         isPublish: isPublish.value,
-        files: file.files
+        files: argFiles
     }
 
     if (isPublish.checked == false) {
@@ -198,17 +225,16 @@ function todoUpdate() {
     const requestUrl = backEndServerAddress + "/user/todo/manage/update";
     const title = document.querySelector("#title").value;
     const content = document.querySelector("#content").value;
-    var isCheckPublic = document.querySelector("#non-public");
+    var isPublish = document.querySelector("#non-public");
 
     var arg = {
-        url: backEndServerAddress + "/user/todo/manage/update",
         title: document.querySelector("#title").value,
         content: document.querySelector("#content").value,
-        isCheckPublic: document.querySelector("#non-public")
+        isPublish: isPublish.value
     }
 
-    if (isCheckPublic.checked == false) {
-        isCheckPublic.value = "public";
+    if (arg.isPublish.checked == false) {
+        arg.isPublish.value = "public";
     }
 
     // fetch(requestUrl, {

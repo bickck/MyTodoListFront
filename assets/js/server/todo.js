@@ -15,6 +15,7 @@ export class Todo {
         const url = backEndServerAddress + "/user/todo/manage/save";
         const data = new FormData();
         const headers = new Headers();
+
         const todos = JSON.stringify({
             title: `${arg.title}`,
             content: `${arg.content}`,
@@ -22,9 +23,8 @@ export class Todo {
         });
 
         for (var i = 0; i < arg.files.length; i++) {
-            data.append("files", arg.files[i]);
+            data.append("files", arg.files[i][0]);
         }
-
 
         headers.append("authorization", auth.getJsonToken());
         data.append("todos", todos);
@@ -39,7 +39,6 @@ export class Todo {
                 console.log("저장 성공");
                 //window.location.href = mainPageAddress;
             }
-
         }).catch((error) => {
             console.log(error);
         });

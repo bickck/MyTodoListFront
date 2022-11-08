@@ -151,16 +151,19 @@ export class PostGenerator {
             userInfoContainer.appendChild(userImage);
         }
 
+        console.log(params);
         // is check post img generator
         if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
 
             // post image 가져오기
 
-            const imageInfo = imageApi.requestTodoImageById();
+            const imageInfo = imageApi.requestTodoImageById({id : params.id});
 
             imageInfo.then((data) => {
-
-                const imageSource = backEndServerAddress + `/${filePath}` + `/${fileName}`;
+                
+                console.log(data);
+                const imageData =  data[0];
+                const imageSource = backEndServerAddress +"/image/api/source" + `/${imageData.fileName}` + `/${imageData.originalFileName}`;
                 image.setAttribute("src", imageSource);
 
             });

@@ -68,25 +68,28 @@ function requestMainPosts() {
             return;
         }
 
+        console.log(data);
+
         for (var i = 0; i < data.numberOfElements; i++) {
 
             var content = data.content[i];
             var container = post.createMainPost(content);
+            console.log()
 
-            if (content.postImgCount > 0) {
-                // request post img 
-                var postImage = container.postImg;
-                postImage.src = "";
-                console.log(postImage);
-            }
+            // if (content.postImgCount > 0) {
+            //     // request post img 
+            //     var postImage = container.postImg;
+            //     postImage.src = "";
+            //     console.log(postImage);
+            // }
 
-            if (content.userImgCount > 0) {
-                // request user img
-                var userImage = container.userImg;
-                userImage.src = "";
-                console.log(userImage);
-            }
-            mainPost.appendChild(container.articleContainer);
+            // if (content.userImgCount > 0) {
+            //     // request user img
+            //     var userImage = container.userImg;
+            //     userImage.src = "";
+            //     console.log(userImage);
+            // }
+            mainPost.appendChild(container);
         }
     });
 }
@@ -108,14 +111,14 @@ function requestMainQuotes() {
         console.log(data);
 
         if (data == null || data == "undefined") {
-            postLists.appendChild(nonDataInjector.createPostListQuote());
+            postLists.appendChild(nonDataInjector.createQuoteList());
             return;
         }
 
         for (var i = 0; i < data.numberOfElements; i++) {
 
             var content = data.content[i];
-            var container = post.createPostListQuote(content);
+            var container = post.createQuoteList(content);
 
             
             postLists.appendChild(container);
