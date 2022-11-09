@@ -108,8 +108,6 @@ function requestMainQuotes() {
 
     mainQuotes.then((data) => {
 
-        console.log(data);
-
         if (data == null || data == "undefined") {
             postLists.appendChild(nonDataInjector.createQuoteList());
             return;

@@ -12,9 +12,15 @@
 
 
     <!-- product -->
-    <script src="./../js/config.js"></script>
+    <script type="text/javascript" src="./../js/jquery.min.js"></script>
+	<script type="text/javascript" src="./../js/browser.min.js"></script>
+	<script type="text/javascript" src="./../js/breakpoints.min.js"></script>
+    <script type="text/javascript" src="./../js/util/message.js"></script>
+
 	<link rel="stylesheet" href="./../css/main.css" />
 	<link rel="stylesheet" href="./../css/custom.css">
+
+    <script src="./../js/config.js"></script>
 
     <title>Document</title>
 </head>
@@ -30,13 +36,14 @@
                             <div class="col-12">
                                 <div class="input-area">
                                     <input type="email" name="demo-name" id="email" value="" placeholder="Email" />
+                                    <div class="email-message" hidden></div>
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <div class="input-area">
-                                    <input type="password" name="demo-name" id="password" value=""
-                                        placeholder="password" />
+                                    <input type="password" name="demo-name" id="password" value="" placeholder="password" />
+                                    <div class="password-message" hidden></div>
                                 </div>
                             </div>
                         </div>
@@ -64,6 +71,7 @@
     <!-- <script src="/assets/js/jsValidation/AccountValidation.js"></script> -->
 
     <!-- product -->
+    <script type="module" src="./../js/validation/formvalidation.js"></script>
     <script type="module" src="./../js/account/Auth.js"></script>
     <script type="module" src="./../js/account/login.js"></script>
 
