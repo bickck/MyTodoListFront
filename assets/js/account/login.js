@@ -27,19 +27,22 @@ function login(event) {
             return data.message;
         } else {
             $("login_form").appearErrorMessage(`${data.id}-message`);
-            $("login_form").setErrorMessage(`${data.id}-message`,data.message);
+            $("login_form").setErrorMessage(`${data.id}-message`, data.message);
         }
     });
 
     if (result == "SUCCESS") {
+        var result = auth.login({
+            email: email,
+            password: password
+        });
 
+        result.then((data)=>{
+            console.log(data);
+        });
     }
 
 
-    // auth.login({
-    //     email : email,
-    //     password : password
-    // })
 
     // var result = fetch(url, {
     //     method: 'POST',

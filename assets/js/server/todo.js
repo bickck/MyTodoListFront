@@ -58,7 +58,7 @@ export class Todo {
             body: JSON.stringify({
                 title: `${arg.title}`,
                 cotent: `${arg.content}`,
-                isChekcPuhlic: `${arg.isCheckPublic}`
+                isPublish: `${arg.isCheckPublic}`
             }),
         }).then(Response => {
 
@@ -100,7 +100,7 @@ export class Todo {
             body: JSON.stringify({
                 title: `${arg.title}`,
                 cotent: `${arg.content}`,
-                isChekcPuhlic: `${arg.isCheckPublic}`
+                isPublish: `${arg.isCheckPublic}`
             }),
         }).catch((error) => {
             console.log(error);
@@ -119,7 +119,7 @@ export class Todo {
             body: JSON.stringify({
                 title: `${arg.title}`,
                 cotent: `${arg.content}`,
-                isChekcPuhlic: `${arg.isCheckPublic}`
+                isPublish: `${arg.isCheckPublic}`
             }),
         }).catch((error) => {
             console.log(error);
@@ -138,7 +138,7 @@ export class Todo {
             body: JSON.stringify({
                 title: `${arg.title}`,
                 cotent: `${arg.content}`,
-                isChekcPuhlic: `${arg.isCheckPublic}`
+                isPublish: `${arg.isCheckPublic}`
             }),
         }).catch((error) => {
             console.log(error);

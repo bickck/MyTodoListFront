@@ -127,16 +127,16 @@ export class FormValidation {
                 returnCode: false
             });
         }
-        if (!regexpEmail.match(email) && email != null && email == "") {
+        if (!regexpEmail.match(email) && email != null && email != "") {
 
             messageLists.push({
                 id: emailContainer.id,
                 message: emailRegExpErrorMessage,
                 returnCode: false
             });
-        }
+        } 
 
-        if (!regexpPassword.match(password) && password != null && password == "") {
+        if (!regexpPassword.match(password) && password != null && password != "") {
 
             messageLists.push({
                 id: passwordContainer.id,
@@ -178,7 +178,7 @@ export class FormValidation {
             });
         }
 
-        if (!regexpEmail.match(email) && email != null && email == "") {
+        if (!regexpEmail.match(email) && email != null && email != "") {
             messageLists.push({
                 id: emailContainer.id,
                 message: emailRegExpErrorMessage,
@@ -186,7 +186,7 @@ export class FormValidation {
             });
         }
 
-        if (!regexpPassword.match(password) && password != null && password == "") {
+        if (!regexpPassword.match(password) && password != null && password != "") {
             messageLists.push({
                 id: passwordContainer.id,
                 message: passwordRegExpErrorMessage,

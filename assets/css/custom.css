@@ -154,3 +154,7 @@
     background-repeat: none;
     background-size: cover;
 } */
+
+.failure {
+    color: rebeccapurple;
+}

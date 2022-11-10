@@ -81,4 +81,28 @@ export class Auth {
 
         return result.json();
     }
+
+    async emailDuplicationCheck(arg) {
+        const url = backEndServerAddress + "/valid/emailduplication";
+
+        var status;
+        var result = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email : `${arg.email}`,
+            }),
+        })
+        .then(Response => Response.text())
+        .then((data)=> {
+            status = data;
+        })
+        .catch((error)=> {
+            console.log(error);
+        });
+
+        return status;
+    }
 }

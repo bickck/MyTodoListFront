@@ -11,9 +11,17 @@
     <script src="/assets/js/config.js"></script> -->
 
     <!-- product -->
+    <script type="text/javascript" src="./../js/jquery.min.js"></script>
+	<script type="text/javascript" src="./../js/browser.min.js"></script>
+	<script type="text/javascript" src="./../js/breakpoints.min.js"></script>
+    <script type="text/javascript" src="./../js/util/message.js"></script>
 
     <link rel="stylesheet" href="./../css/main.css">
+	<link rel="stylesheet" href="./../css/custom.css">
+
+
     <script type="text/javascript" src="./../js/config.js"></script>
+    <script type="module" src="./../js/account/Auth.js"></script>
 </head>
 
 <body class="single">
@@ -28,9 +36,13 @@
                                 <div class="row">
                                     <div class="col-8">
                                         <input type="email" name="email" id="email" value="" placeholder="Email" autocomplete="off"/>
+                                        <div class="email-message" hidden></div>
                                     </div>
                                     <div class="col-4">
-                                        <button class="button fit medium" id="reconfirm">중복 확인</button>
+                                        <button class="button fit medium duplication" id="email-duplication-button" value="">중복 확인
+                                            <i id="success" class="icon solid fa-check success" hidden></i>
+                                            <i id="failure" class="icon solid fa-times failure" hidden></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -38,6 +50,7 @@
                                 <div class="row">
                                     <div class="col-8">
                                         <input type="password" name="password" id="password" value="" placeholder="Password" />
+                                        <div class="password-message" hidden></div>
                                     </div>
                                 </div>
                                
@@ -46,6 +59,7 @@
                                 <div class="row">
                                     <div class="col-8">
                                         <input type="text" name="username" id="username" value="" placeholder="UserName" autocomplete="off"/>
+                                        <div class="username-message" hidden></div>
                                     </div>  
                                 </div>        
                             </div>    
@@ -54,7 +68,7 @@
 
                     <div class="col-12">
                         <ul class="actions stacked">
-                            <li><button class="button fit large" id="register_button">Sign Up</button></li>
+                            <li><button class="button fit large" id="register-button">Sign Up</button></li>
                         </ul>
 
                     </div>
@@ -69,8 +83,8 @@
     <script src="/assets/js/jsValidation/AccountValidation.js"></script> -->
 
     <!-- product -->
-    <script type="text/javascript" src="./../js/account/register.js"></script>
-    <script type="text/javascript" src="./../js/jsValidation/AccountValidation.js"></script>
+    <script type="module" src="./../js/validation/formvalidation.js"></script>
+    <script type="module" src="./../js/account/register.js"></script>
 
 </body>
 </html>
