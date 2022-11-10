@@ -60,5 +60,20 @@
 
     }
 
+    $.fn.setSuccessMessage = function (className, message) {
+
+
+        if (className == null || typeof className == "undefined") {
+            return null;
+        }
+
+        if(message == null || typeof message == "undefined") {
+            return null;
+        }
+
+        $(`.${className}`).text(message);
+
+    }
+
 
 })(jQuery);
