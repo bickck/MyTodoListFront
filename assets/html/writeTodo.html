@@ -21,11 +21,13 @@
 	<script type="text/javascript" src="./../js/jquery.min.js"></script>
 	<script type="text/javascript" src="./../js/browser.min.js"></script>
 	<script type="text/javascript" src="./../js/breakpoints.min.js"></script>
+
+	<script type="text/javascript" src="./../js/util/message.js"></script>
 	<script type="text/javascript" src="./../js/config.js"></script>
 	<script type="module" src="./../js/account/Auth.js"></script>
 
 
-	<title>Document</title>
+	<title>Todo Write</title>
 </head>
 
 <body class="single is-preload">
@@ -157,35 +159,26 @@
 			<!-- Post -->
 			<section class="post">
 				<h3>Todo Write</h3>
-				<form id="todo_save" method="post">
+				<form id="todo_form" method="post">
 					<div class="row gtr-uniform">
 						<div class="col-8 col-12-xsmall">
-							<input type="text" name="Title" id="title" value="" placeholder="Title"
-								autocomplete="off" />
+							<input type="text" name="Title" id="title" value="" class="" placeholder="Title" autocomplete="off" />
+							<div id="title-message" class="title-message message"></div>
 						</div>
 						<div class="col-4 col-12-xsmall">
-							<input type="checkbox" id="isPublish" name="demo-copy" value="private">
+							<input type="checkbox" id="isPublish" name="isPublish" value="private">
 							<label for="isPublish" style="user-select: none;">비공개</label>
 						</div>
 
 						<div class="col-12">
-							<textarea name="content" id="content" value="" placeholder="Enter your message" rows="6"
-								autocomplete="off"></textarea>
+							<textarea name="content" id="content" value="" class="" placeholder="Enter your message" rows="6" autocomplete="off"></textarea>
+							<div id="content-message" class="content-message message"></div>
 						</div>
-
-						<!-- <div class="col-6 col-12-small">
-							<input type="checkbox" id="isPublish" name="demo-copy" value="private">
-							<label for="isPublish" style="user-select: none;">비공개</label>
-						</div> -->
 					</div>
 				</form>
 				<div class="col-12">
 					<ul class="actions">
 						<li><button id="save_button" type="button" value="Send Message">Send Message</button></li>
-						<!-- <li>
-							<input id="files" type="file" multiple="m ultiple"></input>
-							<label for="files" class="button icon solid fa-upload">Image upload</label>
-						</li> -->
 					</ul>
 				</div>
 
@@ -226,7 +219,9 @@
 	<script type="text/javascript" src="./../js/main.js"></script>
 	<script type="text/javascript" src="./../js/generator/header.js"></script>
 	<script type="module" src="./../js/generator/footer.js"></script>
-	<script type="module" src="./../js/function/TodoWrite.js"></script>
+	<script type="module" src="./../js/validation/formvalidation.js"></script>
+
+	<script type="module" src="./../js/function/todowrite.js"></script>
 	
 
 </body>

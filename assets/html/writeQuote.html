@@ -16,14 +16,17 @@
 
 	<!-- product -->
 	<link rel="stylesheet" href="./../css/main.css">
+	<link rel="stylesheet" href="./../css/custom.css">
+
 	<script type="text/javascript" src="./../js/jquery.min.js"></script>
 	<script type="text/javascript" src="./../js/browser.min.js"></script>
 	<script type="text/javascript" src="./../js/breakpoints.min.js"></script>
+	<script type="text/javascript" src="./../js/util/message.js"></script>
 
 	<script type="text/javascript" src="./../js/config.js"></script>
-	<!-- <script type="text/javascript" src="./../js/account/Auth.js"></script> -->
+	<script type="module" src="./../js/account/Auth.js"></script>
 
-	<title>Document</title>
+	<title>Quote Write</title>
 </head>
 
 <body class="single is-preload">
@@ -159,24 +162,18 @@
 				<form id="quote_form" method="post">
 					<div class="row gtr-uniform">
 						<div class="col-12 col-12-xsmall">
-							<input type="text" name="quote" id="quote" value="" placeholder="Your message"
-								autocomplete="off" />
+							<input type="text" name="quote" id="quote" value="" class="" placeholder="Your message" autocomplete="off" />
+							<div id="quote-message" class="quote-message message" hidden>1234</div>
 						</div>
 						<div class="col-12 col-12-xsmall">
-							<input type="text" name="author" id="author" value="" placeholder="Your Name or Author"
-								autocomplete="off" />
+							<input type="text" name="author" id="author" value="" class="" placeholder="Your Name or Author" autocomplete="off" />
+							<div id="author-message" class="author-message message" hidden></div>
 						</div>
 				
 						<div class="col-6 col-12-small">
-							<input type="checkbox" id="isPublish" name="isPublic" value="private">
+							<input type="checkbox" name="isPublic" id="isPublish" value="private">
 							<label for="non-public" style="user-select: none;">비공개</label>
 						</div>
-
-						<!-- <div class="col-12">
-							<ul class="actions">
-								<li><input id="save_button" type="submit" value="Send Message" /></li>
-							</ul>
-						</div> -->
 					</div>
 				</form>
 
@@ -202,20 +199,14 @@
 		</section>
 
 	</div>
-
-	<!-- dev -->
-	<!-- <script src="/assets/js/util.js"></script>
-	<script src="/assets/js/main.js"></script>	
-	<script src="/assets/js/generator/header.js"></script>
-	<script src="/assets/js/function/QuoteWrite.js"></script>
-	<script type="module" src="/assets/js/generator/footer.js"></script> -->
-
-	<!-- product -->
+	
 	<script type="text/javascript" src="./../js/util.js"></script>
 	<script type="text/javascript" src="./../js/main.js"></script>	
 	<script type="text/javascript" src="./../js/generator/header.js"></script>
 	<script type="module" src="./../js/generator/footer.js"></script>
-	<script type="module" src="./../js/function/QuoteWrite.js"></script>
+	<script type="module" src="./../js/validation/formvalidation.js"></script>
+
+	<script type="module" src="./../js/function/quotewrite.js"></script>
 	
 </body>
 </html>

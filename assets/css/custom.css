@@ -155,6 +155,36 @@
     background-size: cover;
 } */
 
-.failure {
-    color: rebeccapurple;
+/* input[type="email"].SUCCESS,
+input[type="password"].SUCCESS,
+input[type="text"].SUCCESS {
+    box-shadow: inset 0 0 0 1px #2ebaae; 
+    border-color: #2ebaae;
+
+} */
+
+input[type="email"].FAILURE,
+input[type="password"].FAILURE,
+input[type="text"].FAILURE {
+    box-shadow: inset 0 0 0 1px rgb(194, 112, 112); 
+    border-color: rgb(194, 112, 112);
+} 
+
+/* message box */
+
+.message {
+    /* display: flex; */
+    padding-top: 0.4em;
+    padding-left: 0.7em;
+    font-size: 0.8em;
+    font-weight: bold;
+    /* display: hidden; */
+
 }
+    .message.success {
+        color: #2ebaae;
+    }
+
+    .message.error {
+        color: rgb(194, 112, 112);
+    }

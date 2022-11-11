@@ -1,14 +1,27 @@
 (function ($) {
 
+    $.fn.appearSuccessMessage = function (className) {
+
+        //No Element
+        if (className == null || typeof className == "undefined") {
+            return null;
+        }
+
+        if (!$(`.${className}`).hasClass("success")) {
+            $(`.${className}`).addClass("success");
+            $(`.${className}`).prop("hidden", false);
+        }
+    }
+
     /**
      * 
      * @param {"string"} className 
      * @returns 
      */
+    
 
     $.fn.appearErrorMessage = function (className) {
 
-        console.log(className);
         //No Element
         if (className == null || typeof className == "undefined") {
             return null;

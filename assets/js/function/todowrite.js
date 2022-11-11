@@ -15,9 +15,14 @@ import {
     PostGenerator
 } from "./../generator/post.js";
 
+import {
+    FormValidation
+} from "../validation/formvalidation.js";
+
 const todo = new Todo();
 const auth = new Auth();
 const postgenerator = new PostGenerator();
+const formvalidation = new FormValidation();
 
 var imageView = document.querySelector(".views");
 var files;
@@ -43,6 +48,45 @@ window.onload = function init() {
 
     refreshEvent();
 }
+
+$("#title").on("blur", function (event) {
+    var title = event.target.value;
+
+    if (!formvalidation.isTextValidationCheck(title)) {
+        $("#todo_form").appearErrorMessage("title-message");
+        $("#todo_form").setErrorMessage(`title-message`, "Title를 입력해주세요.");
+    } else {
+        $("#todo_form").disappearErrorMessage("title-message");
+    }
+
+    // if (!formvalidation.isEmailValidationCheck(email)) {
+    //     $("#todo_form").appearErrorMessage("title-message");
+    //     $("#todo_form").setErrorMessage(`title-message`, "Email형식이 맞지 않습니다.");
+    // } else {
+    //     $("#todo_form").disappearErrorMessage("title-message");
+
+    // }
+})
+
+$("#content").on("blur", function (event) {
+    var content = event.target.value;
+
+    if (!formvalidation.isTextValidationCheck(content)) {
+        $("#todo_form").appearErrorMessage("content-message");
+        $("#todo_form").setErrorMessage(`content-message`, "Content를 입력해주세요.");
+    } else {
+        $("#todo_form").disappearErrorMessage("content-message");
+    }
+
+    // if (!formvalidation.isEmailValidationCheck(email)) {
+    //     $("#todo_form").appearErrorMessage("content-message");
+    //     $("#todo_form").setErrorMessage(`content-message`, "Email형식이 맞지 않습니다.");
+    // } else {
+    //     $("#todo_form").disappearErrorMessage("content-message");
+
+    // }
+})
+
 
 
 function uuidv4() {
@@ -193,32 +237,46 @@ function imagePreviewer(input, label) {
 
 function todoSave() {
 
-    const isPublish = document.querySelector("#isPublish");
-
     var argFiles = [];
+    const title = document.querySelector("#title");
+    const content = document.querySelector("#content");
+    const isPublish = document.querySelector("#isPublish");
     const file = document.querySelectorAll(".files");
 
-    for (var i = 0; i < file.length; i++) {
-        if(file[i].files.length != 0) {
-            argFiles[i] = file[i].files;
+
+    var validResult = formvalidation.isTodoFormCheck("todo_form")
+
+    validResult.forEach((data) => {
+        if (data.returnCode) {
+            return data.message;
+        } else {
+            $("#todo_form").appearErrorMessage(`${data.id}-message`);
+            $("#todo_form").setErrorMessage(`${data.id}-message`, data.message);
         }
-    }
-    var arg = {
-        title: document.querySelector("#title").value,
-        content: document.querySelector("#content").value,
-        isPublish: isPublish.value,
-        files: argFiles
-    }
+    })
+   
 
-    if (isPublish.checked == false) {
-        arg.isPublish = "publish";
-    }
+    // for (var i = 0; i < file.length; i++) {
+    //     if(file[i].files.length != 0) {
+    //         argFiles[i] = file[i].files;
+    //     }
+    // }
+    // var arg = {
+    //     title: title.value,
+    //     content: content.value,
+    //     isPublish: isPublish.value,
+    //     files: argFiles
+    // }
 
-    var result = todo.requestUserTodoInsert(arg);
+    // if (isPublish.checked == false) {
+    //     arg.isPublish = "publish";
+    // }
 
-    result.then((data) => {
-        console.log(data);
-    });
+    // var result = todo.requestUserTodoInsert(arg);
+
+    // result.then((data) => {
+    //     console.log(data);
+    // });
 }
 
 function todoUpdate() {

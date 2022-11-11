@@ -11,6 +11,39 @@ const formvalidation = new FormValidation();
 const auth = new Auth();
 
 
+$("#email").on("blur", function (event) {
+    var email = event.target.value;
+
+    if (!formvalidation.isTextValidationCheck(email)) {
+        return;
+    }
+
+    if (!formvalidation.isEmailValidationCheck(email)) {
+        $("#login_form").appearErrorMessage("email-message");
+        $("#login_form").setErrorMessage(`email-message`, "Email형식이 맞지 않습니다.");
+    } else {
+        $("#login_form").disappearErrorMessage("email-message");
+
+    }
+
+});
+
+$("#password").on("blur", function (event) {
+    var password = event.target.value;
+
+    if (!formvalidation.isTextValidationCheck(password)) {
+        return;
+    }
+
+    if (!formvalidation.isPasswordValidationCheck(password)) {
+        $("#login_form").appearErrorMessage("password-message");
+        $("#login_form").setErrorMessage(`password-message`, "Password 형식이 맞지 않습니다.");
+    } else {
+        $("#login_form").disappearErrorMessage("password-message");
+    }
+});
+
+
 function login(event) {
     event.preventDefault();
 
@@ -20,14 +53,13 @@ function login(event) {
 
     var validResult = formvalidation.isLoginFormCheck("login_form");
 
-    console.log(validResult);
     var result = validResult.forEach((data) => {
 
         if (data.returnCode) {
             return data.message;
         } else {
             $("login_form").appearErrorMessage(`${data.id}-message`);
-            $("login_form").setErrorMessage(`${data.id}-message`, data.message);
+            $("login_form").set(`${data.id}-message`, data.message);
         }
     });
 

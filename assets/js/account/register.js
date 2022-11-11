@@ -11,6 +11,46 @@ const auth = new Auth();
 const emailDuplicationBtn = document.querySelector("#email-duplication-button");
 const registerBtn = document.querySelector("#register-button");
 
+
+$("#email").on("blur", function (event) {
+    var email = event.target.value;
+
+    if (!formvalidation.isTextValidationCheck(email)) {
+        return;
+    }
+
+    if (!formvalidation.isEmailValidationCheck(email)) {
+        $("#register_form").appearErrorMessage("email-message");
+        $("#register_form").setErrorMessage(`email-message`, "Email형식이 맞지 않습니다.");
+    } else {
+        $("#register_form").disappearErrorMessage("email-message");
+
+    }
+})
+
+$("#password").on("blur", function (event) {
+    var password = event.target.value;
+
+    if (!formvalidation.isTextValidationCheck(password)) {
+        return;
+    }
+
+    if (!formvalidation.isPasswordValidationCheck(password)) {
+        $("#register_form").appearErrorMessage("password-message");
+        $("#register_form").setErrorMessage(`password-message`, "Password 형식이 맞지 않습니다.");
+    } else {
+        $("#register_form").disappearErrorMessage("password-message");
+    }
+})
+
+$("#username").on("blur", function (event) {
+    var text = event.target.value;
+
+    if (formvalidation.isTextValidationCheck(text)) {
+        $("#register_form").disappearErrorMessage("username-message");
+    }
+})
+
 function register(event) {
     event.preventDefault();
     const url = backEndServerAddress + "/auth/register";
@@ -24,18 +64,16 @@ function register(event) {
         if (data.returnCode) {
             return data.message;
         } else {
-            $("register_form").appearErrorMessage(`${data.id}-message`);
-            $("register_form").setErrorMessage(`${data.id}-message`, data.message);
+            $("#register_form").appearErrorMessage(`${data.id}-message`);
+            $("#register_form").setErrorMessage(`${data.id}-message`, data.message);
         }
     });
 
-
-    if(!isCheckEmailDuplication()) {
-
+    if (!isCheckEmailDuplication()) {
+        $("#register_form").appearErrorMessage("email-message");
+        $("#register_form").setErrorMessage(`email-message`, "중복확인을 눌러주세요.");
         return;
     }
-
-
 
 
     // if (result == "SUCCESS") {
@@ -77,6 +115,13 @@ function emailDuplication(event) {
     event.preventDefault();
 
     const email = document.querySelector("#email").value;
+
+    if (!formvalidation.isTextValidationCheck(email)) {
+        $("#register_form").appearSuccessMessage("email-message");
+        $("#register_form").setSuccessMessage(`email-message`, "Email를 입력해주세요.");
+        return;
+    }
+
     var result = auth.emailDuplicationCheck({
         email: email
     });
@@ -84,39 +129,40 @@ function emailDuplication(event) {
     result.then((data) => {
         emailDuplicationBtn.value = data;
 
-        if(data == "SUCCESS") {
-
+        if (data == "SUCCESS") {
+            $("#register_form").appearSuccessMessage("email-message");
+            $("#register_form").setSuccessMessage(`email-message`, "사용 가능한 아이디입니다.");
+            apprearIconSuccessVisualMessage();
         } else {
-            apprearFailVisualMessage();
-            
+            $("#register_form").appearErrorMessage("email-message");
+            $("#register_form").setErrorMessage(`email-message`, "사용 불가능한 아이디입니다.");
+            apprearIconFailVisualMessage();
         }
     })
 }
 
-function isCheckEmailDuplication() {
-    const result = emailDuplicationBtn.value;
-
-    if (result == null || result == "FALURE" || result == "") {
-        apprearFailVisualMessage();
-        $("#email").foucs();
-        return false;
-    } else {
-        apprearSuccessVisualMessage();
+function isCheckEmailDuplication(value) {
+    const result = value;
+    var retunValue = true;
+    if (result == null || result == "FAILURE" || result == "") {
+        apprearIconFailVisualMessage();
+        retunValue = false;
     }
-    
-    return true;
+    apprearIconSuccessVisualMessage();
+    return retunValue;
 }
 
-function apprearSuccessVisualMessage() {
-    $("#failure").prop("hidden",true);
+function apprearIconSuccessVisualMessage() {
+    $("#email-duplication-button").prop("disabled", true);
+    $("#failure").prop("hidden", true);
     $("#failure").removeClass("failure");
-    $("#success").prop("hidden",false);
+    $("#success").prop("hidden", false);
 }
 
-function apprearFailVisualMessage() {
-    $("#success").prop("hidden",true);
+function apprearIconFailVisualMessage() {
+    $("#success").prop("hidden", true);
     $("#success").removeClass("failure");
-    $("#failure").prop("hidden",false);
+    $("#failure").prop("hidden", false);
 }
 
 emailDuplicationBtn.addEventListener("click", emailDuplication);

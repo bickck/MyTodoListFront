@@ -2,13 +2,51 @@
  * 
  */
 
-import {Quote} from "./../server/quote.js";
+import {
+    Quote
+} from "./../server/quote.js";
+import {
+    FormValidation
+} from "./../validation/formvalidation.js"
 
 const quoteServer = new Quote();
+const formvalidation = new FormValidation();
 
 const save_btn = document.querySelector("#save_button");
 const update_btn = document.querySelector("#update_button");
 const delete_btn = document.querySelector("#delete_button");
+
+
+$("#quote").on("blur", function (event) {
+    var text = event.target.value;
+
+    if($("#quote").hasClass("FAILURE")) {
+        $("#quote").removeClass("FAILURE");
+    }
+    
+    if(formvalidation.isTextValidationCheck(text)) {
+        $("#quote_form").disappearErrorMessage("quote-message");
+        $("#quote").addClass("SUCCESS");
+    }    
+})
+
+$("#author").on("blur", function (event) {
+    var text = event.target.value;
+
+    if($("#author").hasClass("FAILURE")) {
+        $("#author").removeClass("FAILURE");
+    }
+
+    if(formvalidation.isTextValidationCheck(text)) {
+        $("#quote_form").disappearErrorMessage("author-message");
+        $("#author").addClass("SUCCESS");
+    }   
+})
+
+/**
+ * 
+ * @returns 
+ */
 
 function quoteSave() {
 
@@ -16,25 +54,48 @@ function quoteSave() {
     const author = document.querySelector("#author").value;
     var isPublish = document.querySelector("#isPublish").value;
 
-    if (isPublish.checked == false) {
-        isPublish.value = "publish";
+    var validResult = formvalidation.isQuoteFormCheck("quote_form");
+    var validPassed;
+
+
+    validResult.forEach((data) => {
+        if (data.returnCode) {
+            validPassed = data.returnCode;
+        } else {
+            $("quote_form").appearErrorMessage(`${data.id}-message`);
+            $("quote_form").setErrorMessage(`${data.id}-message`, data.message);
+            $("#quote").addClass("FAILURE");
+            $("#author").addClass("FAILURE");
+            validPassed = data.returnCode;
+        }
+    })
+
+    if (!validPassed) {
+        return;
     }
 
-    var result = quoteServer.requestUserQuoteSave({
-        quote : quote,
-        author : author,
-        isPublish : isPublish
-    });
+    // if (isPublish.checked == false) {
+    //     isPublish.value = "publish";
+    // }
 
-    result.then((data)=> {
-        if (data.status.toString() === "200") {
-            alert("저장 성공");
-            //window.location.href = mainPageAddress;
-        }
-    });
+    // var result = quoteServer.requestUserQuoteSave({
+    //     quote : quote,
+    //     author : author,
+    //     isPublish : isPublish
+    // });
+
+    // result.then((data)=> {
+    //     if (data.status.toString() === "200") {
+    //         alert("저장 성공");
+    //         //window.location.href = mainPageAddress;
+    //     }
+    // });
 
 }
 
+/**
+ * 
+ */
 
 function quoteUpdate() {
 
@@ -78,6 +139,9 @@ function quoteUpdate() {
     });
 }
 
+/**
+ * 
+ */
 
 function quoteDelete() {
     const requestUrl = backEndServerAddress + "/user/quote/manage/delete";
