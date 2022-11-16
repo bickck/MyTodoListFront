@@ -53,6 +53,11 @@ $("#title").on("blur", function (event) {
     var title = event.target.value;
 
     if (!formvalidation.isTextValidationCheck(title)) {
+        return;
+    }
+
+
+    if (!formvalidation.isTextValidationCheck(title)) {
         $("#todo_form").appearErrorMessage("title-message");
         $("#todo_form").setErrorMessage(`title-message`, "Title를 입력해주세요.");
     } else {
@@ -70,6 +75,11 @@ $("#title").on("blur", function (event) {
 
 $("#content").on("blur", function (event) {
     var content = event.target.value;
+
+    if (!formvalidation.isTextValidationCheck(content)) {
+        return;
+    }
+
 
     if (!formvalidation.isTextValidationCheck(content)) {
         $("#todo_form").appearErrorMessage("content-message");

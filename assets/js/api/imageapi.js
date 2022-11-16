@@ -18,13 +18,12 @@ export class ImageApi {
             }
         }).catch((error) => {
             console.log(error);
-            console.log("서버 연결에 에러가 발생했습니다.");
         });
 
         return result.json();
     }
 
-    async requestUserImage() {
+    async requestUserImage(arg) {
         
         const url = backEndServerAddress + `/image/api/user`;
         var result = await fetch(url, {
@@ -35,7 +34,6 @@ export class ImageApi {
             }
         }).catch((error) => {
             console.log(error);
-            console.log("서버 연결에 에러가 발생했습니다.");
         });
 
         return result.json();

@@ -6,7 +6,7 @@
 export class Users {
     // 유저 정보 요청
     async requestUserDetails(arg) {
-        const url = arg.url;
+        const url = backEndServerAddress + `/user/api/intro`;
         var result = await fetch(url, {
             method: 'POST',
             headers: {
@@ -19,14 +19,13 @@ export class Users {
         // })
         .catch((error) => {
             console.log(error);
-            console.log("서버 연결에 에러가 발생했습니다.");
         });
         
         return result.json();
     }
 
     async requestUserUpdate(arg) {
-        const url = arg.url;
+        const url = backEndServerAddress + `/`;
         var result = await fetch(url, {
             method: 'POST',
             headers: {
@@ -40,14 +39,13 @@ export class Users {
 
         }).catch((error) => {
             console.log(error);
-            console.log("서버 연결에 에러가 발생했습니다.");
         });
 
         return result.json();
     }
 
     async requestUserDelete(arg) {
-        const url = arg.url;
+        const url = backEndServerAddress + `/`;
         var result = await fetch(url, {
             method: 'POST',
             headers: {
@@ -55,13 +53,12 @@ export class Users {
                 "authorization": `${arg.authorization}`
             },
             body: JSON.stringify({
-
+                id : arg.id
             }),
         }).then(Response => {
 
         }).catch((error) => {
             console.log(error);
-            console.log("서버 연결에 에러가 발생했습니다.");
         });
 
         return result.json();

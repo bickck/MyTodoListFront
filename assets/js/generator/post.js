@@ -67,9 +67,11 @@ export class PostGenerator {
      */
 
     createMainPost(params) {
+        console.log("postGenerator");
+
+        console.log(params);
 
         // element 생성
-
         var articleContainer = document.createElement("article");
         var header = document.createElement("header");
         var headerContainer = document.createElement("div");
@@ -116,9 +118,12 @@ export class PostGenerator {
 
         // 내부 값 설정
 
+        const link = "detail-page-move";
+
         postId.setAttribute("id", `PostID-${params.id}`);
         postId.setAttribute("value", params.id);
-        createTime.setAttribute("datetime", params.createTimeStamp);
+        createTime.setAttribute("datetime", params.createTimestamp);
+        imageContainer.setAttribute("href",link);
 
         title.setAttribute("class", "post-details");
         metaContainer.setAttribute("class", "meta");
@@ -151,7 +156,6 @@ export class PostGenerator {
             userInfoContainer.appendChild(userImage);
         }
 
-        console.log(params);
         // is check post img generator
         if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
 
@@ -161,10 +165,10 @@ export class PostGenerator {
 
             imageInfo.then((data) => {
                 
-                console.log(data);
                 const imageData =  data[0];
                 const imageSource = backEndServerAddress +"/image/api/source" + `/${imageData.fileName}` + `/${imageData.originalFileName}`;
                 image.setAttribute("src", imageSource);
+                image.setAttribute("class","post-img");
 
             });
 
@@ -220,7 +224,7 @@ export class PostGenerator {
 
         // view 값 설정
         title.innerText = params.title;
-        subtitle.innerText = params.subtitle;
+        subtitle.innerText = "";
         createTime.innerText = convert.convertViewDate(params.createTimeStamp);
         username.innerText = params.username;
         mainContent.innerText = params.content;
@@ -252,6 +256,10 @@ export class PostGenerator {
      */
 
     crateMiniPost(params) {
+        console.log("postGenerator");
+
+        console.log(params);
+
 
         // element 생성
         var articleContainer = document.createElement("article");
@@ -389,6 +397,10 @@ export class PostGenerator {
     };
 
     createMiniTodos(params) {
+        console.log("postGenerator");
+
+        console.log(params);
+
 
         // element 생성
         var articleContainer = document.createElement("article");
@@ -554,6 +566,9 @@ export class PostGenerator {
      * @returns 
      */
     createPostList(params) {
+        console.log("postGenerator");
+
+        console.log(params);
 
         // element 생성
         var li = document.createElement("li");
@@ -724,6 +739,10 @@ export class PostGenerator {
      */
 
     todoSinglePage(params) {
+        console.log("postGenerator");
+
+        console.log(params);
+
 
         // element 생성
         var articleContainer = document.createElement("article");
@@ -867,11 +886,32 @@ export class PostGenerator {
 
     /**
      * 
+     * <li>
+     *  <article>
+     *      <header>
+     *          <p hidden="" id="QuoteId-1" value="1"></p>
+     *          <h3><p value="test1234">test1234</p></h3>
+     *          <h4 value="author1234"> author1234 </h4>
+     *          <ul class="stats">
+     *           <li><a class="icon solid fa-heart">0</a></li>
+     *           <li><time class="published" datetime="undefined">November 15. 2022</time></li>
+     *          </ul>
+     *      </header>
+     *  </article>
+     * </li>
+     */
+
+    /**
+     * 
      * @param {*} params 
      * @returns 
      */
 
     createQuoteList(params) {
+        console.log("postGenerator");
+
+        console.log(params);
+
 
         // element 생성
         var li = document.createElement("li");
@@ -879,8 +919,8 @@ export class PostGenerator {
         var header = document.createElement("header");
         var quoteContainer = document.createElement("h3");
         var quoteId = document.createElement("p");
-        var quote = document.createElement("p");
-        var author = document.createElement("h4");
+        //var quote = document.createElement("p");
+        var author = document.createElement("p");
         var ulContainer = document.createElement("ul");
         var liHeartContainer = document.createElement("li");
         var heart = document.createElement("a");
@@ -888,7 +928,7 @@ export class PostGenerator {
         var createTime = document.createElement("time");
 
         // 구조 생성
-        quoteContainer.appendChild(quote);
+        //quoteContainer.appendChild(quote);
         liHeartContainer.appendChild(heart);
         liCreateTimeContainer.appendChild(createTime);
         ulContainer.appendChild(liHeartContainer);
@@ -907,7 +947,8 @@ export class PostGenerator {
         quoteId.setAttribute("hidden", "");
         quoteId.setAttribute("id", `QuoteId-${params.id}`);
         quoteId.setAttribute("value", params.id);
-        quote.setAttribute("value", params.quote);
+        quoteContainer.setAttribute("value",params.quote);
+        //quote.setAttribute("value", params.quote);
         author.setAttribute("value", params.author);
         createTime.setAttribute("datetime", params.createTimeStamp);
 
@@ -933,9 +974,9 @@ export class PostGenerator {
 
         // view 생성
 
-        quote.innerText = params.quote;
+        quoteContainer.innerText = params.quote;
         author.innerText = ` ${params.author} `
-        createTime.innerText = convert.convertViewDate(params.createTimeStamp);
+        createTime.innerText = convert.convertViewDate(params.createTimestamp);
         heart.innerText = params.heart;
 
         return li;
@@ -950,6 +991,10 @@ export class PostGenerator {
      */
 
     createTodoList(params) {
+        console.log("postGenerator");
+
+        console.log(params);
+
 
         // element 생성
         var li = document.createElement("li");
@@ -1038,6 +1083,10 @@ export class PostGenerator {
      */
 
     createBlurd(params) {
+        console.log("postGenerator");
+
+        console.log(params);
+
 
         // element 생성
         var blurdSection = document.createElement("section");
@@ -1102,6 +1151,9 @@ export class PostGenerator {
      */
 
     createMainQuote(params) {
+        console.log("postGenerator");
+
+        console.log(params);
 
         // element 생성
 
@@ -1213,6 +1265,10 @@ export class PostGenerator {
 
 
     createPreViewImageContainer(id) {
+
+        console.log("postGenerator");
+        console.log(id);
+
         const li = document.createElement("li");
         const input = document.createElement("input");
         const label = document.createElement("label");

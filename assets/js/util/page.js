@@ -11,7 +11,7 @@ export class NonDataInjector {
 
     /**
      * 
-     * <article class="post">
+     *  Main Todo Post Empty
      */
     createNonMainPost() {
 
@@ -28,7 +28,50 @@ export class NonDataInjector {
         return section;
     }
 
+     /**
+     * 
+     *  Main Todo Post Empty
+     */
+      createEmptyMainTodoPost() {
+
+        var arg = {
+            title : "데이터가 없어요. Todo",
+            isPublish : "publish",
+            username : "유저가 없어요.",
+            content : "메인 데이터가 없어요.",
+            heart : 0,
+            comment : 0,
+            createTimeStamp : "2022-10-13"
+        }
+
+        var section = post.createMainPost(arg);
+        
+        return section;
+    }
+
     /**
+     * 
+     * Main Quote Post Empty
+     * @returns section
+     */
+
+    createEmptyMainQuotePost() {
+
+        var arg = {
+            title : "데이터가 없어요. Quote",
+            isPublish : "publish",
+            heart : 0,
+            comment : 0,
+            createTimeStamp : "2022-10-13"
+        }
+
+        var section = post.createMainQuote(arg);
+        
+        return section;
+    }
+
+    /**
+     *  Mini Todo Post Empty
      * 
      * <div class="mini-posts">
      */
@@ -50,6 +93,7 @@ export class NonDataInjector {
 
 
     /**
+     * 
      * 
      * <ul class="posts">
      */

@@ -20,27 +20,43 @@ const delete_btn = document.querySelector("#delete_button");
 $("#quote").on("blur", function (event) {
     var text = event.target.value;
 
+    if (!formvalidation.isTextValidationCheck(text)) {
+        return;
+    }
+
     if($("#quote").hasClass("FAILURE")) {
         $("#quote").removeClass("FAILURE");
     }
     
-    if(formvalidation.isTextValidationCheck(text)) {
+    if(!formvalidation.isTextValidationCheck(text)) {
+        $("#register_form").appearErrorMessage("quote-message");
+        $("#register_form").setErrorMessage(`quote-message`, "내용을 입력해주세요.");
+        $("#quote").addClass("FAILURE");
+    } else {
         $("#quote_form").disappearErrorMessage("quote-message");
-        $("#quote").addClass("SUCCESS");
-    }    
+        // $("#quote").addClass("SUCCESS");
+    }
 })
 
 $("#author").on("blur", function (event) {
     var text = event.target.value;
 
+    if (!formvalidation.isTextValidationCheck(text)) {
+        return;
+    }
+
     if($("#author").hasClass("FAILURE")) {
         $("#author").removeClass("FAILURE");
     }
 
-    if(formvalidation.isTextValidationCheck(text)) {
+    if(!formvalidation.isTextValidationCheck(text)) {
+        $("#register_form").appearErrorMessage("author-message");
+        $("#register_form").setErrorMessage(`author-message`, "내용을 입력해주세요.");
+        $("#author").addClass("FAILURE");
+    } else {
         $("#quote_form").disappearErrorMessage("author-message");
-        $("#author").addClass("SUCCESS");
-    }   
+        // $("#author").addClass("SUCCESS");
+    }
 })
 
 /**

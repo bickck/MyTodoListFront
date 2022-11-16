@@ -45,7 +45,6 @@ export class TodoApi {
         })
         .catch((error) => {
             console.log(error);
-            console.log("서버 연결에 에러가 발생했습니다.");
         });
 
         return result.json();
@@ -67,7 +66,7 @@ export class TodoApi {
             },
         })
         .catch((error) => {
-            console.log("서버 연결에 에러가 발생했습니다.");
+            console.log(error);
         });
 
         return result.json();
@@ -88,7 +87,7 @@ export class TodoApi {
             },
         })
         .catch((error) => {
-            console.log("서버 연결에 에러가 발생했습니다.");
+            console.log(error);
         });
 
         return result.json();
@@ -104,7 +103,7 @@ export class TodoApi {
             },
         })
         .catch((error) => {
-            console.log("서버 연결에 에러가 발생했습니다.");
+            console.log(error);
         });
 
         return result.json();

@@ -1,12 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="./../css/main.css">
+    <link rel="stylesheet" href="./../css/custom.css">
+
+    <script type="text/javascript" src="./../js/jquery.min.js"></script>
+    <script type="text/javascript" src="./../js/browser.min.js"></script>
+    <script type="text/javascript" src="./../js/breakpoints.min.js"></script>
+
+    <script type="text/javascript" src="./../js/util/message.js"></script>
+    <script type="text/javascript" src="./../js/config.js"></script>
+    <script type="module" src="./../js/account/Auth.js"></script>
+
     <title>Document</title>
 </head>
-<body>
-    
+
+<body class="is-preload">
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <h1><a id="mainLink" href="#main">Future Imperfect</a></h1>
+            <nav class="links page">
+                <ul class="lists">
+                    <li><a href="#">Todo</a></li>
+                    <li><a href="#">Quote</a></li>
+                    <li><a href="#">Image</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#"></a></li>
+                </ul>
+            </nav>
+            <nav class="main">
+                <ul>
+                    <li class="search">
+                        <a class="fa-search" href="#search">Search</a>
+                        <form id="search" method="get" action="#">
+                            <input type="text" name="query" placeholder="Search" />
+                        </form>
+                    </li>
+                    <li class="menu">
+                        <a class="fa-bars" href="#menu">Menu</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Menu -->
+        <section id="menu">
+
+            <!-- Search -->
+            <section>
+                <form class="search" method="get" action="#">
+                    <input type="text" name="query" placeholder="Search" />
+                </form>
+            </section>
+
+            <!-- Links -->
+            <section class="auth">
+                <ul class="links">
+					<li>
+						<a href="#userManagePage">
+							<h3>User Manage</h3>
+							<!-- <p>Feugiat tempus veroeros dolor</p> -->
+						</a>
+					</li>
+					<li>
+						<a href="#userTodoPage">
+							<h3>User Todo</h3>
+							<!-- <p>Sed vitae justo condimentum</p> -->
+						</a>
+					</li>
+					<li>
+						<a href="#userQuotePage">
+							<h3>User Quote</h3>
+							<!-- <p>Phasellus sed ultricies mi congue</p> -->
+						</a>
+					</li>
+					<li>
+						<a href="#userTodoWritePage">
+							<h3>Write Todo</h3>
+							<!-- <p>Porta lectus amet ultricies</p> -->
+						</a>
+					</li>
+					<li>
+						<a href="#userQuoteWritePage">
+							<h3>Write Quote</h3>
+							<!-- <p>Porta lectus amet ultricies</p> -->
+						</a>
+					</li>
+				</ul>
+            </section>
+            <!-- Links -->
+            <section class="non-auth">
+                <ul class="links">
+					<!-- <li>
+						<a href="#pagetodo">
+							<h3>Todo</h3>
+							<p>Feugiat tempus veroeros dolor</p>
+						</a>
+					</li> -->
+					<li>
+						<a href="#pagequote">
+							<h3>Quote</h3>
+							<p>Sed vitae justo condimentum</p>
+						</a>
+					</li>
+				</ul>
+            </section>
+
+            <!-- Actions -->
+            <section class="auth">
+                <ul class="actions stacked">
+                    <li><a href="#userinfo" class="button large fit">유저 정보</a></li>
+                    <li><a id="logout" class="button large fit">LogOut</a></li>
+                </ul>
+            </section>
+
+            <!-- Actions -->
+            <section class="non-auth">
+                <ul class="actions stacked">
+                    <li class="loginPage"><a href="#" class="button large fit">Log In</a></li>
+                </ul>
+            </section>
+        </section>
+
+        <!-- Main -->
+        <div id="main">
+
+            <div id="user-info" class="user-info" hidden>
+                <div>
+                    <h2>Your Info</h2>
+                </div>
+                <div class="user-info-section"></div>
+            </div>
+            <div id="todo" class="todo">
+                <div>
+                    <h2>Your Todo</h2>
+                </div>
+                <div class="todo-section"></div>
+            </div>
+            
+            <div id="quote" class="quote" hidden>
+                <div>
+                    <h2>Your Quote</h2>
+                </div>
+                <div class="quote-section"></div>
+            </div>
+
+            <div id="todo-like" class="todo-like" hidden>
+                <div>
+                    <h2>Todo Like</h2>
+                </div>
+                <div class="todo-like-section"></div>
+            </div>
+
+            <div id="quote-like" class="quote-like" hidden>
+                <div>
+                    <h2>Quote Like</h2>
+                </div>
+                <div class="quote-like-section"></div>
+            </div>
+        </div>
+
+        <!-- <div id="main" class="Quote" hidden>
+            <h2>Your Test</h2>
+
+        </div> -->
+
+        <!-- Sidebar -->
+        <section id="sidebar">
+            <!-- Intro -->
+            <section id="intro" class="user">
+                <a href="#" class="logo"><img id="userImage" src="" alt="" /></a>
+                <header id="userIntroArea">
+                    <p id="userId" value="" hidden></p>
+                    <h2 id="username"></h2>
+                    <div class="comment">
+                        <p id="usercomment"></p>
+                        <a id="commentEdit" class="icon solid fa-edit"></a>
+                    </div>
+                </header>
+            </section>
+
+            <!-- Mini Posts -->
+            <section>
+                <h2>유저 정보</h2>
+                <ul class="user action">
+                    <li><button id="user-info-button" class="actions" type="button">사용자 정보</button></li>
+                    <li><button id="user-todo-button" class="actions" type="button">게시글 보기</button></li>
+                    <li><button id="user-quote-button" class="actions" type="button">게시글 보기</button></li>
+                    <li><button id="user-todo-like-button" class="actions" type="button">좋아요한 Todo</button></li>
+                    <li><button id="user-quote-like-button" class="actions" type="button">좋아요한 Quote</button></li>
+                </ul>
+            </section>
+
+            <!-- About -->
+            <section class="blurb">
+                <h2>About</h2>
+                <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
+                    amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.
+                </p>
+                <ul class="actions">
+                    <li><a href="#" class="button">Learn More</a></li>
+                </ul>
+            </section>
+
+
+            <!-- Footer -->
+            <section id="footer">
+                <ul class="icons">
+                    <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                    <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
+                    <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+                </ul>
+                <p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a
+                        href="http://unsplash.com">Unsplash</a>.</p>
+            </section>
+        </section>
+    </div>
+
+    <script type="text/javascript" src="./../js/util.js"></script>
+    <script type="text/javascript" src="./../js/main.js"></script>
+    <script type="text/javascript" src="./../js/generator/header.js"></script>
+    <script type="module" src="./../js/generator/footer.js"></script>
+
+    <script src="./../js/generator/menu.js"></script>
+    <script type="module"  src="./../js/index/userpage.js"></script>
+   
 </body>
+
 </html>

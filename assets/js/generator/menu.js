@@ -9,7 +9,7 @@ function authlinkInjector() {
     for (var i = 0; i < authLinks.childElementCount; i++) {
         var link = authLinks.children[i].lastElementChild.href;
         if (link.includes("#userManagePage")) {
-            link = frontEndServerAddress + "/assets/hmtl/userpage.html";
+            link = frontEndServerAddress + "/assets/html/userpage.html";
         }
         if (link.includes("#userTodoPage")) {
             link = frontEndServerAddress + "/assets/html/usertodo.html";

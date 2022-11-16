@@ -68,27 +68,13 @@ function requestMainPosts() {
             return;
         }
 
-        console.log(data);
+        // console.log(data);
 
         for (var i = 0; i < data.numberOfElements; i++) {
 
             var content = data.content[i];
             var container = post.createMainPost(content);
-            console.log()
 
-            // if (content.postImgCount > 0) {
-            //     // request post img 
-            //     var postImage = container.postImg;
-            //     postImage.src = "";
-            //     console.log(postImage);
-            // }
-
-            // if (content.userImgCount > 0) {
-            //     // request user img
-            //     var userImage = container.userImg;
-            //     userImage.src = "";
-            //     console.log(userImage);
-            // }
             mainPost.appendChild(container);
         }
     });
@@ -123,6 +109,16 @@ function requestMainQuotes() {
         }
     });
 }
+
+/**
+ * 친구 추천 (예정)
+ */
+
+function requestMiniQuotes() {
+   
+
+}
+
 
 /**
  * 유저의 정보를 가져옴
@@ -164,12 +160,6 @@ function postUserIntroData(introData) {
         userImage.setAttribute("hidden");
     } else {
         userImage.removeAttribute("hidden");
-        // var userIntroImage = imageapi.requestUserImageByUserId();
-
-        // userIntroImage.then((data)=>{
-        //     userImage.src=`${data.filePath}/${data.fileName}`;
-
-        // });
     }
     username.innerText = introData.username;
 }

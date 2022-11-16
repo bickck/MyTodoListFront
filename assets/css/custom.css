@@ -84,13 +84,15 @@
     
 }
 
+.fa-heart,
+.post-img,
 .fa-heart.heart,
 .comment,
 .author,
-.post-details {
+.post-details,
+.sync {
     cursor: pointer;
 }
-
 
 .recommand-todos > article > header > .icon {
     color: rgba(160, 160, 160, 0.5);

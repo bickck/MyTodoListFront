@@ -1,13 +1,18 @@
 import {
     Auth
-} from "../account/Auth.js";
+} from "./../account/Auth.js";
+import {
+    Account
+} from "./account.js"
 import {
     FormValidation
 } from "../validation/formvalidation.js";
 
 const loginBtn = document.querySelector("#login_button");
 
+
 const formvalidation = new FormValidation();
+const account = new Account();
 const auth = new Auth();
 
 
@@ -47,7 +52,6 @@ $("#password").on("blur", function (event) {
 function login(event) {
     event.preventDefault();
 
-    const url = backEndServerAddress + "/auth/login";
     const email = document.querySelector("#email");
     const password = document.querySelector("#password");
 
@@ -59,19 +63,20 @@ function login(event) {
             return data.message;
         } else {
             $("login_form").appearErrorMessage(`${data.id}-message`);
-            $("login_form").set(`${data.id}-message`, data.message);
+            $("login_form").setErrorMessage(`${data.id}-message`, data.message);
         }
     });
 
-    if (result == "SUCCESS") {
-        var result = auth.login({
-            email: email,
-            password: password
-        });
+    
+  
+    account.login({
+        email: email.value,
+        password: password.value
+    });
 
-        result.then((data)=>{
-            console.log(data);
-        });
+
+    if (result == "SUCCESS") {
+        
     }
 
 

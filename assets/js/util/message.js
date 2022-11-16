@@ -18,7 +18,7 @@
      * @param {"string"} className 
      * @returns 
      */
-    
+
 
     $.fn.appearErrorMessage = function (className) {
 
@@ -65,7 +65,7 @@
             return null;
         }
 
-        if(message == null || typeof message == "undefined") {
+        if (message == null || typeof message == "undefined") {
             return null;
         }
 
@@ -75,16 +75,19 @@
 
     $.fn.setSuccessMessage = function (className, message) {
 
-
         if (className == null || typeof className == "undefined") {
             return null;
         }
 
-        if(message == null || typeof message == "undefined") {
+        if (message == null || typeof message == "undefined") {
             return null;
         }
 
         $(`.${className}`).text(message);
+    }
+
+
+    $.fn.setResultStatusMessage = function (className, message) {
 
     }
 

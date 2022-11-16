@@ -2,11 +2,16 @@ import {
     Auth
 } from "../account/Auth.js";
 import {
+    Account
+} from "./account.js"
+import {
     FormValidation
 } from "../validation/formvalidation.js";
 
+
 const formvalidation = new FormValidation();
 const auth = new Auth();
+const account = new Account();
 
 const emailDuplicationBtn = document.querySelector("#email-duplication-button");
 const registerBtn = document.querySelector("#register-button");
@@ -19,12 +24,18 @@ $("#email").on("blur", function (event) {
         return;
     }
 
+    if ($("#email").hasClass("FAILURE")) {
+        $("#email").removeClass("FAILURE");
+    }
+
+
     if (!formvalidation.isEmailValidationCheck(email)) {
         $("#register_form").appearErrorMessage("email-message");
-        $("#register_form").setErrorMessage(`email-message`, "Email형식이 맞지 않습니다.");
+        $("#register_form").setErrorMessage(`email-message`, "Email 형식이 맞지 않습니다.");
+        // $("#email").addClass("FAILURE");
     } else {
         $("#register_form").disappearErrorMessage("email-message");
-
+        $("#email").addClass("SUCCESS");
     }
 })
 
@@ -35,19 +46,39 @@ $("#password").on("blur", function (event) {
         return;
     }
 
+    if ($("#password").hasClass("FAILURE")) {
+        $("#password").removeClass("FAILURE");
+    }
+
     if (!formvalidation.isPasswordValidationCheck(password)) {
         $("#register_form").appearErrorMessage("password-message");
         $("#register_form").setErrorMessage(`password-message`, "Password 형식이 맞지 않습니다.");
+        // $("#password").addClass("FAILURE");
+
     } else {
         $("#register_form").disappearErrorMessage("password-message");
+        $("#password").addClass("SUCCESS");
     }
 })
 
 $("#username").on("blur", function (event) {
     var text = event.target.value;
 
-    if (formvalidation.isTextValidationCheck(text)) {
+    if (!formvalidation.isTextValidationCheck(text)) {
+        return;
+    }
+
+    if ($("#username").hasClass("FAILURE")) {
+        $("#username").removeClass("FAILURE");
+    }
+
+    if (!formvalidation.isTextValidationCheck(text)) {
+        $("#register_form").appearErrorMessage("username-message");
+        $("#register_form").setErrorMessage(`username-message`, "내용을 입력해주세요.");
+        // $("#username").addClass("FAILURE");
+    } else {
         $("#register_form").disappearErrorMessage("username-message");
+        $("#username").addClass("SUCCESS");
     }
 })
 
@@ -55,37 +86,46 @@ function register(event) {
     event.preventDefault();
     const url = backEndServerAddress + "/auth/register";
     const email = document.querySelector("#email");
-    const id_register = document.querySelector("#username");
-    const password_register = document.querySelector("#password");
+    const username = document.querySelector("#username");
+    const password = document.querySelector("#password");
 
+    var validPassed;
     var validResult = formvalidation.isRegisterFormCheck("register_form");
-    var result = validResult.forEach((data) => {
+    validResult.forEach((data) => {
 
         if (data.returnCode) {
-            return data.message;
+            validPassed = true;
         } else {
             $("#register_form").appearErrorMessage(`${data.id}-message`);
             $("#register_form").setErrorMessage(`${data.id}-message`, data.message);
+            validPassed = false;
         }
     });
 
-    if (!isCheckEmailDuplication()) {
-        $("#register_form").appearErrorMessage("email-message");
-        $("#register_form").setErrorMessage(`email-message`, "중복확인을 눌러주세요.");
+    if (!validPassed) {
         return;
     }
 
+    const isSuccess = document.querySelector("#email-duplication-button").value;
 
-    // if (result == "SUCCESS") {
-    //     var result = auth.register({
-    //         email: email,
-    //         password: password
-    //     });
 
-    //     result.then((data)=>{
-    //         console.log(data);
-    //     });
+
+    // if (!isCheckEmailDuplication()) {
+    //     $("#register_form").appearErrorMessage("email-message");
+    //     $("#register_form").setErrorMessage(`email-message`, "중복확인을 눌러주세요.");
+    //     return;
     // }
+
+
+    var result = account.register({
+        email: email.value,
+        password: password.value,
+        username: username.value
+    });
+
+    result.then((data) => {
+        console.log(data);
+    });
 
 
     // fetch(url, {
@@ -147,8 +187,9 @@ function isCheckEmailDuplication(value) {
     if (result == null || result == "FAILURE" || result == "") {
         apprearIconFailVisualMessage();
         retunValue = false;
+    } else {
+        apprearIconSuccessVisualMessage();
     }
-    apprearIconSuccessVisualMessage();
     return retunValue;
 }
 
