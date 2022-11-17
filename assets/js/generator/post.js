@@ -1253,7 +1253,7 @@ export class PostGenerator {
         quote.innerText = params.quote;
         author.innerText = params.author;
         createTime.innerText = convert.convertViewDate(params.createTimestamp);
-        userinfo.innerText = params.username;
+        username.innerText = params.username;
 
         return articleContainer;
     }
