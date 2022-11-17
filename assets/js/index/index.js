@@ -51,6 +51,7 @@ window.onload = function init(event) {
     requestMainQuotes();
 }
 
+
 /**
  * 
  * Todo List를 Main에 넣는 함수

@@ -118,12 +118,12 @@ export class PostGenerator {
 
         // 내부 값 설정
 
-        const link = "detail-page-move";
+        const link = "#detail-page-move";
 
         postId.setAttribute("id", `PostID-${params.id}`);
         postId.setAttribute("value", params.id);
         createTime.setAttribute("datetime", params.createTimestamp);
-        imageContainer.setAttribute("href",link);
+        imageContainer.setAttribute("href", link);
 
         title.setAttribute("class", "post-details");
         metaContainer.setAttribute("class", "meta");
@@ -141,6 +141,8 @@ export class PostGenerator {
 
         // post, user 이미지 세팅
 
+        //setPostImage(params.id, params.userImgCount,userImage,userInfoContainer,"USER");
+
         // is check user img generator
         if (params.userImgCount != null && typeof params.userImgCount != "undefined" && params.userImgCount != 0) {
 
@@ -156,71 +158,27 @@ export class PostGenerator {
             userInfoContainer.appendChild(userImage);
         }
 
-        // is check post img generator
-        if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
-
-            // post image 가져오기
-
-            const imageInfo = imageApi.requestTodoImageById({id : params.id});
-
-            imageInfo.then((data) => {
-                
-                const imageData =  data[0];
-                const imageSource = backEndServerAddress +"/image/api/source" + `/${imageData.fileName}` + `/${imageData.originalFileName}`;
-                image.setAttribute("src", imageSource);
-                image.setAttribute("class","post-img");
-
-            });
-
-            imageContainer.appendChild(image);
-        }
+        setPostImage(params.id, params.postImgCount, image, imageContainer, "POST");
 
 
         // 공개 여부 설정
 
-        if (params.isPublish == "private") {
-            heart.innerText = "private";
-            heart.addEventListener("click", function changePublish() {
-                quoteServer.requestChangeQuotePublish({
-                    id: params.id
-                });
+        setVisualPublish({
+            id: params.id,
+            heart: params.heart,
+            isPublish: params.isPublish
+        }, heart, "TODO");
 
-            });
-        } else {
-            heart.innerText = params.heart;
-            heart.addEventListener("click", function addHeart() {
-                quoteServer.requestSaveQuoteHeart({
-                    id: params.id
-                });
-            });
-        }
 
         // 이벤트 설정
 
         // click 시 user detail page로 이동
-        userInfoContainer.addEventListener("click", function userDetailsPage() {
-
-            const url = frontEndServerAddress + "/assets/html/userpage.html";
-
-            window.location.href = url;
-        })
-
-        // title click 시 todo detail page로 이동
-        title.addEventListener("click", function todoDetailsPage() {
-
-            const url = frontEndServerAddress + "/assets/html/tododetails.html";
-
-            window.localStorage.setItem("todo_id", params.id);
-
-            window.location.href = url;
-
+        setDetailPageMoveEvent(params.id, {
+            userInfoContainer: userInfoContainer,
+            imageContainer: imageContainer,
+            title: title
         });
 
-        //comment.setAttribute("href", "#comment");
-
-        comment.addEventListener("click", function createComment() {
-
-        });
 
         // view 값 설정
         title.innerText = params.title;
@@ -256,10 +214,6 @@ export class PostGenerator {
      */
 
     crateMiniPost(params) {
-        console.log("postGenerator");
-
-        console.log(params);
-
 
         // element 생성
         var articleContainer = document.createElement("article");
@@ -397,10 +351,6 @@ export class PostGenerator {
     };
 
     createMiniTodos(params) {
-        console.log("postGenerator");
-
-        console.log(params);
-
 
         // element 생성
         var articleContainer = document.createElement("article");
@@ -417,6 +367,7 @@ export class PostGenerator {
         var comment = document.createElement("a");
 
         // 구조 설정
+        
         titleContainer.appendChild(title);
         headerContainer.appendChild(postId);
         headerContainer.appendChild(titleContainer);
@@ -445,20 +396,22 @@ export class PostGenerator {
         comment.setAttribute("href", "#");
 
         // 이미지 생성
-        if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
+        // if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
 
-            const imageInfo = imageApi.requestTodoImageById({
-                id: params.id
-            });
+        //     const imageInfo = imageApi.requestTodoImageById({
+        //         id: params.id
+        //     });
 
-            // post image 가져오기
-            imageInfo.then((data) => {
-                const imageSource = backEndServerAddress + `/${filePath}` + `/${fileName}`;
-                image.setAttribute("src", imageSource);
-            });
+        //     // post image 가져오기
+        //     imageInfo.then((data) => {
+        //         const imageSource = backEndServerAddress + `/${filePath}` + `/${fileName}`;
+        //         image.setAttribute("src", imageSource);
+        //     });
 
-            imageContainer.appendChild(image);
-        }
+        //     imageContainer.appendChild(image);
+        // }
+
+        setPostImage(params.id, params.postImgCount, image, imageContainer, "POST")
 
         if (params.userImgCount != null && typeof params.userImgCount != "undefined" && params.userImgCount != 0) {
 
@@ -481,10 +434,6 @@ export class PostGenerator {
          * 
          * 파일을 확인하는 이유는 다른 Todo를 만들 때 서버 Query가 이미지 경로를 줬을 때를 가정했기 때문
          */
-
-        if (params.fileName != null && typeof params.fileName != "undefined" && params.filePath != null && typeof params.filePath != "undefined") {
-
-        }
 
 
         // 공개여부 설정
@@ -739,11 +688,7 @@ export class PostGenerator {
      */
 
     todoSinglePage(params) {
-        console.log("postGenerator");
-
-        console.log(params);
-
-
+      
         // element 생성
         var articleContainer = document.createElement("article");
         var headerContainer = document.createElement("header");
@@ -806,6 +751,10 @@ export class PostGenerator {
         todoId.setAttribute("value", params.id);
         createTimeStamp.setAttribute("datetime", params.createTimeStamp);
 
+
+        // setPostImage(params.id, postImgCount,mainContentImage,)
+
+
         // 이미지 생성
         if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
             // postImageContainer.appendChild(postImage);
@@ -844,23 +793,11 @@ export class PostGenerator {
             userImage.appendChild(userImage);
         }
 
-        // 공개 여부 및 이벤트 생성
-        if (params.isPublish == "private") {
-            heart.innerText = "private";
-            heart.addEventListener("click", function changePublish() {
-                quoteServer.requestChangeQuotePublish({
-                    id: params.id
-                });
-
-            });
-        } else {
-            heart.innerText = params.heart;
-            heart.addEventListener("click", function addHeart() {
-                quoteServer.requestSaveQuoteHeart({
-                    id: params.id
-                });
-            });
-        }
+        setVisualPublish({
+            id: params.id,
+            heart: params.heart,
+            isPublish: params.isPublish
+        }, heart, "TODO");
 
         // 커멘트 전용 팝업 or 리스트 필요
 
@@ -908,10 +845,6 @@ export class PostGenerator {
      */
 
     createQuoteList(params) {
-        console.log("postGenerator");
-
-        console.log(params);
-
 
         // element 생성
         var li = document.createElement("li");
@@ -947,7 +880,7 @@ export class PostGenerator {
         quoteId.setAttribute("hidden", "");
         quoteId.setAttribute("id", `QuoteId-${params.id}`);
         quoteId.setAttribute("value", params.id);
-        quoteContainer.setAttribute("value",params.quote);
+        quoteContainer.setAttribute("value", params.quote);
         //quote.setAttribute("value", params.quote);
         author.setAttribute("value", params.author);
         createTime.setAttribute("datetime", params.createTimeStamp);
@@ -955,22 +888,11 @@ export class PostGenerator {
 
         // 공개 여부 설정
 
-        if (params.isPublish == "private") {
-            heart.innerText = "private";
-            heart.addEventListener("click", function changePublish() {
-                quoteServer.requestChangeQuotePublish({
-                    id: params.id
-                });
-
-            });
-        } else {
-            heart.innerText = params.heart;
-            heart.addEventListener("click", function addHeart() {
-                quoteServer.requestSaveQuoteHeart({
-                    id: params.id
-                });
-            });
-        }
+        setVisualPublish({
+            id: params.id,
+            heart: params.heart,
+            isPublish: params.isPublish
+        }, heart, "QUOTE");
 
         // view 생성
 
@@ -1017,7 +939,7 @@ export class PostGenerator {
         li.appendChild(articleContainer);
 
         title.setAttribute("class", "post-details");
-        todoImageContainer.setAttribute("class", "post-details");
+        todoImageContainer.setAttribute("class", "image post-details");
         createTime.setAttribute("class", "published");
         todoId.setAttribute("hidden", "");
         todoId.setAttribute("id", `TodoId-${params.id}`);
@@ -1026,33 +948,18 @@ export class PostGenerator {
         createTime.setAttribute("datetime", params.createTimeStamp);
 
 
-        // 이미지 생성
-        if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
-            // postImageContainer.appendChild(postImage);
 
-
-            // post image 가져오기
-            const imageInfo = imageApi.requestTodoImageById({
-                id: params.id
-            });
-
-            imageInfo.then((data) => {
-
-                const imageSource = backEndServerAddress + `/${filePath}` + `/${fileName}`;
-                todoImage.setAttribute("src", imageSource);
-
-            });
-
-            todoImageContainer.appendChild(todoImage);
-
-        }
-
-        title.addEventListener("click", function todoDetailsPage() {
-            const url = frontEndServerAddress + "/assets/html/tododetails.html";
+        setPostImage(params.id, params.postImgCount, todoImage, todoImageContainer, "POST");
+        setDetailPageMoveEvent(params.id, {
+            userInfoContainer: null,
+            title: title,
+            imageContainer: todoImageContainer
         });
 
-        todoImageContainer.addEventListener("click", function todoDetailsPage() {
-            const url = frontEndServerAddress + "/assets/html/tododetails.html";
+        setDetailPageMoveEvent(params.id, {
+            userInfoContainer: null,
+            title: title,
+            imageContainer: todoImageContainer
         });
 
         // // view 생성
@@ -1083,10 +990,6 @@ export class PostGenerator {
      */
 
     createBlurd(params) {
-        console.log("postGenerator");
-
-        console.log(params);
-
 
         // element 생성
         var blurdSection = document.createElement("section");
@@ -1151,10 +1054,6 @@ export class PostGenerator {
      */
 
     createMainQuote(params) {
-        console.log("postGenerator");
-
-        console.log(params);
-
         // element 생성
 
         var articleContainer = document.createElement("article");
@@ -1211,44 +1110,20 @@ export class PostGenerator {
         heart.setAttribute("value", params.heart);
         quoteId.setAttribute("hidden", "");
 
+
+
         // 이미지 생성
+        setPostImage(params.id, params.userImgCount, userImage, username, "USER");
 
-        // is check user img generator
-        if (params.userImgCount != null && typeof params.userImgCount != "undefined" && params.userImgCount != 0) {
 
-            const imageInfo = imageApi.requestUserImage(params.id);
-
-            imageInfo.then((data) => {
-                const imageSource = backEndServerAddress + `/${data.filePath} + /${data.fileName}`;
-
-                userImage.setAttribute("src", imageSource);
-                userImage.setAttribute("alt", "#");
-            });
-
-            username.appendChild(userImage);
-        }
-
-        // 공개여부 설정
-
-        if (params.isPublish == "private") {
-            heart.innerText = "private";
-            heart.addEventListener("click", function changePublish() {
-                quoteServer.requestChangeQuotePublish({
-                    id: params.id
-                });
-
-            });
-        } else {
-            heart.innerText = params.heart;
-            heart.addEventListener("click", function addHeart() {
-                quoteServer.requestSaveQuoteHeart({
-                    id: params.id
-                });
-            });
-        }
+        // 공개 여부 설정
+        setVisualPublish({
+            id: params.id,
+            heart: params.heart,
+            isPublish: params.isPublish
+        }, heart, "QUOTE");
 
         // view 생성
-
         quoteId.innerText = params.id;
         quote.innerText = params.quote;
         author.innerText = params.author;
@@ -1287,4 +1162,146 @@ export class PostGenerator {
         return li;
     }
 
+}
+
+
+
+
+function setVisualPublish(arg, heartContainer, postKind) {
+
+    var postId = arg.id;
+    var heart = arg.heart;
+    var isPublish = arg.isPublish;
+    var funcServer;
+
+    if (postKind == "TODO" || postKind == "todo") {
+        funcServer = todoServer;
+    }
+
+    if (postKind == "QUOTE" || postKind == "quote") {
+        funcServer = quoteServer;
+    }
+
+    if (isPublish == "private" || isPublish == "PRIVATE") {
+        heartContainer.innerText = "private";
+        heartContainer.addEventListener("click", function changePublish() {
+            funcServer.requestChangeQuotePublish({
+                id: postId
+            });
+
+        });
+    } else {
+        heartContainer.innerText = heart;
+        heartContainer.addEventListener("click", function addHeart() {
+            funcServer.requestSaveQuoteHeart({
+                id: postId
+            });
+        });
+    }
+
+}
+
+function setPostImage(id, imageCount, imageContainer, parentImageContainer, kind) {
+
+    var imageInfo;
+
+    if (imageCount == null && typeof imageCount == "undefined" && imageCount == 0) {
+        return;
+    }
+
+    if (kind == "USER" || kind == "user") {
+        imageInfo = imageApi.requestUserImage({
+            id: id
+        });
+    }
+
+    if (kind == "POST" || kind == "post") {
+        imageInfo = imageApi.requestTodoImageById({
+            id: id
+        });
+    }
+
+    imageInfo.then((data) => {
+
+        const imageData = data[0];
+        const imageSource = backEndServerAddress + "/image/api/source" + `/${imageData.fileName}` + `/${imageData.originalFileName}`;
+        imageContainer.setAttribute("src", imageSource);
+        imageContainer.setAttribute("class", `${kind}-img`);
+
+    });
+
+    parentImageContainer.appendChild(imageContainer);
+}
+
+function setDetailPageMoveEvent(id, containerList) {
+
+    const postURL = frontEndServerAddress + "/assets/html/tododetails.html";
+    const userURL = frontEndServerAddress + "/assets/html/userpage.html";
+
+    if (containerList.userInfoContainer != null) {
+        containerList.userInfoContainer.addEventListener("click", function userDetailsPage() {
+
+            window.location.href = userURL;
+        });
+    }
+
+    if (containerList.title != null) {
+        containerList.title.addEventListener("click", function todoDetailsPage() {
+
+            window.localStorage.setItem("todo_id", id);
+
+            window.location.href = postURL;
+
+        });
+
+    }
+    if (containerList.imageContainer != null) {
+        containerList.imageContainer.addEventListener("click", function todoDetailsPage() {
+
+            window.localStorage.setItem("todo_id", id);
+
+            window.location.href = postURL;
+
+        });
+    }
+
+    // containerList.userInfoContainer.addEventListener("click", function userDetailsPage() {
+    //     window.location.href = userURL;
+    // });
+    // title click 시 todo detail page로 이동
+    // containerList.title.addEventListener("click", function todoDetailsPage() {
+    //     window.localStorage.setItem("todo_id", id);
+    //     window.location.href = postURL;
+    // });
+    // containerList.imageContainer.addEventListener("click", function todoDetailsPage() {
+    //     window.localStorage.setItem("todo_id", id);
+    //     window.location.href = postURL;
+    // });
+}
+
+function moveUserDetailPage() {
+
+}
+
+
+function generator(className) {
+    if (className = "post") {
+
+    }
+
+    if (className == "mini-post") {
+
+    }
+
+    if (className == "posts") {
+
+    }
+
+    if (className = "blurb") {
+
+    }
+
+    if (className = "single") {
+
+    }
 }

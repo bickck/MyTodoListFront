@@ -3,7 +3,7 @@ import {
 } from "./../account/Auth.js";
 import {
     Account
-} from "./account.js"
+} from "./../server/account.js"
 import {
     FormValidation
 } from "../validation/formvalidation.js";
@@ -14,6 +14,10 @@ const loginBtn = document.querySelector("#login_button");
 const formvalidation = new FormValidation();
 const account = new Account();
 const auth = new Auth();
+
+window.onload = function init() {
+    
+}
 
 
 $("#email").on("blur", function (event) {

@@ -6,18 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <!-- dev -->
-    <!-- <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="/assets/js/config.js"></script> -->
-
-    <!-- product -->
+   
+    <!-- css -->
     <link rel="stylesheet" href="./../css/main.css">
 	<link rel="stylesheet" href="./../css/custom.css">
     
+    <!-- jQuery -->
     <script type="text/javascript" src="./../js/jquery.min.js"></script>
 	<script type="text/javascript" src="./../js/browser.min.js"></script>
 	<script type="text/javascript" src="./../js/breakpoints.min.js"></script>
     
+    <!-- config -->
     <script type="text/javascript" src="./../js/util/message.js"></script>
     <script type="text/javascript" src="./../js/config.js"></script>
     <script type="module" src="./../js/account/Auth.js"></script>
@@ -25,6 +24,112 @@
 
 <body class="single">
     <div id="wrapper">
+        <!-- Header -->
+        <header id="header">
+            <h1><a id="mainLink" href="#main">Future Imperfect</a></h1>
+            <nav class="links page">
+                <ul class="lists">
+                    <li><a href="#">Todo</a></li>
+                    <li><a href="#">Quote</a></li>
+                    <li><a href="#">Image</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#"></a></li>
+                </ul>
+            </nav>
+            <nav class="main">
+                <ul>
+                    <li class="search">
+                        <a class="fa-search" href="#search">Search</a>
+                        <form id="search" method="get" action="#">
+                            <input type="text" name="query" placeholder="Search" />
+                        </form>
+                    </li>
+                    <li class="alarm">
+						<a class="fa-bell" href="#alarm">alarm</a>
+						<form id="search" method="get" action="#">
+							<input type="text" name="query" placeholder="Search" />
+						</form>
+					</li>
+                    <li class="menu">
+                        <a class="fa-bars" href="#menu">Menu</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Menu -->
+        <section id="menu">
+            <!-- Search -->
+            <section>
+                <form class="search" method="get" action="#">
+                    <input type="text" name="query" placeholder="Search" />
+                </form>
+            </section>
+
+            <!-- Links -->
+            <section class="auth">
+                <ul class="links">
+					<li>
+						<a href="#userManagePage">
+							<h3>User Manage</h3>
+						</a>
+					</li>
+					<li>
+						<a href="#userTodoPage">
+							<h3>User Todo</h3>
+						</a>
+					</li>
+					<li>
+						<a href="#userQuotePage">
+							<h3>User Quote</h3>
+						</a>
+					</li>
+					<li>
+						<a href="#userTodoWritePage">
+							<h3>Write Todo</h3>
+						</a>
+					</li>
+					<li>
+						<a href="#userQuoteWritePage">
+							<h3>Write Quote</h3>
+						</a>
+					</li>
+				</ul>
+            </section>
+            <!-- Links -->
+            <section class="non-auth">
+                <ul class="links">
+                    <li>
+                        <a href="#pagetodo">
+                            <h3>Todo</h3>
+                            <p>Feugiat tempus veroeros dolor</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#pagequote">
+                            <h3>Quote</h3>
+                            <p>Sed vitae justo condimentum</p>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Actions -->
+            <section class="auth">
+                <ul class="actions stacked">
+                    <li><a href="#userinfo" class="button large fit">유저 정보</a></li>
+                    <li><a id="logout" class="button large fit">LogOut</a></li>
+                </ul>
+            </section>
+
+            <!-- Actions -->
+            <section class="non-auth">
+                <ul class="actions stacked">
+                    <li class="loginPage"><a href="#" class="button large fit">Log In</a></li>
+                </ul>
+            </section>
+        </section>
+
         <article class="post">
             <section id="main">
                 <section>
@@ -79,10 +184,12 @@
     <!-- product -->
     <script type="text/javascript" src="./../js/util.js"></script>
 	<script type="text/javascript" src="./../js/main.js"></script>
-    <!-- <script type="text/javascript" src="./../js/generator/header.js"></script> -->
-	<script type="module" src="./../js/generator/footer.js"></script>
+    
+    <script type="text/javascript" src="./../js/generator/header.js"></script>
+    <script type="module" src="./../js/generator/footer.js"></script>
+    <script type="module" src="./../js/generator/menu.js"></script>
+    
     <script type="module" src="./../js/validation/formvalidation.js"></script>
-
     <script type="module" src="./../js/account/register.js"></script>
 
 </body>

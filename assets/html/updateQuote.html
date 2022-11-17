@@ -6,15 +6,21 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- prodcut -->
+	<title>Quote Update</title>
+
+	<!-- css -->
 	<link rel="stylesheet" href="./../css/main.css">
+	<link rel="stylesheet" href="./../css/custom.css">
+
+	<!-- jQuery -->
 	<script type="text/javascript" src="./../js/jquery.min.js"></script>
 	<script type="text/javascript" src="./../js/browser.min.js"></script>
 	<script type="text/javascript" src="./../js/breakpoints.min.js"></script>
+
+	<!-- config -->
 	<script type="text/javascript" src="./../js/config.js"></script>
 	<script type="module" src="./../js/account/Auth.js"></script>
 
-	<title>Quote Update</title>
 </head>
 
 <body class="single is-preload">
@@ -42,6 +48,12 @@
 							<input type="text" name="query" placeholder="Search" />
 						</form>
 					</li>
+					<li class="alarm">
+						<a class="fa-bell" href="#alarm">alarm</a>
+						<form id="search" method="get" action="#">
+							<input type="text" name="query" placeholder="Search" />
+						</form>
+					</li>
 					<li class="menu">
 						<a class="fa-bars" href="#menu">Menu</a>
 					</li>
@@ -65,31 +77,26 @@
 					<li>
 						<a href="#userManagePage">
 							<h3>User Manage</h3>
-							<!-- <p>Feugiat tempus veroeros dolor</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userTodoPage">
 							<h3>User Todo</h3>
-							<!-- <p>Sed vitae justo condimentum</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userQuotePage">
 							<h3>User Quote</h3>
-							<!-- <p>Phasellus sed ultricies mi congue</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userTodoWritePage">
 							<h3>Write Todo</h3>
-							<!-- <p>Porta lectus amet ultricies</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userQuoteWritePage">
 							<h3>Write Quote</h3>
-							<!-- <p>Porta lectus amet ultricies</p> -->
 						</a>
 					</li>
 				</ul>
@@ -187,23 +194,9 @@
 	<script type="module" src="./../js/generator/menu.js"></script>
 
 	<script type="text/javascript" src="./../js/function/quoteWrite.js"></script>
+	<script src="./../js/index/updatequote.js"></script>
 	
 
-	<script type="text/javascript">
-		var quoteTemp = JSON.parse(window.localStorage.getItem("quoteTemp"));
-		window.localStorage.clear();
-		const quoteId = document.querySelector("#post_id");
-		const quote = document.querySelector("#quote");
-		const author = document.querySelector("#author");
-		const isPublic = document.querySelector("#non-public");
-
-		quoteId.value = quoteTemp.id;
-		quote.value = quoteTemp.quote;
-		author.value = quoteTemp.author;
-
-		if (quoteTemp.isPublic == "private") {
-			isPublic.checked = true;
-		}
-	</script>
+	
 </body>
 </html>

@@ -25,7 +25,7 @@ export class ImageApi {
 
     async requestUserImage(arg) {
         
-        const url = backEndServerAddress + `/image/api/user`;
+        const url = backEndServerAddress + `/image/api/user/${arg.id}`;
         var result = await fetch(url, {
             method: 'POST',
             headers: {

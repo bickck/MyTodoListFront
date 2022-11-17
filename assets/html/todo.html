@@ -6,26 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- dev -->
-    <!-- <link rel="stylesheet" href="/assets/css/custom.css">
-    <link rel="stylesheet" href="/assets/css/main.css">
-    
+    <title>Todo</title>
 
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/browser.min.js"></script>
-    <script src="/assets/js/breakpoints.min.js"></script>
-    <script type="text/javascript" src="../js/config.js"></script> -->
-
-    <!-- product -->
+ 
+    <!-- css -->
     <link rel="stylesheet" href="./../css/custom.css">
     <link rel="stylesheet" href="./../css/main.css">
 
+    <!-- jQuery -->
     <script type="text/javascript" src="./../js/jquery.min.js"></script>
     <script type="text/javascript" src="./../js/browser.min.js"></script>
     <script type="text/javascript" src="./../js/breakpoints.min.js"></script>
+
+    <!-- config -->
     <script type="text/javascript" src="./../js/config.js"></script>
 
-    <title>Document</title>
 </head>
 
 <body class="is-preload">
@@ -53,6 +48,12 @@
                             <input type="text" name="query" placeholder="Search" />
                         </form>
                     </li>
+                    <li class="alarm">
+						<a class="fa-bell" href="#alarm">alarm</a>
+						<form id="search" method="get" action="#">
+							<input type="text" name="query" placeholder="Search" />
+						</form>
+					</li>
                     <li class="menu">
                         <a class="fa-bars" href="#menu">Menu</a>
                     </li>
@@ -75,31 +76,26 @@
 					<li>
 						<a href="#userManagePage">
 							<h3>User Manage</h3>
-							<!-- <p>Feugiat tempus veroeros dolor</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userTodoPage">
 							<h3>User Todo</h3>
-							<!-- <p>Sed vitae justo condimentum</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userQuotePage">
 							<h3>User Quote</h3>
-							<!-- <p>Phasellus sed ultricies mi congue</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userTodoWritePage">
 							<h3>Write Todo</h3>
-							<!-- <p>Porta lectus amet ultricies</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userQuoteWritePage">
 							<h3>Write Quote</h3>
-							<!-- <p>Porta lectus amet ultricies</p> -->
 						</a>
 					</li>
 				</ul>
@@ -164,17 +160,6 @@
                 <h2>recommand Todos <a class="icon solid fa-sync-alt"></a></h2>
                 <div class="mini-posts recommand-todos">
 
-                    <!-- Mini Post -->
-                    <!-- <article class="mini-post">
-                        <header>
-                            <h3><a href="single.html">Vitae sed condimentum</a></h3>
-                            <a href="#" class="icon solid fa-heart">0</a>
-                            <a href="#" class="icon solid fa-comment">0</a>
-                            <time class="published" datetime="2015-10-20">October 20, 2015</time>
-                            <a href="#" class="author"><img src="images/avatar.jpg" alt="" /></a>
-                        </header>
-                        <a href="single.html" class="image"><img src="images/pic04.jpg" alt="" /></a>
-                    </article> -->
                 </div>
             </section>
 
@@ -210,17 +195,6 @@
     </section>
 
     </div>
-
-    <!-- dev -->
-    <!-- <script src="/assets/js/util.js"></script>
-    <script src="/assets/js/main.js"></script>
-
-    <script type="module" src="/assets/js/server/todo.js"></script>
-    <script type="module" src="/assets/js/post/Todo.js"></script>
-    <script type="module" src="/assets/js/function/todoWrite.js"></script>
-    <script type="module" src="/assets/js/function/action.js"></script>
-    <script type="modeul" src="/assets/js/generator/header.js"></script>
-    <script type="module" src="/assets/js/generator/footer.js"></script> -->
 
     <!-- product -->
     <script src="./../js/util.js"></script>

@@ -3,7 +3,7 @@ import {
 } from "../account/Auth.js";
 import {
     Account
-} from "./account.js"
+} from "./../server/account.js"
 import {
     FormValidation
 } from "../validation/formvalidation.js";
@@ -15,6 +15,10 @@ const account = new Account();
 
 const emailDuplicationBtn = document.querySelector("#email-duplication-button");
 const registerBtn = document.querySelector("#register-button");
+
+window.onload = function init() {
+    
+}
 
 
 $("#email").on("blur", function (event) {

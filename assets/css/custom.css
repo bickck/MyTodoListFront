@@ -145,7 +145,19 @@
     width: 100px;
     height: 100px;
 }
+.posts > li > article > a > .POST-img {
+    width: 64px;
+    height: 64px;
+}
 
+.mini-posts > article > .image {
+    height: 175.48px;
+}
+.mini-posts > article > .image > img {
+    image-rendering: optimizeQuality;
+    max-height: initial;
+    overflow: hidden;
+}
 /* .views > li:hover {
     padding: 20px;
 } */

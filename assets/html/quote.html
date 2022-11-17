@@ -5,30 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Quote</title>
 
-    <!-- dev -->
-    <!-- <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="stylesheet" href="/assets/css/custom.css">
-
-    
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/browser.min.js"></script>
-    <script src="/assets/js/breakpoints.min.js"></script>
-
-    <script type="text/javascript" src="../js/config.js"></script> -->
-
-    <!-- product -->
-
+  
+    <!-- css -->
     <link rel="stylesheet" href="./../css/main.css">
     <link rel="stylesheet" href="./../css/custom.css">
 
-
+	<!-- jQuery -->
     <script type="text/javascript" src="./../js/jquery.min.js"></script>
     <script type="text/javascript" src="./../js/browser.min.js"></script>
     <script type="text/javascript" src="./../js/breakpoints.min.js"></script>
-    <script type="text/javascript" src="./../js/config.js"></script>
 
+	<!-- config -->
+    <script type="text/javascript" src="./../js/config.js"></script>
 </head>
 
 <body class="is-preload">
@@ -56,6 +46,12 @@
 							<input type="text" name="query" placeholder="Search" />
 						</form>
 					</li>
+                    <li class="alarm">
+						<a class="fa-bell" href="#alarm">alarm</a>
+						<form id="search" method="get" action="#">
+							<input type="text" name="query" placeholder="Search" />
+						</form>
+					</li>
 					<li class="menu">
 						<a class="fa-bars" href="#menu">Menu</a>
 					</li>
@@ -79,31 +75,26 @@
 					<li>
 						<a href="#userManagePage">
 							<h3>User Manage</h3>
-							<!-- <p>Feugiat tempus veroeros dolor</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userTodoPage">
 							<h3>User Todo</h3>
-							<!-- <p>Sed vitae justo condimentum</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userQuotePage">
 							<h3>User Quote</h3>
-							<!-- <p>Phasellus sed ultricies mi congue</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userTodoWritePage">
 							<h3>Todo Write</h3>
-							<!-- <p>Porta lectus amet ultricies</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userQuoteWritePage">
 							<h3>Quote Write</h3>
-							<!-- <p>Porta lectus amet ultricies</p> -->
 						</a>
 					</li>
 				</ul>
@@ -148,38 +139,7 @@
             <h2>Quotes</h2>
             
         </div>
-        <!-- 
-        <div id="main">
-            <h2>Quotes</h2>
-           
-            <article class="post quote">
-                <header>
-                    <div class="title">
-                        <h3 id="quote">Euismod et accumsan</h3>
-                        <p id="author">Lorem ipsum dolor amet nullam consequat etiam feugiat</p>
-                    </div>
-                    <div class="meta">
-                        <time class="published" datetime="2015-11-01">November 1, 2015</time>
-                        <a href="#" class="author">
-                            <span class="name">Jane Doe</span>
-                            <img src="images/avatar.jpg" alt="" />
-                        </a>
-                    </div>
-                </header>
-                <div class="col-6 col-12-small">
-                    <input type="checkbox" id="non-public" name="public" value="public" disabled>
-                    <label for="non-public" style="user-select: none;">비공개</label>
-                </div>
-                <footer>
-                    <ul class="stats">
-                        <li class="heart custom-style"><a class="icon solid fa-heart"></a></li>
-                        <li class="update custom-style"><a id="update_button">Update</a></li>
-                        <li class="delete custom-style"><a id="delete_button">Delete</a></li>
-                    </ul>
-                </footer>
-            </article>
-        </div> -->
-
+       
         <!-- Sidebar -->
         <section id="sidebar">
 
@@ -193,51 +153,16 @@
             <section>
                 <h2>Daily Quotes <a class="icon solid fa-sync-alt"></a></h2>
                 <ul class="posts quote quote-daily">
-                    <!-- <li>
-                        <article>
-                            <header>
-                                <h3><a id="quote" href="single.html">Main QUote</a></h3>
-                                <h4 id="author">-author-</h4>
-                                <ul class="stats">
-                                    <li><a href="#" class="icon solid fa-heart">0</a></li>
-                                    <li><time class="published" datetime="2015-10-20">October 20, 2015</time></li>
-                                </ul>
-                            </header>
-                        </article>
-                    </li> -->
+                  
                 </ul>
             </section>
 
             <section>
                 <h2>recommand Quotes <a class="icon solid fa-sync-alt"></a></h2>
                 <ul class="posts quote quote-recommand">
-                    <!-- <li>
-                        <article>
-                            <header>
-                                <h3><a id="quote" href="single.html">Main QUote</a></h3>
-                                <h4 id="author">-author-</h4>
-                                <ul class="stats">
-                                    <li><a href="#heart" class="icon solid fa-heart">0</a></li>
-                                    <li><time class="published" datetime="2015-10-20">October 20, 2015</time></li>
-                                </ul>
-                            </header>
-                        </article>
-                    </li> -->
+                  
                 </ul>
             </section>
-
-            <!-- About -->
-            <!-- <section class="blurb">
-                <h2>About</h2>
-                <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
-                    amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.
-                </p>
-                <ul class="actions">
-                    <li><a href="#" class="button">Learn More</a></li>
-                </ul>
-            </section> -->
-
-
 
             <!-- Footer -->
             <section id="footer">
@@ -260,25 +185,6 @@
 
     <script src="./../js/util.js"></script>
     <script src="./../js/main.js"></script>
-
-    <!-- <script type="text/javascript">
-        const pageMoveBtn = document.querySelector("#update_button");
-
-        function pageMoveQuoteUpdate() {
-
-            var quoteTemp = {
-                id: document.querySelector("#post_id").value,
-                quote: document.querySelector("#quote").value,
-                author: document.querySelector("#author").value,
-                isPublic: document.querySelector("#non-public").value
-            }
-
-            window.localStorage.setItem("quoteTemp", JSON.stringify(quoteTemp));
-            window.location.href = "http://127.0.0.1:5501/assets/html/updateQuote.html";
-
-        }
-        pageMoveBtn.addEventListener("click", pageMoveQuoteUpdate);
-    </script> -->
 
     <script type="text/javascript" src="./../js/generator/header.js"></script>
     <script type="module" src="./../js/generator/footer.js"></script>

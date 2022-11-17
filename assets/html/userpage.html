@@ -6,19 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>User Page</title>
 
+    
+    <!-- css -->
     <link rel="stylesheet" href="./../css/main.css">
     <link rel="stylesheet" href="./../css/custom.css">
 
+    <!-- jQuery -->
     <script type="text/javascript" src="./../js/jquery.min.js"></script>
     <script type="text/javascript" src="./../js/browser.min.js"></script>
     <script type="text/javascript" src="./../js/breakpoints.min.js"></script>
 
+    <!-- config -->
     <script type="text/javascript" src="./../js/util/message.js"></script>
     <script type="text/javascript" src="./../js/config.js"></script>
     <script type="module" src="./../js/account/Auth.js"></script>
 
-    <title>Document</title>
 </head>
 
 <body class="is-preload">
@@ -44,6 +48,12 @@
                             <input type="text" name="query" placeholder="Search" />
                         </form>
                     </li>
+                    <li class="alarm">
+						<a class="fa-bell" href="#alarm">alarm</a>
+						<form id="search" method="get" action="#">
+							<input type="text" name="query" placeholder="Search" />
+						</form>
+					</li>
                     <li class="menu">
                         <a class="fa-bars" href="#menu">Menu</a>
                     </li>
@@ -67,31 +77,26 @@
 					<li>
 						<a href="#userManagePage">
 							<h3>User Manage</h3>
-							<!-- <p>Feugiat tempus veroeros dolor</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userTodoPage">
 							<h3>User Todo</h3>
-							<!-- <p>Sed vitae justo condimentum</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userQuotePage">
 							<h3>User Quote</h3>
-							<!-- <p>Phasellus sed ultricies mi congue</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userTodoWritePage">
 							<h3>Write Todo</h3>
-							<!-- <p>Porta lectus amet ultricies</p> -->
 						</a>
 					</li>
 					<li>
 						<a href="#userQuoteWritePage">
 							<h3>Write Quote</h3>
-							<!-- <p>Porta lectus amet ultricies</p> -->
 						</a>
 					</li>
 				</ul>
@@ -229,12 +234,11 @@
 
     <script type="text/javascript" src="./../js/util.js"></script>
     <script type="text/javascript" src="./../js/main.js"></script>
+
     <script type="module" src="./../js/generator/header.js"></script>
     <script type="module" src="./../js/generator/footer.js"></script>
     <script type="module" src="./../js/generator/menu.js"></script>
 
-
-    <script src="./../js/generator/menu.js"></script>
     <script type="module"  src="./../js/index/userpage.js"></script>
    
 </body>
