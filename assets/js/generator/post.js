@@ -26,11 +26,21 @@ import {
     ImageApi
 } from "./../api/imageapi.js";
 
+import {
+    HeartApi
+} from "./../api/heart.js";
+
+import {
+    Auth
+} from "./../account/auth.js";
+
 const convert = new ConvertDate();
 const imageApi = new ImageApi();
 const todoApi = new TodoApi();
 const quoteServer = new Quote();
 const todoServer = new Todo();
+const heartapi = new HeartApi();
+const auth = new Auth();
 // const action = new Action();
 
 
@@ -367,7 +377,7 @@ export class PostGenerator {
         var comment = document.createElement("a");
 
         // 구조 설정
-        
+
         titleContainer.appendChild(title);
         headerContainer.appendChild(postId);
         headerContainer.appendChild(titleContainer);
@@ -441,7 +451,7 @@ export class PostGenerator {
         if (params.isPublish == "private") {
             heart.innerText = "private";
             heart.addEventListener("click", function changePublish() {
-                quoteServer.requestChangeQuotePublish({
+                quoteServer.requestChangePublish({
                     id: params.id
                 });
 
@@ -449,7 +459,8 @@ export class PostGenerator {
         } else {
             heart.innerText = params.heart;
             heart.addEventListener("click", function addHeart() {
-                quoteServer.requestSaveQuoteHeart({
+                heart.innerText += 1;
+                quoteServer.requestSaveHeart({
                     id: params.id
                 });
             });
@@ -515,10 +526,7 @@ export class PostGenerator {
      * @returns 
      */
     createPostList(params) {
-        console.log("postGenerator");
-
-        console.log(params);
-
+    
         // element 생성
         var li = document.createElement("li");
         var articleContainer = document.createElement("article");
@@ -542,8 +550,8 @@ export class PostGenerator {
         //내부 값 설정
         createTime.setAttribute("class", "published");
         imageContainer.setAttribute("class", "image");
-
         createTime.setAttribute("class", "published");
+
         postId.setAttribute("id", `PostID-${params.id}`);
         createTime.setAttribute("datetime", params.createTimeStamp);
 
@@ -582,8 +590,6 @@ export class PostGenerator {
             });
 
             imageContainer.appendChild(image);
-
-
         }
 
         //이벤트 생성
@@ -688,7 +694,7 @@ export class PostGenerator {
      */
 
     todoSinglePage(params) {
-      
+
         // element 생성
         var articleContainer = document.createElement("article");
         var headerContainer = document.createElement("header");
@@ -752,46 +758,46 @@ export class PostGenerator {
         createTimeStamp.setAttribute("datetime", params.createTimeStamp);
 
 
-        // setPostImage(params.id, postImgCount,mainContentImage,)
+        // setPostImage(params.id, postImgCount,mainContentImage,"POST")
 
-
+        // setPostImage(params.id, userImgCount,mainContentImage,"POST")
         // 이미지 생성
-        if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
-            // postImageContainer.appendChild(postImage);
-            for (var i = 0; i < params.postImgCount; i++) {
-                var mainContentImageContainer = document.createElement("span");
-                var mainContentImage = document.createElement("img");
+        // if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
+        //     // postImageContainer.appendChild(postImage);
+        //     for (var i = 0; i < params.postImgCount; i++) {
+        //         var mainContentImageContainer = document.createElement("span");
+        //         var mainContentImage = document.createElement("img");
 
-                // post image 가져오기
-                const imageInfo = imageApi.requestTodoImageById({
-                    id: params.id
-                });
+        //         // post image 가져오기
+        //         const imageInfo = imageApi.requestTodoImageById({
+        //             id: params.id
+        //         });
 
-                imageInfo.then((data) => {
+        //         imageInfo.then((data) => {
 
-                    const imageSource = backEndServerAddress + `/${filePath}` + `/${fileName}`;
-                    mainContentImage.setAttribute("src", imageSource);
+        //             const imageSource = backEndServerAddress + `/${filePath}` + `/${fileName}`;
+        //             mainContentImage.setAttribute("src", imageSource);
 
-                });
+        //         });
 
-                imageContainer.appendChild(mainContentImageContainer);
+        //         imageContainer.appendChild(mainContentImageContainer);
 
-            }
-        }
+        //     }
+        // }
 
-        if (params.userImgCount != null && typeof params.userImgCount != "undefined" && params.userImgCount != 0) {
+        // if (params.userImgCount != null && typeof params.userImgCount != "undefined" && params.userImgCount != 0) {
 
-            const imageInfo = imageApi.requestUserImage(params.id);
+        //     const imageInfo = imageApi.requestUserImage(params.id);
 
-            imageInfo.then((data) => {
-                const imageSource = backEndServerAddress + `/${data.filePath} + /${data.fileName}`;
+        //     imageInfo.then((data) => {
+        //         const imageSource = backEndServerAddress + `/${data.filePath} + /${data.fileName}`;
 
-                userImage.setAttribute("src", imageSource);
+        //         userImage.setAttribute("src", imageSource);
 
-            });
+        //     });
 
-            userImage.appendChild(userImage);
-        }
+        //     userImage.appendChild(userImage);
+        // }
 
         setVisualPublish({
             id: params.id,
@@ -881,7 +887,6 @@ export class PostGenerator {
         quoteId.setAttribute("id", `QuoteId-${params.id}`);
         quoteId.setAttribute("value", params.id);
         quoteContainer.setAttribute("value", params.quote);
-        //quote.setAttribute("value", params.quote);
         author.setAttribute("value", params.author);
         createTime.setAttribute("datetime", params.createTimeStamp);
 
@@ -913,11 +918,7 @@ export class PostGenerator {
      */
 
     createTodoList(params) {
-        console.log("postGenerator");
-
-        console.log(params);
-
-
+        
         // element 생성
         var li = document.createElement("li");
         var articleContainer = document.createElement("article");
@@ -956,11 +957,6 @@ export class PostGenerator {
             imageContainer: todoImageContainer
         });
 
-        setDetailPageMoveEvent(params.id, {
-            userInfoContainer: null,
-            title: title,
-            imageContainer: todoImageContainer
-        });
 
         // // view 생성
 
@@ -1151,7 +1147,6 @@ export class PostGenerator {
         input.setAttribute("id", `files${id}`);
         input.setAttribute("class", "files");
         input.setAttribute("type", `file`);
-        // input.setAttribute("multiple", "multiple");
 
         label.setAttribute("for", `files${id}`);
         label.setAttribute("class", "button icon solid fa-plus image");
@@ -1165,14 +1160,14 @@ export class PostGenerator {
 }
 
 
-
+var funcServer;
+var heartServer;
 
 function setVisualPublish(arg, heartContainer, postKind) {
 
     var postId = arg.id;
     var heart = arg.heart;
     var isPublish = arg.isPublish;
-    var funcServer;
 
     if (postKind == "TODO" || postKind == "todo") {
         funcServer = todoServer;
@@ -1185,20 +1180,103 @@ function setVisualPublish(arg, heartContainer, postKind) {
     if (isPublish == "private" || isPublish == "PRIVATE") {
         heartContainer.innerText = "private";
         heartContainer.addEventListener("click", function changePublish() {
-            funcServer.requestChangeQuotePublish({
-                id: postId
-            });
-
-        });
-    } else {
-        heartContainer.innerText = heart;
-        heartContainer.addEventListener("click", function addHeart() {
-            funcServer.requestSaveQuoteHeart({
+            funcServer.requestChangePublish({
                 id: postId
             });
         });
+        return;
     }
 
+    // is Auth?
+    if (auth.getJsonToken() != null) {
+        var result = funcServer.requestHeartExists({
+            id: postId
+        });
+
+        result.then((exists) => {
+
+            if (exists == "true") {
+                heartContainer.setAttribute("id", `heart-${postId}`);
+                heartContainer.setAttribute("id", `heart-postid-${postId}`);
+                heartContainer.setAttribute("isExists", `${exists.exists}`);
+                heartContainer.setAttribute("uuid", `${exists.uuid}`)
+                heartContainer.setAttribute("value", heart);
+                heartContainer.addEventListener("click", heartActions);
+
+            } else {
+                heartContainer.setAttribute("id", `heart-${postId}`);
+                heartContainer.setAttribute("isExists", `${exists.exists}`);
+                heartContainer.setAttribute("uuid", `${exists.uuid}`)
+                heartContainer.setAttribute("value", heart);
+                heartContainer.addEventListener("click", heartActions);
+            }
+        });
+
+    } else {
+        heartContainer.setAttribute("id", `heart-${postId}`)
+        heartContainer.setAttribute("value", heart);
+        heartContainer.addEventListener("click", heartActions);
+    }
+}
+
+function cancleHeart(heartuuid, postId, heart, heartContainer) {
+
+    if(heart == 0) {
+        return;
+    }
+    
+    var decreaseHeart = Number(heart) - 1;
+    heartContainer.innerText = decreaseHeart;
+    heartContainer.setAttribute("id", `heart-${postId}`);
+    heartContainer.setAttribute("isExists", `false`);
+    heartContainer.setAttribute("uuid", `${null}`)
+    heartContainer.setAttribute("value", decreaseHeart);
+
+    funcServer.requestCancleHeart({
+        id: heartuuid
+    });
+}
+
+function addHeart(postId, heart, heartContainer) {
+    var increaseHeart = Number(heart) + 1;
+    heartContainer.innerText = increaseHeart;
+    heartContainer.setAttribute("id", `heart-${postId}`);
+    heartContainer.setAttribute("isExists", `true`);
+    heartContainer.setAttribute("uuid", `${null}`)
+    heartContainer.setAttribute("value", increaseHeart);
+
+    var result = funcServer.requestSaveHeart({
+        id: postId
+    });
+
+    result.then((data)=>{
+        heartContainer.setAttribute("uuid", `${data}`)
+    });
+    
+}
+
+function heartActions(event) {
+
+    var heartContainer = event.target;
+    var postid = heartContainer.id.split("-")[1];
+    var uuid = heartContainer.getAttribute("uuid");
+    var isExists = heartContainer.getAttribute("isExists");
+    var heartValue = heartContainer.getAttribute("value");
+
+    //no login
+    if (auth.getJsonToken() == null) {
+        console.log("login Please");
+    }
+
+    // pressed heart
+    if (isExists == "false") {
+        addHeart(postid, heartValue, heartContainer);
+    }
+
+    // cancle heart press
+    if (isExists == "true") {
+        cancleHeart(uuid, postid, heartValue, heartContainer);
+    }
 }
 
 function setPostImage(id, imageCount, imageContainer, parentImageContainer, kind) {
