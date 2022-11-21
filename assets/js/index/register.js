@@ -3,7 +3,7 @@ import {
 } from "../account/Auth.js";
 import {
     Account
-} from "./../server/account.js"
+} from "../server/account.js"
 import {
     FormValidation
 } from "../validation/formvalidation.js";

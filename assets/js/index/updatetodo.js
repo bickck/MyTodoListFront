@@ -1,8 +1,8 @@
 
 window.onload = function init() {
-    getTodoDataBy();
+    getTodoDataById();
 }
 
-function getTodoDataBy() {
+function getTodoDataById() {
 
 }

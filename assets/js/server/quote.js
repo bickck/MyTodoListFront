@@ -75,8 +75,8 @@ export class Quote {
         return result.text();
     }
 
-    async requestSaveQuoteHeart(arg) {
-        const url = backEndServerAddress + `/user/quote/manage/heart/save/${arg.id}`;
+    async requestSaveHeart(arg) {
+        const url = backEndServerAddress + `/heart/quote/${arg.id}`;
         var result = await fetch(url, {
             method: 'POST',
             headers: {
@@ -89,7 +89,20 @@ export class Quote {
         return result.text();
     }
 
-    async requestChangeQuotePublish(arg) {
+    async requestCancleHeart(arg) {
+        const url = backEndServerAddress + `/heart/cancle/quote/${arg.id}`;
+        var result = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": auth.getJsonToken()
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
+    async requestChangePublish(arg) {
         const url = backEndServerAddress + `/user/quote/manage/heart/update/${arg.id}`;
 
         var result = await fetch(url, {
@@ -102,5 +115,21 @@ export class Quote {
             console.log(error);
         });
         return result.text();
+    }
+
+    async requestHeartExists(arg) {
+        const url = backEndServerAddress + `/heart/api/quote/${arg.id}`;
+
+        var result = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": auth.getJsonToken()
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        return result.json();
     }
 }

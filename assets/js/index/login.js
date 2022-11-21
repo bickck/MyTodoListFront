@@ -1,9 +1,9 @@
 import {
     Auth
-} from "./../account/Auth.js";
+} from "../account/Auth.js";
 import {
     Account
-} from "./../server/account.js"
+} from "../server/account.js"
 import {
     FormValidation
 } from "../validation/formvalidation.js";
@@ -71,6 +71,9 @@ function login(event) {
         }
     });
 
+    if (result == "SUCCESS") {
+        
+    }
     
   
     account.login({
@@ -78,28 +81,6 @@ function login(event) {
         password: password.value
     });
 
-
-    if (result == "SUCCESS") {
-        
-    }
-
-
-
-    // var result = fetch(url, {
-    //     method: 'POST',
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //         email: `${email.value}`,
-    //         password: `${password.value}`,
-    //     }),
-    // }).then(Response => Response.text()).then((data)=>{
-    //     auth.setJsonToken(data);  
-    //     window.location.href = mainPageAddress;
-    // }).catch((error)=> {
-    //     console.log(error);
-    // });
 }
 
 

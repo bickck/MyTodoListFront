@@ -37,13 +37,13 @@ export class Todo {
         }).then(Response => {
             if (Response.status.toString() === "200") {
                 console.log("저장 성공");
-                //window.location.href = mainPageAddress;
+                // window.location.href = mainPageAddress;
             }
         }).catch((error) => {
             console.log(error);
         });
 
-        return result.json();
+        return result.text();
     }
 
     async requestUserTodoUpdate(arg) {
@@ -61,12 +61,14 @@ export class Todo {
                 isPublish: `${arg.isCheckPublic}`
             }),
         }).then(Response => {
-
+            if (Response.status.toString() === "200") {
+                console.log("수정 성공");
+            }
         }).catch((error) => {
             console.log(error);
         });
 
-        return result.json();
+        return result.text();
     }
 
     async requestUserTodoDelete(arg) {
@@ -86,25 +88,7 @@ export class Todo {
             console.log(error);
         });
 
-        return result.json();
-    }
-
-    async requestSaveTodoHeart(arg) {
-        const url = backEndServerAddress + "/user/todo/manage" + `/heart/add/${arg.id}`;
-        var result = await fetch(url, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "authorization": auth.getJsonToken()
-            },
-            body: JSON.stringify({
-                title: `${arg.title}`,
-                cotent: `${arg.content}`,
-                isPublish: `${arg.isCheckPublic}`
-            }),
-        }).catch((error) => {
-            console.log(error);
-        });
+        return result.text();
     }
 
     async requestSaveCommentByTodoId(arg) {
@@ -126,6 +110,34 @@ export class Todo {
         });
     }
 
+    async requestSaveHeart(arg) {
+        const url = backEndServerAddress + `/heart/todo/${arg.id}`;
+        var result = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": auth.getJsonToken()
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        return result.text();
+    }
+
+    async requestCancleHeart(arg) {
+        const url = backEndServerAddress + `/heart/cancle/todo/${arg.id}`;
+        var result = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": auth.getJsonToken()
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
     async requestChangePublish(arg) {
         const url = backEndServerAddress + "/user/todo/manage" + ``;
 
@@ -134,14 +146,26 @@ export class Todo {
             headers: {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
-            },
-            body: JSON.stringify({
-                title: `${arg.title}`,
-                cotent: `${arg.content}`,
-                isPublish: `${arg.isCheckPublic}`
-            }),
+            }
         }).catch((error) => {
             console.log(error);
         });
     }
+
+    async requestHeartExists(arg) {
+        const url = backEndServerAddress + `/heart/api/todo/${arg.id}`;
+
+        var result = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": auth.getJsonToken()
+            },
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        return result.json();
+    }
+    
 }

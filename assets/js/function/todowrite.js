@@ -266,27 +266,28 @@ function todoSave() {
     })
    
 
-    // for (var i = 0; i < file.length; i++) {
-    //     if(file[i].files.length != 0) {
-    //         argFiles[i] = file[i].files;
-    //     }
-    // }
-    // var arg = {
-    //     title: title.value,
-    //     content: content.value,
-    //     isPublish: isPublish.value,
-    //     files: argFiles
-    // }
+    for (var i = 0; i < file.length; i++) {
+        if(file[i].files.length != 0) {
+            argFiles[i] = file[i].files;
+        }
+    }
+    var arg = {
+        title: title.value,
+        content: content.value,
+        isPublish: isPublish.value,
+        files: argFiles
+    }
 
-    // if (isPublish.checked == false) {
-    //     arg.isPublish = "publish";
-    // }
+    if (isPublish.checked == false) {
+        arg.isPublish = "publish";
+    }
 
-    // var result = todo.requestUserTodoInsert(arg);
+    var result = todo.requestUserTodoInsert(arg);
 
-    // result.then((data) => {
-    //     console.log(data);
-    // });
+    result.then((data) => {
+        console.log(data);
+        window.location.href = mainPageAddress;
+    });
 }
 
 function todoUpdate() {
