@@ -202,3 +202,30 @@ input[type="text"].FAILURE {
     .message.error {
         color: rgb(194, 112, 112);
     }
+
+
+
+.is-alarm-visible {
+    display: block;
+}
+
+#alarm {
+    top: 0;
+    width: 25em;
+    /* height: 10em; */
+    background: #ffffff;
+    text-align: left;
+    /* border-left : solid 1px rgba(160, 160, 160, 0.3); */
+    /* border-right: solid 1px rgba(160, 160, 160, 0.3);
+    border-bottom: solid 1px rgba(160, 160, 160, 0.3); */
+    /* visibility: hidden; */
+}
+
+    #alarm > .alarm-message {
+        /* display: flex; */
+    }
+
+    #alarm > .alarm-message > li{
+        display: block;
+        border: none;
+    }

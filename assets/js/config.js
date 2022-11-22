@@ -26,7 +26,24 @@ const userTodoURL = "/todo/api/";
 const userQuoteURL = "/quote/api/";
 
 const todoWritePageURL = "";
-const quoteWritePageURL = "";
+// const quoteWritePageURL = "";
 
 const todoPageURL = "/assets/html/todo.html";
 const quotePageURL = "/assets/html/quote.html";
+
+
+// var $alarm = $("#alarm");
+// var $nav = $("nav.main");
+
+//     $alarm
+//     .appendTo($nav)
+//     .panel({
+//         delay: 500,
+//         hideOnClick: true,
+//         hideOnSwipe: true,
+//         resetScroll: true,
+//         resetForms: true,
+//         side: 'top',
+//         target: $nav,
+//         visibleClass: 'is-menu-visible'
+//     });

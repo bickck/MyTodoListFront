@@ -52,7 +52,6 @@
 					$(this[i]).panel(userConfig);
 
 				return $this;
-
 			}
 
 		// Vars.
@@ -102,7 +101,6 @@
 
 			// Methods.
 				$this._hide = function(event) {
-
 					// Already hidden? Bail.
 						if (!config.target.hasClass(config.visibleClass))
 							return;
@@ -114,6 +112,7 @@
 							event.stopPropagation();
 
 						}
+						console.log(event);
 
 					// Hide.
 						config.target.removeClass(config.visibleClass);
@@ -141,6 +140,7 @@
 					.css('-webkit-overflow-scrolling', 'touch');
 
 			// Hide on click.
+
 				if (config.hideOnClick) {
 
 					$this.find('a')
@@ -148,6 +148,7 @@
 
 					$this
 						.on('click', 'a', function(event) {
+
 
 							var $a = $(this),
 								href = $a.attr('href'),
@@ -165,7 +166,6 @@
 
 							// Redirect to href.
 								window.setTimeout(function() {
-
 									if (target == '_blank')
 										window.open(href);
 									else
@@ -256,7 +256,7 @@
 
 			// Event: Hide panel if a child anchor tag pointing to its ID is clicked.
 				$this.on('click', 'a[href="#' + id + '"]', function(event) {
-
+					console.log(id);
 					event.preventDefault();
 					event.stopPropagation();
 

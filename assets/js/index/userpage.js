@@ -15,6 +15,9 @@ import {
 import {
     Users
 } from "../server/users.js";
+import {
+    PostGenerator
+} from "./../generator/post.js";
 
 const userInfoButton = document.querySelector("#user-info-button");
 const userTodoButton = document.querySelector("#user-todo-button");
@@ -36,6 +39,7 @@ const auth = new Auth();
 const userapi = new UserApi();
 const imageapi = new ImageApi();
 const nonDataInjector = new NonDataInjector();
+const postGenerator = new PostGenerator();
 
 
 window.onload = function init() {
@@ -92,51 +96,37 @@ function setSidebarUserIntro() {
     const userImageContainer = document.querySelector("#userImage");
 
     var result = user.requestUserDetails({
-        authorization : auth.getJsonToken()
+        authorization: auth.getJsonToken()
     })
 
-    result.then((data)=> {
+    result.then((data) => {
         const id = data.id;
         const username = data.username;
         const comment = data.introComment;
         const fileName = data.fileName;
         const location = data.location;
-        
+
         userIdContainer.innerText = id;
         usernameContainer.innerText = username;
 
-        userIdContainer.setAttribute("value",id);
-        usernameContainer.setAttribute("value",username);
-        
-        if(comment != null && comment.length != 0) {
+        userIdContainer.setAttribute("value", id);
+        usernameContainer.setAttribute("value", username);
+
+        if (comment != null && comment.length != 0) {
             userCommentContainer.innerText = comment;
         } else {
             userCommentContainer.innerText = "당신의 코멘트를 적어주세요.";
         }
-        
-        if(fileName != null && location != null) {
+
+        if (fileName != null && location != null) {
             const imageSource = backEndServerAddress + `/${location}` + `/${fileName}`;
-            userImageContainer.setAttribute("src",imageSource);
+            userImageContainer.setAttribute("src", imageSource);
         } else {
 
         }
 
 
     });
-
-    // if (introData.introComment.length < 1) {
-    //     userComment.innerText = "당신의 코멘트를 적어주세요.";
-        
-    // } else {
-    //     userComment.innerText = introData.introComment;
-    // }
-
-    // if(introData.userImageCount == 0) {
-    //     userImage.setAttribute("hidden");
-    // } else {
-    //     userImage.removeAttribute("hidden");
-    // }
-    // username.innerText = introData.username;
 }
 
 /**
@@ -153,17 +143,26 @@ function setUserInfoPost() {
 
 function setUserTodoPost() {
 
-    var result = userapi.requestUserLikeTodo({
+    var result = userapi.requestUserTodos({
         authorization: auth.getJsonToken()
     });
 
     result.then((data) => {
         const todosSection = document.querySelector(".todo-section");
+        clearChildNode(todosSection);
 
         if (data == null || data == "undefined" || data.content.length == 0) {
-            clearChildNode(todosSection);
             todosSection.appendChild(nonDataInjector.createEmptyMainTodoPost());
             return;
+        } else {
+
+
+            const size = data.numberOfElements;
+
+            for (var i = 0; i < size; i++) {
+                const content = data.content[i];
+                todosSection.appendChild(postGenerator.createMainPost(content));
+            }
         }
 
     });
@@ -180,11 +179,22 @@ function setUserQuotePost() {
     });
 
     result.then((data) => {
+        console.log(data)
         const quoteSection = document.querySelector(".quote");
+        clearChildNode(quoteSection);
+
         if (data == null || data == "undefined" || data.content.length == 0) {
-            clearChildNode(quoteSection);
             quoteSection.appendChild(nonDataInjector.createEmptyMainQuotePost());
             return;
+        } else {
+
+            const size = data.numberOfElements;
+
+            for (var i = 0; i < size; i++) {
+                const content = data.content[i];
+                quoteSection.appendChild(postGenerator.createMainPost(content));
+            }
+
         }
 
     });
@@ -201,15 +211,25 @@ function setUserTodoLikePost() {
     });
 
     result.then((data) => {
-        const quoteSection = document.querySelector(".todo-like-section");
+        const todoLikeSection = document.querySelector(".todo-like-section");
+        clearChildNode(todoLikeSection);
+
+        console.log(data);
+
+
         if (data == null || data == "undefined" || data.content.length == 0) {
-            clearChildNode(quoteSection);
-
-            quoteSection.appendChild(nonDataInjector.createEmptyMainTodoPost());
-            console.log("empty data");
-
+            todoLikeSection.appendChild(nonDataInjector.createEmptyMainTodoPost());
             return;
+        } else {
+
+            const size = data.numberOfElements;
+
+            for (var i = 0; i < size; i++) {
+                const content = data.content[i];
+                todoLikeSection.appendChild(postGenerator.createMainPost(content));
+            }
         }
+
     });
 
 }
@@ -226,11 +246,20 @@ function setUserQuoteLikePost() {
 
     result.then((data) => {
         const quoteSection = document.querySelector(".quote-like-section");
+        clearChildNode(quoteSection);
+
         if (data == null || data == "undefined" || data.content.length == 0) {
             clearChildNode(quoteSection);
             quoteSection.appendChild(nonDataInjector.createEmptyMainQuotePost());
-            console.log("empty data");
             return;
+        } else {
+
+            const size = data.numberOfElements;
+
+            for (var i = 0; i < size; i++) {
+                const content = data.content[i];
+                quoteSection.appendChild(postGenerator.createMainPost(content));
+            }
         }
     });
 }

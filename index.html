@@ -51,10 +51,7 @@
 						</form>
 					</li>
 					<li class="alarm">
-						<a class="fa-bell" href="#alarm">alarm</a>
-						<form id="search" method="get" action="#">
-							<input type="text" name="query" placeholder="Search" />
-						</form>
+						<a class="fa-bell" href="#alarm">alarm</a>						
 					</li>
 					<li class="menu">
 						<a class="fa-bars" href="#menu">Menu</a>
@@ -63,9 +60,17 @@
 			</nav>
 		</header>
 
+		<section id="alarm">
+			<ul class="alarm-message" hidden>
+				<li>message-1</li>
+				<li>message-2</li>
+				<li>message-3</li>
+				<li>message-4</li>
+			</ul>
+		</section>
+
 		<!-- Menu -->
 		<section id="menu">
-
 			<!-- Search -->
 			<section>
 				<form class="search" method="get" action="#">
@@ -159,24 +164,32 @@
 					<h2 id="username"></h2>
 					<div class="comment">
 						<p id="usercomment"></p>
-						<a id="commentEdit" class="icon solid fa-edit"></a>
+						<a id="commentEdit" class="icon solid fa-edit edit-usercomment"></a>
+					</div>
+					<div class="comment-input" hidden>
+						<form id="comment-form" action="">
+							<input type="text" name="comment" id="comment" placeholder="Write Your Comment" autocomplete="off">
+						</form>
+						<button class="button fit small" id="comment-save-button">Regist</button>
 					</div>
 				</header>
 			</section>
 
-			<!-- Mini Posts -->
 
 			<section>
-				<h2>Daily post <a class="icon solid fa-sync-alt sync"></a></h2>
+				<h2>Daily post <a class="icon solid fa-sync-alt daily-sync"></a></h2>
 				<ul class="posts quote">
+					<!-- Mini Posts -->
+
 				
 				</ul>
 			</section>
 
 			<section>
-				<h2>recommand post <a class="icon solid fa-sync-alt sync"></a></h2>
+				<h2>recommand post <a class="icon solid fa-sync-alt recommand-sync"></a></h2>
 				<div class="mini-posts">
 					<!-- Mini Post -->
+
 				</div>
 			</section>
 

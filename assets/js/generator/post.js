@@ -77,10 +77,7 @@ export class PostGenerator {
      */
 
     createMainPost(params) {
-        console.log("postGenerator");
-
-        console.log(params);
-
+    
         // element 생성
         var articleContainer = document.createElement("article");
         var header = document.createElement("header");
@@ -526,7 +523,7 @@ export class PostGenerator {
      * @returns 
      */
     createPostList(params) {
-    
+
         // element 생성
         var li = document.createElement("li");
         var articleContainer = document.createElement("article");
@@ -693,15 +690,14 @@ export class PostGenerator {
      * @param {*} params 
      */
 
-    todoSinglePage(params) {
+    createTodoSinglePage(params) {
 
         // element 생성
         var articleContainer = document.createElement("article");
         var headerContainer = document.createElement("header");
         var titleContainer = document.createElement("div");
         var todoId = document.createElement("p");
-        var titleSize = document.createElement("h2");
-        var title = document.createElement("p");
+        var title = document.createElement("h2");
         var subtitle = document.createElement("p");
         var metaContainer = document.createElement("div");
         var createTimeStamp = document.createElement("time");
@@ -719,14 +715,16 @@ export class PostGenerator {
 
         // 삭제 수정 버튼 생성 필요
 
-        titleSize.appendChild(title);
+        // titleSize.appendChild(title);
         titleContainer.appendChild(title);
         titleContainer.appendChild(subtitle);
         titleContainer.appendChild(todoId);
+
         userInfoContainer.appendChild(username);
         userInfoContainer.appendChild(userImage);
-        headerContainer.appendChild(titleContainer);
-        headerContainer.appendChild(subtitle);
+
+
+
         metaContainer.appendChild(createTimeStamp);
         metaContainer.appendChild(userInfoContainer);
         heartList.appendChild(heart);
@@ -734,9 +732,11 @@ export class PostGenerator {
         statsList.appendChild(commentList);
         statsList.appendChild(heartList);
         footerContainer.appendChild(statsList);
+
+        headerContainer.appendChild(titleContainer);
+        headerContainer.appendChild(metaContainer);
+
         articleContainer.appendChild(headerContainer);
-        articleContainer.appendChild(titleContainer);
-        articleContainer.appendChild(metaContainer);
         articleContainer.appendChild(imageContainer);
         articleContainer.appendChild(mainContent);
         articleContainer.appendChild(footerContainer);
@@ -758,46 +758,10 @@ export class PostGenerator {
         createTimeStamp.setAttribute("datetime", params.createTimeStamp);
 
 
-        // setPostImage(params.id, postImgCount,mainContentImage,"POST")
+        setTodoDetailImage(params.id, params.postImgCount, imageContainer);
 
         // setPostImage(params.id, userImgCount,mainContentImage,"POST")
         // 이미지 생성
-        // if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
-        //     // postImageContainer.appendChild(postImage);
-        //     for (var i = 0; i < params.postImgCount; i++) {
-        //         var mainContentImageContainer = document.createElement("span");
-        //         var mainContentImage = document.createElement("img");
-
-        //         // post image 가져오기
-        //         const imageInfo = imageApi.requestTodoImageById({
-        //             id: params.id
-        //         });
-
-        //         imageInfo.then((data) => {
-
-        //             const imageSource = backEndServerAddress + `/${filePath}` + `/${fileName}`;
-        //             mainContentImage.setAttribute("src", imageSource);
-
-        //         });
-
-        //         imageContainer.appendChild(mainContentImageContainer);
-
-        //     }
-        // }
-
-        // if (params.userImgCount != null && typeof params.userImgCount != "undefined" && params.userImgCount != 0) {
-
-        //     const imageInfo = imageApi.requestUserImage(params.id);
-
-        //     imageInfo.then((data) => {
-        //         const imageSource = backEndServerAddress + `/${data.filePath} + /${data.fileName}`;
-
-        //         userImage.setAttribute("src", imageSource);
-
-        //     });
-
-        //     userImage.appendChild(userImage);
-        // }
 
         setVisualPublish({
             id: params.id,
@@ -817,7 +781,7 @@ export class PostGenerator {
 
         title.innerText = params.title;
         subtitle.innerText = "";
-        createTimeStamp.innerText = params.title;
+        createTimeStamp.innerText = convert.convertViewDate(params.createTimeStamp);
         username.innerText = params.username;
         mainContent.innerText = params.content;
         heart.innerText = params.heart;
@@ -918,7 +882,7 @@ export class PostGenerator {
      */
 
     createTodoList(params) {
-        
+
         // element 생성
         var li = document.createElement("li");
         var articleContainer = document.createElement("article");
@@ -1169,6 +1133,9 @@ function setVisualPublish(arg, heartContainer, postKind) {
     var heart = arg.heart;
     var isPublish = arg.isPublish;
 
+    if(arg.id == "undefined"){
+        return;
+    }
     if (postKind == "TODO" || postKind == "todo") {
         funcServer = todoServer;
     }
@@ -1221,10 +1188,10 @@ function setVisualPublish(arg, heartContainer, postKind) {
 
 function cancleHeart(heartuuid, postId, heart, heartContainer) {
 
-    if(heart == 0) {
+    if (heart == 0) {
         return;
     }
-    
+
     var decreaseHeart = Number(heart) - 1;
     heartContainer.innerText = decreaseHeart;
     heartContainer.setAttribute("id", `heart-${postId}`);
@@ -1249,10 +1216,10 @@ function addHeart(postId, heart, heartContainer) {
         id: postId
     });
 
-    result.then((data)=>{
+    result.then((data) => {
         heartContainer.setAttribute("uuid", `${data}`)
     });
-    
+
 }
 
 function heartActions(event) {
@@ -1311,9 +1278,38 @@ function setPostImage(id, imageCount, imageContainer, parentImageContainer, kind
     parentImageContainer.appendChild(imageContainer);
 }
 
+function setTodoDetailImage(id, imageCount, imageContainers) {
+
+
+    if (imageCount == null && typeof imageCount == "undefined" && imageCount == 0) {
+        return;
+    }
+
+    var imageInfos = imageApi.requestTodoImageById({
+        id: id
+    });
+
+    imageInfos.then((data) => {
+
+        for (var i = 0; i < data.length; i++) {
+            console.log(data[i]);
+            const imgContainer = document.createElement("span");
+            const img = document.createElement("img");
+            imgContainer.setAttribute("class","image featured");
+            imgContainer.appendChild(img);
+            const imageSource = backEndServerAddress + "/image/api/source" + `/${data[i].fileName}` + `/${data[i].originalFileName}`;
+            img.setAttribute("src", imageSource);
+            imageContainers.appendChild(imgContainer);
+        }
+    });
+
+
+
+}
+
 function setDetailPageMoveEvent(id, containerList) {
 
-    const postURL = frontEndServerAddress + "/assets/html/tododetails.html";
+    const postURL = frontEndServerAddress + `/assets/html/tododetails.html?todoid=${id}`;
     const userURL = frontEndServerAddress + "/assets/html/userpage.html";
 
     if (containerList.userInfoContainer != null) {
@@ -1342,23 +1338,6 @@ function setDetailPageMoveEvent(id, containerList) {
 
         });
     }
-
-    // containerList.userInfoContainer.addEventListener("click", function userDetailsPage() {
-    //     window.location.href = userURL;
-    // });
-    // title click 시 todo detail page로 이동
-    // containerList.title.addEventListener("click", function todoDetailsPage() {
-    //     window.localStorage.setItem("todo_id", id);
-    //     window.location.href = postURL;
-    // });
-    // containerList.imageContainer.addEventListener("click", function todoDetailsPage() {
-    //     window.localStorage.setItem("todo_id", id);
-    //     window.location.href = postURL;
-    // });
-}
-
-function moveUserDetailPage() {
-
 }
 
 

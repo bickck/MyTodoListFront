@@ -50,27 +50,6 @@ export class UserApi {
     }
 
     /**
-     * 유저가 작성한 댓글
-     */
-    // async requestUserComment(arg) {
-    //     const url = backEndServerAddress + "/user/api/quote";
-
-    //     var result = await fetch(url, {
-    //             method: 'POST',
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 "authorization": `${arg.authorization}`
-    //             },
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-
-    //     return result.json();
-    // }
-
-
-    /**
      * 유저가 좋아요를 누른 Quote
      */
     async requestUserLikeQuote(arg) {

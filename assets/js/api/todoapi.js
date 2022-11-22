@@ -12,20 +12,19 @@ export class TodoApi {
 
 
     async requestMainPosts() {
-        //event.preventDefault();
-        const url = backEndServerAddress +"/todo/api/mainpost";
+        const url = backEndServerAddress + "/todo/api/mainpost";
         let response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-        .catch((error) => {
-            console.log(error);
-            console.log("서버 연결에 에러가 발생했습니다.");
-        });
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .catch((error) => {
+                console.log(error);
+                console.log("서버 연결에 에러가 발생했습니다.");
+            });
 
-        return  response.json();
+        return response.json();
     }
 
     /**
@@ -35,17 +34,16 @@ export class TodoApi {
      */
 
     async requestUserTodoByTodoId(arg) {
-        //event.preventDefault();
-        const url =backEndServerAddress + `/todo/api/${id}`;
+        const url = backEndServerAddress + `/todo/api/${arg.id}`;
         var result = await fetch(url, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .catch((error) => {
+                console.log(error);
+            });
 
         return result.json();
     }
@@ -57,17 +55,17 @@ export class TodoApi {
 
     async requestRecommandTodoApi() {
 
-        const url = backEndServerAddress +"/todo/api/recommand";
+        const url = backEndServerAddress + "/todo/api/recommand";
 
         var result = await fetch(url, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .catch((error) => {
+                console.log(error);
+            });
 
         return result.json();
     }
@@ -78,33 +76,33 @@ export class TodoApi {
      */
 
     async requestDailyTodoApi() {
-        const url = backEndServerAddress +"/todo/api/daily";
+        const url = backEndServerAddress + "/todo/api/daily";
 
         var result = await fetch(url, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .catch((error) => {
+                console.log(error);
+            });
 
         return result.json();
     }
 
-    async requestTodoCommentsByTodoId(arg){
-        const url = backEndServerAddress +`/todo/api/comment/${arg.id}`;
+    async requestTodoCommentsByTodoId(arg) {
+        const url = backEndServerAddress + `/todo/api/comment/${arg.id}`;
 
         var result = await fetch(url, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .catch((error) => {
+                console.log(error);
+            });
 
         return result.json();
 
