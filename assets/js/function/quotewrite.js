@@ -16,7 +16,6 @@ const save_btn = document.querySelector("#save_button");
 const update_btn = document.querySelector("#update_button");
 const delete_btn = document.querySelector("#delete_button");
 
-
 $("#quote").on("blur", function (event) {
     var text = event.target.value;
 
@@ -55,7 +54,6 @@ $("#author").on("blur", function (event) {
         $("#author").addClass("FAILURE");
     } else {
         $("#quote_form").disappearErrorMessage("author-message");
-        // $("#author").addClass("SUCCESS");
     }
 })
 
@@ -90,77 +88,60 @@ function quoteSave() {
         return;
     }
 
-    // if (isPublish.checked == false) {
-    //     isPublish.value = "publish";
-    // }
+    if (isPublish.checked == false) {
+        isPublish.value = "publish";
+    }
 
-    // var result = quoteServer.requestUserQuoteSave({
+    var result = quoteServer.requestUserQuoteSave({
+        quote : quote,
+        author : author,
+        isPublish : isPublish
+    });
+
+    result.then((data)=> {
+        if (data.status.toString() === "200") {
+            //window.location.href = mainPageAddress;
+        }
+    });
+
+}
+
+/**
+ * 
+ */
+
+function quoteUpdate(arg) {
+
+    const quote = document.querySelector("#quote");
+    const author = document.querySelector("#author");
+    const isPublish = document.querySelector("#isPublish");
+
+    if(isPublish.checked) {
+        isPublish.value = "PRIVATE";
+    }
+    
+    console.log(quote.value);
+    console.log(author.value);
+    console.log(isPublish.value);
+    
+    // var result = quoteServer.requestUserQuoteUpdate({
     //     quote : quote,
     //     author : author,
     //     isPublish : isPublish
     // });
 
-    // result.then((data)=> {
-    //     if (data.status.toString() === "200") {
-    //         alert("저장 성공");
+    // result.then((Response) => {
+    //     if (Response.status.toString() === "200") {
     //         //window.location.href = mainPageAddress;
     //     }
-    // });
-
+    // })
 }
 
 /**
  * 
  */
 
-function quoteUpdate() {
-
-    const requestUrl = backEndServerAddress + "/user/quote/manage/update";
-    const quote = document.querySelector("#quote").value;
-    const author = document.querySelector("#author").value;
-    var isCheckPublic = document.querySelector("#non-public");
-
-    // var arg = {
-    //     url : backEndServerAddress + "/user/quote/manage/update",
-    //     quote : document.querySelector("#quote").value,
-    //     author : document.querySelector("#author").value,
-    //     isCheckPublic : document.querySelector("#non-public").value
-    // };
-
-    if (isCheckPublic.checked == false) {
-        isCheckPublic.value = "public";
-    }
-
-
-    var result = fetch(requestUrl, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-            "authorization": auth.getJsonToken(),
-        },
-        body: JSON.stringify({
-            quote: `${quote}`,
-            author: `${author}`,
-            isCheckPublic: `${isCheckPublic}`
-        }),
-    }).then(Response => {
-        if (Response.status.toString() === "200") {
-            alert("저장 성공");
-            window.location.href = mainPageAddress;
-        }
-
-    }).catch((error) => {
-        console.log("서버 연결에 에러가 발생했습니다.");
-        console.log(error);
-    });
-}
-
-/**
- * 
- */
-
-function quoteDelete() {
-    const requestUrl = backEndServerAddress + "/user/quote/manage/delete";
+function quoteDelete(arg) {
     const quote = document.querySelector("#quote").value;
     const author = document.querySelector("#author").value;
     var isCheckPublic = document.querySelector("#non-public").value;
@@ -169,27 +150,18 @@ function quoteDelete() {
         isCheckPublic.value = "public";
     }
 
-    var result = fetch(requestUrl, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-            "authorization": auth.getJsonToken(),
-        },
-        body: JSON.stringify({
-            quote: `${quote}`,
-            author: `${author}`,
-            isCheckPublic: `${isCheckPublic}`
-        }),
-    }).then(Response => {
-        if (Response.status.toString() === "200") {
-            alert("저장 성공");
-            window.location.href = mainPageAddress;
-        }
 
-    }).catch((error) => {
-        console.log("서버 연결에 에러가 발생했습니다.");
-        console.log(error);
+    var result = quoteServer.requestUserQuoteUpdate({
+        quote : quote,
+        author : author,
+        isPublish : isPublish
     });
+
+    result.then((Response) => {
+        if (Response.status.toString() === "200") {
+            //window.location.href = mainPageAddress;
+        }
+    })
 }
 
 

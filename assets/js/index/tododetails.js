@@ -9,11 +9,11 @@ const detailContainer = document.querySelector("#main");
 var query = window.location.search;
 
 window.onload = function init() {
-    const id = getId(query);
+    const id = getQueryId(query);
     loadTodoDetailsById(id);
 }
 
-function getId(query){
+function getQueryId(query){
     const id = new URLSearchParams(query).get("todoid");
     return id;
 }

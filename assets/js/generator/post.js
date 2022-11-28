@@ -77,7 +77,7 @@ export class PostGenerator {
      */
 
     createMainPost(params) {
-    
+
         // element 생성
         var articleContainer = document.createElement("article");
         var header = document.createElement("header");
@@ -173,8 +173,9 @@ export class PostGenerator {
         setVisualPublish({
             id: params.id,
             heart: params.heart,
+            comment : params.comment,
             isPublish: params.isPublish
-        }, heart, "TODO");
+        }, heart, comment, "TODO");
 
 
         // 이벤트 설정
@@ -193,8 +194,8 @@ export class PostGenerator {
         createTime.innerText = convert.convertViewDate(params.createTimeStamp);
         username.innerText = params.username;
         mainContent.innerText = params.content;
-        heart.innerText = params.heart;
-        comment.innerText = params.comment;
+        // heart.innerText = params.heart;
+        // comment.innerText = params.comment;
 
         return articleContainer;
     }
@@ -767,15 +768,11 @@ export class PostGenerator {
             id: params.id,
             heart: params.heart,
             isPublish: params.isPublish
-        }, heart, "TODO");
+        }, heart, comment, "TODO");
 
         // 커멘트 전용 팝업 or 리스트 필요
 
-        comment.addEventListener("click", function addComment() {
-            todoApi.requestTodoCommentsByTodoId({
-                id: params.id
-            });
-        });
+
 
         //view 이미지 생성
 
@@ -861,7 +858,7 @@ export class PostGenerator {
             id: params.id,
             heart: params.heart,
             isPublish: params.isPublish
-        }, heart, "QUOTE");
+        }, heart, null, "QUOTE");
 
         // view 생성
 
@@ -1081,12 +1078,13 @@ export class PostGenerator {
             id: params.id,
             heart: params.heart,
             isPublish: params.isPublish
-        }, heart, "QUOTE");
+        }, heart, null, "QUOTE");
 
         // view 생성
         quoteId.innerText = params.id;
         quote.innerText = params.quote;
         author.innerText = params.author;
+        heart.innerText = params.heart;
         createTime.innerText = convert.convertViewDate(params.createTimestamp);
         username.innerText = params.username;
 
@@ -1101,8 +1099,8 @@ export class PostGenerator {
 
     createPreViewImageContainer(id) {
 
-        console.log("postGenerator");
-        console.log(id);
+        // console.log("postGenerator");
+        // console.log(id);
 
         const li = document.createElement("li");
         const input = document.createElement("input");
@@ -1121,21 +1119,87 @@ export class PostGenerator {
         return li;
     }
 
+    createEmptyMainQuote(params) {
+        // element 생성
+
+        var articleContainer = document.createElement("article");
+        var headerContainer = document.createElement("header");
+        var headerTitle = document.createElement("div");
+        var quoteId = document.querySelector("p");
+        var quote = document.createElement("h3");
+        var author = document.createElement("p");
+        var metaContainer = document.createElement("div");
+        var createTime = document.createElement("time");
+        var userInfoContainer = document.createElement("a");
+        var username = document.createElement("span");
+        var userImage = document.createElement("img");
+        var footerContainer = document.createElement("footer");
+        var ulStats = document.createElement("ul");
+        var liHeart = document.createElement("li");
+        var heart = document.createElement("a");
+
+        // 구조 생성
+        headerTitle.appendChild(quoteId);
+        headerTitle.appendChild(quote);
+        headerTitle.appendChild(author);
+        userInfoContainer.appendChild(username);
+        metaContainer.appendChild(createTime);
+        metaContainer.appendChild(userInfoContainer);
+        headerContainer.appendChild(headerTitle);
+        headerContainer.appendChild(metaContainer);
+        liHeart.appendChild(heart);
+        ulStats.appendChild(liHeart);
+        footerContainer.appendChild(ulStats);
+        articleContainer.appendChild(headerContainer);
+        articleContainer.appendChild(footerContainer);
+
+        //내부 값 설정
+
+        articleContainer.setAttribute("class", "post quote");
+        headerTitle.setAttribute("class", "title");
+        metaContainer.setAttribute("class", "meta");
+        createTime.setAttribute("class", "published");
+        userInfoContainer.setAttribute("class", "author");
+        ulStats.setAttribute("class", "stats");
+        heart.setAttribute("class", "icon solid fa-heart heart");
+        userInfoContainer.setAttribute("href", "#user");
+        username.setAttribute("class", "username");
+
+        quoteId.setAttribute("id", `QuoteID-${params.id}`);
+        quote.setAttribute("id", "quote");
+        author.setAttribute("id", "author")
+        quoteId.setAttribute("value", params.id);
+        username.setAttribute("value", params.username);
+        quote.setAttribute("value", params.quote);
+        author.setAttribute("value", params.author);
+        createTime.setAttribute("datetime", params.createTimestamp);
+        heart.setAttribute("value", params.heart);
+        quoteId.setAttribute("hidden", "");
+
+        // view 생성
+        quoteId.innerText = params.id;
+        quote.innerText = params.quote;
+        author.innerText = params.author;
+        heart.innertText = params.heart;
+        createTime.innerText = convert.convertViewDate(params.createTimestamp);
+        username.innerText = params.username;
+
+        return articleContainer;
+    }
+
 }
 
 
 var funcServer;
 var heartServer;
 
-function setVisualPublish(arg, heartContainer, postKind) {
+function setVisualPublish(arg, heartContainer, commentContainer, postKind) {
 
     var postId = arg.id;
     var heart = arg.heart;
     var isPublish = arg.isPublish;
+    var comment = arg.comment;
 
-    if(arg.id == "undefined"){
-        return;
-    }
     if (postKind == "TODO" || postKind == "todo") {
         funcServer = todoServer;
     }
@@ -1144,14 +1208,20 @@ function setVisualPublish(arg, heartContainer, postKind) {
         funcServer = quoteServer;
     }
 
+   
     if (isPublish == "private" || isPublish == "PRIVATE") {
-        heartContainer.innerText = "private";
-        heartContainer.addEventListener("click", function changePublish() {
-            funcServer.requestChangePublish({
-                id: postId
-            });
-        });
+        console.log(postId);
+        postPrivateAction({
+            postId,
+            heartContainer : heartContainer,
+            funcServer : funcServer,
+            commentContainer : commentContainer
+        })
         return;
+    } 
+    if( isPublish == "publish" || isPublish == "PUBLISH") {
+        heartContainer.innerText = heart;    
+        commentContainer.innerText  = comment;
     }
 
     // is Auth?
@@ -1185,6 +1255,16 @@ function setVisualPublish(arg, heartContainer, postKind) {
         heartContainer.addEventListener("click", heartActions);
     }
 }
+
+
+/**
+ * 
+ * @param {*} heartuuid 
+ * @param {*} postId 
+ * @param {*} heart 
+ * @param {*} heartContainer 
+ * @returns 
+ */
 
 function cancleHeart(heartuuid, postId, heart, heartContainer) {
 
@@ -1222,8 +1302,16 @@ function addHeart(postId, heart, heartContainer) {
 
 }
 
+/**
+ * 
+ * @param {*} event 
+ */
+
+
+
 function heartActions(event) {
 
+    console.log(event);
     var heartContainer = event.target;
     var postid = heartContainer.id.split("-")[1];
     var uuid = heartContainer.getAttribute("uuid");
@@ -1246,11 +1334,71 @@ function heartActions(event) {
     }
 }
 
+
+
+/**
+ * 
+ * @param {*} arg 
+ */
+
+function postPrivateAction(arg) {
+
+    var postHeartContainer = arg.heartContainer;
+    var postCommentContainer = arg.commentContainer;
+    var executeFunctionService = arg.funcServer;
+
+    postHeartContainer.innerText = "private";
+
+    postHeartContainer.addEventListener("click", function changePublish() {
+        postHeartContainer.innerText = 0;
+
+        executeFunctionService.requestChangePublish({
+            id: arg.postId
+        });
+
+        if(postCommentContainer != null) {
+            const commentContainerParent = postCommentContainer.parentElement;
+            commentContainerParent.removeAttribute("class", "actions-hidden");
+            postCommentContainer.classList.remove("actions-hidden");
+            postCommentContainerr.innerText = 0;
+        }
+        postHeartContainer.setAttribute("id", `heart-${arg.postId}`);
+        postHeartContainer.setAttribute("isExists", `false`);
+        postHeartContainer.setAttribute("uuid", `${null}`)
+        postHeartContainer.setAttribute("value", 0);
+        postHeartContainer.addEventListener("click", heartActions);
+    });
+
+    if (postCommentContainer != null) {
+
+        const commentContainerParent = arg.commentContainer.parentElement;
+        commentContainerParent.setAttribute("class", "actions-hidden");
+        postCommentContainer.classList.add("actions-hidden");
+
+        postCommentContainer.addEventListener("click", function addComment() {
+            console.log("click");
+            // todoApi.requestTodoCommentsByTodoId({
+            //     id: arg.id
+            // });
+        });
+    }
+}
+
+/**
+ * 
+ * @param {*} id 
+ * @param {*} imageCount 
+ * @param {*} imageContainer 
+ * @param {*} parentImageContainer 
+ * @param {*} kind 
+ * @returns 
+ */
+
 function setPostImage(id, imageCount, imageContainer, parentImageContainer, kind) {
 
     var imageInfo;
 
-    if (imageCount == null && typeof imageCount == "undefined" && imageCount == 0) {
+    if (imageCount == null || imageCount == "undefined" || imageCount == 0) {
         return;
     }
 
@@ -1278,6 +1426,14 @@ function setPostImage(id, imageCount, imageContainer, parentImageContainer, kind
     parentImageContainer.appendChild(imageContainer);
 }
 
+/**
+ * 
+ * @param {*} id 
+ * @param {*} imageCount 
+ * @param {*} imageContainers 
+ * @returns 
+ */
+
 function setTodoDetailImage(id, imageCount, imageContainers) {
 
 
@@ -1292,10 +1448,9 @@ function setTodoDetailImage(id, imageCount, imageContainers) {
     imageInfos.then((data) => {
 
         for (var i = 0; i < data.length; i++) {
-            console.log(data[i]);
             const imgContainer = document.createElement("span");
             const img = document.createElement("img");
-            imgContainer.setAttribute("class","image featured");
+            imgContainer.setAttribute("class", "image featured");
             imgContainer.appendChild(img);
             const imageSource = backEndServerAddress + "/image/api/source" + `/${data[i].fileName}` + `/${data[i].originalFileName}`;
             img.setAttribute("src", imageSource);
@@ -1342,23 +1497,98 @@ function setDetailPageMoveEvent(id, containerList) {
 
 
 function generator(className) {
-    if (className = "post") {
 
+    if (className == "post" || className == "POST") {
+
+        var articleContainer = document.createElement("article");
+        var header = document.createElement("header");
+        var headerContainer = document.createElement("div");
+        var postId = document.createElement("p");
+        var titleContainer = document.createElement("h2");
+        var title = document.createElement("a");
+        var subtitle = document.createElement("p");
+        var metaContainer = document.createElement("div");
+        var createTime = document.createElement("time");
+        var userInfoContainer = document.createElement("a");
+        var username = document.createElement("span");
+        var userImage = document.createElement("img");
+        var imageContainer = document.createElement("a");
+        var image = document.createElement("img");
+        var mainContent = document.createElement("p");
+        var footerContainer = document.createElement("footer");
+        var ulActions = document.createElement("ul");
+        var ulStats = document.createElement("ul");
+        var liHeart = document.createElement("li");
+        var heart = document.createElement("a");
+        var liComment = document.createElement("li");
+        var comment = document.createElement("a");
+
+        // 구조 설정
+        titleContainer.appendChild(title);
+        headerContainer.appendChild(postId);
+        headerContainer.appendChild(titleContainer);
+        headerContainer.appendChild(subtitle);
+        userInfoContainer.appendChild(username);
+        metaContainer.appendChild(createTime);
+        metaContainer.appendChild(userInfoContainer);
+        header.appendChild(headerContainer);
+        header.appendChild(metaContainer);
+        liHeart.appendChild(heart);
+        liComment.appendChild(comment);
+        ulStats.appendChild(liHeart);
+        ulStats.appendChild(liComment);
+        footerContainer.appendChild(ulActions);
+        footerContainer.appendChild(ulStats);
+        articleContainer.appendChild(header);
+        articleContainer.appendChild(imageContainer);
+        articleContainer.appendChild(mainContent);
+        articleContainer.appendChild(footerContainer);
+
+        return {
+            articleContainer,
+            header,
+            headerContainer,
+            postId,
+            titleContainer,
+            title,
+            subtitle,
+            metaContainer,
+            createTime,
+            userInfoContainer,
+            username,
+            userImage,
+            imageContainer,
+            image,
+            mainContent,
+            footerContainer,
+            ulActions,
+            ulStats,
+            liHeart,
+            heart,
+            liComment,
+            comment
+        };
     }
 
-    if (className == "mini-post") {
+    if (className == "mini-post" || className == "MINI-POST") {
 
+        return;
     }
 
-    if (className == "posts") {
+    if (className == "posts" || className == "POSTS") {
 
+        return;
     }
 
-    if (className = "blurb") {
+    if (className = "blurb" || className == "BLURB") {
 
+        return;
     }
 
-    if (className = "single") {
+    if (className = "single" || className == "SINGLE") {
 
+        return;
     }
+
+    return;
 }

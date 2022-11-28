@@ -18,6 +18,9 @@ import {
 import {
     PostGenerator
 } from "./../generator/post.js";
+import {
+    Todo
+} from "./../server/todo.js";
 
 const userInfoButton = document.querySelector("#user-info-button");
 const userTodoButton = document.querySelector("#user-todo-button");
@@ -36,6 +39,7 @@ var currPage = todoPost;
 
 const user = new Users();
 const auth = new Auth();
+const todo = new Todo();
 const userapi = new UserApi();
 const imageapi = new ImageApi();
 const nonDataInjector = new NonDataInjector();
@@ -156,12 +160,13 @@ function setUserTodoPost() {
             return;
         } else {
 
-
             const size = data.numberOfElements;
 
             for (var i = 0; i < size; i++) {
                 const content = data.content[i];
-                todosSection.appendChild(postGenerator.createMainPost(content));
+                const container = postGenerator.createMainPost(content);
+                const addedAction = createPostManageActions(container, data.content[i].id)
+                todosSection.appendChild(addedAction);
             }
         }
 
@@ -179,8 +184,7 @@ function setUserQuotePost() {
     });
 
     result.then((data) => {
-        console.log(data)
-        const quoteSection = document.querySelector(".quote");
+        const quoteSection = document.querySelector(".quote-section");
         clearChildNode(quoteSection);
 
         if (data == null || data == "undefined" || data.content.length == 0) {
@@ -192,7 +196,8 @@ function setUserQuotePost() {
 
             for (var i = 0; i < size; i++) {
                 const content = data.content[i];
-                quoteSection.appendChild(postGenerator.createMainPost(content));
+                console.log(content);
+                quoteSection.appendChild(postGenerator.createMainQuote(content));
             }
 
         }
@@ -214,9 +219,6 @@ function setUserTodoLikePost() {
         const todoLikeSection = document.querySelector(".todo-like-section");
         clearChildNode(todoLikeSection);
 
-        console.log(data);
-
-
         if (data == null || data == "undefined" || data.content.length == 0) {
             todoLikeSection.appendChild(nonDataInjector.createEmptyMainTodoPost());
             return;
@@ -226,6 +228,7 @@ function setUserTodoLikePost() {
 
             for (var i = 0; i < size; i++) {
                 const content = data.content[i];
+                setDeleteEvent(content);
                 todoLikeSection.appendChild(postGenerator.createMainPost(content));
             }
         }
@@ -245,11 +248,11 @@ function setUserQuoteLikePost() {
     });
 
     result.then((data) => {
+
         const quoteSection = document.querySelector(".quote-like-section");
         clearChildNode(quoteSection);
 
         if (data == null || data == "undefined" || data.content.length == 0) {
-            clearChildNode(quoteSection);
             quoteSection.appendChild(nonDataInjector.createEmptyMainQuotePost());
             return;
         } else {
@@ -258,7 +261,7 @@ function setUserQuoteLikePost() {
 
             for (var i = 0; i < size; i++) {
                 const content = data.content[i];
-                quoteSection.appendChild(postGenerator.createMainPost(content));
+                quoteSection.appendChild(postGenerator.createMainQuote(content));
             }
         }
     });
@@ -267,6 +270,61 @@ function setUserQuoteLikePost() {
 function clearChildNode(section) {
     section.innerHTML = "";
 }
+
+function setDeleteEvent(container) {
+
+    const parentContainer = container.lastChild.lastChild;
+
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+
+
+    console.dir(container.lastChild.lastChild);
+}
+
+
+/**
+ * 
+ * @param {*} arg 
+ */
+
+function createPostManageActions(arg, todoid) {
+
+    const postActionsContainer = arg.lastChild.firstChild;
+    console.dir(arg.lastChild.firstChild);
+
+    const deleteList = document.createElement("li");
+    const updateList = document.createElement("li");
+
+    const deleteButton = document.createElement("a");
+    const updateButton = document.createElement("a");
+
+    deleteButton.innerText = "DELETE";
+    updateButton.innerText = "UPDATE";
+
+    deleteList.setAttribute("class", "post_delete");
+    updateList.setAttribute("class", "post_update");
+
+    deleteButton.setAttribute("class", "");
+    updateButton.setAttribute("class", "");
+
+    deleteButton.addEventListener("click", function deleteActions() {
+        todo.requestUserTodoDelete({
+            id: todoid
+        });
+    });
+    updateButton.setAttribute("href", frontEndServerAddress + `/assets/html/updatetodo.html?todoid=${todoid}`);
+
+    deleteList.appendChild(deleteButton);
+    updateList.appendChild(updateButton);
+
+    postActionsContainer.appendChild(deleteList);
+    postActionsContainer.appendChild(updateList);
+
+    return arg;
+
+}
+
 
 userInfoButton.addEventListener("click", postHiddenActions);
 userTodoButton.addEventListener("click", postHiddenActions);

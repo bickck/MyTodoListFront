@@ -6,6 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="./assets/css/main.css">
+	<link rel="stylesheet" href="./assets/css/custom.css">
+
+	<!-- jQuery -->
+	<script type="text/javascript" src="./assets/js/jquery.min.js"></script>
+	<script type="text/javascript" src="./assets/js/browser.min.js"></script>
+	<script type="text/javascript" src="./assets/js/breakpoints.min.js"></script>
+
+	<!-- config -->
+	<script type="text/javascript" src="./assets/js/util/message.js"></script>
+	<script type="text/javascript" src="./assets/js/config.js"></script>
+	<script type="module" src="./assets/js/account/Auth.js"></script>
 </head>
 
 <body>
@@ -78,7 +91,7 @@
  -->
 
      
-    <form id="login_form" method="post" action="http://127.0.0.1:8080/auth/login">
+    <!-- <form id="login_form" method="post" action="http://127.0.0.1:8080/auth/login">
         <div class="row gtr-uniform">
             <div class="col-12">
                 <div class="input-area">
@@ -92,11 +105,28 @@
                 </div>
             </div>
         </div>
-    </form>
+    </form> -->
+
+    <div class="col-12 view-images">
+        <div class="col-12 title">
+            <h4>
+                Upload your Images &nbsp <h4 class="image-count">0</h4>&nbsp<h4 class="image-limit">/ 2</h4>
+            </h4>
+        </div>
+        <ul class="actions views">
+            <!-- <li>
+                <input id="files" class="files" type="file" multiple="multiple"></input>
+                <label for="files" class="button icon solid fa-plus image"></label>
+            </li> -->
+        </ul>
+    </div>
+    <button id="button">Test</button>
 
     <!-- <script type="module" src="./assets/js/generator/test/ElementGenerator.js"></script> -->
     <script type="module" src="./assets/js/validation/formvalidation.js"></script>
+    <script type="module" src="./assets/js/util/imgPreviwer.js"></script>
     <script type="module" src="./test.js"></script>
+
 </body>
 
 </html>

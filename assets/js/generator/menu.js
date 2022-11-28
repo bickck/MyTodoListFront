@@ -44,7 +44,10 @@ function logoutEvent() {
 
 }
 
+if(logout != null) {
+    logout.addEventListener("click",logoutEvent);
 
-logout.addEventListener("click",logoutEvent);
+}
+
 authlinkInjector();
 nonAuthLinkInjector();

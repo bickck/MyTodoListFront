@@ -58,14 +58,14 @@ export class NonDataInjector {
     createEmptyMainQuotePost() {
 
         var arg = {
-            title : "데이터가 없어요. Quote",
+            quote : "데이터가 없어요. Quote",
             isPublish : "publish",
             heart : 0,
             comment : 0,
             createTimeStamp : "2022-10-13"
         }
 
-        var section = post.createMainQuote(arg);
+        var section = post.createEmptyMainQuote(arg);
         
         return section;
     }

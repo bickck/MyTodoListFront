@@ -75,10 +75,6 @@ export class FormValidation {
                 returnCode: false
             });
         } 
-        // else {
-        //     $("#quote").removeClass(".error");
-        //     $(".quote-message").prop("hidden", true);
-        // }
 
         if (author == null || typeof author == "undefined" || author == "") {
             messageLists.push({
@@ -87,10 +83,6 @@ export class FormValidation {
                 returnCode: false
             });
         } 
-        // else {
-        //     $("#author").removeClass(".error");
-        //     $(".author-message").prop("hidden", true);
-        // }
 
         if (messageLists == null || messageLists == [] || messageLists.length == 0) {
             messageLists.push({
@@ -254,9 +246,7 @@ export class FormValidation {
     }
 
     isPasswordValidationCheck(password) {
-        // if (password == null || typeof password == "undefined" || password == "") {
-        //     return false;
-        // }
+       
         if(!regexpPassword.test(password)) {
             return false;
         }

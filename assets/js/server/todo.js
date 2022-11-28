@@ -40,7 +40,7 @@ export class Todo {
                 // window.location.href = mainPageAddress;
             }
         }).catch((error) => {
-            console.log(error);
+            console.error(error);
         });
 
         return result.text();
@@ -49,23 +49,32 @@ export class Todo {
     async requestUserTodoUpdate(arg) {
         const url = backEndServerAddress + "/user/todo/manage" + `/update/${arg.id}`;
 
+        const data = new FormData();
+        const headers = new Headers();
+
+        const todos = JSON.stringify({
+            title: `${arg.title}`,
+            content: `${arg.content}`,
+            isPublish: `${arg.isPublish}`
+        });
+
+        for (var i = 0; i < arg.files.length; i++) {
+            data.append("files", arg.files[i]);
+        }
+
+        headers.append("authorization", auth.getJsonToken());
+        data.append("todos", todos);
+
         var result = await fetch(url, {
             method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "authorization": auth.getJsonToken()
-            },
-            body: JSON.stringify({
-                title: `${arg.title}`,
-                cotent: `${arg.content}`,
-                isPublish: `${arg.isCheckPublic}`
-            }),
+            headers: headers,
+            body: data
         }).then(Response => {
             if (Response.status.toString() === "200") {
                 console.log("수정 성공");
             }
         }).catch((error) => {
-            console.log(error);
+            console.error(error);
         });
 
         return result.text();
@@ -85,7 +94,7 @@ export class Todo {
         }).then(Response => {
 
         }).catch((error) => {
-            console.log(error);
+            console.error(error);
         });
 
         return result.text();
@@ -106,7 +115,7 @@ export class Todo {
                 isPublish: `${arg.isCheckPublic}`
             }),
         }).catch((error) => {
-            console.log(error);
+            console.error(error);
         });
     }
 
@@ -119,7 +128,7 @@ export class Todo {
                 "authorization": auth.getJsonToken()
             }
         }).catch((error) => {
-            console.log(error);
+            console.error(error);
         });
 
         return result.text();
@@ -134,12 +143,12 @@ export class Todo {
                 "authorization": auth.getJsonToken()
             }
         }).catch((error) => {
-            console.log(error);
+            console.error(error);
         });
     }
 
     async requestChangePublish(arg) {
-        const url = backEndServerAddress + "/user/todo/manage" + ``;
+        const url = backEndServerAddress + "/user/todo/manage/update/publish" + `/${arg.id}`;
 
         var result = await fetch(url, {
             method: 'POST',
@@ -148,7 +157,7 @@ export class Todo {
                 "authorization": auth.getJsonToken()
             }
         }).catch((error) => {
-            console.log(error);
+            console.error(error);
         });
     }
 
@@ -162,7 +171,7 @@ export class Todo {
                 "authorization": auth.getJsonToken()
             },
         }).catch((error) => {
-            console.log(error);
+            console.error(error);
         });
 
         return result.json();

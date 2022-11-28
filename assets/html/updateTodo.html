@@ -19,6 +19,7 @@
 	<script type="text/javascript" src="./../js/breakpoints.min.js"></script>
 
 	<!-- config -->
+	<script type="text/javascript" src="./../js/util/message.js"></script>
 	<script type="text/javascript" src="./../js/config.js"></script>
 	<script type="module" src="./../js/account/Auth.js"></script>
 
@@ -49,7 +50,7 @@
 							<input type="text" name="query" placeholder="Search" />
 						</form>
 					</li>
-					<li class="alarm">
+					<li class="alarm auth">
 						<a class="fa-bell" href="#alarm">alarm</a>
 						<form id="search" method="get" action="#">
 							<input type="text" name="query" placeholder="Search" />
@@ -142,40 +143,45 @@
 			<!-- Post -->
 			<section class="post">
 				<h3>Todo Update</h3>
-				<form id="todo_update" method="post">
+				<form id="todo_form" method="post">
 					<div class="row gtr-uniform">
                         <div class="col-8 col-12-xsmall" hidden>
 							<input type="text" name="id" id="id" value=""/>
 						</div>
 						<div class="col-8 col-12-xsmall">
 							<input type="text" name="Title" id="title" value="" autocomplete="off" />
+							<div id="title-message" class="title-message message"></div>
+
+						</div>
+						<div class="col-4 col-12-small">
+							<input type="checkbox" id="isPublish" name="isPublish" value="PRIVATE">
+							<label for="isPublish" style="user-select: none;">비공개</label>
 						</div>
 
 						<div class="col-12">
-							<textarea name="content" id="content" value="" rows="6"
-								autocomplete="off"></textarea>
+							<textarea name="content" id="content" value="" rows="6" autocomplete="off"></textarea>
+							<div id="content-message" class="content-message message"></div>
 						</div>
-
-						<div class="col-6 col-12-small">
-							<input type="checkbox" id="non-public" name="demo-copy" value="public">
-							<label for="non-public" style="user-select: none;">비공개</label>
-						</div>
-
-						<!-- <div class="col-12">
-							<ul class="actions">
-								<li><button class="button"  id="save_button" type="submit" value="Send Message">Send Message</button></li>
-								<li><input type="file" class="button icon solid fa-upload"></input></li>
-							</ul>
-						</div> -->
 					</div>
 				</form>
 				<div class="col-12">
 					<ul class="actions">
 						<li><button id="update_button" type="button" value="Send Message">Send Message</button></li>
-						<li><input type="file" class="button icon solid fa-upload"></input></li>
 					</ul>
 				</div>
-
+				<div class="col-12 view-images">
+					<div class="col-12 title">
+						<h4>
+							Upload your Images &nbsp <h4 class="image-count">0</h4>&nbsp<h4 class="image-limit">/ 2</h4>
+						</h4>
+					</div>
+					<ul class="actions views">
+						<!-- <li>
+							<input id="files" class="files" type="file" multiple="multiple"></input>
+							<label for="files" class="button icon solid fa-plus image"></label>
+						</li> -->
+					</ul>
+				</div>
 		</div>
 
 		<!-- Footer -->
@@ -201,7 +207,7 @@
     <script type="module" src="./../js/generator/footer.js"></script>
 	<script type="module" src="./../js/generator/menu.js"></script>
 
-	<script type="module" src="./../js/function/todoWrite.js"></script>
-	<script src="./../js/index/updatetodo.js"></script>
+	<script type="module" src="./../js/validation/formvalidation.js"></script>
+	<script type="module" src="./../js/index/updatetodo.js"></script>
 </body>
 </html>

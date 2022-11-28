@@ -229,3 +229,7 @@ input[type="text"].FAILURE {
         display: block;
         border: none;
     }
+
+.actions-hidden {
+    display: none;
+}

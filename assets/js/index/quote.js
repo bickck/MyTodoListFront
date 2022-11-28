@@ -22,15 +22,15 @@
      mainQuoteApi();
      dailyQuoteApi();
      recommandQuoteApi();
+     
  }
- 
+
  function mainQuoteApi() {
      const mainApiList = quoteapi.requestMainQuotes();
  
      mainApiList.then((data)=> {
-         console.log(data);
          if (data == null || data == "undefined") {
-             mainQuoteContainer.appendChild(nonDataInjector.createPostListQuote());
+             mainQuoteContainer.appendChild(nonDataInjector.createEmptyMainQuotePost());
              return;
          }
  
@@ -38,8 +38,6 @@
  
              var content = data.content[i];
              var container = postGenerator.createMainQuote(content);
- 
-             
              mainQuoteContainer.appendChild(container);
          }
      });
@@ -56,11 +54,11 @@
          }
  
          for (var i = 0; i < data.numberOfElements; i++) {
+            
  
              var content = data.content[i];
-             var container = postGenerator.createQuoteList(content);
- 
-             
+             console.log(content);
+             var container = postGenerator.createQuoteList(content);  
              dailyQuoteContinaer.appendChild(container);
          }
      });

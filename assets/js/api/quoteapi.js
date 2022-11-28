@@ -16,7 +16,6 @@ export class QuoteApi {
             }
         }).catch((error)=> {
             console.log(error);
-            console.log("서버 연결에 에러가 발생했습니다.");
         });
 
         return result.json();
@@ -32,7 +31,6 @@ export class QuoteApi {
             },
         }).catch((error)=> {
             console.log(error);
-            console.log("서버 연결에 에러가 발생했습니다.");
         });
 
         return result.json();
@@ -48,7 +46,6 @@ export class QuoteApi {
             },
         }).catch((error)=> {
             console.log(error);
-            console.log("서버 연결에 에러가 발생했습니다.");
         });
 
         return result.json();
@@ -64,7 +61,6 @@ export class QuoteApi {
             },
         }).catch((error)=> {
             console.log(error);
-            console.log("서버 연결에 에러가 발생했습니다.");
         });
 
         return result.json();
