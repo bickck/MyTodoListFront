@@ -100,3 +100,115 @@
 //     }
 
 // }
+
+
+var baseElement = {
+    article : document.createElement("article"),
+    header : document.createElement("header"),
+}
+
+var generator = function(argument) {
+
+    if(argument.type == "TODO") {
+
+        argument.baseElement = baseElement;
+
+        return categorizeTodo(argument);
+    }
+
+    if(argument.type == "QUOTE") {
+
+        argument.baseElement = baseElement;
+
+        return categorizeQuote(argument)
+    }
+
+    if(argument.type == "BLURB") {
+
+    }
+
+    if(argument.type == "DETAIL") {
+
+    }
+}
+
+function categorizeTodo(argument) {
+
+    argument.baseElement.postIdentify = document.createElement("p");
+    argument.baseElement.timeContainer = document.createElement("time");
+    argument.baseElement.mainImageContainer = document.createElement("img");
+
+
+    if(argument.detailType == "MAIN") {
+        argument.baseElement.titleContainer = document.createElement("div");
+        argument.baseElement.metaContainer = document.createElement("div");
+        argument.baseElement.title = document.createElement("h2");
+        argument.baseElement.subtitle = document.createElement("p");
+        argument.baseElement.mainContent = document.createElement("p");
+        argument.baseElement.userContainer = document.createElement("a");
+        argument.baseElement.username = document.createElement("span");
+        argument.baseElement.userImage = document.createElement("img");
+        argument.baseElement.stats = document.createElement("ul");
+        argument.baseElement.footer = document.createElement("footer");
+        argument.baseElement.heartContainer = document.createElement("li");
+        argument.baseElement.heart = document.createElement("a");
+
+    }
+
+    if(argument.detailType == "MINI"){
+        argument.baseElement.title = document.createElement("h2");
+        argument.baseElement.heart = document.createElement("a");
+        
+    }
+
+    if(argument.detailType == "POSTS") {
+
+    }
+
+    if(argument.type == "COMMENT") {
+        
+    }
+
+    return setElementTodoStruct(argument);
+}
+
+function categorizeQuote(argument) {
+
+    if(argument.detailType == "MAIN") {
+
+    }
+
+    if(argument.detailType == "MINI"){
+
+    }
+
+    if(argument.detailType == "POSTS") {
+        argument.baseElement.postList = document.createElement("li");
+    }
+
+    return setElementTodoStruct(argument);
+}
+
+function setElementTodoStruct(argument) {
+
+    if(argument.detailType == "MAIN") {
+       
+    }
+
+    if(argument.detailType == "MINI"){
+
+    }
+
+    if(argument.detailType == "POSTS") {
+
+    }
+
+    if(argument.type == "COMMENT") {
+        
+    }
+}
+
+
+
+
+generator({type : "TODO", detailType : "MINI"});

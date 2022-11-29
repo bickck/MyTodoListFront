@@ -173,7 +173,7 @@ export class PostGenerator {
         setVisualPublish({
             id: params.id,
             heart: params.heart,
-            comment : params.comment,
+            comment: params.comment,
             isPublish: params.isPublish
         }, heart, comment, "TODO");
 
@@ -1200,6 +1200,10 @@ function setVisualPublish(arg, heartContainer, commentContainer, postKind) {
     var isPublish = arg.isPublish;
     var comment = arg.comment;
 
+    if (postId == undefined) {
+        return console.log("post id not exist");
+    }
+
     if (postKind == "TODO" || postKind == "todo") {
         funcServer = todoServer;
     }
@@ -1208,20 +1212,22 @@ function setVisualPublish(arg, heartContainer, commentContainer, postKind) {
         funcServer = quoteServer;
     }
 
-   
     if (isPublish == "private" || isPublish == "PRIVATE") {
-        console.log(postId);
+
         postPrivateAction({
             postId,
-            heartContainer : heartContainer,
-            funcServer : funcServer,
-            commentContainer : commentContainer
+            heartContainer: heartContainer,
+            funcServer: funcServer,
+            commentContainer: commentContainer
         })
         return;
-    } 
-    if( isPublish == "publish" || isPublish == "PUBLISH") {
-        heartContainer.innerText = heart;    
-        commentContainer.innerText  = comment;
+    }
+    if (isPublish == "publish" || isPublish == "PUBLISH") {
+        heartContainer.innerText = heart;
+    }
+
+    if (commentContainer != null || commentContainer != undefined) {
+        commentContainer.innerText = comment;
     }
 
     // is Auth?
@@ -1285,6 +1291,7 @@ function cancleHeart(heartuuid, postId, heart, heartContainer) {
 }
 
 function addHeart(postId, heart, heartContainer) {
+
     var increaseHeart = Number(heart) + 1;
     heartContainer.innerText = increaseHeart;
     heartContainer.setAttribute("id", `heart-${postId}`);
@@ -1356,7 +1363,7 @@ function postPrivateAction(arg) {
             id: arg.postId
         });
 
-        if(postCommentContainer != null) {
+        if (postCommentContainer != null) {
             const commentContainerParent = postCommentContainer.parentElement;
             commentContainerParent.removeAttribute("class", "actions-hidden");
             postCommentContainer.classList.remove("actions-hidden");

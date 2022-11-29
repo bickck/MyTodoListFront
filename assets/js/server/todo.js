@@ -87,12 +87,7 @@ export class Todo {
             headers: {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
-            },
-            body: JSON.stringify({
-
-            }),
-        }).then(Response => {
-
+            }
         }).catch((error) => {
             console.error(error);
         });
@@ -117,6 +112,8 @@ export class Todo {
         }).catch((error) => {
             console.error(error);
         });
+
+        return result.json();
     }
 
     async requestSaveHeart(arg) {
@@ -145,6 +142,8 @@ export class Todo {
         }).catch((error) => {
             console.error(error);
         });
+
+        return result.json();
     }
 
     async requestChangePublish(arg) {
@@ -159,6 +158,8 @@ export class Todo {
         }).catch((error) => {
             console.error(error);
         });
+
+        return result.json();
     }
 
     async requestHeartExists(arg) {

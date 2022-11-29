@@ -4,11 +4,9 @@ import {
 import {
     ImageApi
 } from "./../api/imageapi.js";
-
 import {
     Auth
 } from "./../account/auth.js";
-
 import {
     NonDataInjector
 } from "./../util/page.js"
@@ -21,6 +19,9 @@ import {
 import {
     Todo
 } from "./../server/todo.js";
+import {
+    Quote
+} from "./../server/quote.js";
 
 const userInfoButton = document.querySelector("#user-info-button");
 const userTodoButton = document.querySelector("#user-todo-button");
@@ -40,6 +41,7 @@ var currPage = todoPost;
 const user = new Users();
 const auth = new Auth();
 const todo = new Todo();
+const quote = new Quote();
 const userapi = new UserApi();
 const imageapi = new ImageApi();
 const nonDataInjector = new NonDataInjector();
@@ -158,16 +160,15 @@ function setUserTodoPost() {
         if (data == null || data == "undefined" || data.content.length == 0) {
             todosSection.appendChild(nonDataInjector.createEmptyMainTodoPost());
             return;
-        } else {
+        }
 
-            const size = data.numberOfElements;
+        const size = data.numberOfElements;
 
-            for (var i = 0; i < size; i++) {
-                const content = data.content[i];
-                const container = postGenerator.createMainPost(content);
-                const addedAction = createPostManageActions(container, data.content[i].id)
-                todosSection.appendChild(addedAction);
-            }
+        for (var i = 0; i < size; i++) {
+            const content = data.content[i];
+            const container = postGenerator.createMainPost(content);
+            const addedAction = createPostManageActions(container, data.content[i].id, "TODO");
+            todosSection.appendChild(addedAction);
         }
 
     });
@@ -190,17 +191,18 @@ function setUserQuotePost() {
         if (data == null || data == "undefined" || data.content.length == 0) {
             quoteSection.appendChild(nonDataInjector.createEmptyMainQuotePost());
             return;
-        } else {
-
-            const size = data.numberOfElements;
-
-            for (var i = 0; i < size; i++) {
-                const content = data.content[i];
-                console.log(content);
-                quoteSection.appendChild(postGenerator.createMainQuote(content));
-            }
-
         }
+
+        const size = data.numberOfElements;
+
+        for (var i = 0; i < size; i++) {
+            const content = data.content[i];
+            const container = postGenerator.createMainQuote(content);
+            const addedAction = createPostManageActions(container, data.content[i].id, "QUOTE");
+            quoteSection.appendChild(addedAction);
+        }
+
+
 
     });
 }
@@ -222,16 +224,15 @@ function setUserTodoLikePost() {
         if (data == null || data == "undefined" || data.content.length == 0) {
             todoLikeSection.appendChild(nonDataInjector.createEmptyMainTodoPost());
             return;
-        } else {
-
-            const size = data.numberOfElements;
-
-            for (var i = 0; i < size; i++) {
-                const content = data.content[i];
-                setDeleteEvent(content);
-                todoLikeSection.appendChild(postGenerator.createMainPost(content));
-            }
         }
+        const size = data.numberOfElements;
+
+        for (var i = 0; i < size; i++) {
+            const content = data.content[i];
+            const container = postGenerator.createMainPost(content);
+            todoLikeSection.appendChild(container);
+        }
+
 
     });
 
@@ -255,15 +256,15 @@ function setUserQuoteLikePost() {
         if (data == null || data == "undefined" || data.content.length == 0) {
             quoteSection.appendChild(nonDataInjector.createEmptyMainQuotePost());
             return;
-        } else {
-
-            const size = data.numberOfElements;
-
-            for (var i = 0; i < size; i++) {
-                const content = data.content[i];
-                quoteSection.appendChild(postGenerator.createMainQuote(content));
-            }
         }
+        const size = data.numberOfElements;
+
+        for (var i = 0; i < size; i++) {
+            const content = data.content[i];
+            const container = postGenerator.createMainPost(content);
+            quoteSection.appendChild(container);
+        }
+
     });
 }
 
@@ -271,27 +272,14 @@ function clearChildNode(section) {
     section.innerHTML = "";
 }
 
-function setDeleteEvent(container) {
-
-    const parentContainer = container.lastChild.lastChild;
-
-    const li = document.createElement("li");
-    const a = document.createElement("a");
-
-
-    console.dir(container.lastChild.lastChild);
-}
-
-
 /**
  * 
  * @param {*} arg 
  */
 
-function createPostManageActions(arg, todoid) {
+function createPostManageActions(arg, postid, postKind) {
 
     const postActionsContainer = arg.lastChild.firstChild;
-    console.dir(arg.lastChild.firstChild);
 
     const deleteList = document.createElement("li");
     const updateList = document.createElement("li");
@@ -308,12 +296,39 @@ function createPostManageActions(arg, todoid) {
     deleteButton.setAttribute("class", "");
     updateButton.setAttribute("class", "");
 
-    deleteButton.addEventListener("click", function deleteActions() {
-        todo.requestUserTodoDelete({
-            id: todoid
-        });
+    
+
+    deleteButton.addEventListener("click", function setDeleteActions() {
+        var server;
+ 
+        if (postKind == "TODO" || postKind == "todo") {
+
+            server = todo.requestUserTodoDelete({
+                id: postid
+            });
+            server.then(() => {
+                setUserTodoPost();
+            });
+        }
+        if (postKind == "QUOTE" || postKind == "quote") {
+            console.log("quote");
+            server = quote.requestUserQuoteDelete({
+                id: postid
+            });
+            server.then(() => {
+                setUserQuotePost();
+
+            });
+        }
     });
-    updateButton.setAttribute("href", frontEndServerAddress + `/assets/html/updatetodo.html?todoid=${todoid}`);
+
+    if(postKind == "TODO" || postKind == "todo"){
+        updateButton.setAttribute("href", frontEndServerAddress + `/assets/html/updatetodo.html?todoid=${postid}`);
+    }
+
+    if(postKind == "QUOTE" || postKind == "quote") {
+        updateButton.setAttribute("href", frontEndServerAddress + `/assets/html/updatequote.html?quoteid=${postid}`);
+    }
 
     deleteList.appendChild(deleteButton);
     updateList.appendChild(updateButton);
@@ -322,9 +337,7 @@ function createPostManageActions(arg, todoid) {
     postActionsContainer.appendChild(updateList);
 
     return arg;
-
 }
-
 
 userInfoButton.addEventListener("click", postHiddenActions);
 userTodoButton.addEventListener("click", postHiddenActions);
