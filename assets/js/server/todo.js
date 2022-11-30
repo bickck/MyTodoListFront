@@ -29,16 +29,10 @@ export class Todo {
         headers.append("authorization", auth.getJsonToken());
         data.append("todos", todos);
 
-
         var result = await fetch(url, {
             method: 'POST',
             headers: headers,
             body: data
-        }).then(Response => {
-            if (Response.status.toString() === "200") {
-                console.log("저장 성공");
-                // window.location.href = mainPageAddress;
-            }
         }).catch((error) => {
             console.error(error);
         });
@@ -58,9 +52,19 @@ export class Todo {
             isPublish: `${arg.isPublish}`
         });
 
+        // if(arg.files.length == 0) {
+        //     console.log("hi");
+        //     headers.append("Content-Type","application/json");
+        // } else {
+        //     for (var i = 0; i < arg.files.length; i++) {
+        //         data.append("files", arg.files[i]);
+        //     }
+        // }
+
         for (var i = 0; i < arg.files.length; i++) {
             data.append("files", arg.files[i]);
         }
+
 
         headers.append("authorization", auth.getJsonToken());
         data.append("todos", todos);
@@ -69,10 +73,6 @@ export class Todo {
             method: 'POST',
             headers: headers,
             body: data
-        }).then(Response => {
-            if (Response.status.toString() === "200") {
-                console.log("수정 성공");
-            }
         }).catch((error) => {
             console.error(error);
         });

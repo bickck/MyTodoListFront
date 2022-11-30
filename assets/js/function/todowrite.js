@@ -108,11 +108,15 @@ function todoSave() {
     if (isPublish.checked == false) {
         arg.isPublish = "publish";
     }
+    popupOpen("저장하시겠습니까?", function () {
+        var result = todo.requestUserTodoInsert(arg);
 
-    var result = todo.requestUserTodoInsert(arg);
-
-    result.then((data) => {
-        window.location.href = mainPageAddress;
+        result.then((data)=>{
+            if(data == "SUCCESS") {
+                popupClose();
+                //window.location.href = mainPageAddress;
+            }
+        })
     });
 }
 
@@ -121,6 +125,7 @@ function todoDelete() {
     const id = document.querySelector("#post_id").value;
     const requestUrl = backEndServerAddress + `/user/todo/manage/delete/${id}`;
 
+    popupOpen("삭제하시겠습니까?");
     var arg = {
         url: requestUrl
     }

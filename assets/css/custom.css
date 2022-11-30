@@ -212,13 +212,8 @@ input[type="text"].FAILURE {
 #alarm {
     top: 0;
     width: 25em;
-    /* height: 10em; */
     background: #ffffff;
     text-align: left;
-    /* border-left : solid 1px rgba(160, 160, 160, 0.3); */
-    /* border-right: solid 1px rgba(160, 160, 160, 0.3);
-    border-bottom: solid 1px rgba(160, 160, 160, 0.3); */
-    /* visibility: hidden; */
 }
 
     #alarm > .alarm-message {
@@ -234,3 +229,34 @@ input[type="text"].FAILURE {
     display: none;
 }
 
+.backGround {
+    z-index: 6;
+    position: absolute;
+    top: 0;
+    background-color: rgba(160, 160, 160, 0.486);
+    /* background-color: rgba(165, 76, 76, 0.486); */
+    width: 100vw;
+    height: 100vh;
+}
+
+.popup-window {
+    z-index: 5;
+    position: absolute;
+    width: 42rem;
+    height: 20rem;
+    background-color: white;
+    top: 30%;
+    left: 37%;
+    margin: 0;
+}
+    .popup-window > .message {
+        text-align: center;
+        align-items: center;
+        font-size: 1.5rem;
+        margin-top: 50px;
+        padding: 0;
+        height: 4rem
+    }
+    .popup-window > .buttons {
+        padding-top: 15px;
+    }

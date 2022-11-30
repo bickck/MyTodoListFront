@@ -98,6 +98,9 @@ function setTodoAtForm(arg) {
     if (arg.isPublish == "PRIVATE" || arg.isPublish == "private") {
         isPublish.setAttribute("checked", true);
     }
+    if(arg.postImgCount == 0) {
+        imagePreviewer.startImagePreviewerCreator();
+    }
 
     if (arg.postImgCount != 0) {
 
@@ -151,7 +154,15 @@ function todoUpdate() {
         arg.isPublish = "publish";
     }
 
-    todo.requestUserTodoUpdate(arg);
+    popupOpen("수정하시겠습니까?", function () {
+        var result = todo.requestUserTodoUpdate(arg);
+        result.then((data) => {
+            if(data == "SUCCESS") {
+
+            }
+            console.log(data);
+        });
+    });
 }
 
 update_btn.addEventListener("click", todoUpdate);

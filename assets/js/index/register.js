@@ -120,6 +120,7 @@ function register(event) {
     //     return;
     // }
 
+    popupOpen("회원가입을 하시겠습니까?");
 
     var result = account.register({
         email: email.value,

@@ -23,11 +23,11 @@ $("#quote").on("blur", function (event) {
         return;
     }
 
-    if($("#quote").hasClass("FAILURE")) {
+    if ($("#quote").hasClass("FAILURE")) {
         $("#quote").removeClass("FAILURE");
     }
-    
-    if(!formvalidation.isTextValidationCheck(text)) {
+
+    if (!formvalidation.isTextValidationCheck(text)) {
         $("#register_form").appearErrorMessage("quote-message");
         $("#register_form").setErrorMessage(`quote-message`, "내용을 입력해주세요.");
         $("#quote").addClass("FAILURE");
@@ -44,11 +44,11 @@ $("#author").on("blur", function (event) {
         return;
     }
 
-    if($("#author").hasClass("FAILURE")) {
+    if ($("#author").hasClass("FAILURE")) {
         $("#author").removeClass("FAILURE");
     }
 
-    if(!formvalidation.isTextValidationCheck(text)) {
+    if (!formvalidation.isTextValidationCheck(text)) {
         $("#register_form").appearErrorMessage("author-message");
         $("#register_form").setErrorMessage(`author-message`, "내용을 입력해주세요.");
         $("#author").addClass("FAILURE");
@@ -92,16 +92,22 @@ function quoteSave() {
         isPublish.value = "publish";
     }
 
-    var result = quoteServer.requestUserQuoteSave({
-        quote : quote,
-        author : author,
-        isPublish : isPublish
-    });
+    var arg = {
+        quote: quote,
+        author: author,
+        isPublish: isPublish
+    }
 
-    result.then((data)=> {
-        if (data.status.toString() === "200") {
-            //window.location.href = mainPageAddress;
-        }
+
+    popupOpen("저장하시겠습니까?", function () {
+        var result = quoteServer.requestUserQuoteSave(arg);
+
+        result.then((data) => {
+            if (data == "SUCCESS") {
+                popupClose();
+                //window.location.href = mainPageAddress;
+            }
+        })
     });
 
 }
@@ -116,14 +122,16 @@ function quoteUpdate(arg) {
     const author = document.querySelector("#author");
     const isPublish = document.querySelector("#isPublish");
 
-    if(isPublish.checked) {
+    if (isPublish.checked) {
         isPublish.value = "PRIVATE";
     }
-    
+
     console.log(quote.value);
     console.log(author.value);
     console.log(isPublish.value);
-    
+
+    popupOpen("수정하시겠습니까?");
+
     // var result = quoteServer.requestUserQuoteUpdate({
     //     quote : quote,
     //     author : author,
@@ -152,9 +160,9 @@ function quoteDelete(arg) {
 
 
     var result = quoteServer.requestUserQuoteUpdate({
-        quote : quote,
-        author : author,
-        isPublish : isPublish
+        quote: quote,
+        author: author,
+        isPublish: isPublish
     });
 
     result.then((Response) => {
