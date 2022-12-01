@@ -9,15 +9,12 @@ const backEndServerAddress = "http://localhost:8080";
 const frontEndServerAddress = "http://127.0.0.1:5501";
 const mainPageAddress = "http://127.0.0.1:5501/index.html";
 
-const updateTodoURL = "user/todo/manage/update/{id}"
-const deleteTodoURL = "/user/todo/manage/delete/{id}"
-const recommandTodoAddURL = "/user/todo/manage/comment/add/{id}"
-const heartTodoURL = "/user/todo/manage/heart/{id}"
+const todoPage = frontEndServerAddress + "/assets/html/todo.html";
+const quotePage = frontEndServerAddress + "/assets/html/quote.html";
 
 const mainPostURL = "/todo/api/mainpost"
 const addHeartURL = "";
 const addCommentURL="";
-
 
 const loginPageURL = "/assets/html/login.html";
 
@@ -26,7 +23,7 @@ const userTodoURL = "/todo/api/";
 const userQuoteURL = "/quote/api/";
 
 const todoWritePageURL = "";
-// const quoteWritePageURL = "";
+const quoteWritePageURL = "";
 
 const todoPageURL = "/assets/html/todo.html";
 const quotePageURL = "/assets/html/quote.html";

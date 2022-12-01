@@ -8,7 +8,7 @@
 
     <title>User Page</title>
 
-    
+
     <!-- css -->
     <link rel="stylesheet" href="./../css/main.css">
     <link rel="stylesheet" href="./../css/custom.css">
@@ -49,11 +49,11 @@
                         </form>
                     </li>
                     <li class="alarm">
-						<a class="fa-bell" href="#alarm">alarm</a>
-						<form id="search" method="get" action="#">
-							<input type="text" name="query" placeholder="Search" />
-						</form>
-					</li>
+                        <a class="fa-bell" href="#alarm">alarm</a>
+                        <form id="search" method="get" action="#">
+                            <input type="text" name="query" placeholder="Search" />
+                        </form>
+                    </li>
                     <li class="menu">
                         <a class="fa-bars" href="#menu">Menu</a>
                     </li>
@@ -74,49 +74,33 @@
             <!-- Links -->
             <section class="auth">
                 <ul class="links">
-					<li>
-						<a href="#userManagePage">
-							<h3>User Manage</h3>
-						</a>
-					</li>
-					<!-- <li>
-						<a href="#userTodoPage">
-							<h3>User Todo</h3>
-						</a>
-					</li>
-					<li>
-						<a href="#userQuotePage">
-							<h3>User Quote</h3>
-						</a>
-					</li> -->
-					<li>
-						<a href="#userTodoWritePage">
-							<h3>Write Todo</h3>
-						</a>
-					</li>
-					<li>
-						<a href="#userQuoteWritePage">
-							<h3>Write Quote</h3>
-						</a>
-					</li>
-				</ul>
+                    <li>
+                        <a href="#userManagePage">
+                            <h3>User Manage</h3>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#userTodoWritePage">
+                            <h3>Write Todo</h3>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#userQuoteWritePage">
+                            <h3>Write Quote</h3>
+                        </a>
+                    </li>
+                </ul>
             </section>
             <!-- Links -->
             <section class="non-auth">
                 <ul class="links">
-					<!-- <li>
-						<a href="#pagetodo">
-							<h3>Todo</h3>
-							<p>Feugiat tempus veroeros dolor</p>
-						</a>
-					</li> -->
-					<li>
-						<a href="#pagequote">
-							<h3>Quote</h3>
-							<p>Sed vitae justo condimentum</p>
-						</a>
-					</li>
-				</ul>
+                    <li>
+                        <a href="#pagequote">
+                            <h3>Quote</h3>
+                            <p>Sed vitae justo condimentum</p>
+                        </a>
+                    </li>
+                </ul>
             </section>
 
             <!-- Actions -->
@@ -142,7 +126,69 @@
                 <div>
                     <h2>Your Info</h2>
                 </div>
-                <div class="user-info-section"></div>
+                <div class="user-info-section">
+                    <article class="post">
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <h2>User Image</h2>
+                                        </th>
+                                        <th><img class="user-image" src="./../../images/logo.jpg" alt="" />
+                                            <ul class="user-intro-manage">
+                                                <li><button id="user-image-update" class="small"> USER IMAGE UPDATE</button></li>
+                                                <li><button id="user-image-delete" class="small"> USER IMAGE DELETE</button></li>
+                                            </ul>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="user-intro">
+                                    <tr>
+                                        <td>
+                                            <h3>Email</h3>
+                                        </td>
+                                        <td>
+                                            <p id="intro-email"></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3>UserName</h3>
+                                        </td>
+                                        <td>
+                                            <p id="intro-username"></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3>Comment</h3>
+                                        </td>
+                                        <td>
+                                            <p id="intro-comment">Ante turpis integer aliquet porttitor.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3>Birth</h3>
+                                        </td>
+                                        <td>
+                                            <p id="intro-birth"></p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td>
+                                            <button id="user-update">UPDATE</button>
+                                            <button id="user-delete">DELETE</button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </article>
+                </div>
             </div>
             <div id="todo" class="todo">
                 <div>
@@ -150,7 +196,7 @@
                 </div>
                 <div class="todo-section"></div>
             </div>
-            
+
             <div id="quote" class="quote" hidden>
                 <div>
                     <h2>Your Quote</h2>
@@ -173,10 +219,6 @@
             </div>
         </div>
 
-        <!-- <div id="main" class="Quote" hidden>
-            <h2>Your Test</h2>
-
-        </div> -->
 
         <!-- Sidebar -->
         <section id="sidebar">
@@ -197,11 +239,11 @@
             <section>
                 <h2>유저 정보</h2>
                 <ul class="user action">
-                    <li><button id="user-info-button" class="actions" type="button">사용자 정보</button></li>
-                    <li><button id="user-todo-button" class="actions" type="button">Todo</button></li>
-                    <li><button id="user-quote-button" class="actions" type="button">Quote</button></li>
-                    <li><button id="user-todo-like-button" class="actions" type="button">좋아요한 Todo</button></li>
-                    <li><button id="user-quote-like-button" class="actions" type="button">좋아요한 Quote</button></li>
+                    <li><a id="user-info-button" class="actions" type="button">사용자 정보</a></li>
+                    <li><a id="user-todo-button" class="actions" type="button">Todo</a></li>
+                    <li><a id="user-quote-button" class="actions" type="button">Quote</a></li>
+                    <li><a id="user-todo-like-button" class="actions" type="button">좋아요한 Todo</a></li>
+                    <li><a id="user-quote-like-button" class="actions" type="button">좋아요한 Quote</a></li>
                 </ul>
             </section>
 
@@ -240,8 +282,8 @@
     <script type="module" src="./../js/generator/footer.js"></script>
     <script type="module" src="./../js/generator/menu.js"></script>
 
-    <script type="module"  src="./../js/index/userpage.js"></script>
-   
+    <script type="module" src="./../js/index/userpage.js"></script>
+
 </body>
 
 </html>

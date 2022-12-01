@@ -14,7 +14,6 @@ const formvalidation = new FormValidation();
 
 const save_btn = document.querySelector("#save_button");
 const update_btn = document.querySelector("#update_button");
-const delete_btn = document.querySelector("#delete_button");
 
 $("#quote").on("blur", function (event) {
     var text = event.target.value;
@@ -33,7 +32,6 @@ $("#quote").on("blur", function (event) {
         $("#quote").addClass("FAILURE");
     } else {
         $("#quote_form").disappearErrorMessage("quote-message");
-        // $("#quote").addClass("SUCCESS");
     }
 })
 
@@ -98,14 +96,13 @@ function quoteSave() {
         isPublish: isPublish
     }
 
-
     popupOpen("저장하시겠습니까?", function () {
         var result = quoteServer.requestUserQuoteSave(arg);
 
         result.then((data) => {
             if (data == "SUCCESS") {
                 popupClose();
-                //window.location.href = mainPageAddress;
+                window.location.href = quotePage;
             }
         })
     });
@@ -126,56 +123,50 @@ function quoteUpdate(arg) {
         isPublish.value = "PRIVATE";
     }
 
-    console.log(quote.value);
-    console.log(author.value);
-    console.log(isPublish.value);
+    var arg = {
+        quote : quote,
+        author : author,
+        isPublish : isPublish
+    }
 
-    popupOpen("수정하시겠습니까?");
+    popupOpen("수정하시겠습니까?", function () {
+        var result = quoteServer.requestUserQuoteUpdate(arg);
 
-    // var result = quoteServer.requestUserQuoteUpdate({
-    //     quote : quote,
-    //     author : author,
-    //     isPublish : isPublish
-    // });
-
-    // result.then((Response) => {
-    //     if (Response.status.toString() === "200") {
-    //         //window.location.href = mainPageAddress;
-    //     }
-    // })
+        result.then((data) => {
+            if (data == "SUCCESS") {
+                popupClose();
+                window.location.href = quotePage;
+            }
+        })
+    });
 }
 
 /**
  * 
  */
 
-function quoteDelete(arg) {
-    const quote = document.querySelector("#quote").value;
-    const author = document.querySelector("#author").value;
-    var isCheckPublic = document.querySelector("#non-public").value;
-
-    if (isCheckPublic.checked == false) {
-        isCheckPublic.value = "public";
-    }
-
-
-    var result = quoteServer.requestUserQuoteUpdate({
-        quote: quote,
-        author: author,
-        isPublish: isPublish
-    });
-
-    result.then((Response) => {
-        if (Response.status.toString() === "200") {
-            //window.location.href = mainPageAddress;
-        }
-    })
-}
-
-
-if (delete_btn != null) {
-    delete_btn.addEventListener("click", quoteDelete);
-}
+// function quoteDelete(arg) {
+//     const quote = document.querySelector("#quote").value;
+//     const author = document.querySelector("#author").value;
+//     var isCheckPublic = document.querySelector("#non-public").value;
+//     if (isCheckPublic.checked == false) {
+//         isCheckPublic.value = "public";
+//     }
+//     var arg = {
+//         quote: quote,
+//         author: author,
+//         isPublish: isPublish
+//     }
+//     var result = quoteServer.requestUserQuoteUpdate(arg);
+//     result.then((Response) => {
+//         if (Response.status.toString() === "200") {
+//             //window.location.href = mainPageAddress;
+//         }
+//     })
+// }
+// if (delete_btn != null) {
+//     delete_btn.addEventListener("click", quoteDelete);
+// }
 if (update_btn != null) {
     update_btn.addEventListener("click", quoteUpdate);
 }

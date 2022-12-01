@@ -2,9 +2,6 @@ import {
     UserApi
 } from "./../api/userapi.js";
 import {
-    ImageApi
-} from "./../api/imageapi.js";
-import {
     Auth
 } from "./../account/auth.js";
 import {
@@ -22,6 +19,11 @@ import {
 import {
     Quote
 } from "./../server/quote.js";
+
+const userimageUpdateButton = document.querySelector("#user-image-update");
+const userimageDeleteButton = document.querySelector("#user-image-delete");
+const userDeleteButton = document.querySelector("#user-delete");
+const userUpdateButton = document.querySelector("#user-update");
 
 const userInfoButton = document.querySelector("#user-info-button");
 const userTodoButton = document.querySelector("#user-todo-button");
@@ -43,7 +45,6 @@ const auth = new Auth();
 const todo = new Todo();
 const quote = new Quote();
 const userapi = new UserApi();
-const imageapi = new ImageApi();
 const nonDataInjector = new NonDataInjector();
 const postGenerator = new PostGenerator();
 
@@ -127,11 +128,7 @@ function setSidebarUserIntro() {
         if (fileName != null && location != null) {
             const imageSource = backEndServerAddress + `/${location}` + `/${fileName}`;
             userImageContainer.setAttribute("src", imageSource);
-        } else {
-
         }
-
-
     });
 }
 
@@ -141,6 +138,18 @@ function setSidebarUserIntro() {
 
 function setUserInfoPost() {
 
+    var result = user.requestUserDetails();
+
+    result.then((data) => {
+
+        const introEmailSection = document.querySelector("#intro-email");
+        const introUsernameSection = document.querySelector("#intro-username");
+        const introCommentSection = document.querySelector("#intro-comment");
+        const introBirthSection = document.querySelector("#intro-birth");
+
+        introUsernameSection.innerText = data.username;
+        introCommentSection.innerText = data.introComment;    
+    });
 }
 
 /**
@@ -293,40 +302,52 @@ function createPostManageActions(arg, postid, postKind) {
     deleteList.setAttribute("class", "post_delete");
     updateList.setAttribute("class", "post_update");
 
-    deleteButton.setAttribute("class", "");
-    updateButton.setAttribute("class", "");
+    deleteButton.setAttribute("class", "delete");
+    updateButton.setAttribute("class", "update");
 
-    
+
 
     deleteButton.addEventListener("click", function setDeleteActions() {
-        var server;
- 
+
         if (postKind == "TODO" || postKind == "todo") {
 
-            server = todo.requestUserTodoDelete({
-                id: postid
-            });
-            server.then(() => {
-                setUserTodoPost();
+            popupOpen("삭제하시겠습니까?", function () {
+
+                var server = todo.requestUserTodoDelete({
+                    id: postid
+                });
+
+                server.then((data) => {
+                    if (data == "SUCCESS") {
+                        popupClose();
+                        setUserTodoPost();
+                    }
+                });
             });
         }
         if (postKind == "QUOTE" || postKind == "quote") {
-            console.log("quote");
-            server = quote.requestUserQuoteDelete({
-                id: postid
-            });
-            server.then(() => {
-                setUserQuotePost();
 
+            popupOpen("삭제하시겠습니까?", function () {
+
+                var server = quote.requestUserQuoteDelete({
+                    id: postid
+                });
+
+                server.then((data) => {
+                    if (data == "SUCCESS") {
+                        popupClose();
+                        setUserQuotePost();
+                    }
+                });
             });
         }
     });
 
-    if(postKind == "TODO" || postKind == "todo"){
+    if (postKind == "TODO" || postKind == "todo") {
         updateButton.setAttribute("href", frontEndServerAddress + `/assets/html/updatetodo.html?todoid=${postid}`);
     }
 
-    if(postKind == "QUOTE" || postKind == "quote") {
+    if (postKind == "QUOTE" || postKind == "quote") {
         updateButton.setAttribute("href", frontEndServerAddress + `/assets/html/updatequote.html?quoteid=${postid}`);
     }
 
@@ -339,8 +360,146 @@ function createPostManageActions(arg, postid, postKind) {
     return arg;
 }
 
+function userImageUpdateAction() {
+    console.log("userImageUpdateAction");
+}
+
+function userImageDeleteAction() {
+    console.log("userImageDeleteAction");
+}
+
+function userDeleteAction() {
+    console.log("userDeleteAction");
+}
+
+function userUpdateAction() {
+    console.log("userUpdateAction");
+}
+
 userInfoButton.addEventListener("click", postHiddenActions);
 userTodoButton.addEventListener("click", postHiddenActions);
 userQuoteButton.addEventListener("click", postHiddenActions);
 userTodoLikeButton.addEventListener("click", postHiddenActions);
 userQuoteLikeButton.addEventListener("click", postHiddenActions);
+
+userimageUpdateButton.addEventListener("click", userImageUpdateAction);
+userimageDeleteButton.addEventListener("click", userImageDeleteAction);
+userDeleteButton.addEventListener("click", userDeleteAction);
+userUpdateButton.addEventListener("click", userUpdateAction);
+
+
+//=====================================================================================================================
+
+
+var actionsContianer = {
+    deleteList: document.createElement("li"),
+    updateList: document.createElement("li"),
+    deleteButton: document.createElement("a"),
+    updateButton: document.createElement("a")
+}
+
+// function setElementActionsStruct(actionsContianer) {
+//     const postActionsContainer = actionsContianer.lastChild.firstChild;
+//     actionsContianer.deleteList.setAttribute("class", "post_delete");
+//     actionsContianer.updateList.setAttribute("class", "post_update");
+//     actionsContianer.deleteButton.setAttribute("class", "");
+//     actionsContianer.updateButton.setAttribute("class", "");
+//     actionsContianer.deleteList.appendChild(actionsContianer.deleteButton);
+//     actionsContianer.updateList.appendChild(actionsContianer.updateButton);
+//     postActionsContainer.appendChild(actionsContianer.deleteList);
+//     postActionsContainer.appendChild(actionsContianer.updateList);
+//     actionsContianer.postActionsContainer = postActionsContainer;
+
+//     return actionsContianer;
+// }
+
+function createQuotePostManageActions(arg) {
+
+    const quoteid = arg.quoteid;
+
+    const postActionsContainer = arg.lastChild.firstChild;
+    const deleteList = document.createElement("li");
+    const updateList = document.createElement("li");
+    const deleteButton = document.createElement("a");
+    const updateButton = document.createElement("a");
+
+    deleteButton.innerText = "DELETE";
+    updateButton.innerText = "UPDATE";
+
+    deleteList.appendChild(deleteButton);
+    updateList.appendChild(updateButton);
+    postActionsContainer.appendChild(deleteList);
+    postActionsContainer.appendChild(updateList);
+
+    deleteList.setAttribute("class", "post_delete");
+    updateList.setAttribute("class", "post_update");
+
+    deleteButton.setAttribute("class", "");
+    updateButton.setAttribute("class", "");
+
+    updateButton.setAttribute("href", frontEndServerAddress + `/assets/html/updatequote.html?quoteid=${quoteid}`);
+    deleteButton.addEventListener("click", function setDeleteActions() {
+
+        popupOpen("삭제하시겠습니까?", function () {
+
+            var server = quote.requestUserQuoteDelete({
+                id: quoteid
+            });
+
+            server.then((data) => {
+                if (data == "SUCCESS") {
+                    popupClose();
+                    setUserQuotePost();
+                }
+            });
+        });
+
+    });
+
+    return arg;
+}
+
+function createTodoPostManageActions(arg) {
+
+    const todoid = arg.todoid;
+
+    const postActionsContainer = arg.lastChild.firstChild;
+    const deleteList = document.createElement("li");
+    const updateList = document.createElement("li");
+    const deleteButton = document.createElement("a");
+    const updateButton = document.createElement("a");
+
+    deleteButton.innerText = "DELETE";
+    updateButton.innerText = "UPDATE";
+
+    deleteList.setAttribute("class", "post_delete");
+    updateList.setAttribute("class", "post_update");
+    deleteButton.setAttribute("class", "");
+    updateButton.setAttribute("class", "");
+
+    deleteList.appendChild(deleteButton);
+    updateList.appendChild(updateButton);
+    postActionsContainer.appendChild(deleteList);
+    postActionsContainer.appendChild(updateList);
+
+    updateButton.setAttribute("href", frontEndServerAddress + `/assets/html/updatetodo.html?todoid=${todoid}`);
+    deleteButton.addEventListener("click", function setDeleteActions() {
+
+        popupOpen("삭제하시겠습니까?", function () {
+
+            var server = todo.requestUserTodoDelete({
+                id: todoid
+            });
+
+            server.then((data) => {
+                if (data == "SUCCESS") {
+                    popupClose();
+                    setUserTodoPost();
+                }
+            });
+        });
+
+    });
+
+    return arg;
+}

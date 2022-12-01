@@ -16,11 +16,7 @@ export class Users {
                 "Content-Type": "application/json",
                 "authorization": `${auth.getJsonToken()}`
             },
-        })
-        // .then(Response => {
-
-        // })
-        .catch((error) => {
+        }).catch((error) => {
             console.log(error);
         });
         
@@ -28,7 +24,7 @@ export class Users {
     }
 
     async requestUserUpdate(arg) {
-        const url = backEndServerAddress + `/`;
+        const url = backEndServerAddress + `/user/manage/update/intro`;
         var result = await fetch(url, {
             method: 'POST',
             headers: {
@@ -38,8 +34,6 @@ export class Users {
             body: JSON.stringify({
 
             }),
-        }).then(Response => {
-
         }).catch((error) => {
             console.log(error);
         });
@@ -58,8 +52,6 @@ export class Users {
             body: JSON.stringify({
                 id : arg.id
             }),
-        }).then(Response => {
-
         }).catch((error) => {
             console.log(error);
         });
@@ -68,7 +60,7 @@ export class Users {
     }
 
     async requestSaveUserIntro(arg) {
-        const url = backEndServerAddress + `/user/manage/update/intro`;
+        const url = backEndServerAddress + `/user/manage/update/intro/comment`;
         console.log(arg);
         var result = await fetch(url, {
             method: 'POST',

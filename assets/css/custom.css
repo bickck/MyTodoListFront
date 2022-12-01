@@ -1,6 +1,4 @@
-
-
-#delete_button:hover {
+.actions .delete:hover {
     border-bottom-color: transparent;
     color: rgb(201, 64, 64) !important;
 }
@@ -80,9 +78,53 @@
                 margin-top: 0.5em;
 			}
 
+/* .quote > li > article > header > .stats {
+    cursor: default;
+    list-style: none;
+    display: flex;
+    padding: 0;
+    align-items: center;
+}
+
+     .quote > li > article > header > .stats li{
+        border-top: 0;
+        border-left: solid 1px rgba(160, 160, 160, 0.3);
+        display: inline-block;
+        font-family: "Raleway", Helvetica, sans-serif;
+        font-size: 0.6em;
+        font-weight: 400;
+        letter-spacing: 0.25em;
+        line-height: 1;
+        margin: 0 0 0 2em;
+        padding: 0 0 0 2em;
+        text-transform: uppercase;
+    }
+
+        .quote > li > article > header > .stats li:first-child {
+            border-left: 0;
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        .quote > li > article > header > .stats li .icon {
+            border-bottom: 0;
+        }
+
+            .quote > li > article > header > .stats li .icon:before {
+                color: rgba(160, 160, 160, 0.3);
+                margin-right: 0.75em;
+            }
+            
+
+            ul.quote > li > article > header > .stats li .published {
+                margin: 0;
+                margin-top: 0.5em;
+			} */
+
 .blurb.quote {
     
 }
+
 
 .fa-heart,
 .post-img,
@@ -90,9 +132,41 @@
 .comment,
 .author,
 .post-details,
+.delete,
+.update
 .sync {
     cursor: pointer;
 }
+
+/* 여기 때문에 버튼이 이상해진 것 같음 */
+footer > .actions {
+    cursor: default;
+    list-style: none;
+    display: flex;
+    padding: 0;
+    align-items: center;
+}
+
+    footer > .actions > li {
+        border-top: 0;
+        border-left: solid 1px rgba(160, 160, 160, 0.3);
+        display: inline-block;
+        font-family: "Raleway", Helvetica, sans-serif;
+        font-size: 0.6em;
+        font-weight: 400;
+        letter-spacing: 0.25em;
+        line-height: 1;
+        margin: 0 0 0 2em;
+        padding: 0 0 0 2em;
+        text-transform: uppercase;
+    }
+
+        footer > .actions li:first-child {
+            border-left: 0;
+            margin-left: 0;
+            padding-left: 0;
+        }
+
 
 .recommand-todos > article > header > .icon {
     color: rgba(160, 160, 160, 0.5);
@@ -158,24 +232,6 @@
     max-height: initial;
     overflow: hidden;
 }
-/* .views > li:hover {
-    padding: 20px;
-} */
-
-/* .image {
-    background-color: red;
-    background-image: url();
-    background-repeat: none;
-    background-size: cover;
-} */
-
-/* input[type="email"].SUCCESS,
-input[type="password"].SUCCESS,
-input[type="text"].SUCCESS {
-    box-shadow: inset 0 0 0 1px #2ebaae; 
-    border-color: #2ebaae;
-
-} */
 
 input[type="email"].FAILURE,
 input[type="password"].FAILURE,
@@ -234,7 +290,6 @@ input[type="text"].FAILURE {
     position: absolute;
     top: 0;
     background-color: rgba(160, 160, 160, 0.486);
-    /* background-color: rgba(165, 76, 76, 0.486); */
     width: 100vw;
     height: 100vh;
 }
@@ -260,3 +315,45 @@ input[type="text"].FAILURE {
     .popup-window > .buttons {
         padding-top: 15px;
     }
+
+.action {
+    list-style: none;
+}
+
+.user {
+    margin: 0;
+    padding: 0;
+    padding-left: 0.5em;
+}
+
+.user li {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 0.7em;
+}
+
+.user > li > a {
+    cursor: pointer;
+    border-top: 0;
+    display: inline-block;
+    font-family: "Raleway", Helvetica, sans-serif;
+    font-size: 0.8em;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.user-image {
+    padding-bottom: 10px;
+}
+
+.user-intro-manage {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+.user-intro-manage > li:first-child{
+    padding: 0;
+}

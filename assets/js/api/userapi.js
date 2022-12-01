@@ -10,6 +10,22 @@ export class UserApi {
      * 유저가 작성한 TODO
      */
 
+    // 유저 정보 요청
+    // async requestUserDetails(arg) {
+    //     const url = backEndServerAddress + `/user/api/intro`;
+    //     var result = await fetch(url, {
+    //         method: 'POST',
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "authorization": `${auth.getJsonToken()}`
+    //         },
+    //     }).catch((error) => {
+    //         console.log(error);
+    //     });
+        
+    //     return result.json();
+    // }
+
     async requestUserTodos(arg) {
         const url = backEndServerAddress + "/user/api/todos";
 
