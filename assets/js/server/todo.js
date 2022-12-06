@@ -96,7 +96,7 @@ export class Todo {
     }
 
     async requestSaveCommentByTodoId(arg) {
-        const url = backEndServerAddress + `/user/todo/comment/${arg.id}`;
+        const url = backEndServerAddress + `/comment/add/${arg.id}`;
 
         var result = await fetch(url, {
             method: 'POST',
@@ -105,15 +105,13 @@ export class Todo {
                 "authorization": auth.getJsonToken()
             },
             body: JSON.stringify({
-                title: `${arg.title}`,
-                cotent: `${arg.content}`,
-                isPublish: `${arg.isCheckPublic}`
+                comment : arg.comment
             }),
         }).catch((error) => {
             console.error(error);
         });
 
-        return result.json();
+        return result.text();
     }
 
     async requestSaveHeart(arg) {

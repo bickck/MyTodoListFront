@@ -5,7 +5,13 @@
 import {
     PostGenerator
 } from "../generator/post.js"
+
+import {
+    Comment
+} from "./../util/comment.js"
+
 const post = new PostGenerator();
+// const comment = new Comment();
 
 export class NonDataInjector {
 
@@ -16,36 +22,36 @@ export class NonDataInjector {
     createNonMainPost() {
 
         var arg = {
-            title : "데이터가 없어요.",
-            isPublish : "publish",
-            heart : 0,
-            comment : 0,
-            createTimeStamp : "2022-10-13"
+            title: "데이터가 없어요.",
+            isPublish: "publish",
+            heart: 0,
+            comment: 0,
+            createTimeStamp: "2022-10-13"
         }
 
         var section = post.createMainPost(arg);
-        
+
         return section;
     }
 
-     /**
+    /**
      * 
      *  Main Todo Post Empty
      */
-      createEmptyMainTodoPost() {
+    createEmptyMainTodoPost() {
 
         var arg = {
-            title : "데이터가 없어요. Todo",
-            isPublish : "publish",
-            username : "유저가 없어요.",
-            content : "메인 데이터가 없어요.",
-            heart : 0,
-            comment : 0,
-            createTimeStamp : "2022-10-13"
+            title: "데이터가 없어요. Todo",
+            isPublish: "publish",
+            username: "유저가 없어요.",
+            content: "메인 데이터가 없어요.",
+            heart: 0,
+            comment: 0,
+            createTimeStamp: "2022-10-13"
         }
 
         var section = post.createMainPost(arg);
-        
+
         return section;
     }
 
@@ -58,15 +64,15 @@ export class NonDataInjector {
     createEmptyMainQuotePost() {
 
         var arg = {
-            quote : "데이터가 없어요. Quote",
-            isPublish : "publish",
-            heart : 0,
-            comment : 0,
-            createTimeStamp : "2022-10-13"
+            quote: "데이터가 없어요. Quote",
+            isPublish: "publish",
+            heart: 0,
+            comment: 0,
+            createTimeStamp: "2022-10-13"
         }
 
         var section = post.createEmptyMainQuote(arg);
-        
+
         return section;
     }
 
@@ -79,15 +85,15 @@ export class NonDataInjector {
     createNonMiniPost() {
 
         var arg = {
-            title : "데이터가 없어요.",
-            isPublish : "publish",
-            heart : 0,
-            comment : 0,
-            createTimeStamp : "2022-10-13"
+            title: "데이터가 없어요.",
+            isPublish: "publish",
+            heart: 0,
+            comment: 0,
+            createTimeStamp: "2022-10-13"
         }
 
         var section = post.createMiniTodos(arg);
-       
+
         return section;
     }
 
@@ -100,12 +106,12 @@ export class NonDataInjector {
     createNonPosts() {
 
         var arg = {
-            title : "데이터가 없어요.",
-            heart : ""
+            title: "데이터가 없어요.",
+            heart: ""
         }
 
         var section = post.createPostList(arg);
-        
+
         return section;
     }
 
@@ -113,17 +119,26 @@ export class NonDataInjector {
      * 
      * <ul class="posts quote">
      */
-     createNonPostQuote() {
+    createNonPostQuote() {
 
         var arg = {
-            title : "데이터가 없어요."
+            title: "데이터가 없어요."
         }
 
         var section = post.createPostListQuote(arg);
-        
+
         return section;
     }
+
+
+    // createEmptyComment() {
+
+    //     var arg = {
+    //         title: "데이터가 없어요."
+    //     }
+
+    //     var section = comment.createCommentElement(arg);
+
+    //     return section;
+    // }
 }
-
-
-

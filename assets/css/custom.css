@@ -357,3 +357,78 @@ input[type="text"].FAILURE {
 .user-intro-manage > li:first-child{
     padding: 0;
 }
+.comment-layer {
+    position: fixed;
+    width: 60rem;
+    margin: 0;
+    top: 30%;
+    left: 32%;
+}
+
+.close-layer {
+    text-align: end;
+    margin-bottom: 0.7em;
+}
+
+.comment-layer-header {
+    display: flex;
+    margin-bottom: 20px;
+    padding-bottom: 0.7em;
+    border-bottom: 0.1em solid rgba(160, 160, 160, 0.486);
+}
+
+.comment-layer-header  > div{
+    margin-right: 20px;
+}
+
+
+.comment-contents {
+
+}
+
+.comment-contents > li {
+    display: flex;
+    width: 100%;
+}
+
+.comment-contents > li > article{
+    flex-direction: row;
+    width: 100%;
+}
+
+.comment-contents > li > article > header{
+    width: 15%;
+}
+
+.comment-contents > li > article > header > h4{
+    padding-left: 10px
+}
+
+.comment-contents > li > article > section{
+    width: 60%;
+}
+.comment-contents > li > article > section > h4{
+    padding-left: 20px
+}
+.comment-contents > li > article > footer{
+    width: 25%;
+}
+
+.comment-contents > li > article > footer > ul {
+    
+    list-style: none;
+}
+
+.comment-contents > li > article > footer > ul > li {
+    border-top: 0;
+    border-left: solid 1px rgba(160, 160, 160, 0.3);
+    display: inline-block;
+    font-family: "Raleway", Helvetica, sans-serif;
+    font-size: 0.6em;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    line-height: 1;
+    margin: 0 0 0 2em;
+    padding: 0 0 0 2em;
+    text-transform: uppercase;
+}

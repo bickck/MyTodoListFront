@@ -2,6 +2,8 @@
  * 
  * 포스트에 컨테이너를 생성하고 데이터를 넣는 클래스
  */
+
+
 import {
     ConvertDate
 } from "./../util/date.js";
@@ -13,10 +15,6 @@ import {
 import {
     Quote
 } from "./../server/quote.js";
-
-import {
-    Action
-} from "./../function/action.js";
 
 import {
     TodoApi
@@ -34,6 +32,11 @@ import {
     Auth
 } from "./../account/auth.js";
 
+import {
+    Comment
+} from "./../util/comment.js"
+
+const comment = new Comment();
 const convert = new ConvertDate();
 const imageApi = new ImageApi();
 const todoApi = new TodoApi();
@@ -41,8 +44,6 @@ const quoteServer = new Quote();
 const todoServer = new Todo();
 const heartapi = new HeartApi();
 const auth = new Auth();
-// const action = new Action();
-
 
 export class PostGenerator {
     // <article class="post">
@@ -128,6 +129,9 @@ export class PostGenerator {
         const link = "#detail-page-move";
 
         postId.setAttribute("id", `PostID-${params.id}`);
+        comment.setAttribute("id", `Comment-PostID-${params.id}`);
+        heart.setAttribute("id", `Heart-PostID-${params.id}`);
+
         postId.setAttribute("value", params.id);
         createTime.setAttribute("datetime", params.createTimestamp);
         imageContainer.setAttribute("href", link);
@@ -180,12 +184,16 @@ export class PostGenerator {
 
         // 이벤트 설정
 
+
+
         // click 시 user detail page로 이동
         setDetailPageMoveEvent(params.id, {
             userInfoContainer: userInfoContainer,
             imageContainer: imageContainer,
             title: title
         });
+
+        comment.addEventListener("click", openCommentLayer);
 
 
         // view 값 설정
@@ -194,8 +202,6 @@ export class PostGenerator {
         createTime.innerText = convert.convertViewDate(params.createTimeStamp);
         username.innerText = params.username;
         mainContent.innerText = params.content;
-        // heart.innerText = params.heart;
-        // comment.innerText = params.comment;
 
         return articleContainer;
     }
@@ -1502,100 +1508,91 @@ function setDetailPageMoveEvent(id, containerList) {
     }
 }
 
+var layer;
+var main;
 
-function generator(className) {
 
-    if (className == "post" || className == "POST") {
+function openCommentLayer(event) {
 
-        var articleContainer = document.createElement("article");
-        var header = document.createElement("header");
-        var headerContainer = document.createElement("div");
-        var postId = document.createElement("p");
-        var titleContainer = document.createElement("h2");
-        var title = document.createElement("a");
-        var subtitle = document.createElement("p");
-        var metaContainer = document.createElement("div");
-        var createTime = document.createElement("time");
-        var userInfoContainer = document.createElement("a");
-        var username = document.createElement("span");
-        var userImage = document.createElement("img");
-        var imageContainer = document.createElement("a");
-        var image = document.createElement("img");
-        var mainContent = document.createElement("p");
-        var footerContainer = document.createElement("footer");
-        var ulActions = document.createElement("ul");
-        var ulStats = document.createElement("ul");
-        var liHeart = document.createElement("li");
-        var heart = document.createElement("a");
-        var liComment = document.createElement("li");
-        var comment = document.createElement("a");
+    var targetId = event.target.id.split("-")[2];
+    main = document.querySelector("body");
 
-        // 구조 설정
-        titleContainer.appendChild(title);
-        headerContainer.appendChild(postId);
-        headerContainer.appendChild(titleContainer);
-        headerContainer.appendChild(subtitle);
-        userInfoContainer.appendChild(username);
-        metaContainer.appendChild(createTime);
-        metaContainer.appendChild(userInfoContainer);
-        header.appendChild(headerContainer);
-        header.appendChild(metaContainer);
-        liHeart.appendChild(heart);
-        liComment.appendChild(comment);
-        ulStats.appendChild(liHeart);
-        ulStats.appendChild(liComment);
-        footerContainer.appendChild(ulActions);
-        footerContainer.appendChild(ulStats);
-        articleContainer.appendChild(header);
-        articleContainer.appendChild(imageContainer);
-        articleContainer.appendChild(mainContent);
-        articleContainer.appendChild(footerContainer);
+    layer = comment.createCommentLayer({
+        id: targetId
+    }, addComment, closeCommentLayer);
 
-        return {
-            articleContainer,
-            header,
-            headerContainer,
-            postId,
-            titleContainer,
-            title,
-            subtitle,
-            metaContainer,
-            createTime,
-            userInfoContainer,
-            username,
-            userImage,
-            imageContainer,
-            image,
-            mainContent,
-            footerContainer,
-            ulActions,
-            ulStats,
-            liHeart,
-            heart,
-            liComment,
-            comment
-        };
+
+    var result = todoApi.requestTodoCommentsByTodoId({
+        id: targetId
+    });
+
+    result.then((data) => {
+        if (data == null || data.content.length == 0) {
+            var arg = {
+                title: "데이터가 없어요."
+            }
+
+            var section = comment.createCommentElement(arg);
+            layer.commentContainer.appendChild(section);
+            main.appendChild(layer.commentLayer);
+
+        } else {
+
+            for (var i = 0; i < data.numberOfElements; i++) {
+                var section = comment.createCommentElement(data.content[i]);
+                layer.commentContainer.appendChild(section);
+            }
+            main.appendChild(layer.commentLayer);
+        }
+    });
+}
+
+function addComment(event) {
+    const todo_Id = document.querySelector("#TodoID").getAttribute("todo_id");
+    const comment = document.getElementById("comment_form").elements[0].value;
+
+    var result = todoServer.requestSaveCommentByTodoId({
+        id: todo_Id,
+        comment: comment
+    });
+
+    result.then((data) => {
+        if (data == "SUCCESS") {
+            reloadTodoCommeandData(todo_Id);
+        }
+    })
+}
+
+function reloadTodoCommeandData(todoId) {
+
+    layer = comment.createCommentLayer({
+        id: todoId
+    }, addComment, closeCommentLayer);
+
+    clearCommentList();
+
+    var result = todoApi.requestTodoCommentsByTodoId({
+        id: todoId
+    });
+
+    result.then((data) => {
+        for (var i = 0; i < data.numberOfElements; i++) {
+            var section = comment.createCommentElement(data.content[i]);
+            layer.commentContainer.appendChild(section);
+        }
+        main.appendChild(layer.commentLayer);
+
+    });
+}
+
+function clearCommentList(todoId) {
+    var childSize = layer.commentContainer.childElementCount;
+
+    for (var i = 0; i < childSize; i++) {
+        layer.commentContainer.removeChild(layer.commentContainer.childNodes[i]);
     }
+}
 
-    if (className == "mini-post" || className == "MINI-POST") {
-
-        return;
-    }
-
-    if (className == "posts" || className == "POSTS") {
-
-        return;
-    }
-
-    if (className = "blurb" || className == "BLURB") {
-
-        return;
-    }
-
-    if (className = "single" || className == "SINGLE") {
-
-        return;
-    }
-
-    return;
+function closeCommentLayer(event) {
+    comment.removeCommentLayer();
 }
