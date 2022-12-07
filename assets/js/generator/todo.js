@@ -293,9 +293,6 @@ export class TodoGenerator {
             const url = frontEndServerAddress + "";
         });
 
-
-
-
         // view 생성
 
         title.innerText = params.title;

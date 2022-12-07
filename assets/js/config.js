@@ -1,13 +1,13 @@
 // product IP
-// const ipAddress = "3.39.190.174";
-// const backEndServerAddress = `https://${ipAddress}:8080`;
-// const frontEndServerAddress = "https://bickck.github.io/MyTodoListFront"
-// const mainPageAddress = "https://bickck.github.io/MyTodoListFront";
+const ipAddress = "13.209.68.218";
+const backEndServerAddress = `https://${ipAddress}:8080`;
+const frontEndServerAddress = "https://bickck.github.io/MyTodoListFront"
+const mainPageAddress = "https://bickck.github.io/MyTodoListFront";
 
 // local dev IP
-const backEndServerAddress = "http://localhost:8080";
-const frontEndServerAddress = "http://127.0.0.1:5501";
-const mainPageAddress = "http://127.0.0.1:5501/index.html";
+// const backEndServerAddress = "http://localhost:8080";
+// const frontEndServerAddress = "http://127.0.0.1:5501";
+// const mainPageAddress = "http://127.0.0.1:5501/index.html";
 
 const todoPage = frontEndServerAddress + "/assets/html/todo.html";
 const quotePage = frontEndServerAddress + "/assets/html/quote.html";
