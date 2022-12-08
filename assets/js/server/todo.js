@@ -12,7 +12,7 @@ const auth = new Auth();
 export class Todo {
 
     async requestUserTodoInsert(arg) {
-        const url = backEndServerAddress + "/user/todo/manage/save";
+        const url = backEndServerAddress + "/user/todo";
         const data = new FormData();
         const headers = new Headers();
 
@@ -41,7 +41,7 @@ export class Todo {
     }
 
     async requestUserTodoUpdate(arg) {
-        const url = backEndServerAddress + "/user/todo/manage" + `/update/${arg.id}`;
+        const url = backEndServerAddress + "/user/todo" + `/${arg.id}`;
 
         const data = new FormData();
         const headers = new Headers();
@@ -70,7 +70,7 @@ export class Todo {
         data.append("todos", todos);
 
         var result = await fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: headers,
             body: data
         }).catch((error) => {
@@ -83,7 +83,7 @@ export class Todo {
     async requestUserTodoDelete(arg) {
         const url = backEndServerAddress + "/user/todo/manage" + `/delete/${arg.id}`;
         var result = await fetch(url, {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
@@ -132,7 +132,7 @@ export class Todo {
     async requestCancleHeart(arg) {
         const url = backEndServerAddress + `/heart/cancle/todo/${arg.id}`;
         var result = await fetch(url, {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
@@ -145,10 +145,10 @@ export class Todo {
     }
 
     async requestChangePublish(arg) {
-        const url = backEndServerAddress + "/user/todo/manage/update/publish" + `/${arg.id}`;
+        const url = backEndServerAddress + "/user/todo/update/publish" + `/${arg.id}`;
 
         var result = await fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()

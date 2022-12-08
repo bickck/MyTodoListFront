@@ -71,7 +71,7 @@ export class NonDataInjector {
             createTimeStamp: "2022-10-13"
         }
 
-        var section = post.createEmptyMainQuote(arg);
+        var section = post.createQuoteList(arg);
 
         return section;
     }

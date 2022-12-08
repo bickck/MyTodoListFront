@@ -94,81 +94,49 @@ export class FormValidation {
         return messageLists;
     }
 
-    isRegisterFormCheck(registerFormId) {
+    isRegisterEmptyFormCheck(arg) {
 
         var messageLists = new Array();
-        const usernameContainer = document.querySelector(`#${registerFormId} > div > div > div > div > #username`);
-        const emailContainer = document.querySelector(`#${registerFormId} > div > div > div > div > #email`);
-        const passwordContainer = document.querySelector(`#${registerFormId} > div > div > div > div > #password`);
+        const username = arg.username;
+        const email = arg.email;
+        const password = arg.password;
 
-        const username = usernameContainer.value;
-        const email = emailContainer.value;
-        const password = passwordContainer.value;
+        console.dir(arg.form);
 
-
-        if (username == null || typeof username == "undefined" || username == "") {
+        if (isTextValidationCheck(username)) {
             messageLists.push({
-                id: usernameContainer.id,
+                id: "username",
                 message: usernameNullErrorMessage,
                 returnCode: false
             });
-        } else {
-
-        }
-        if (email == null || typeof email == "undefined" || email == "") {
+        } 
+        if (isTextValidationCheck(email)) {
             messageLists.push({
-                id: emailContainer.id,
+                id: "email",
                 message: emailNullErrorMessage,
                 returnCode: false
             });
-        } else {
-
-        }
-        if (password == null || typeof password == "undefined" || password == "") {
+        } 
+        if (isTextValidationCheck(password)) {
             messageLists.push({
-                id: passwordContainer.id,
+                id: "password",
                 message: passwordNullErrorMessage,
                 returnCode: false
             });
-        } else {
-
-        }
-        if (!regexpEmail.test(email) && email != null && email != "") {
-
-            messageLists.push({
-                id: emailContainer.id,
-                message: emailRegExpErrorMessage,
-                returnCode: false
-            });
-        } else {
-
-        }
-
-        if (!regexpPassword.test(password) && password != null && password != "") {
-
-            messageLists.push({
-                id: passwordContainer.id,
-                message: passwordRegExpErrorMessage,
-                returnCode: false
-            });
-        } else {
-
-        }
+        } 
 
         if (messageLists == null || messageLists == [] || messageLists.length == 0) {
             messageLists.push({
                 message: passedSuccessMessage,
                 returnCode: true
             });
-        } else {
-
-        }
+        } 
 
         return messageLists;
 
     }
 
-    isLoginFormCheck(loginFormId) {
+    isLoginEmptyFormCheck(arg) {
 
         var messageLists = new Array();
         const emailContainer = document.querySelector(`#${loginFormId} > div > div > div > #email`);
@@ -182,9 +150,7 @@ export class FormValidation {
                 message: emailNullErrorMessage,
                 returnCode: false
             });
-        } else {
-
-        }
+        } 
 
         if (password == null || typeof password == "undefined" || password == "") {
             messageLists.push({
@@ -192,59 +158,33 @@ export class FormValidation {
                 message: passwordNullErrorMessage,
                 returnCode: false
             });
-        } else {
-
-        }
-
-        if (!regexpEmail.test(email) && email != null && email != "") {
-            messageLists.push({
-                id: emailContainer.id,
-                message: emailRegExpErrorMessage,
-                returnCode: false
-            });
-        } else {
-
-        }
-
-        if (!regexpPassword.test(password) && password != null && password != "") {
-            messageLists.push({
-                id: passwordContainer.id,
-                message: passwordRegExpErrorMessage,
-                returnCode: false
-            });
-        } else {
-
-        }
-
+        } 
         if (messageLists == null || messageLists == [] || messageLists.length == 0) {
             messageLists.push({
                 message: passedSuccessMessage,
                 returnCode: true
             });
-        } else {
-
-        }
+        } 
 
         return messageLists;
     }
 
     isTextValidationCheck(text) {
 
-        if (text == null || typeof text == "undefined" || text == "") {
+        if (text == null || typeof text == "undefined" || text == "" || text.length == 0) {
             return false;
         }
         return true;
     }
-
+    
     isEmailValidationCheck(email) {
         
-        console.log(regexpEmail.test(email));
         if(!regexpEmail.test(email)) {
             return false;
         }
         return true;
     }
-
+    
     isPasswordValidationCheck(password) {
        
         if(!regexpPassword.test(password)) {
@@ -253,10 +193,28 @@ export class FormValidation {
         return true;
     }
 
-    isEmailDuplicaitonValidCheck(email) {
-        if (!isEmailValidationCheck(email)) {
-            return false;
-        }
-        return true;
+}
+
+function isTextValidationCheck(text) {
+
+    if (text == null || typeof text == "undefined" || text == "") {
+        return false;
     }
+    return true;
+}
+
+function isEmailValidationCheck(email) {
+    
+    if(!regexpEmail.test(email)) {
+        return false;
+    }
+    return true;
+}
+
+function isPasswordValidationCheck(password) {
+   
+    if(!regexpPassword.test(password)) {
+        return false;
+    }
+    return true;
 }

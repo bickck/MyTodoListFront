@@ -26,7 +26,7 @@ export class Users {
     async requestUserUpdate(arg) {
         const url = backEndServerAddress + `/user/manage/update/intro`;
         var result = await fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
                 "authorization": `${auth.getJsonToken()}`
@@ -44,7 +44,7 @@ export class Users {
     async requestUserDelete(arg) {
         const url = backEndServerAddress + `/`;
         var result = await fetch(url, {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
                 "authorization": `${auth.getJsonToken()}`
@@ -60,10 +60,10 @@ export class Users {
     }
 
     async requestSaveUserIntro(arg) {
-        const url = backEndServerAddress + `/user/manage/update/intro/comment`;
+        const url = backEndServerAddress + `/user/intro/comment`;
         console.log(arg);
         var result = await fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
                 "authorization": `${auth.getJsonToken()}`

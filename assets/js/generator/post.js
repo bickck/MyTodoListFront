@@ -825,7 +825,6 @@ export class PostGenerator {
         var header = document.createElement("header");
         var quoteContainer = document.createElement("h3");
         var quoteId = document.createElement("p");
-        //var quote = document.createElement("p");
         var author = document.createElement("p");
         var ulContainer = document.createElement("ul");
         var liHeartContainer = document.createElement("li");
@@ -834,7 +833,6 @@ export class PostGenerator {
         var createTime = document.createElement("time");
 
         // 구조 생성
-        //quoteContainer.appendChild(quote);
         liHeartContainer.appendChild(heart);
         liCreateTimeContainer.appendChild(createTime);
         ulContainer.appendChild(liHeartContainer);
@@ -1104,10 +1102,7 @@ export class PostGenerator {
 
 
     createPreViewImageContainer(id) {
-
-        // console.log("postGenerator");
-        // console.log(id);
-
+        
         const li = document.createElement("li");
         const input = document.createElement("input");
         const label = document.createElement("label");
@@ -1125,7 +1120,13 @@ export class PostGenerator {
         return li;
     }
 
-    createEmptyMainQuote(params) {
+    /**
+     * 
+     * @param {*} params 
+     * @returns 
+     */
+
+    createMainQuote(params) {
         // element 생성
 
         var articleContainer = document.createElement("article");

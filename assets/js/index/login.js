@@ -16,7 +16,7 @@ const account = new Account();
 const auth = new Auth();
 
 window.onload = function init() {
-    
+
 }
 
 
@@ -59,26 +59,21 @@ function login(event) {
     const email = document.querySelector("#email");
     const password = document.querySelector("#password");
 
-    var validResult = formvalidation.isLoginFormCheck("login_form");
-
-    var result = validResult.forEach((data) => {
-
-        if (data.returnCode) {
-            return data.message;
-        } else {
-            $("login_form").appearErrorMessage(`${data.id}-message`);
-            $("login_form").setErrorMessage(`${data.id}-message`, data.message);
-        }
-    });
-
-    if (result == "SUCCESS") {
-        
-    }
-    
-  
-    account.login({
+    var result = account.login({
         email: email.value,
         password: password.value
+    });
+
+    result.then((data) => {
+        if (data.status != "400") {
+            window.location.href = mainPageAddress;
+        }
+        return data.text();
+    }).then((data)=> {
+        $("#login_form").appearErrorMessage("email-message");
+        $("#login_form").setErrorMessage(`email-message`, `${data}`);
+        $("#login_form").appearErrorMessage("password-message");
+        $("#login_form").setErrorMessage(`password-message`, `${data}`);
     });
 
 }

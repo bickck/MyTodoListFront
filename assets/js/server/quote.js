@@ -9,7 +9,7 @@ const auth = new Auth();
 export class Quote {
 
     async requestUserQuoteSave(arg) {
-        const url = backEndServerAddress + `/user/quote/manage/save`;
+        const url = backEndServerAddress + `/user/quote`;
 
         var result = await fetch(url, {
             method: 'POST',
@@ -34,10 +34,10 @@ export class Quote {
     }
 
     async requestUserQuoteUpdate(arg) {
-        const url = backEndServerAddress + `/user/quote/manage/update/${arg.id}`;
+        const url = backEndServerAddress + `/user/quote/${arg.id}`;
 
         var result = await fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
@@ -55,10 +55,10 @@ export class Quote {
     }
 
     async requestUserQuoteDelete(arg) {
-        const url = backEndServerAddress + `/user/quote/manage/delete/${arg.id}`;
+        const url = backEndServerAddress + `/user/quote/${arg.id}`;
 
         var result = await fetch(url, {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
@@ -87,7 +87,7 @@ export class Quote {
     async requestCancleHeart(arg) {
         const url = backEndServerAddress + `/heart/cancle/quote/${arg.id}`;
         var result = await fetch(url, {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
@@ -100,10 +100,10 @@ export class Quote {
     }
 
     async requestChangePublish(arg) {
-        const url = backEndServerAddress + `/user/quote/manage/heart/update/${arg.id}`;
+        const url = backEndServerAddress + `/user/quote/manage/heart/${arg.id}`;
 
         var result = await fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()

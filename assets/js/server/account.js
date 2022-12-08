@@ -10,7 +10,7 @@ export class Account {
         console.log(arg.email);
         console.log(arg.password);
     
-        var result =  fetch(url, {
+        var result = await fetch(url, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -19,14 +19,11 @@ export class Account {
                 email: `${arg.email}`,
                 password: `${arg.password}`,
             }),
-        })
-        .then(Response => Response.text())
-        .then((data)=>{
-            auth.setJsonToken(data);
-            window.location.href = mainPageAddress;
         }).catch((error)=> {
             console.log(error);
         });
+
+        return result;
     }
 
     async logout(arg) {

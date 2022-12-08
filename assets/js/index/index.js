@@ -43,7 +43,7 @@ const postLists = document.querySelector(".posts")
 const editComment = document.querySelector(".edit-usercomment");
 const recommandSyncButton = document.querySelector(".recommand-sync");
 const dailySyncButton = document.querySelector(".daily-sync");
-const commentSaveButton = document.querySelector("#comment-save-button");
+const userCommentSaveButton = document.querySelector("#user-comment-save-button");
 
 window.onload = function init(event) {
     event.preventDefault();
@@ -54,12 +54,11 @@ window.onload = function init(event) {
     requestMainPosts();
     requestMainQuotes();
 
-    editComment.addEventListener("click", requestEditUserComment);
     editComment.addEventListener("click", createUserCommentInput);
 
     recommandSyncButton.addEventListener("click", refreshRandomRecommandTodo);
     dailySyncButton.addEventListener("click", refreshRandomDailyQuote);
-    commentSaveButton.addEventListener("click", requestSaveComment);
+    userCommentSaveButton.addEventListener("click", requestSaveComment);
 }
 
 
@@ -75,12 +74,11 @@ function requestMainPosts() {
 
     mainTodos.then((data) => {
 
-        if (data == null || data == "undefined") {
+        console.log(data);
+        if (data == null || data == "undefined" || data.content.length == 0) {
             mainPost.appendChild(nonDataInjector.createNonMainPost());
             return;
         }
-
-        // console.log(data);
 
         for (var i = 0; i < data.numberOfElements; i++) {
 
@@ -106,8 +104,8 @@ function requestMainQuotes() {
 
     mainQuotes.then((data) => {
 
-        if (data == null || data == "undefined") {
-            postLists.appendChild(nonDataInjector.createQuoteList());
+        if (data == null || data == "undefined" || data.content.length == 0) {
+            postLists.appendChild(nonDataInjector.createEmptyMainQuotePost());
             return;
         }
 
@@ -123,16 +121,6 @@ function requestMainQuotes() {
 }
 
 /**
- * 친구 추천 (예정)
- */
-
-function requestMiniQuotes() {
-
-
-}
-
-
-/**
  * 유저의 정보를 가져옴
  */
 
@@ -144,7 +132,6 @@ function userDetailInfo() {
     });
 
     userIntroData.then((data) => {
-        console.log(data);
         postUserIntroData(data);
     });
 }
@@ -160,21 +147,33 @@ function postUserIntroData(introData) {
     const userComment = document.querySelector("#usercomment");
     const userImage = document.querySelector("#userImage");
 
-    if (introData.introComment.length < 1) {
+    console.log(introData);
+
+    if (introData.introComment == null || introData.introComment == "") {
         userComment.innerText = "당신의 코멘트를 적어주세요.";
 
     } else {
         userComment.innerText = introData.introComment;
     }
 
-    if (introData.userImageCount == 0) {
-        userImage.setAttribute("hidden");
-    } else {
-        userImage.removeAttribute("hidden");
-    }
+    const imageSource = backEndServerAddress + `/image/api/user/source/${introData.fileName}/${introData.originalFileName}`;
+
+    userImage.src = imageSource;
     username.innerText = introData.username;
 }
 
+/**
+ * 친구 추천 (예정)
+ */
+
+function requestMiniQuotes() {
+
+
+}
+
+/**
+ * 
+ */
 function createUserCommentInput() {
 
     var input = document.querySelector(".comment-input");
@@ -188,24 +187,30 @@ function createUserCommentInput() {
 
 }
 
+/**
+ * 
+ * @param {*} event 
+ */
+
 function requestSaveComment(event) {
     event.preventDefault();
-    var comment = document.querySelector("#comment").value;
-    var commentArea = document.querySelector("#usercomment");
 
-    console.log(comment.value);
+    const commentInput = document.querySelector("#introComment").value;
+
+    var userCommentArea = document.querySelector("#usercomment");
+
     user.requestSaveUserIntro({
-        introComment: comment
+        introComment: commentInput
     });
 
-    commentArea.innerText = comment;
-
+    createUserCommentInput();
+    document.querySelector("#introComment").value = "";
+    userCommentArea.innerText = commentInput;
 }
 
-function requestEditUserComment() {
-    const userComment = document.querySelector("#usercomment");
-
-}
+/**
+ * 
+ */
 
 function refreshRandomDailyQuote() {
     const postQuote = document.querySelector(".quote");
@@ -213,9 +218,12 @@ function refreshRandomDailyQuote() {
 
 }
 
+/**
+ * 
+ */
+
 function refreshRandomRecommandTodo() {
     const miniPost = document.querySelector(".mini-posts")
-    console.log("refreshRandomRecommandTodo");
 }
 
 var $body = $('body');
