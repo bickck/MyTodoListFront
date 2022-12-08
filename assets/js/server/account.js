@@ -5,10 +5,7 @@ const auth = new Auth();
 export class Account {
 
     async login(arg) {
-    
         const url = backEndServerAddress + "/auth/login";
-        console.log(arg.email);
-        console.log(arg.password);
     
         var result = await fetch(url, {
             method: 'POST',

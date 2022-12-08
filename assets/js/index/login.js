@@ -59,6 +59,15 @@ function login(event) {
     const email = document.querySelector("#email");
     const password = document.querySelector("#password");
 
+    var isPassEmpty = isEmptyCheck({
+        email : email.value,
+        password : password.value
+    });
+
+    if(!isPassEmpty) {
+        return;
+    }
+
     var result = account.login({
         email: email.value,
         password: password.value
@@ -97,6 +106,23 @@ function loginout(event) {
     }).catch((error) => {
         console.log(error);
     });
+}
+
+function isEmptyCheck(arg) {
+    var isPass = true;
+
+    if(!formvalidation.isTextValidationCheck(arg.email)) {
+        $("#login_form").appearErrorMessage("email-message");
+        $("#login_form").setErrorMessage(`email-message`, "이메일을 입력해주세요.");
+        isPass = false;
+    }
+    if(!formvalidation.isTextValidationCheck(arg.password)) {
+        $("#login_form").appearErrorMessage("password-message");
+        $("#login_form").setErrorMessage(`password-message`, "비밀번호를 입력해주세요.");
+        isPass = false;
+    }
+
+    return isPass;
 }
 
 loginBtn.addEventListener("click", login);
