@@ -69,7 +69,6 @@ function quoteSave() {
     var validResult = formvalidation.isQuoteFormCheck("quote_form");
     var validPassed;
 
-
     validResult.forEach((data) => {
         if (data.returnCode) {
             validPassed = data.returnCode;

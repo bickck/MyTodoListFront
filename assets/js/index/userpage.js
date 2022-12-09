@@ -142,13 +142,17 @@ function setUserInfoPost() {
 
     result.then((data) => {
 
+        console.log(data);
+
         const introEmailSection = document.querySelector("#intro-email");
         const introUsernameSection = document.querySelector("#intro-username");
         const introCommentSection = document.querySelector("#intro-comment");
         const introBirthSection = document.querySelector("#intro-birth");
+        const introUserImage = document.querySelector(".user-image");
 
         introUsernameSection.innerText = data.username;
-        introCommentSection.innerText = data.introComment;    
+        introCommentSection.innerText = data.introComment;
+        introUserImage.src = backEndServerAddress + `/image/api/user/source/${data.fileName}/${data.originalFileName}`;
     });
 }
 
@@ -360,12 +364,50 @@ function createPostManageActions(arg, postid, postKind) {
     return arg;
 }
 
-function userImageUpdateAction() {
-    console.log("userImageUpdateAction");
+function userImageUpdateAction(event) {
+
+    const imageContainer = document.querySelector(".user-image");
+    var files = event.target.files;
+
+
+    var result = user.requestUpdateUserIntroImage({
+        file: files
+    });
+
+    result.then((data) => {
+
+        if (data == "SUCCESS") {
+            imagePreviewer(event.target, imageContainer);
+        }
+    });
 }
 
-function userImageDeleteAction() {
-    console.log("userImageDeleteAction");
+function imagePreviewer(input, imgTag) {
+
+    if (input == null && label == null) {
+        return;
+    }
+
+    if (input.file || input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+
+            imgTag.src = e.target.result;
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+
+function userImageDeleteAction(event) {
+
+    var result = user.requestDeleteUserIntroImage();
+
+    result.then((data) => {
+        console.log(data);
+        const imageContainer = document.querySelector(".user-image");
+        imageContainer.src = backEndServerAddress + "/image/api/user/source/default";
+    });
 }
 
 function userDeleteAction() {
@@ -382,7 +424,7 @@ userQuoteButton.addEventListener("click", postHiddenActions);
 userTodoLikeButton.addEventListener("click", postHiddenActions);
 userQuoteLikeButton.addEventListener("click", postHiddenActions);
 
-userimageUpdateButton.addEventListener("click", userImageUpdateAction);
+userimageUpdateButton.addEventListener("change", userImageUpdateAction);
 userimageDeleteButton.addEventListener("click", userImageDeleteAction);
 userDeleteButton.addEventListener("click", userDeleteAction);
 userUpdateButton.addEventListener("click", userUpdateAction);

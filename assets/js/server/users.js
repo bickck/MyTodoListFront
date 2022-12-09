@@ -61,7 +61,6 @@ export class Users {
 
     async requestSaveUserIntro(arg) {
         const url = backEndServerAddress + `/user/intro/comment`;
-        console.log(arg);
         var result = await fetch(url, {
             method: 'PUT',
             headers: {
@@ -77,4 +76,43 @@ export class Users {
 
         return result.text();
     }
+
+    async requestUpdateUserIntroImage(arg) {
+        const url = backEndServerAddress + `/user/intro/image`;
+
+        const data = new FormData();
+        const headers = new Headers();
+
+        data.append("file", arg.file[0]);
+        headers.append("authorization", auth.getJsonToken());
+
+        var result = await fetch(url, {
+            method: 'PUT',
+            headers: headers,
+            body : data
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        return result.text();
+    }
+
+    async requestDeleteUserIntroImage(arg) {
+        const url = backEndServerAddress + `/user/intro/image`;
+
+        const data = new FormData();
+        const headers = new Headers();
+
+        headers.append("authorization", auth.getJsonToken());
+
+        var result = await fetch(url, {
+            method: 'DELETE',
+            headers: headers
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        return result.text();
+    }
+
 }

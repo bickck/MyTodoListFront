@@ -73,16 +73,25 @@ function login(event) {
         password: password.value
     });
 
+    var redirectedUrl = "";
+    
     result.then((data) => {
         if (data.status != "400") {
-            window.location.href = mainPageAddress;
+            redirectedUrl = mainPageAddress;
+            return data.text();
         }
         return data.text();
     }).then((data)=> {
-        $("#login_form").appearErrorMessage("email-message");
-        $("#login_form").setErrorMessage(`email-message`, `${data}`);
-        $("#login_form").appearErrorMessage("password-message");
-        $("#login_form").setErrorMessage(`password-message`, `${data}`);
+
+        if(redirectedUrl == "") {
+            $("#login_form").appearErrorMessage("email-message");
+            $("#login_form").setErrorMessage(`email-message`, `${data}`);
+            $("#login_form").appearErrorMessage("password-message");
+            $("#login_form").setErrorMessage(`password-message`, `${data}`);
+        } else {
+            window.location.href = redirectedUrl;
+            auth.setJsonToken(data);
+        }
     });
 
 }

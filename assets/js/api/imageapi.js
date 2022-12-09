@@ -38,4 +38,20 @@ export class ImageApi {
 
         return result.json();
     }
+
+    async requestUserDefaultIntroImage(arg) {
+        
+        const url = backEndServerAddress + `/image/api/user/default`;
+        var result = await fetch(url, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "authorization" : auth.getJsonToken()
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        return result.json();
+    }
 }

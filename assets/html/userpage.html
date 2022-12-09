@@ -135,9 +135,13 @@
                                         <th>
                                             <h2>User Image</h2>
                                         </th>
-                                        <th><img class="user-image" src="./../../images/logo.jpg" alt="" />
+                                        <th>
+                                            <img class="user-image" style="width: 100px; height: 100px;" src="" alt="" />
                                             <ul class="user-intro-manage">
-                                                <li><button id="user-image-update" class="small"> USER IMAGE UPDATE</button></li>
+                                                <li>
+                                                    <input id="user-image-update" class="files" type="file" style="display: none;">
+                                                    <label for="user-image-update" class="button icon solid small image"> USER IMAGE UPDATE</label>
+                                                </li>
                                                 <li><button id="user-image-delete" class="small"> USER IMAGE DELETE</button></li>
                                             </ul>
                                         </th>
