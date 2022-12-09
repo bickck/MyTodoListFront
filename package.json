@@ -1,0 +1,11 @@
+{
+  "homepage": "https://bickck.github.io/MyTodoListFront/",
+  "dependencies": {
+    "gh-pages": "^4.0.0"
+  },
+
+  "script": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  }
+}
