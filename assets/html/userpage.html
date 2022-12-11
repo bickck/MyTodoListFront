@@ -161,7 +161,10 @@
                                             <h3>UserName</h3>
                                         </td>
                                         <td>
-                                            <p id="intro-username"></p>
+                                            <p class="view-username" id="intro-username"></p>
+                                            <div class="username-input-container" hidden>
+                                                <input type="text" id="update-intro-username" >
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -169,7 +172,10 @@
                                             <h3>Comment</h3>
                                         </td>
                                         <td>
-                                            <p id="intro-comment">Ante turpis integer aliquet porttitor.</p>
+                                            <p class="view-comment" id="intro-comment">Ante turpis integer aliquet porttitor.</p>
+                                            <div class="comment-input-container" hidden>
+                                                <input type="text" id="update-intro-comment">
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -177,15 +183,30 @@
                                             <h3>Birth</h3>
                                         </td>
                                         <td>
-                                            <p id="intro-birth"></p>
+                                            <p class="view-birth" id="intro-birth">2022-10-22</p>
+                                            <div class="birth-input-container" hidden>
+                                                <input type="text" id="update-intro-birth">
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <td>
-                                            <button id="user-update">UPDATE</button>
-                                            <button id="user-delete">DELETE</button>
+                                            <div class="intro-update-view">
+                                                <button class="button small" id="user-update">INTRO UPDATE</button>
+                                            </div>
+                                            <div class="intro-update-cancle" hidden>
+                                                <button class="button small" id="user-update-cancle">INTRO UPDATE CANCLE</button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="intro-save-button" hidden>
+                                                <button class="button small" id="user-intro-save">INTRO SAVE</button>
+                                            </div>
+                                            <div class="intro-delete-button">
+                                                <button class="button small" id="user-delete">ACCOUNT DELETE</button>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tfoot>

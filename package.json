@@ -2,7 +2,8 @@
   "homepage": "https://bickck.github.io/MyTodoListFront/",
   "dependencies": {
     "express": "^4.18.2",
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "mongodb": "^4.12.1"
   },
   "script": {
     "predeploy": "npm run build",

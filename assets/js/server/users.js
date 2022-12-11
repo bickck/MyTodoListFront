@@ -24,7 +24,8 @@ export class Users {
     }
 
     async requestUserUpdate(arg) {
-        const url = backEndServerAddress + `/user/manage/update/intro`;
+        const url = backEndServerAddress + `/user/intro`;
+        console.log(arg);
         var result = await fetch(url, {
             method: 'PUT',
             headers: {
@@ -32,13 +33,15 @@ export class Users {
                 "authorization": `${auth.getJsonToken()}`
             },
             body: JSON.stringify({
-
+                username : arg.username,
+                birth : arg.birth,
+                introComment : arg.comment
             }),
         }).catch((error) => {
             console.log(error);
         });
 
-        return result.json();
+        return result.text();
     }
 
     async requestUserDelete(arg) {

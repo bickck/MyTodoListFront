@@ -24,6 +24,10 @@ const userimageUpdateButton = document.querySelector("#user-image-update");
 const userimageDeleteButton = document.querySelector("#user-image-delete");
 const userDeleteButton = document.querySelector("#user-delete");
 const userUpdateButton = document.querySelector("#user-update");
+const userIntroSaveButton = document.querySelector("#user-intro-save");
+
+const changeTextViewButton = document.querySelector("#user-update-cancle");
+
 
 const userInfoButton = document.querySelector("#user-info-button");
 const userTodoButton = document.querySelector("#user-todo-button");
@@ -107,11 +111,12 @@ function setSidebarUserIntro() {
     })
 
     result.then((data) => {
+        console.log(data);
         const id = data.id;
         const username = data.username;
         const comment = data.introComment;
         const fileName = data.fileName;
-        const location = data.location;
+        const originalFileName = data.originalFileName;
 
         userIdContainer.innerText = id;
         usernameContainer.innerText = username;
@@ -125,8 +130,11 @@ function setSidebarUserIntro() {
             userCommentContainer.innerText = "당신의 코멘트를 적어주세요.";
         }
 
-        if (fileName != null && location != null) {
-            const imageSource = backEndServerAddress + `/${location}` + `/${fileName}`;
+        if (fileName == "DEFAULT") {
+            const imageSource = frontEndServerAddress + `/images/blank-profile-picture-gdf6b93f73_640.png`;
+            userImageContainer.setAttribute("src", imageSource);
+        } else {
+            const imageSource = backEndServerAddress + `/image/api/user/source/${fileName}/${originalFileName}`;
             userImageContainer.setAttribute("src", imageSource);
         }
     });
@@ -142,7 +150,9 @@ function setUserInfoPost() {
 
     result.then((data) => {
 
-        console.log(data);
+        const comment = data.introComment;
+        const username = data.username;
+        const imageSource = backEndServerAddress + `/image/api/user/source/${data.fileName}/${data.originalFileName}`;
 
         const introEmailSection = document.querySelector("#intro-email");
         const introUsernameSection = document.querySelector("#intro-username");
@@ -150,9 +160,15 @@ function setUserInfoPost() {
         const introBirthSection = document.querySelector("#intro-birth");
         const introUserImage = document.querySelector(".user-image");
 
-        introUsernameSection.innerText = data.username;
-        introCommentSection.innerText = data.introComment;
-        introUserImage.src = backEndServerAddress + `/image/api/user/source/${data.fileName}/${data.originalFileName}`;
+        if (comment == "") {
+            introCommentSection.innerText == "당신의 코멘트를 적어주세요."
+        } else {
+            introCommentSection.innerText = data.introComment;
+        }
+
+        introUsernameSection.innerText = username;
+        introBirthSection.innerText = "";
+        introUserImage.src = imageSource;
     });
 }
 
@@ -281,9 +297,6 @@ function setUserQuoteLikePost() {
     });
 }
 
-function clearChildNode(section) {
-    section.innerHTML = "";
-}
 
 /**
  * 
@@ -364,6 +377,11 @@ function createPostManageActions(arg, postid, postKind) {
     return arg;
 }
 
+/**
+ * 
+ * @param {*} event 
+ */
+
 function userImageUpdateAction(event) {
 
     const imageContainer = document.querySelector(".user-image");
@@ -382,6 +400,13 @@ function userImageUpdateAction(event) {
     });
 }
 
+/**
+ * 
+ * @param {*} input 
+ * @param {*} imgTag 
+ * @returns 
+ */
+
 function imagePreviewer(input, imgTag) {
 
     if (input == null && label == null) {
@@ -391,33 +416,148 @@ function imagePreviewer(input, imgTag) {
     if (input.file || input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-
             imgTag.src = e.target.result;
         }
         reader.readAsDataURL(input.files[0]);
     }
 }
 
+/**
+ * 
+ * @param {*} event 
+ */
 
 function userImageDeleteAction(event) {
 
     var result = user.requestDeleteUserIntroImage();
 
     result.then((data) => {
-        console.log(data);
         const imageContainer = document.querySelector(".user-image");
-        imageContainer.src = backEndServerAddress + "/image/api/user/source/default";
+        imageContainer.src = userDefaultImageLocation;
     });
 }
+
+/**
+ * 
+ */
+
+function userUpdateAction(event) {
+
+    const save = document.querySelector(".intro-update-view");
+    const cancle = document.querySelector(".intro-update-cancle");
+
+    const delteUserButton = document.querySelector(".intro-delete-button");
+    const introSaveButton = document.querySelector(".intro-save-button");
+
+    const birthContainer = document.querySelector(".birth-input-container");
+    const usernameContainer = document.querySelector(".username-input-container");
+    const commentContainer = document.querySelector(".comment-input-container");
+
+    const viewBirthContainer = document.querySelector(".view-username");
+    const viewCommentContainer = document.querySelector(".view-comment");
+    const viewUsername = document.querySelector(".view-birth");
+
+    if(cancle.hasAttribute("hidden")) {
+        save.setAttribute("hidden","");
+        cancle.removeAttribute("hidden");
+    }
+
+    if (birthContainer.hasAttribute("hidden")) {
+        viewBirthContainer.setAttribute("hidden", "");
+        birthContainer.removeAttribute('hidden');
+    } else {
+        birthContainer.setAttribute('hidden', "");
+        viewBirthContainer.removeAttribute("hidden");
+    }
+
+    if (usernameContainer.hasAttribute("hidden")) {
+        viewUsername.setAttribute("hidden", "");
+        usernameContainer.removeAttribute('hidden');
+    } else {
+        usernameContainer.setAttribute('hidden', "");
+        viewUsername.removeAttribute("hidden");
+    }
+
+    if (commentContainer.hasAttribute("hidden")) {
+        viewCommentContainer.setAttribute("hidden", "");
+        commentContainer.removeAttribute('hidden');
+    } else {
+        commentContainer.setAttribute('hidden', "");
+        viewCommentContainer.removeAttribute("hidden");
+    }
+
+    if (introSaveButton.hasAttribute("hidden")) {
+        introSaveButton.removeAttribute("hidden");
+    } else {
+        introSaveButton.setAttribute("hidden", "");
+    }
+
+    if (delteUserButton.hasAttribute("hidden")) {
+        delteUserButton.removeAttribute("hidden");
+    } else {
+        delteUserButton.setAttribute("hidden", "");
+    }
+}
+
+/**
+ * 
+ */
+
+function cancleUpdateBtn() {
+
+    const save = document.querySelector(".intro-update-view");
+    const cancle = document.querySelector(".intro-update-cancle");
+
+    if(save.hasAttribute("hidden")) {
+        save.removeAttribute("hidden");
+        cancle.setAttribute("hidden","");
+        userUpdateAction();
+    }
+}
+
+/**
+ * 
+ */
 
 function userDeleteAction() {
     console.log("userDeleteAction");
 }
 
-function userUpdateAction() {
-    console.log("userUpdateAction");
+/**
+ * 
+ */
+
+function userIntroSave() {
+
+    const username = document.querySelector("#update-intro-username");
+    const comment = document.querySelector("#update-intro-comment");
+    const birth = document.querySelector("#update-intro-birth");
+
+    var result = user.requestUserUpdate({
+        username: username.value,
+        comment: comment.value,
+        birth: birth.value
+    });
+
+    result.then((data) => {
+        if (data == "SUCCESS") {
+            setUserInfoPost();
+            userUpdateAction();
+        }
+
+    });
 }
 
+/**
+ * 
+ * @param {*} section 
+ */
+
+function clearChildNode(section) {
+    section.innerHTML = "";
+}
+
+changeTextViewButton.addEventListener("click", cancleUpdateBtn);
 userInfoButton.addEventListener("click", postHiddenActions);
 userTodoButton.addEventListener("click", postHiddenActions);
 userQuoteButton.addEventListener("click", postHiddenActions);
@@ -428,6 +568,7 @@ userimageUpdateButton.addEventListener("change", userImageUpdateAction);
 userimageDeleteButton.addEventListener("click", userImageDeleteAction);
 userDeleteButton.addEventListener("click", userDeleteAction);
 userUpdateButton.addEventListener("click", userUpdateAction);
+userIntroSaveButton.addEventListener("click", userIntroSave);
 
 
 //=====================================================================================================================

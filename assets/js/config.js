@@ -1,13 +1,15 @@
 // product IP
-// const ipAddress = "13.209.68.218";
-// const backEndServerAddress = `http://${ipAddress}:8080`;
-// const frontEndServerAddress = "https://bickck.github.io/MyTodoListFront"
-// const mainPageAddress = "https://bickck.github.io/MyTodoListFront";
+const ipAddress = "52.78.161.7";
+const backEndServerAddress = `http://${ipAddress}:8080`;
+const frontEndServerAddress = "https://bickck.github.io/MyTodoListFront"
+const mainPageAddress = "https://bickck.github.io/MyTodoListFront";
 
 // local dev IP
-const backEndServerAddress = "http://localhost:8080";
-const frontEndServerAddress = "http://127.0.0.1:5501";
-const mainPageAddress = "http://127.0.0.1:5501/index.html";
+// const backEndServerAddress = "http://localhost:8080";
+// const frontEndServerAddress = "http://127.0.0.1:5501";
+// const mainPageAddress = "http://127.0.0.1:5501/index.html";
+
+const userDefaultImageLocation = frontEndServerAddress + "/assets/images/blank-profile-picture-gdf6b93f73_640.png";
 
 const todoPage = frontEndServerAddress + "/assets/html/todo.html";
 const quotePage = frontEndServerAddress + "/assets/html/quote.html";
@@ -28,19 +30,4 @@ const quoteWritePageURL = "";
 const todoPageURL = "/assets/html/todo.html";
 const quotePageURL = "/assets/html/quote.html";
 
-
-// var $alarm = $("#alarm");
-// var $nav = $("nav.main");
-
-//     $alarm
-//     .appendTo($nav)
-//     .panel({
-//         delay: 500,
-//         hideOnClick: true,
-//         hideOnSwipe: true,
-//         resetScroll: true,
-//         resetForms: true,
-//         side: 'top',
-//         target: $nav,
-//         visibleClass: 'is-menu-visible'
-//     });
+// t4Dr9HKQO7CJIJv9 - mongodb password
