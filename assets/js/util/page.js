@@ -103,7 +103,7 @@ export class NonDataInjector {
      * 
      * <ul class="posts">
      */
-    createNonPosts() {
+    createEmptyTodoList() {
 
         var arg = {
             title: "데이터가 없어요.",
@@ -111,6 +111,21 @@ export class NonDataInjector {
         }
 
         var section = post.createPostList(arg);
+
+        return section;
+    }
+
+    /**
+     * 
+     */
+
+    createEmptyQuoteList() {
+        var arg = {
+            title: "데이터가 없어요.",
+            heart: ""
+        }
+
+        var section = post.createQuoteList(arg);
 
         return section;
     }

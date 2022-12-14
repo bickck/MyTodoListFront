@@ -28,7 +28,6 @@ const userIntroSaveButton = document.querySelector("#user-intro-save");
 
 const changeTextViewButton = document.querySelector("#user-update-cancle");
 
-
 const userInfoButton = document.querySelector("#user-info-button");
 const userTodoButton = document.querySelector("#user-todo-button");
 const userQuoteButton = document.querySelector("#user-quote-button");
@@ -111,32 +110,20 @@ function setSidebarUserIntro() {
     })
 
     result.then((data) => {
-        console.log(data);
+
         const id = data.id;
         const username = data.username;
         const comment = data.introComment;
-        const fileName = data.fileName;
+        const physicalPath = data.fileName;
         const originalFileName = data.originalFileName;
 
         userIdContainer.innerText = id;
         usernameContainer.innerText = username;
+        userCommentContainer.innerText = setUserProfileCommentStr(comment);
+        userImageContainer.src = setUserProfileImageUrl(physicalPath, originalFileName);
 
         userIdContainer.setAttribute("value", id);
         usernameContainer.setAttribute("value", username);
-
-        if (comment != null && comment.length != 0) {
-            userCommentContainer.innerText = comment;
-        } else {
-            userCommentContainer.innerText = "당신의 코멘트를 적어주세요.";
-        }
-
-        if (fileName == "DEFAULT") {
-            const imageSource = frontEndServerAddress + `/images/blank-profile-picture-gdf6b93f73_640.png`;
-            userImageContainer.setAttribute("src", imageSource);
-        } else {
-            const imageSource = backEndServerAddress + `/image/api/user/source/${fileName}/${originalFileName}`;
-            userImageContainer.setAttribute("src", imageSource);
-        }
     });
 }
 
@@ -152,7 +139,8 @@ function setUserInfoPost() {
 
         const comment = data.introComment;
         const username = data.username;
-        const imageSource = backEndServerAddress + `/image/api/user/source/${data.fileName}/${data.originalFileName}`;
+        const physicalPath = data.fileName;
+        const originalFileName = data.originalFileName;
 
         const introEmailSection = document.querySelector("#intro-email");
         const introUsernameSection = document.querySelector("#intro-username");
@@ -160,15 +148,11 @@ function setUserInfoPost() {
         const introBirthSection = document.querySelector("#intro-birth");
         const introUserImage = document.querySelector(".user-image");
 
-        if (comment == "") {
-            introCommentSection.innerText == "당신의 코멘트를 적어주세요."
-        } else {
-            introCommentSection.innerText = data.introComment;
-        }
-
+        
+        introCommentSection.innerText = setUserProfileCommentStr(comment);
         introUsernameSection.innerText = username;
         introBirthSection.innerText = "";
-        introUserImage.src = imageSource;
+        introUserImage.src = setUserProfileImageUrl(physicalPath, originalFileName);
     });
 }
 
@@ -569,120 +553,3 @@ userimageDeleteButton.addEventListener("click", userImageDeleteAction);
 userDeleteButton.addEventListener("click", userDeleteAction);
 userUpdateButton.addEventListener("click", userUpdateAction);
 userIntroSaveButton.addEventListener("click", userIntroSave);
-
-
-//=====================================================================================================================
-
-
-var actionsContianer = {
-    deleteList: document.createElement("li"),
-    updateList: document.createElement("li"),
-    deleteButton: document.createElement("a"),
-    updateButton: document.createElement("a")
-}
-
-// function setElementActionsStruct(actionsContianer) {
-//     const postActionsContainer = actionsContianer.lastChild.firstChild;
-//     actionsContianer.deleteList.setAttribute("class", "post_delete");
-//     actionsContianer.updateList.setAttribute("class", "post_update");
-//     actionsContianer.deleteButton.setAttribute("class", "");
-//     actionsContianer.updateButton.setAttribute("class", "");
-//     actionsContianer.deleteList.appendChild(actionsContianer.deleteButton);
-//     actionsContianer.updateList.appendChild(actionsContianer.updateButton);
-//     postActionsContainer.appendChild(actionsContianer.deleteList);
-//     postActionsContainer.appendChild(actionsContianer.updateList);
-//     actionsContianer.postActionsContainer = postActionsContainer;
-
-//     return actionsContianer;
-// }
-
-function createQuotePostManageActions(arg) {
-
-    const quoteid = arg.quoteid;
-
-    const postActionsContainer = arg.lastChild.firstChild;
-    const deleteList = document.createElement("li");
-    const updateList = document.createElement("li");
-    const deleteButton = document.createElement("a");
-    const updateButton = document.createElement("a");
-
-    deleteButton.innerText = "DELETE";
-    updateButton.innerText = "UPDATE";
-
-    deleteList.appendChild(deleteButton);
-    updateList.appendChild(updateButton);
-    postActionsContainer.appendChild(deleteList);
-    postActionsContainer.appendChild(updateList);
-
-    deleteList.setAttribute("class", "post_delete");
-    updateList.setAttribute("class", "post_update");
-
-    deleteButton.setAttribute("class", "");
-    updateButton.setAttribute("class", "");
-
-    updateButton.setAttribute("href", frontEndServerAddress + `/assets/html/updatequote.html?quoteid=${quoteid}`);
-    deleteButton.addEventListener("click", function setDeleteActions() {
-
-        popupOpen("삭제하시겠습니까?", function () {
-
-            var server = quote.requestUserQuoteDelete({
-                id: quoteid
-            });
-
-            server.then((data) => {
-                if (data == "SUCCESS") {
-                    popupClose();
-                    setUserQuotePost();
-                }
-            });
-        });
-
-    });
-
-    return arg;
-}
-
-function createTodoPostManageActions(arg) {
-
-    const todoid = arg.todoid;
-
-    const postActionsContainer = arg.lastChild.firstChild;
-    const deleteList = document.createElement("li");
-    const updateList = document.createElement("li");
-    const deleteButton = document.createElement("a");
-    const updateButton = document.createElement("a");
-
-    deleteButton.innerText = "DELETE";
-    updateButton.innerText = "UPDATE";
-
-    deleteList.setAttribute("class", "post_delete");
-    updateList.setAttribute("class", "post_update");
-    deleteButton.setAttribute("class", "");
-    updateButton.setAttribute("class", "");
-
-    deleteList.appendChild(deleteButton);
-    updateList.appendChild(updateButton);
-    postActionsContainer.appendChild(deleteList);
-    postActionsContainer.appendChild(updateList);
-
-    updateButton.setAttribute("href", frontEndServerAddress + `/assets/html/updatetodo.html?todoid=${todoid}`);
-    deleteButton.addEventListener("click", function setDeleteActions() {
-
-        popupOpen("삭제하시겠습니까?", function () {
-
-            var server = todo.requestUserTodoDelete({
-                id: todoid
-            });
-
-            server.then((data) => {
-                if (data == "SUCCESS") {
-                    popupClose();
-                    setUserTodoPost();
-                }
-            });
-        });
-
-    });
-
-    return arg;
-}

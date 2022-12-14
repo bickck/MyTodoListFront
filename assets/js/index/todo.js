@@ -34,9 +34,8 @@ function mainTodoApi() {
 
     mainApiList.then((data) => {
 
-        console.log(data);
-        if (data == null && data == "undefined" && data.totalElements > 0) {
-            mainTodoContainer.appendChild(nonDataInjector.createNonMainPost());
+        if (data == null || data == "undefined" || data.totalElements == 0) {
+            mainTodoContainer.appendChild(nonDataInjector.createEmptyMainTodoPost());
             return;
         }
 
@@ -44,8 +43,6 @@ function mainTodoApi() {
 
             var content = data.content[i];
             var container = postGenerator.createMainPost(content);
-
-
             mainTodoContainer.appendChild(container);
         }
     });
@@ -62,7 +59,7 @@ function recommandTodoApi() {
 
     resposeRecommandTodoList.then((data) => {
 
-        if (data == null && data == "undefined" && data.number == 0) {
+        if (data == null || data == "undefined" || data.number == 0) {
             recommandTodoContainer.appendChild(nonDataInjector.createNonMiniPost());
             return;
         }
@@ -89,8 +86,8 @@ function dailyTodoApi() {
 
     dailyQuoteList.then((data) => {
 
-        if (data == null && data == "undefined" && data.number == 0) {
-            dailyTodoContainer.appendChild(nonDataInjector.createTodoList());
+        if (data == null || data == "undefined" || data.number == 0) {
+            dailyTodoContainer.appendChild(nonDataInjector.createEmptyTodoList());
 
             return;
         }

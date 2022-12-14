@@ -35,12 +35,8 @@ class QuotePostGenerator {
      */
 
     createMainQuote(params) {
-        console.log("postGenerator");
-
-        console.log(params);
-
+    
         // element 생성
-
         var articleContainer = document.createElement("article");
         var headerContainer = document.createElement("header");
         var headerTitle = document.createElement("div");
@@ -167,11 +163,6 @@ class QuotePostGenerator {
      */
 
     createQuoteList(params) {
-        console.log("postGenerator");
-
-        console.log(params);
-
-
         // element 생성
         var li = document.createElement("li");
         var articleContainer = document.createElement("article");

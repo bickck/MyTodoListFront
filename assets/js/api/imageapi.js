@@ -25,9 +25,9 @@ export class ImageApi {
 
     async requestUserImage(arg) {
         
-        const url = backEndServerAddress + `/image/api/user/${arg.id}`;
+        const url = backEndServerAddress + `/image/api/user/${arg.uuid}`;
         var result = await fetch(url, {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 "Content-Type": "application/json",
                 "authorization" : auth.getJsonToken()

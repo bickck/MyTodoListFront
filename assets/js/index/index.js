@@ -103,9 +103,10 @@ function requestMainQuotes() {
     });
 
     mainQuotes.then((data) => {
+        console.log(data);
 
         if (data == null || data == "undefined" || data.content.length == 0) {
-            postLists.appendChild(nonDataInjector.createEmptyMainQuotePost());
+            postLists.appendChild(nonDataInjector.createEmptyQuoteList());
             return;
         }
 
@@ -119,6 +120,8 @@ function requestMainQuotes() {
         }
     });
 }
+
+/** */
 
 /**
  * 유저의 정보를 가져옴
@@ -143,23 +146,22 @@ function userDetailInfo() {
  */
 
 function postUserIntroData(introData) {
-    const username = document.querySelector("#username");
-    const userComment = document.querySelector("#usercomment");
-    const userImage = document.querySelector("#userImage");
 
     console.log(introData);
 
-    if (introData.introComment == null || introData.introComment == "") {
-        userComment.innerText = "당신의 코멘트를 적어주세요.";
+    const usernameContainer = document.querySelector("#username");
+    const userCommentContainer = document.querySelector("#usercomment");
+    const userImageContainer = document.querySelector("#userImage");
 
-    } else {
-        userComment.innerText = introData.introComment;
-    }
+    const comment = introData.introComment;
+    const username = introData.username;
 
-    const imageSource = backEndServerAddress + `/image/api/user/source/${introData.fileName}/${introData.originalFileName}`;
+    const filePath = introData.fileName;
+    const originalFileName = introData.originalFileName;
 
-    userImage.src = imageSource;
-    username.innerText = introData.username;
+    userCommentContainer.innerText = setUserProfileCommentStr(comment)
+    userImageContainer.src = setUserProfileImageUrl(filePath, originalFileName);;
+    usernameContainer.innerText = username;
 }
 
 /**
@@ -183,8 +185,6 @@ function createUserCommentInput() {
     } else {
         input.removeAttribute("hidden");
     }
-
-
 }
 
 /**
@@ -199,13 +199,15 @@ function requestSaveComment(event) {
 
     var userCommentArea = document.querySelector("#usercomment");
 
-    user.requestSaveUserIntro({
+    var result = user.requestSaveUserIntro({
         introComment: commentInput
     });
 
-    createUserCommentInput();
-    document.querySelector("#introComment").value = "";
-    userCommentArea.innerText = commentInput;
+    result.then((data)=>{
+        createUserCommentInput();
+        document.querySelector("#introComment").value = "";
+        userCommentArea.innerText = commentInput;
+    });
 }
 
 /**

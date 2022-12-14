@@ -46,33 +46,8 @@ const heartapi = new HeartApi();
 const auth = new Auth();
 
 export class PostGenerator {
-    // <article class="post">
-    // 		<header>
-    // 			<div class="title">
-    // 				<h2><a href="single.html">Magna sed adipiscing</a></h2>
-    // 				<p>Lorem ipsum dolor amet nullam consequat etiam feugiat</p>
-    //  		</div>
-    // 			<div class="meta">
-    // 				<time class="published" datetime="2015-11-01">November 1, 2015</time>
-    // 				<a href="#" class="author"><span class="name">Jane Doe</span><img src="images/avatar.jpg" alt="" /></a>
-    // 			</div>
-    // 		</header>
-    // 		<a href="single.html" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-    // 		<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-    // 		<footer>
-    // 			<ul class="actions">
-    // 				<li><a href="single.html" class="button large">Continue Reading</a></li>
-    // 			</ul>
-    // 			<ul class="stats">
-    // 				<li><a href="#">General</a></li>
-    // 				<li><a href="#" class="icon solid fa-heart">28</a></li>
-    // 				<li><a href="#" class="icon solid fa-comment">128</a></li>
-    // 			</ul>
-    // 		</footer>
-    // 	</article>'
-
     /**
-     * 
+     *  <article class="post">
      * @param {*} params 
      * @returns 
      */
@@ -152,22 +127,22 @@ export class PostGenerator {
 
         // post, user 이미지 세팅
 
-        //setPostImage(params.id, params.userImgCount,userImage,userInfoContainer,"USER");
-
         // is check user img generator
-        if (params.userImgCount != null && typeof params.userImgCount != "undefined" && params.userImgCount != 0) {
 
-            const imageInfo = imageApi.requestUserImage(params.id);
 
-            imageInfo.then((data) => {
-                const imageSource = backEndServerAddress + `/${data.filePath} + /${data.fileName}`;
+        const imageInfo = imageApi.requestUserImage({
+            uuid: params.userImageUUID
+        });
+        imageInfo.then((data) => {
+            console.log(data);
+            const imageSource = setUserProfileImageUrl(data.fileName, data.originalFileName);
+            userImage.setAttribute("src", imageSource);
+            userImage.setAttribute("style", "width:44.8px, height:44.8px");
 
-                userImage.setAttribute("src", imageSource);
+        });
 
-            });
+        userInfoContainer.appendChild(userImage);
 
-            userInfoContainer.appendChild(userImage);
-        }
 
         setPostImage(params.id, params.postImgCount, image, imageContainer, "POST");
 
@@ -206,22 +181,8 @@ export class PostGenerator {
         return articleContainer;
     }
 
-    // <section>
-    //     <div class="mini-posts">
-
-    //         <!-- Mini Post -->
-    //             <article class="mini-post">
-    //                 <header>
-    //                     <h3><a href="single.html">Vitae sed condimentum</a></h3>
-    //                     <time class="published" datetime="2015-10-20">October 20, 2015</time>
-    //                     <a href="#" class="author"><img src="images/avatar.jpg" alt="" /></a>
-    //                 </header>
-    //                 <a href="single.html" class="image"><img src="images/pic04.jpg" alt="" /></a>
-    //             </article>
-    //     </div>
-    // </section>
-
     /**
+     * <div class="mini-posts">
      * 
      * @param {*} params 
      * @returns 
@@ -256,7 +217,6 @@ export class PostGenerator {
         authorImageContainer.setAttribute("class", "author");
         imageContainer.setAttribute("class", "image");
         createTime.setAttribute("class", "published");
-
         postId.setAttribute("hidden", "");
         postId.setAttribute("id", `PostID-${params.id}`);
         postId.setAttribute("value", params.id);
@@ -363,6 +323,12 @@ export class PostGenerator {
 
         return articleContainer;
     };
+
+    /**
+     * 
+     * @param {*} params 
+     * @returns 
+     */
 
     createMiniTodos(params) {
 
@@ -510,21 +476,8 @@ export class PostGenerator {
         return articleContainer;
     };
 
-    /* <section>
-        <ul class="posts">
-            <li>
-                <article>
-                    <header>
-                        <h3><a href="single.html">Lorem ipsum fermentum ut nisl vitae</a></h3>
-                        <time class="published" datetime="2015-10-20">October 20, 2015</time>
-                    </header>
-                    <a href="single.html" class="image"><img src="images/pic08.jpg" alt="" /></a>
-                </article>
-            </li>
-        </ul>
-    </section> */
-
     /**
+     * <ul class="posts">
      * 
      * @param {*} params 
      * @returns 
@@ -635,62 +588,8 @@ export class PostGenerator {
         return li;
     }
 
-    // <ul class="posts quote">
-    //     <li>
-    //     <article>
-    //         <header>
-    //             <h3><a id="" href="single.html">Main QUote</a></h3>
-    //             <h4 id="author">-author-</h4>
-    //             <ul class="actions">
-    //                 <li><a href="#" class="icon solid fa-heart">0</a></li>
-    //                 <li><time class="published" datetime="2015-10-20">October 20, 2015</time></li>
-    //             </ul>
-    //           </header>
-    //         </article>
-    //     </li>
-    // </ul>
-
-
-    //    <article class="post todo-details">
-    //     <header>
-    //         <div class="title">
-    //             <h2><a href="#">Magna sed adipiscing</a></h2>
-    //             <p>Lorem ipsum dolor amet nullam consequat etiam feugiat</p>
-    //         </div>
-    //         <div class="meta">
-    //             <time class="published" datetime="2015-11-01">November 1, 2015</time>
-    //             <a href="#" class="author">
-    //                 <span class="name">Jane Doe</span>
-    //                 <img src="images/avatar.jpg"alt="" />
-    //             </a>
-    //         </div>
-    //     </header>
-    //     <span class="image featured"><img src="./../../images/pic01.jpg" alt="" /></span>
-    //     <span class="image featured"><img src="./../../images/pic01.jpg" alt="" /></span>
-    //     <span class="image featured"><img src="./../../images/pic01.jpg" alt="" /></span>
-    //     <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
-    //         placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non
-    //         congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta
-    //         lectus vitae, ultricies congue gravida diam non fringilla.</p>
-    //     <p>Nunc quis dui scelerisque, scelerisque urna ut, dapibus orci. Sed vitae condimentum lectus, ut
-    //         imperdiet quam. Maecenas in justo ut nulla aliquam sodales vel at ligula. Sed blandit diam odio, sed
-    //         fringilla lectus molestie sit amet. Praesent eu tortor viverra lorem mattis pulvinar feugiat in
-    //         turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-    //         Fusce ullamcorper tellus sit amet mattis dignissim. Phasellus ut metus ligula. Curabitur nec leo
-    //         turpis. Ut gravida purus quis erat pretium, sed pellentesque massa elementum. Fusce vestibulum porta
-    //         augue, at mattis justo. Integer sed sapien fringilla, dapibus risus id, faucibus ante. Pellentesque
-    //         mattis nunc sit amet tortor pellentesque, non placerat neque viverra. </p>
-    //     <footer>
-    //         <ul class="stats">
-    //             <li><a href="#">General</a></li>
-    //             <li><a href="#" class="icon solid fa-heart">28</a></li>
-    //             <li><a href="#" class="icon solid fa-comment">128</a></li>
-    //         </ul>
-    //     </footer>
-    // </article>
-
-
     /**
+     * <article class="post todo-details">
      * 
      * Todo Detail Page
      * 
@@ -726,12 +625,8 @@ export class PostGenerator {
         titleContainer.appendChild(title);
         titleContainer.appendChild(subtitle);
         titleContainer.appendChild(todoId);
-
         userInfoContainer.appendChild(username);
         userInfoContainer.appendChild(userImage);
-
-
-
         metaContainer.appendChild(createTimeStamp);
         metaContainer.appendChild(userInfoContainer);
         heartList.appendChild(heart);
@@ -739,17 +634,15 @@ export class PostGenerator {
         statsList.appendChild(commentList);
         statsList.appendChild(heartList);
         footerContainer.appendChild(statsList);
-
         headerContainer.appendChild(titleContainer);
         headerContainer.appendChild(metaContainer);
-
         articleContainer.appendChild(headerContainer);
         articleContainer.appendChild(imageContainer);
         articleContainer.appendChild(mainContent);
         articleContainer.appendChild(footerContainer);
 
+        
         // 내부 값 설정
-
         articleContainer.setAttribute("class", "post todo-details");
         titleContainer.setAttribute("class", "title");
         metaContainer.setAttribute("class", "meta");
@@ -778,8 +671,6 @@ export class PostGenerator {
 
         // 커멘트 전용 팝업 or 리스트 필요
 
-
-
         //view 이미지 생성
 
         title.innerText = params.title;
@@ -792,24 +683,6 @@ export class PostGenerator {
 
         return articleContainer;
     }
-
-
-    /**
-     * 
-     * <li>
-     *  <article>
-     *      <header>
-     *          <p hidden="" id="QuoteId-1" value="1"></p>
-     *          <h3><p value="test1234">test1234</p></h3>
-     *          <h4 value="author1234"> author1234 </h4>
-     *          <ul class="stats">
-     *           <li><a class="icon solid fa-heart">0</a></li>
-     *           <li><time class="published" datetime="undefined">November 15. 2022</time></li>
-     *          </ul>
-     *      </header>
-     *  </article>
-     * </li>
-     */
 
     /**
      * 
@@ -847,7 +720,6 @@ export class PostGenerator {
         ulContainer.setAttribute("class", "stats");
         heart.setAttribute("class", "icon solid fa-heart");
         createTime.setAttribute("class", "published");
-
         quoteId.setAttribute("hidden", "");
         quoteId.setAttribute("id", `QuoteId-${params.id}`);
         quoteId.setAttribute("value", params.id);
@@ -931,20 +803,9 @@ export class PostGenerator {
         return li;
     }
 
-
-
-    // <!-- About -->
-    // <section class="blurb">
-    //     <h2>About</h2>
-    //     <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
-    //         amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.
-    //     </p>
-    //     <ul class="actions">
-    //         <li><a href="#" class="button">Learn More</a></li>
-    //     </ul>
-    // </section>
-
     /**
+     * <!-- About -->
+     * <section class="blurb">
      * 
      * @param {*} params 
      * @returns 
@@ -979,36 +840,8 @@ export class PostGenerator {
         return blurdSection;
     }
 
-
-
-    // <article class="post quote">
-    //     <header>
-    //         <div class="title">
-    //             <h3><a href="single.html">Euismod et accumsan</a></h3>
-    //             <p>Lorem ipsum dolor amet nullam consequat etiam feugiat</p>
-    //         </div>
-    //         <div class="meta">
-    //             <time class="published" datetime="2015-11-01">November 1, 2015</time>
-    //             <a href="#" class="author">
-    //                 <span class="name">Jane Doe</span>
-    //                 <img src="images/avatar.jpg" alt="" />
-    //             </a>
-    //         </div>
-    //     </header>
-    //     <div class="col-6 col-12-small" hidden>
-    //         <input type="checkbox" id="non-public" name="public" value="public" disabled>
-    //         <label for="non-public" style="user-select: none;">비공개</label>
-    //     </div>
-    //     <footer>
-    //         <ul class="stats">
-    //             <li class="heart custom-style"><a class="icon solid fa-heart"></a></li>
-    //             <li class="update custom-style"><a id="update_button">Update</a></li>
-    //             <li class="delete custom-style"><a id="delete_button">Delete</a></li>
-    //         </ul>
-    //     </footer>
-    // </article>
-
     /**
+     * <article class="post quote">
      * 
      * @param {*} params 
      * @returns 
@@ -1049,7 +882,6 @@ export class PostGenerator {
         articleContainer.appendChild(footerContainer);
 
         //내부 값 설정
-
         articleContainer.setAttribute("class", "post quote");
         headerTitle.setAttribute("class", "title");
         metaContainer.setAttribute("class", "meta");
@@ -1095,14 +927,23 @@ export class PostGenerator {
         return articleContainer;
     }
 
-    // <li>
-    //     <input id="files" class="files" type="file" multiple="multiple"></input>
-    //     <label for="files" class="button icon solid fa-plus image"></label>
-    // </li>						
+
+    /**
+     * 
+     *  <li>
+            <input id="files" class="files" type="file" multiple="multiple"></input>
+            <label for="files" class="button icon solid fa-plus image"></label>
+        </li>	
+     * 
+     * @param {*} id 
+     * @returns 
+     */
+
+   					
 
 
     createPreViewImageContainer(id) {
-        
+
         const li = document.createElement("li");
         const input = document.createElement("input");
         const label = document.createElement("label");
@@ -1175,6 +1016,7 @@ export class PostGenerator {
         quoteId.setAttribute("id", `QuoteID-${params.id}`);
         quote.setAttribute("id", "quote");
         author.setAttribute("id", "author")
+
         quoteId.setAttribute("value", params.id);
         username.setAttribute("value", params.username);
         quote.setAttribute("value", params.quote);
@@ -1509,10 +1351,6 @@ function setDetailPageMoveEvent(id, containerList) {
     }
 }
 
-var layer;
-var main;
-
-
 function openCommentLayer(event) {
 
     var targetId = event.target.id.split("-")[2];
@@ -1548,22 +1386,6 @@ function openCommentLayer(event) {
     });
 }
 
-function addComment(event) {
-    const todo_Id = document.querySelector("#TodoID").getAttribute("todo_id");
-    const comment = document.getElementById("comment_form").elements[0].value;
-
-    var result = todoServer.requestSaveCommentByTodoId({
-        id: todo_Id,
-        comment: comment
-    });
-
-    result.then((data) => {
-        if (data == "SUCCESS") {
-            reloadTodoCommeandData(todo_Id);
-        }
-    })
-}
-
 function reloadTodoCommeandData(todoId) {
 
     layer = comment.createCommentLayer({
@@ -1585,6 +1407,23 @@ function reloadTodoCommeandData(todoId) {
 
     });
 }
+
+function addComment(event) {
+    const todo_Id = document.querySelector("#TodoID").getAttribute("todo_id");
+    const comment = document.getElementById("comment_form").elements[0].value;
+
+    var result = todoServer.requestSaveCommentByTodoId({
+        id: todo_Id,
+        comment: comment
+    });
+
+    result.then((data) => {
+        if (data == "SUCCESS") {
+            reloadTodoCommeandData(todo_Id);
+        }
+    })
+}
+
 
 function clearCommentList(todoId) {
     var childSize = layer.commentContainer.childElementCount;
