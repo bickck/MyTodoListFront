@@ -32,10 +32,15 @@ export class ImageApi {
                 "Content-Type": "application/json",
                 "authorization" : auth.getJsonToken()
             }
-        }).catch((error) => {
+        })
+        // .then((data)=>{
+        //     console.log(data);
+        // })
+        .catch((error) => {
             console.log(error);
         });
 
+        
         return result.json();
     }
 

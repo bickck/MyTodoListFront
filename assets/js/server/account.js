@@ -37,8 +37,8 @@ export class Account {
         })
         .then(Response => Response.text())
         .then((data)=>{
-            // auth.setJsonToken(data);
-            // remove json token
+            auth.setJsonToken(data);
+            //remove json token
             window.location.href = mainPageAddress;
         }).catch((error)=> {
             console.log(error);

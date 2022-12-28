@@ -2,6 +2,7 @@
 function setUserProfileImageUrl(filePath, fileName) {
 
     var imageSource;
+    
     if (filePath != "DEFAULT") {
         imageSource = backEndServerAddress + `/image/api/user/source/${filePath}/${fileName}`;
     } else {
@@ -30,3 +31,9 @@ function setUserProfileCommentStr(comment) {
 function refreshCommentInputElement(commentID) {
     document.querySelector(`#${commentID}`).value = "";
 }
+
+export {
+    setUserProfileImageUrl,
+    setUserProfileCommentStr,
+    refreshCommentInputElement
+};

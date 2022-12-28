@@ -27,8 +27,6 @@ function loadTodoDetailsById(id) {
     var todoDetails = todoapi.requestUserTodoByTodoId(arg);
 
     todoDetails.then((data)=>{
-        console.log(data);
-
 
         const post = postgenerator.createTodoSinglePage(data);
         

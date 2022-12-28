@@ -1,145 +1,17 @@
 import {
     Todo
-} from "./../../server/todo.js";
+} from "../../server/todo.js";
 import {
     Quote
-} from "./../../server/quote.js";
+} from "../../server/quote.js";
+
+import {
+    Auth
+} from "../../account/auth.js"
 
 const todo = new Todo();
 const quote = new Quote();
-
-function setTodoHeart(arg) {
-
-    var postId = arg.id;
-    var heart = arg.heart;
-    const isPublish = arg.isPublish;
-
-    if (isPublish == "private" || isPublish == "PRIVATE") {
-
-        postPrivateAction({
-            postId,
-            heartContainer: heartContainer,
-            funcServer: funcServer });
-        return;
-    }
-
-    if (auth.getJsonToken() != null)  {
-        injectorTodoAuthValue(arg);
-    }
-
-    postPublishAction();
-    heartContainer.innerText = heart;
-
-}
-
-function setQuoteHeart(arg) {
-
-    var postId = arg.id;
-    var heart = arg.heart;
-    const isPublish = arg.isPublish;
-
-    if (isPublish == "private" || isPublish == "PRIVATE") {
-
-        postPrivateAction({
-            postId,
-            heartContainer: heartContainer,
-            funcServer: funcServer
-        })
-        return;
-    }
-}
-
-/**
- * 
- * @param {*} arg 
- */
-
-function postPublishAction(arg) {
-
-}
-
-/**
- * 
- * @param {*} arg 
- */
-
-function injectorTodoAuthValue(arg){
-
-    if (auth.getJsonToken() != null) {
-        var result = todo.requestHeartExists({
-            id: postId
-        });
-
-        result.then((exists) => {
-
-            if (exists == "true") {
-                heartContainer.setAttribute("id", `heart-${postId}`);
-                heartContainer.setAttribute("id", `heart-postid-${postId}`);
-                heartContainer.setAttribute("isExists", `${exists.exists}`);
-                heartContainer.setAttribute("uuid", `${exists.uuid}`)
-                heartContainer.setAttribute("value", heart);
-                heartContainer.addEventListener("click", heartActions);
-
-            } else {
-                heartContainer.setAttribute("id", `heart-${postId}`);
-                heartContainer.setAttribute("isExists", `${exists.exists}`);
-                heartContainer.setAttribute("uuid", `${exists.uuid}`)
-                heartContainer.setAttribute("value", heart);
-                heartContainer.addEventListener("click", heartActions);
-            }
-        });
-
-    } else {
-        heartContainer.setAttribute("id", `heart-${postId}`)
-        heartContainer.setAttribute("value", heart);
-        heartContainer.addEventListener("click", heartActions);
-    }
-}
-
-/**
- * 
- * @param {*} arg 
- */
-
-function injectorQuoteAuthValue(arg){
-
-    if (auth.getJsonToken() != null) {
-        var result = quote.requestHeartExists({
-            id: postId
-        });
-
-        result.then((exists) => {
-
-            if (exists == "true") {
-                heartContainerValueInjector(heartContainer,{
-                    postId : postId,
-                    exists : exists,
-                    uuid : uuid,
-                    heartCounter : heart
-                });
-                heartContainer.addEventListener("click", heartActions);
-
-            } else {
-                heartContainerValueInjector(heartContainer,{
-                    postId : postId,
-                    exists : exists,
-                    uuid : uuid,
-                    heartCounter : heart
-                });
-                heartContainer.addEventListener("click", heartActions);
-            }
-        });
-
-    } else {
-        heartContainerValueInjector(heartContainer,{
-            postId : postId,
-            exists : exists,
-            uuid : uuid,
-            heartCounter : heart
-        });
-        heartContainer.addEventListener("click", heartActions);
-    }
-}
+const auth = new Auth();
 
 
 /**
@@ -151,138 +23,206 @@ function injectorQuoteAuthValue(arg){
  * @returns 
  */
 
-function cancleHeart(heartuuid, postId, heart, heartContainer) {
+function cancleHeart(heartUUID, postId, heart, heartContainer) {
 
     if (heart == 0) {
+        heartContainer.innerText = heart;
+
         return;
     }
 
     var decreaseHeart = Number(heart) - 1;
     heartContainer.innerText = decreaseHeart;
-    heartContainer.setAttribute("id", `heart-${postId}`);
-    heartContainer.setAttribute("isExists", `false`);
-    heartContainer.setAttribute("uuid", `${null}`)
-    heartContainer.setAttribute("value", decreaseHeart);
-
-    funcServer.requestCancleHeart({
-        id: heartuuid
-    });
+    heartContainerValueInjector(postId, false, heartUUID, decreaseHeart, heartContainer);
 }
 
-function addHeart(postId, heart, heartContainer) {
+function addHeart(heartUUID, postId, heart, heartContainer) {
 
     var increaseHeart = Number(heart) + 1;
     heartContainer.innerText = increaseHeart;
-    heartContainer.setAttribute("id", `heart-${postId}`);
-    heartContainer.setAttribute("isExists", `true`);
-    heartContainer.setAttribute("uuid", `${null}`)
-    heartContainer.setAttribute("value", increaseHeart);
+    heartContainerValueInjector(postId, true, heartUUID, increaseHeart, heartContainer);
+}
 
-    var result = funcServer.requestSaveHeart({
+/**
+ * 
+ * @param {*} arg 
+ */
+
+function injectorTodoAuthValue(postId, heart, heartContainer) {
+
+    var result = todo.requestHeartExists({
         id: postId
     });
 
-    result.then((data) => {
-        heartContainer.setAttribute("uuid", `${data}`)
-    });
+    result.then((exists) => {
 
+        var uuid = exists.uuid;
+        var isExists = exists.exists;
+
+        if (isExists == true) {
+            var result = todo.requestCancleHeart({
+                id: uuid
+            });
+            result.then((data) => {
+                cancleHeart(null, postId, heart, heartContainer);
+            });
+        } else {
+            var result = todo.requestSaveHeart({
+                id: postId
+            })
+            result.then((data) => {
+                console.log("add");
+                addHeart(data, postId, heart, heartContainer);
+            });
+        }
+    });
 }
 
 /**
  * 
- * @param {*} event 
+ * @param {*} arg 
  */
 
+function injectorQuoteAuthValue(postId, heart, heartContainer) {
+
+    var result = quote.requestHeartExists({
+        id: postId
+    });
+
+    result.then((exists) => {
+
+        var uuid = exists.uuid;
+        var isExists = exists.exists;
+
+        if (isExists == true) {
+            var result = quote.requestCancleHeart({
+                id: uuid
+            });
+            result.then((data) => {
+                cancleHeart(null, postId, heart, heartContainer);
+            });
+        } else {
+            var result = quote.requestSaveHeart({
+                id: postId
+            })
+            result.then((data) => {
+                addHeart(data, postId, heart, heartContainer);
+            });
+        }
+    });
+}
+
+// function setChangeHeartEvent(id, heartContainer) {
+//     heartContainerValueInjector(id, `false`, null, 0, heartContainer);
+//     heartContainer.addEventListener("click", function () {
+//         injectorTodoAuthValue(id, heartContainer);
+//     });
+// }
+/**
+ * 
+ * @param {*} arg 
+ */
+
+function todoPrivateAction(arg, heartContainer) {
+
+    var todoId = arg.postId;
+    heartContainer.innerText = "private";
+
+    // heartContainer.addEventListener("click", function () {
+    //     heartContainer.innerText = 0;
+
+    //     todo.requestChangePublish({
+    //         id: todoId
+    //     });
+    //     injectorTodoAuthValue(todoId, heartContainer);
+    // });
+}
 
 
-function heartActions(event) {
+/**
+ * 
+ * @param {*} arg 
+ */
 
-    var heartContainer = event.target;
-    var postid = heartContainer.id.split("-")[1];
-    var uuid = heartContainer.getAttribute("uuid");
-    var isExists = heartContainer.getAttribute("isExists");
-    var heartValue = heartContainer.getAttribute("value");
+function quotePrivateAction(arg, heartContainer) {
 
-    //no login
+    var quoteId = arg.postId;
+    heartContainer.innerText = "private";
+
+    // heartContainer.addEventListener("click", function () {
+    //     heartContainer.innerText = 0;
+    //     quote.requestChangePublish({
+    //         id: quoteId
+    //     });
+    //     setChangeHeartEvent(quoteId, heartContainer);
+    // });
+}
+
+function heartContainerValueInjector(id, isExists, uuid, heart, container) {
+    container.setAttribute("id", `heart-${id}`);
+    container.setAttribute("isExists", `${isExists}`);
+    container.setAttribute("uuid", `${uuid}`);
+    container.setAttribute("value", heart);
+}
+
+function noticeLoginRequest() {
+    console.log("Need login");
+}
+
+
+function setEventTodoHeart(arg, heartContainer) {
+
+    var todoId = arg.id;
+    var heart = arg.heart;
+    const isTodoPublished = arg.isPublish;
+    heartContainer.innerText = heart;
+
     if (auth.getJsonToken() == null) {
-        console.log("login Please");
+        noticeLoginRequest(arg);
+        return;
     }
-
-    // pressed heart
-    if (isExists == "false") {
-        addHeart(postid, heartValue, heartContainer);
-    }
-
-    // cancle heart press
-    if (isExists == "true") {
-        cancleHeart(uuid, postid, heartValue, heartContainer);
-    }
-}
-
-
-
-/**
- * 
- * @param {*} arg 
- */
-
-function todoPrivateAction(arg) {
-
-    var todoHeartContainer = arg.heartContainer;
-
-    todoHeartContainer.innerText = "private";
-
-    todoHeartContainer.addEventListener("click", function changePublish() {
-        todoHeartContainer.innerText = 0;
-
-        todo.requestChangePublish({
-            id: arg.postId
+    if (isTodoPublished == "PUBLISH" || isTodoPublished == "publish") {
+        heartContainer.addEventListener("click", function () {
+            injectorTodoAuthValue(todoId, heart, heartContainer);
         });
-
-        postHeartContainer.setAttribute("id", `heart-${arg.postId}`);
-        postHeartContainer.setAttribute("isExists", `false`);
-        postHeartContainer.setAttribute("uuid", `${null}`)
-        postHeartContainer.setAttribute("value", 0);
-        postHeartContainer.addEventListener("click", heartActions);
-    });
+        return;
+    }
+    if (isTodoPublished == "PRIVATE" || isTodoPublished == "private") {
+        todoPrivateAction(arg, heartContainer);
+        return;
+    }
 }
 
-/**
- * 
- * @param {*} arg 
- */
+function setEventQuoteHeart(arg, heartContainer) {
 
-function quotePrivateAction(arg) {
+    var quoteId = arg.id;
+    var heart = arg.heart;
+    const isQuotePublished = arg.isPublish;
+    heartContainer.innerText = heart;
 
-    var quoteHeartContainer = arg.heartContainer;
-
-    quoteHeartContainer.innerText = "private";
-
-    quoteHeartContainer.addEventListener("click", function changePublish() {
-        quoteHeartContainer.innerText = 0;
-
-        quote.requestChangePublish({
-            id: arg.postId
+    if (auth.getJsonToken() == null) {
+        noticeLoginRequest();
+    }
+    if (isQuotePublished == "PUBLISH" || isQuotePublished == "publish") {
+        heartContainer.addEventListener("click", function () {
+            injectorQuoteAuthValue(quoteId, heart, heartContainer);
         });
-        heartContainerValueInjector(quoteHeartContainer,{
-            postId : postId,
-            isExists : `false`,
-            uuid : null,
-            heartCounter : 0
-        })
-        quoteHeartContainer.setAttribute("id", `heart-${arg.postId}`);
-        quoteHeartContainer.setAttribute("isExists", `false`);
-        quoteHeartContainer.setAttribute("uuid", `${null}`)
-        quoteHeartContainer.setAttribute("value", 0);
-        quoteHeartContainer.addEventListener("click", function() {
-            addHeart();
-        } );
-    });
+    }
+    if (isQuotePublished == "PRIVATE" || isQuotePublished == "private") {
+        quotePrivateAction(arg, heartContainer);
+    }
 }
 
-function heartContainerValueInjector(container,arg) {
-    container.setAttribute("id", `heart-${arg.postId}`);
-    container.setAttribute("isExists", `${arg.isExists}`);
-    container.setAttribute("uuid", `${arg.uuid}`);
-    container.setAttribute("value", arg.heartCounter);
+export {
+    setEventTodoHeart,
+    setEventQuoteHeart
 }
+
+// const Heart = (arg) => {
+
+//     console.log(arg);
+
+//     return (
+//         <a id="Comment-PostID-1" className="icon solid fa-comment comment">{comment}</a>
+//     );
+// }

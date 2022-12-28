@@ -5,6 +5,7 @@ import {
     Auth
 } from "./../account/auth.js";
 const auth = new Auth();
+const token = auth.getJsonToken();
 
 export class Quote {
 
@@ -22,11 +23,13 @@ export class Quote {
                 author: `${arg.author}`,
                 isPublish: `${arg.isCheckPublic}`
             }),
-        }).then(Response => {
-
-            console.log(Response);
-
-        }).catch((error) => {
+        })
+        .then((Response)=>{   
+            console.log(Response); 
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.log(error);
         });
 
@@ -47,7 +50,12 @@ export class Quote {
                 author: `${arg.author}`,
                 isCheckPublic: `${arg.isCheckPublic}`
             }),
-        }).catch((error) => {
+        })
+        .then((Response)=>{    
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.log(error);
         });
 
@@ -63,7 +71,12 @@ export class Quote {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
             }
-        }).catch((error) => {
+        })
+        .then((Response)=>{    
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.log(error);
         });
 
@@ -78,7 +91,12 @@ export class Quote {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
             }
-        }).catch((error) => {
+        })
+        .then((Response)=>{    
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.log(error);
         });
         return result.text();
@@ -92,7 +110,12 @@ export class Quote {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
             }
-        }).catch((error) => {
+        })
+        .then((Response)=>{    
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.log(error);
         });
 
@@ -108,7 +131,12 @@ export class Quote {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
             }
-        }).catch((error) => {
+        })
+        .then((Response)=>{    
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.log(error);
         });
         return result.text();
@@ -123,7 +151,12 @@ export class Quote {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
             }
-        }).catch((error) => {
+        })
+        .then((Response)=>{    
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.log(error);
         });
 

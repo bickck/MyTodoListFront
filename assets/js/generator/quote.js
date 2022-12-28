@@ -234,3 +234,60 @@ class QuotePostGenerator {
 
 
 }
+
+
+const CreateQuotePostGenerator = (arg) => {
+
+    const quote = "";
+    const author = "";
+    const username = "";
+    const createTimeStamp = "";
+    const heart = 0;
+
+    return (
+        <article className="post quote">
+            <header>
+                <div className="title">
+                    <p id="QUOTE_ID-undefined" value="" hidden/>
+                    <h3 id="quote" value={quote}>{quote}</h3>
+                    <p id="author" value={author}>{author}</p>
+                </div>
+                <div className="meta">
+                    <time className="published" datetime="undefined">{createTimeStamp}</time>
+                    <a className="author" href="#user">
+                        <span className="username" value={username}>{username}</span>
+                        <UserImageGenerator/>
+                    </a>
+                </div>
+            </header>
+            <footer>
+                <ul className="stats">
+                    <li><a className="icon solid fa-heart heart" value={heart}>{heart}</a></li>
+                </ul>
+            </footer>
+        </article>
+    );
+}
+
+const CreateQuoteListGenerator = (arg) => {
+
+    const quote = "";
+    const author = "";
+    const createTimeStamp = "";
+    const heart = 0;
+
+    return (
+        <li>
+            <article>
+                <header>
+                    <h3 value="">{quote}</h3>
+                    <p value="">{author}</p>
+                        <ul className="stats">
+                            <li><a className="icon solid fa-heart">{heart}</a></li>
+                            <li><time className="published" datetime="">{createTimeStamp}</time></li>
+                        </ul>
+                </header>
+            </article>
+        </li>
+    );
+}

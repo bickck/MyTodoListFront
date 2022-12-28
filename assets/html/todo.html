@@ -7,11 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Todo</title>
-
- 
     <!-- css -->
     <link rel="stylesheet" href="./../css/custom.css">
     <link rel="stylesheet" href="./../css/main.css">
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/6.6.0/react-router-dom.development.js"
+        integrity="sha512-XHQuNfsrYCFIcZoP5MutJCh54xMgCkjrZQBUIXSTL2NWM/BndDH/B0tPAOnldM6Jvp7hqxGQKNU6LhTNX5k5lg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <!-- jQuery -->
     <script type="text/javascript" src="./../js/jquery.min.js"></script>
@@ -20,9 +27,7 @@
 
     <!-- config -->
     <script type="text/javascript" src="./../js/config.js"></script>
-
 </head>
-
 <body class="is-preload">
 
     <!-- Wrapper -->
@@ -49,11 +54,11 @@
                         </form>
                     </li>
                     <li class="alarm">
-						<a class="fa-bell" href="#alarm">alarm</a>
-						<form id="search" method="get" action="#">
-							<input type="text" name="query" placeholder="Search" />
-						</form>
-					</li>
+                        <a class="fa-bell" href="#alarm">alarm</a>
+                        <form id="search" method="get" action="#">
+                            <input type="text" name="query" placeholder="Search" />
+                        </form>
+                    </li>
                     <li class="menu">
                         <a class="fa-bars" href="#menu">Menu</a>
                     </li>
@@ -73,32 +78,22 @@
             <!-- Links -->
             <section class="auth">
                 <ul class="links">
-					<li>
-						<a href="#userManagePage">
-							<h3>User Manage</h3>
-						</a>
-					</li>
-					<!-- <li>
-						<a href="#userTodoPage">
-							<h3>User Todo</h3>
-						</a>
-					</li>
-					<li>
-						<a href="#userQuotePage">
-							<h3>User Quote</h3>
-						</a>
-					</li> -->
-					<li>
-						<a href="#userTodoWritePage">
-							<h3>Write Todo</h3>
-						</a>
-					</li>
-					<li>
-						<a href="#userQuoteWritePage">
-							<h3>Write Quote</h3>
-						</a>
-					</li>
-				</ul>
+                    <li>
+                        <a href="#userManagePage">
+                            <h3>User Manage</h3>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#userTodoWritePage">
+                            <h3>Write Todo</h3>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#userQuoteWritePage">
+                            <h3>Write Quote</h3>
+                        </a>
+                    </li>
+                </ul>
             </section>
             <!-- Links -->
             <section class="non-auth">
@@ -152,7 +147,7 @@
             <section>
                 <h2>Daily Todos <a class="icon solid fa-sync-alt"></a></h2>
                 <ul class="posts daliy-todos">
-                    
+
                 </ul>
             </section>
 
@@ -163,54 +158,39 @@
                 </div>
             </section>
 
+            <!-- Posts List -->
+            <!-- About -->
+            <section class="blurb">
+                <h2>About</h2>
+                <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
+                    amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.
+                </p>
+                <ul class="actions">
+                    <li><a href="#" class="button">Learn More</a></li>
+                </ul>
+            </section>
 
-    <!-- Posts List -->
-
-
-    <!-- About -->
-    <section class="blurb">
-        <h2>About</h2>
-        <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod
-            amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.
-        </p>
-        <ul class="actions">
-            <li><a href="#" class="button">Learn More</a></li>
-        </ul>
-    </section>
-
-
-
-    <!-- Footer -->
-    <section id="footer">
-        <ul class="icons">
-            <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-            <li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
-            <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-        </ul>
-        <p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a
-                href="http://unsplash.com">Unsplash</a>.</p>
-    </section>
-    </section>
+            <!-- Footer -->
+            <section id="footer">
+                <ul class="icons">
+                    <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                    <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                    <li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
+                    <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+                </ul>
+                <p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a
+                        href="http://unsplash.com">Unsplash</a>.</p>
+            </section>
+        </section>
 
     </div>
 
     <!-- product -->
     <script src="./../js/util.js"></script>
-    <script src="./..//js/main.js"></script>
+    <script src="./..//js/main.js"></script> 
 
-    <script type="text/javascript" src="./../js/generator/functions.js"></script>
-    <script type="text/javascript" src="./../js/generator/header.js"></script>
-    <script type="module" src="./../js/generator/footer.js"></script>
-    <script type="module" src="./../js/generator/menu.js"></script>
-
-
-    <script type="module" src="./../js/server/todo.js"></script>
-    <script type="module" src="./../js/function/todowrite.js"></script>
     <script type="module" src="./../js/index/todo.js"></script>
-    <script type="module" src="./../js/function/action.js"></script>
-
 </body>
 
 </html>

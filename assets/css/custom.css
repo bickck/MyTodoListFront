@@ -357,11 +357,23 @@ input[type="text"].FAILURE {
 .user-intro-manage > li:first-child{
     padding: 0;
 }
+
+/* .comments-section {
+    z-index: 6;
+    position: absolute;
+    top: 0;
+    background-color: rgba(160, 160, 160, 0.486);
+    width: 100vw;
+    height: 100vh;
+} */
 .comment-layer {
+    background: #ffffff;
+	border: solid 1px rgba(160, 160, 160, 0.3);
     position: fixed;
     width: 60rem;
-    margin: 0;
-    top: 30%;
+    margin: 0 0 3em 0;
+    padding: 3em 3em 1em 3em ;
+    top: 28%;
     left: 32%;
 }
 
@@ -432,3 +444,15 @@ input[type="text"].FAILURE {
     padding: 0 0 0 2em;
     text-transform: uppercase;
 }
+
+
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+}
+
+.stop-click {
+    pointer-events: none;
+}
+
+

@@ -2,29 +2,18 @@
  * 
  */
 
-import {
-    PostGenerator
-} from "../generator/post.js";
-import {
-    Auth
-} from "../account/auth.js";
-import {
-    Users
-} from "../server/users.js";
-import {
-    TodoApi
-} from "../api/todoapi.js";
-import {
-    QuoteApi
-} from "../api/quoteapi.js";
-
-import {
-    ImageApi
-} from "../api/imageapi.js";
-
-import {
-    NonDataInjector
-} from "../util/page.js"
+import {setUserProfileImageUrl,setUserProfileCommentStr,refreshCommentInputElement} from "./../generator/functions.js";
+import {PostGenerator} from "./../generator/post.js";
+import {Auth} from "./../account/auth.js";
+import {Users} from "./../server/users.js";
+import {TodoApi} from "./../api/todoapi.js";
+import {QuoteApi} from "./../api/quoteapi.js";
+import {ImageApi} from "./../api/imageapi.js";
+import {NonDataInjector} from "./../util/page.js"
+import "./../config.js";
+import "./../generator/menu.js";
+import "./../generator/header.js";
+import "./../generator/footer.js";
 
 
 // const mainTodos = new Todo();
@@ -55,7 +44,6 @@ window.onload = function init(event) {
     requestMainQuotes();
 
     editComment.addEventListener("click", createUserCommentInput);
-
     recommandSyncButton.addEventListener("click", refreshRandomRecommandTodo);
     dailySyncButton.addEventListener("click", refreshRandomDailyQuote);
     userCommentSaveButton.addEventListener("click", requestSaveComment);
@@ -68,14 +56,12 @@ window.onload = function init(event) {
  */
 
 function requestMainPosts() {
-    const url = backEndServerAddress + "/todo/api/mainpost";
 
     var mainTodos = todoapi.requestMainPosts();
 
     mainTodos.then((data) => {
 
-        console.log(data);
-        if (data == null || data == "undefined" || data.content.length == 0) {
+        if (data == null || data == "undefined" || data.empty == true) {
             mainPost.appendChild(nonDataInjector.createNonMainPost());
             return;
         }
@@ -96,16 +82,12 @@ function requestMainPosts() {
  */
 
 function requestMainQuotes() {
-    const url = backEndServerAddress + "/quote/api/mainquote";
 
-    var mainQuotes = quoteapi.requestMainQuotes({
-        url: url
-    });
+    var mainQuotes = quoteapi.requestMainQuotes();
 
     mainQuotes.then((data) => {
-        console.log(data);
 
-        if (data == null || data == "undefined" || data.content.length == 0) {
+        if (data == null || data == "undefined" || data.empty == true) {
             postLists.appendChild(nonDataInjector.createEmptyQuoteList());
             return;
         }
@@ -114,8 +96,6 @@ function requestMainQuotes() {
 
             var content = data.content[i];
             var container = post.createQuoteList(content);
-
-
             postLists.appendChild(container);
         }
     });
@@ -129,12 +109,10 @@ function requestMainQuotes() {
 
 function userDetailInfo() {
 
-    var userIntroData = user.requestUserDetails({
-        authorization: `${auth.getJsonToken()}`,
-        url: backEndServerAddress + "/user/api/intro"
-    });
+    var userIntroData = user.requestUserDetails();
 
     userIntroData.then((data) => {
+        console.log(data);
         postUserIntroData(data);
     });
 }
@@ -146,8 +124,6 @@ function userDetailInfo() {
  */
 
 function postUserIntroData(introData) {
-
-    console.log(introData);
 
     const usernameContainer = document.querySelector("#username");
     const userCommentContainer = document.querySelector("#usercomment");
@@ -203,7 +179,7 @@ function requestSaveComment(event) {
         introComment: commentInput
     });
 
-    result.then((data)=>{
+    result.then((data) => {
         createUserCommentInput();
         document.querySelector("#introComment").value = "";
         userCommentArea.innerText = commentInput;

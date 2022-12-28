@@ -3,6 +3,30 @@
  * 포스트에 컨테이너를 생성하고 데이터를 넣는 클래스
  */
 
+import {
+    setUserProfileImageUrl,
+    setUserProfileCommentStr,
+    refreshCommentInputElement
+} from "./../generator/functions.js";
+
+import {
+    setEventTodoHeart,
+    setEventQuoteHeart
+} from "./action/heart.js";
+import {
+    setCommentEvent
+} from "./../generator/action/comment.js"
+import {
+    setUserPageMovementEventByUserName,
+    setTodoPageMovementEventByTodoImage,
+    setTodoPageMovementEventByTodoTitle
+} from "./../generator/action/pageMovement.js"
+
+import {
+    setUserIntroImage,
+    setMainTodoImage,
+    setTodoListImage
+} from "./../generator/action/image.js"
 
 import {
     ConvertDate
@@ -124,52 +148,14 @@ export class PostGenerator {
         heart.setAttribute("class", "icon solid fa-heart heart");
         comment.setAttribute("class", "icon solid fa-comment comment");
 
+        setUserIntroImage(params.userImageUUID, userImage, userInfoContainer);
+        setMainTodoImage(params.id, params.postImgCount, imageContainer);
+        setUserPageMovementEventByUserName(params.username, userInfoContainer);
+        setTodoPageMovementEventByTodoImage(params.id, imageContainer);
+        setTodoPageMovementEventByTodoTitle(params.id, title);
 
-        // post, user 이미지 세팅
-
-        // is check user img generator
-
-
-        const imageInfo = imageApi.requestUserImage({
-            uuid: params.userImageUUID
-        });
-        imageInfo.then((data) => {
-            console.log(data);
-            const imageSource = setUserProfileImageUrl(data.fileName, data.originalFileName);
-            userImage.setAttribute("src", imageSource);
-            userImage.setAttribute("style", "width:44.8px, height:44.8px");
-
-        });
-
-        userInfoContainer.appendChild(userImage);
-
-
-        setPostImage(params.id, params.postImgCount, image, imageContainer, "POST");
-
-
-        // 공개 여부 설정
-
-        setVisualPublish({
-            id: params.id,
-            heart: params.heart,
-            comment: params.comment,
-            isPublish: params.isPublish
-        }, heart, comment, "TODO");
-
-
-        // 이벤트 설정
-
-
-
-        // click 시 user detail page로 이동
-        setDetailPageMoveEvent(params.id, {
-            userInfoContainer: userInfoContainer,
-            imageContainer: imageContainer,
-            title: title
-        });
-
-        comment.addEventListener("click", openCommentLayer);
-
+        setEventTodoHeart(params, heart);
+        setCommentEvent(params.id, params.comment, comment);
 
         // view 값 설정
         title.innerText = params.title;
@@ -223,103 +209,15 @@ export class PostGenerator {
         createTime.setAttribute("datatime", params.createTimeStamp);
 
         // 이미지 생성
-        if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
-
-            const imageInfo = imageApi.requestTodoImageById({
-                id: params.id
-            });
-
-            // post image 가져오기
-            imageInfo.then((data) => {
-                const imageSource = backEndServerAddress + `/${filePath}` + `/${fileName}`;
-                image.setAttribute("src", imageSource);
-            });
-
-            imageContainer.appendChild(image);
-        }
-
-        if (params.userImgCount != null && typeof params.userImgCount != "undefined" && params.userImgCount != 0) {
-
-            const imageInfo = imageApi.requestUserImage(params.id);
-
-            imageInfo.then((data) => {
-                const imageSource = backEndServerAddress + `/${data.filePath} + /${data.fileName}`;
-
-                userImage.setAttribute("src", imageSource);
-            });
-
-            authorImageContainer.appendChild(authorImage);
-        }
-
-        /**
-         * 
-         * 서버로 부터 받은 이미지 개수 정보가 0이 아니라면 이미지 정보를 가져오거나 서버가 이미지 개수가 아닌 위치를 준다면 그 위치를 넣기
-         * 서버로 부터 이미지 정보가 아닌 개수를 파악하는 로직을 만든 이유 :
-         * 쿼리를 만들기 어려움 개수가 1개 일 경우는 만들기 쉽지만 2개 이상일 경우는 쿼리를 만들기 어렵다고 판단하여 개수만을 가져오는 로직을 설계
-         * 
-         * 파일을 확인하는 이유는 다른 Todo를 만들 때 서버 Query가 이미지 경로를 줬을 때를 가정했기 때문
-         */
-
-        if (params.fileName != null && typeof params.fileName != "undefined" && params.filePath != null && typeof params.filePath != "undefined") {
-
-        }
-
-
-        // 공개여부 설정
-
-        // if (params.isPublish == "private") {
-        //     heart.innerText = "private";
-        //     heart.addEventListener("click", function changePublish() {
-        //         quoteServer.requestChangeQuotePublish({
-        //             id: params.id
-        //         });
-
-        //     });
-        // } else {
-        //     heart.innerText = params.heart;
-        //     heart.addEventListener("click", function addHeart() {
-        //         quoteServer.requestSaveQuoteHeart({
-        //             id: params.id
-        //         });
-        //     });
-        // }
-
-        // 이벤트 생성
-        // title.setAttribute("href", "#title");
-        // authorImageContainer.setAttribute("href", "#author");
-        // imageContainer.setAttribute("href", "#");
-
-
-
-        title.addEventListener("click", function postDetails() {
-            const url = frontEndServerAddress + "";
-
-            window.localStorage.setItem("todo_id", params.id);
-
-            window.location.href = url;
-        });
-
-        imageContainer.addEventListener("click", function postDetails() {
-            const url = frontEndServerAddress + "";
-
-            window.localStorage.setItem("todo_id", params.id);
-
-            window.location.href = url;
-        });
-
-        authorImageContainer.addEventListener("click", function userDetailsPage() {
-            const url = frontEndServerAddress + "";
-
-        });
-
-
-
+        setMainTodoImage(params.id, params.postImgCount, imageContainer);
+        setUserIntroImage(params.userImageUUID, authorImage, authorImage);
+        setUserPageMovementEventByUserName(params.username, userInfoContainer);
+        setTodoPageMovementEventByTodoImage(params.id, imageContainer);
+        setTodoPageMovementEventByTodoTitle(params.id, title);
 
         // view 생성
-
         title.innerText = params.title;
         createTime.innerText = params.createTimeStamp;
-
 
         return articleContainer;
     };
@@ -342,7 +240,6 @@ export class PostGenerator {
         var authorImageContainer = document.createElement("a");
         var authorImage = document.createElement("img");
         var imageContainer = document.createElement("a");
-        var image = document.createElement("img");
         var heart = document.createElement("a");
         var comment = document.createElement("a");
 
@@ -356,7 +253,6 @@ export class PostGenerator {
         headerContainer.appendChild(createTime);
         headerContainer.appendChild(authorImageContainer);
         articleContainer.appendChild(headerContainer);
-        articleContainer.appendChild(imageContainer);
 
         // 내부 값 설정
 
@@ -365,110 +261,26 @@ export class PostGenerator {
         authorImageContainer.setAttribute("class", "author");
         imageContainer.setAttribute("class", "image");
         createTime.setAttribute("class", "published");
-        heart.setAttribute("class", "icon solid fa-heart");
-        comment.setAttribute("class", "icon solid fa-comment");
+        heart.setAttribute("class", "icon solid fa-heart heart");
+        comment.setAttribute("class", "icon solid fa-comment comment");
 
         postId.setAttribute("hidden", "");
         postId.setAttribute("id", `PostID-${params.id}`);
         postId.setAttribute("value", params.id);
         createTime.setAttribute("datatime", params.createTimeStamp);
-        heart.setAttribute("href", "#");
-        comment.setAttribute("href", "#");
 
-        // 이미지 생성
-        // if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
-
-        //     const imageInfo = imageApi.requestTodoImageById({
-        //         id: params.id
-        //     });
-
-        //     // post image 가져오기
-        //     imageInfo.then((data) => {
-        //         const imageSource = backEndServerAddress + `/${filePath}` + `/${fileName}`;
-        //         image.setAttribute("src", imageSource);
-        //     });
-
-        //     imageContainer.appendChild(image);
-        // }
-
-        setPostImage(params.id, params.postImgCount, image, imageContainer, "POST")
-
-        if (params.userImgCount != null && typeof params.userImgCount != "undefined" && params.userImgCount != 0) {
-
-            const imageInfo = imageApi.requestUserImage(params.id);
-
-            imageInfo.then((data) => {
-                const imageSource = backEndServerAddress + `/${data.filePath} + /${data.fileName}`;
-
-                userImage.setAttribute("src", imageSource);
-            });
-
-            authorImageContainer.appendChild(authorImage);
+        if (params.postImgCount != 0) {
+            articleContainer.appendChild(imageContainer);
+            setMainTodoImage(params.id, params.postImgCount, imageContainer);
         }
-
-        /**
-         * 
-         * 서버로 부터 받은 이미지 개수 정보가 0이 아니라면 이미지 정보를 가져오거나 서버가 이미지 개수가 아닌 위치를 준다면 그 위치를 넣기
-         * 서버로 부터 이미지 정보가 아닌 개수를 파악하는 로직을 만든 이유 :
-         * 쿼리를 만들기 어려움 개수가 1개 일 경우는 만들기 쉽지만 2개 이상일 경우는 쿼리를 만들기 어렵다고 판단하여 개수만을 가져오는 로직을 설계
-         * 
-         * 파일을 확인하는 이유는 다른 Todo를 만들 때 서버 Query가 이미지 경로를 줬을 때를 가정했기 때문
-         */
-
-
-        // 공개여부 설정
-
-        if (params.isPublish == "private") {
-            heart.innerText = "private";
-            heart.addEventListener("click", function changePublish() {
-                quoteServer.requestChangePublish({
-                    id: params.id
-                });
-
-            });
-        } else {
-            heart.innerText = params.heart;
-            heart.addEventListener("click", function addHeart() {
-                heart.innerText += 1;
-                quoteServer.requestSaveHeart({
-                    id: params.id
-                });
-            });
-        }
-
-        // 이벤트 생성
-        // title.setAttribute("href", "#title");
-        // authorImageContainer.setAttribute("href", "#author");
-        // imageContainer.setAttribute("href", "#");
-
-
-
-        title.addEventListener("click", function postDetails() {
-            const url = frontEndServerAddress + "";
-
-            window.localStorage.setItem("todo_id", params.id);
-
-            window.location.href = url;
-        });
-
-        imageContainer.addEventListener("click", function postDetails() {
-            const url = frontEndServerAddress + "";
-
-            window.localStorage.setItem("todo_id", params.id);
-
-            window.location.href = url;
-        });
-
-        authorImageContainer.addEventListener("click", function userDetailsPage() {
-
-            const url = frontEndServerAddress + "";
-        });
-
-
-
+        setUserIntroImage(params.userImageUUID, authorImage, authorImageContainer);
+        setUserPageMovementEventByUserName(params.username, authorImageContainer);
+        setTodoPageMovementEventByTodoImage(params.id, imageContainer);
+        setTodoPageMovementEventByTodoTitle(params.id, title);
+        setEventTodoHeart(params, heart);
+        setCommentEvent(params.id, params.comment, comment);
 
         // view 생성
-
         title.innerText = params.title;
         createTime.innerText = convert.convertViewDate(params.createTimeStamp);
         comment.innerText = params.comment;
@@ -512,75 +324,7 @@ export class PostGenerator {
         postId.setAttribute("id", `PostID-${params.id}`);
         createTime.setAttribute("datetime", params.createTimeStamp);
 
-        // 공개여부 설정
-
-        // if (params.isPublish == "private") {
-        //     heart.innerText = "private";
-        //     heart.addEventListener("click", function changePublish() {
-        //         quoteServer.requestChangeQuotePublish({
-        //             id: params.id
-        //         });
-
-        //     });
-        // } else {
-        //     heart.innerText = params.heart;
-        //     heart.addEventListener("click", function addHeart() {
-        //         quoteServer.requestSaveQuoteHeart({
-        //             id: params.id
-        //         });
-        //     });
-        // }
-
-        // 이미지 생성
-        if (params.postImgCount != null && typeof params.postImgCount != "undefined" && params.postImgCount != 0) {
-            // post image 가져오기
-
-            const imageInfo = imageApi.requestTodoImageById({
-                id: params.id
-            });
-
-            imageInfo.then((data) => {
-
-                const imageSource = backEndServerAddress + `/${filePath}` + `/${fileName}`;
-                image.setAttribute("src", imageSource);
-
-            });
-
-            imageContainer.appendChild(image);
-        }
-
-        //이벤트 생성
-
-        title.addEventListener("click", function postDetail() {
-
-            const url = frontEndServerAddress + "/assets/html/tododetails.html"
-
-            window.localStorage.setItem("todo_id", params.id);
-
-            window.location.href = url;
-        });
-
-        imageContainer.addEventListener("click", function postDetail() {
-
-        });
-
-
-
-        /**
-         * 
-         * 서버로 부터 받은 이미지 개수 정보가 0이 아니라면 이미지 정보를 가져오거나 서버가 이미지 개수가 아닌 위치를 준다면 그 위치를 넣기
-         * 서버로 부터 이미지 정보가 아닌 개수를 파악하는 로직을 만든 이유 :
-         * 쿼리를 만들기 어려움 개수가 1개 일 경우는 만들기 쉽지만 2개 이상일 경우는 쿼리를 만들기 어렵다고 판단하여 개수만을 가져오는 로직을 설계
-         * 
-         * 파일을 확인하는 이유는 다른 Todo를 만들 때 서버 Query가 이미지 경로를 줬을 때를 가정했기 때문
-         */
-
-        if (params.fileName != null && typeof params.fileName != "undefined" && params.filePath != null && typeof params.filePath != "undefined") {
-
-        }
-
         // view 생성
-
 
         title.innerText = params.title;
         createTime.innerText = params.date;
@@ -621,7 +365,6 @@ export class PostGenerator {
 
         // 삭제 수정 버튼 생성 필요
 
-        // titleSize.appendChild(title);
         titleContainer.appendChild(title);
         titleContainer.appendChild(subtitle);
         titleContainer.appendChild(todoId);
@@ -641,7 +384,6 @@ export class PostGenerator {
         articleContainer.appendChild(mainContent);
         articleContainer.appendChild(footerContainer);
 
-        
         // 내부 값 설정
         articleContainer.setAttribute("class", "post todo-details");
         titleContainer.setAttribute("class", "title");
@@ -650,8 +392,8 @@ export class PostGenerator {
         userInfoContainer.setAttribute("class", "author");
         username.setAttribute("class", "name");
         statsList.setAttribute("class", "stats");
-        heart.setAttribute("class", "icon solid fa-heart");
-        comment.setAttribute("class", "icon solid fa-comment");
+        heart.setAttribute("class", "icon solid fa-heart heart");
+        comment.setAttribute("class", "icon solid fa-comment comment");
 
         todoId.setAttribute("id", `TodoID-${params.id}`);
         todoId.setAttribute("value", params.id);
@@ -663,16 +405,14 @@ export class PostGenerator {
         // setPostImage(params.id, userImgCount,mainContentImage,"POST")
         // 이미지 생성
 
-        setVisualPublish({
-            id: params.id,
-            heart: params.heart,
-            isPublish: params.isPublish
-        }, heart, comment, "TODO");
+        // setVisualPublish({
+        //     id: params.id,
+        //     heart: params.heart,
+        //     isPublish: params.isPublish
+        // }, heart, comment, "TODO");
 
-        // 커멘트 전용 팝업 or 리스트 필요
 
         //view 이미지 생성
-
         title.innerText = params.title;
         subtitle.innerText = "";
         createTimeStamp.innerText = convert.convertViewDate(params.createTimeStamp);
@@ -727,17 +467,9 @@ export class PostGenerator {
         author.setAttribute("value", params.author);
         createTime.setAttribute("datetime", params.createTimeStamp);
 
-
-        // 공개 여부 설정
-
-        setVisualPublish({
-            id: params.id,
-            heart: params.heart,
-            isPublish: params.isPublish
-        }, heart, null, "QUOTE");
+        setEventTodoHeart(params, heart);
 
         // view 생성
-
         quoteContainer.innerText = params.quote;
         author.innerText = ` ${params.author} `
         createTime.innerText = convert.convertViewDate(params.createTimestamp);
@@ -765,7 +497,6 @@ export class PostGenerator {
         var title = document.createElement("a");
         var createTime = document.createElement("time");
         var todoImageContainer = document.createElement("a");
-        var todoImage = document.createElement("img");
 
         // 구조 생성
         titleContainer.appendChild(title);
@@ -773,7 +504,6 @@ export class PostGenerator {
         header.appendChild(titleContainer);
         header.appendChild(createTime);
         articleContainer.appendChild(header);
-        articleContainer.appendChild(todoImageContainer);
         li.appendChild(articleContainer);
 
         title.setAttribute("class", "post-details");
@@ -785,18 +515,15 @@ export class PostGenerator {
         title.setAttribute("value", params.title);
         createTime.setAttribute("datetime", params.createTimeStamp);
 
+        if (params.postImgCount != 0) {
+            articleContainer.appendChild(todoImageContainer);
+            setTodoListImage(params.id, params.postImgCount, todoImageContainer);
 
-
-        setPostImage(params.id, params.postImgCount, todoImage, todoImageContainer, "POST");
-        setDetailPageMoveEvent(params.id, {
-            userInfoContainer: null,
-            title: title,
-            imageContainer: todoImageContainer
-        });
-
+        }
+        setTodoPageMovementEventByTodoImage(params.id, todoImageContainer);
+        setTodoPageMovementEventByTodoTitle(params.id, title);
 
         // // view 생성
-
         title.innerText = params.title;
         createTime.innerText = convert.convertViewDate(params.createTimeStamp);
 
@@ -826,7 +553,6 @@ export class PostGenerator {
         ulActions.setAttribute("class", "actions")
         aAction.setAttribute("href", "");
         aAction.setAttribute("class", "button");
-
 
         // 구조 생성
         ulActions.appendChild(liAction);
@@ -903,19 +629,10 @@ export class PostGenerator {
         heart.setAttribute("value", params.heart);
         quoteId.setAttribute("hidden", "");
 
-
-
         // 이미지 생성
-        setPostImage(params.id, params.userImgCount, userImage, username, "USER");
-
-
-        // 공개 여부 설정
-        setVisualPublish({
-            id: params.id,
-            heart: params.heart,
-            isPublish: params.isPublish
-        }, heart, null, "QUOTE");
-
+        setUserIntroImage(params.userImageUUID, userImage, userInfoContainer);
+        setEventQuoteHeart(params, heart);
+    
         // view 생성
         quoteId.innerText = params.id;
         quote.innerText = params.quote;
@@ -938,9 +655,6 @@ export class PostGenerator {
      * @param {*} id 
      * @returns 
      */
-
-   					
-
 
     createPreViewImageContainer(id) {
 
@@ -967,396 +681,83 @@ export class PostGenerator {
      * @returns 
      */
 
-    createMainQuote(params) {
-        // element 생성
+    // createMainQuote(params) {
+    //     // element 생성
+
+    //     var articleContainer = document.createElement("article");
+    //     var headerContainer = document.createElement("header");
+    //     var headerTitle = document.createElement("div");
+    //     var quoteId = document.querySelector("p");
+    //     var quote = document.createElement("h3");
+    //     var author = document.createElement("p");
+    //     var metaContainer = document.createElement("div");
+    //     var createTime = document.createElement("time");
+    //     var userInfoContainer = document.createElement("a");
+    //     var username = document.createElement("span");
+    //     var userImage = document.createElement("img");
+    //     var footerContainer = document.createElement("footer");
+    //     var ulStats = document.createElement("ul");
+    //     var liHeart = document.createElement("li");
+    //     var heart = document.createElement("a");
+
+    //     // 구조 생성
+    //     headerTitle.appendChild(quoteId);
+    //     headerTitle.appendChild(quote);
+    //     headerTitle.appendChild(author);
+    //     userInfoContainer.appendChild(username);
+    //     metaContainer.appendChild(createTime);
+    //     metaContainer.appendChild(userInfoContainer);
+    //     headerContainer.appendChild(headerTitle);
+    //     headerContainer.appendChild(metaContainer);
+    //     liHeart.appendChild(heart);
+    //     ulStats.appendChild(liHeart);
+    //     footerContainer.appendChild(ulStats);
+    //     articleContainer.appendChild(headerContainer);
+    //     articleContainer.appendChild(footerContainer);
+
+    //     //내부 값 설정
+
+    //     articleContainer.setAttribute("class", "post quote");
+    //     headerTitle.setAttribute("class", "title");
+    //     metaContainer.setAttribute("class", "meta");
+    //     createTime.setAttribute("class", "published");
+    //     userInfoContainer.setAttribute("class", "author");
+    //     ulStats.setAttribute("class", "stats");
+    //     heart.setAttribute("class", "icon solid fa-heart heart");
+    //     userInfoContainer.setAttribute("href", "#user");
+    //     username.setAttribute("class", "username");
+
+    //     quoteId.setAttribute("id", `QuoteID-${params.id}`);
+    //     quote.setAttribute("id", "quote");
+    //     author.setAttribute("id", "author")
+
+    //     quoteId.setAttribute("value", params.id);
+    //     username.setAttribute("value", params.username);
+    //     quote.setAttribute("value", params.quote);
+    //     author.setAttribute("value", params.author);
+    //     createTime.setAttribute("datetime", params.createTimestamp);
+    //     heart.setAttribute("value", params.heart);
+    //     quoteId.setAttribute("hidden", "");
+
+    //     // view 생성
+    //     quoteId.innerText = params.id;
+    //     quote.innerText = params.quote;
+    //     author.innerText = params.author;
+    //     heart.innertText = params.heart;
+    //     createTime.innerText = convert.convertViewDate(params.createTimestamp);
+    //     username.innerText = params.username;
+
+    //     return articleContainer;
+    // }
 
-        var articleContainer = document.createElement("article");
-        var headerContainer = document.createElement("header");
-        var headerTitle = document.createElement("div");
-        var quoteId = document.querySelector("p");
-        var quote = document.createElement("h3");
-        var author = document.createElement("p");
-        var metaContainer = document.createElement("div");
-        var createTime = document.createElement("time");
-        var userInfoContainer = document.createElement("a");
-        var username = document.createElement("span");
-        var userImage = document.createElement("img");
-        var footerContainer = document.createElement("footer");
-        var ulStats = document.createElement("ul");
-        var liHeart = document.createElement("li");
-        var heart = document.createElement("a");
-
-        // 구조 생성
-        headerTitle.appendChild(quoteId);
-        headerTitle.appendChild(quote);
-        headerTitle.appendChild(author);
-        userInfoContainer.appendChild(username);
-        metaContainer.appendChild(createTime);
-        metaContainer.appendChild(userInfoContainer);
-        headerContainer.appendChild(headerTitle);
-        headerContainer.appendChild(metaContainer);
-        liHeart.appendChild(heart);
-        ulStats.appendChild(liHeart);
-        footerContainer.appendChild(ulStats);
-        articleContainer.appendChild(headerContainer);
-        articleContainer.appendChild(footerContainer);
-
-        //내부 값 설정
-
-        articleContainer.setAttribute("class", "post quote");
-        headerTitle.setAttribute("class", "title");
-        metaContainer.setAttribute("class", "meta");
-        createTime.setAttribute("class", "published");
-        userInfoContainer.setAttribute("class", "author");
-        ulStats.setAttribute("class", "stats");
-        heart.setAttribute("class", "icon solid fa-heart heart");
-        userInfoContainer.setAttribute("href", "#user");
-        username.setAttribute("class", "username");
-
-        quoteId.setAttribute("id", `QuoteID-${params.id}`);
-        quote.setAttribute("id", "quote");
-        author.setAttribute("id", "author")
-
-        quoteId.setAttribute("value", params.id);
-        username.setAttribute("value", params.username);
-        quote.setAttribute("value", params.quote);
-        author.setAttribute("value", params.author);
-        createTime.setAttribute("datetime", params.createTimestamp);
-        heart.setAttribute("value", params.heart);
-        quoteId.setAttribute("hidden", "");
-
-        // view 생성
-        quoteId.innerText = params.id;
-        quote.innerText = params.quote;
-        author.innerText = params.author;
-        heart.innertText = params.heart;
-        createTime.innerText = convert.convertViewDate(params.createTimestamp);
-        username.innerText = params.username;
-
-        return articleContainer;
-    }
-
-}
-
-
-var funcServer;
-var heartServer;
-
-function setVisualPublish(arg, heartContainer, commentContainer, postKind) {
-
-    var postId = arg.id;
-    var heart = arg.heart;
-    var isPublish = arg.isPublish;
-    var comment = arg.comment;
-
-    if (postId == undefined) {
-        return console.log("post id not exist");
-    }
-
-    if (postKind == "TODO" || postKind == "todo") {
-        funcServer = todoServer;
-    }
-
-    if (postKind == "QUOTE" || postKind == "quote") {
-        funcServer = quoteServer;
-    }
-
-    if (isPublish == "private" || isPublish == "PRIVATE") {
-
-        postPrivateAction({
-            postId,
-            heartContainer: heartContainer,
-            funcServer: funcServer,
-            commentContainer: commentContainer
-        })
-        return;
-    }
-    if (isPublish == "publish" || isPublish == "PUBLISH") {
-        heartContainer.innerText = heart;
-    }
-
-    if (commentContainer != null || commentContainer != undefined) {
-        commentContainer.innerText = comment;
-    }
-
-    // is Auth?
-    if (auth.getJsonToken() != null) {
-        var result = funcServer.requestHeartExists({
-            id: postId
-        });
-
-        result.then((exists) => {
-
-            if (exists == "true") {
-                heartContainer.setAttribute("id", `heart-${postId}`);
-                heartContainer.setAttribute("id", `heart-postid-${postId}`);
-                heartContainer.setAttribute("isExists", `${exists.exists}`);
-                heartContainer.setAttribute("uuid", `${exists.uuid}`)
-                heartContainer.setAttribute("value", heart);
-                heartContainer.addEventListener("click", heartActions);
-
-            } else {
-                heartContainer.setAttribute("id", `heart-${postId}`);
-                heartContainer.setAttribute("isExists", `${exists.exists}`);
-                heartContainer.setAttribute("uuid", `${exists.uuid}`)
-                heartContainer.setAttribute("value", heart);
-                heartContainer.addEventListener("click", heartActions);
-            }
-        });
-
-    } else {
-        heartContainer.setAttribute("id", `heart-${postId}`)
-        heartContainer.setAttribute("value", heart);
-        heartContainer.addEventListener("click", heartActions);
-    }
-}
-
-
-/**
- * 
- * @param {*} heartuuid 
- * @param {*} postId 
- * @param {*} heart 
- * @param {*} heartContainer 
- * @returns 
- */
-
-function cancleHeart(heartuuid, postId, heart, heartContainer) {
-
-    if (heart == 0) {
-        return;
-    }
-
-    var decreaseHeart = Number(heart) - 1;
-    heartContainer.innerText = decreaseHeart;
-    heartContainer.setAttribute("id", `heart-${postId}`);
-    heartContainer.setAttribute("isExists", `false`);
-    heartContainer.setAttribute("uuid", `${null}`)
-    heartContainer.setAttribute("value", decreaseHeart);
-
-    funcServer.requestCancleHeart({
-        id: heartuuid
-    });
-}
-
-function addHeart(postId, heart, heartContainer) {
-
-    var increaseHeart = Number(heart) + 1;
-    heartContainer.innerText = increaseHeart;
-    heartContainer.setAttribute("id", `heart-${postId}`);
-    heartContainer.setAttribute("isExists", `true`);
-    heartContainer.setAttribute("uuid", `${null}`)
-    heartContainer.setAttribute("value", increaseHeart);
-
-    var result = funcServer.requestSaveHeart({
-        id: postId
-    });
-
-    result.then((data) => {
-        heartContainer.setAttribute("uuid", `${data}`)
-    });
-
-}
-
-/**
- * 
- * @param {*} event 
- */
-
-
-
-function heartActions(event) {
-
-    console.log(event);
-    var heartContainer = event.target;
-    var postid = heartContainer.id.split("-")[1];
-    var uuid = heartContainer.getAttribute("uuid");
-    var isExists = heartContainer.getAttribute("isExists");
-    var heartValue = heartContainer.getAttribute("value");
-
-    //no login
-    if (auth.getJsonToken() == null) {
-        console.log("login Please");
-    }
-
-    // pressed heart
-    if (isExists == "false") {
-        addHeart(postid, heartValue, heartContainer);
-    }
-
-    // cancle heart press
-    if (isExists == "true") {
-        cancleHeart(uuid, postid, heartValue, heartContainer);
-    }
-}
-
-
-
-/**
- * 
- * @param {*} arg 
- */
-
-function postPrivateAction(arg) {
-
-    var postHeartContainer = arg.heartContainer;
-    var postCommentContainer = arg.commentContainer;
-    var executeFunctionService = arg.funcServer;
-
-    postHeartContainer.innerText = "private";
-
-    postHeartContainer.addEventListener("click", function changePublish() {
-        postHeartContainer.innerText = 0;
-
-        executeFunctionService.requestChangePublish({
-            id: arg.postId
-        });
-
-        if (postCommentContainer != null) {
-            const commentContainerParent = postCommentContainer.parentElement;
-            commentContainerParent.removeAttribute("class", "actions-hidden");
-            postCommentContainer.classList.remove("actions-hidden");
-            postCommentContainerr.innerText = 0;
-        }
-        postHeartContainer.setAttribute("id", `heart-${arg.postId}`);
-        postHeartContainer.setAttribute("isExists", `false`);
-        postHeartContainer.setAttribute("uuid", `${null}`)
-        postHeartContainer.setAttribute("value", 0);
-        postHeartContainer.addEventListener("click", heartActions);
-    });
-
-    if (postCommentContainer != null) {
-
-        const commentContainerParent = arg.commentContainer.parentElement;
-        commentContainerParent.setAttribute("class", "actions-hidden");
-        postCommentContainer.classList.add("actions-hidden");
-
-        postCommentContainer.addEventListener("click", function addComment() {
-            console.log("click");
-            // todoApi.requestTodoCommentsByTodoId({
-            //     id: arg.id
-            // });
-        });
-    }
-}
-
-/**
- * 
- * @param {*} id 
- * @param {*} imageCount 
- * @param {*} imageContainer 
- * @param {*} parentImageContainer 
- * @param {*} kind 
- * @returns 
- */
-
-function setPostImage(id, imageCount, imageContainer, parentImageContainer, kind) {
-
-    var imageInfo;
-
-    if (imageCount == null || imageCount == "undefined" || imageCount == 0) {
-        return;
-    }
-
-    if (kind == "USER" || kind == "user") {
-        imageInfo = imageApi.requestUserImage({
-            id: id
-        });
-    }
-
-    if (kind == "POST" || kind == "post") {
-        imageInfo = imageApi.requestTodoImageById({
-            id: id
-        });
-    }
-
-    imageInfo.then((data) => {
-
-        const imageData = data[0];
-        const imageSource = backEndServerAddress + "/image/api/source" + `/${imageData.fileName}` + `/${imageData.originalFileName}`;
-        imageContainer.setAttribute("src", imageSource);
-        imageContainer.setAttribute("class", `${kind}-img`);
-
-    });
-
-    parentImageContainer.appendChild(imageContainer);
-}
-
-/**
- * 
- * @param {*} id 
- * @param {*} imageCount 
- * @param {*} imageContainers 
- * @returns 
- */
-
-function setTodoDetailImage(id, imageCount, imageContainers) {
-
-
-    if (imageCount == null && typeof imageCount == "undefined" && imageCount == 0) {
-        return;
-    }
-
-    var imageInfos = imageApi.requestTodoImageById({
-        id: id
-    });
-
-    imageInfos.then((data) => {
-
-        for (var i = 0; i < data.length; i++) {
-            const imgContainer = document.createElement("span");
-            const img = document.createElement("img");
-            imgContainer.setAttribute("class", "image featured");
-            imgContainer.appendChild(img);
-            const imageSource = backEndServerAddress + "/image/api/source" + `/${data[i].fileName}` + `/${data[i].originalFileName}`;
-            img.setAttribute("src", imageSource);
-            imageContainers.appendChild(imgContainer);
-        }
-    });
-
-
-
-}
-
-function setDetailPageMoveEvent(id, containerList) {
-
-    const postURL = frontEndServerAddress + `/assets/html/tododetails.html?todoid=${id}`;
-    const userURL = frontEndServerAddress + "/assets/html/userpage.html";
-
-    if (containerList.userInfoContainer != null) {
-        containerList.userInfoContainer.addEventListener("click", function userDetailsPage() {
-
-            window.location.href = userURL;
-        });
-    }
-
-    if (containerList.title != null) {
-        containerList.title.addEventListener("click", function todoDetailsPage() {
-
-            window.localStorage.setItem("todo_id", id);
-
-            window.location.href = postURL;
-
-        });
-
-    }
-    if (containerList.imageContainer != null) {
-        containerList.imageContainer.addEventListener("click", function todoDetailsPage() {
-
-            window.localStorage.setItem("todo_id", id);
-
-            window.location.href = postURL;
-
-        });
-    }
 }
 
 function openCommentLayer(event) {
 
     var targetId = event.target.id.split("-")[2];
-    main = document.querySelector("body");
+    var main = document.querySelector("body");
 
-    layer = comment.createCommentLayer({
+    var layer = comment.createCommentLayer({
         id: targetId
     }, addComment, closeCommentLayer);
 
@@ -1388,11 +789,11 @@ function openCommentLayer(event) {
 
 function reloadTodoCommeandData(todoId) {
 
-    layer = comment.createCommentLayer({
+    clearCommentList();
+
+    var layer = comment.createCommentLayer({
         id: todoId
     }, addComment, closeCommentLayer);
-
-    clearCommentList();
 
     var result = todoApi.requestTodoCommentsByTodoId({
         id: todoId

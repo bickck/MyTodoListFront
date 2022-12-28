@@ -65,4 +65,35 @@ export class QuoteApi {
 
         return result.json();
     }
+
+    async requestUserQuoteByUserName(username) {
+        const url = backEndServerAddress + `/quote/api/${username}/quotes`;
+        var result = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        return result.json();
+    }
+
+    async requestUserLikeQuoteByUserName(username) {
+        const url = backEndServerAddress + `/quote/api/like/${username}`;
+        var result = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        return result.json();
+    }
+
 }

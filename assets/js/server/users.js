@@ -6,17 +6,24 @@ import {
 } from "./../account/auth.js";
 const auth = new Auth();
 
+const token = auth.getJsonToken();
+
 export class Users {
     // 유저 정보 요청
-    async requestUserDetails(arg) {
+    async requestUserDetails() {
         const url = backEndServerAddress + `/user/api/intro`;
         var result = await fetch(url, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
-                "authorization": `${auth.getJsonToken()}`
+                "authorization": `${token}`
             },
-        }).catch((error) => {
+        })
+        .then((Response)=>{
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.log(error);
         });
         
@@ -25,19 +32,23 @@ export class Users {
 
     async requestUserUpdate(arg) {
         const url = backEndServerAddress + `/user/intro`;
-        console.log(arg);
         var result = await fetch(url, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
-                "authorization": `${auth.getJsonToken()}`
+                "authorization": `${token}`
             },
             body: JSON.stringify({
                 username : arg.username,
                 birth : arg.birth,
                 introComment : arg.comment
             }),
-        }).catch((error) => {
+        })
+        .then((Response)=>{
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.log(error);
         });
 
@@ -50,12 +61,17 @@ export class Users {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
-                "authorization": `${auth.getJsonToken()}`
+                "authorization": `${token}`
             },
             body: JSON.stringify({
                 id : arg.id
             }),
-        }).catch((error) => {
+        })
+        .then((Response)=>{
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.log(error);
         });
 
@@ -68,12 +84,17 @@ export class Users {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
-                "authorization": `${auth.getJsonToken()}`
+                "authorization": `${token}`
             },
             body: JSON.stringify({
                 introComment : arg.introComment
             }),
-        }).catch((error) => {
+        })
+        .then((Response)=>{ 
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.log(error);
         });
 
@@ -87,13 +108,18 @@ export class Users {
         const headers = new Headers();
 
         data.append("file", arg.file[0]);
-        headers.append("authorization", auth.getJsonToken());
+        headers.append("authorization", token);
 
         var result = await fetch(url, {
             method: 'PUT',
             headers: headers,
             body : data
-        }).catch((error) => {
+        })
+        .then((Response)=>{    
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.log(error);
         });
 
@@ -106,12 +132,17 @@ export class Users {
         const data = new FormData();
         const headers = new Headers();
 
-        headers.append("authorization", auth.getJsonToken());
+        headers.append("authorization", token);
 
         var result = await fetch(url, {
             method: 'DELETE',
             headers: headers
-        }).catch((error) => {
+        })
+        .then((Response)=>{
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.log(error);
         });
 

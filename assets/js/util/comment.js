@@ -44,6 +44,7 @@ export class Comment {
     createCommentLayer(params, addComment, closeLayer) {
 
         var elements = {
+            commentSection : document.createElement("section"),
             commentLayer: document.createElement("article"),
             commnetLayerHeader: document.createElement("div"),
             commentContainer: document.createElement("ul"),
@@ -61,10 +62,12 @@ export class Comment {
         elements.commentWriteButton.innerText = "Write Comment";
         elements.commentWriteButton.setAttribute("class", "button small");
         elements.commentCloseButton.setAttribute("class", "icon solid fa-times comment-close");
-        elements.commentLayer.setAttribute("class", "post comment-layer");
+        elements.commentLayer.setAttribute("class", "comment-layer");
         elements.commentCloseLayer.setAttribute("class", "close-layer");
         elements.commnetLayerHeader.setAttribute("class", "comment-layer-header");
         elements.commentContainer.setAttribute("class", "posts comment-contents");
+        elements.commentSection.setAttribute("class", "comments-section");
+
 
         elements.commentCloseLayer.appendChild(elements.commentCloseButton);
         elements.conmmentTitleContainer.appendChild(elements.commentTitle);
@@ -77,6 +80,8 @@ export class Comment {
         elements.commentLayer.appendChild(elements.commentFormLayer);
         elements.commentLayer.appendChild(elements.commentContainer);
 
+        elements.commentSection.appendChild(elements.commentLayer);
+
         elements.commentTitle.innerText = "COMMENT";
 
         elements.commentCloseButton.addEventListener("click", closeLayer);
@@ -86,7 +91,7 @@ export class Comment {
     removeCommentLayer() {
 
         const body = document.querySelector("body");
-        const layer = document.querySelector(".comment-layer");
+        const layer = document.querySelector(".comments-section");
 
         body.removeChild(layer);
     }

@@ -12,7 +12,7 @@ const auth = new Auth();
 export class Todo {
 
     async requestUserTodoInsert(arg) {
-        const url = backEndServerAddress + "/user/todo";
+        const url = backEndServerAddress + "/user/todo/";
         const data = new FormData();
         const headers = new Headers();
 
@@ -41,7 +41,7 @@ export class Todo {
     }
 
     async requestUserTodoUpdate(arg) {
-        const url = backEndServerAddress + "/user/todo" + `/${arg.id}`;
+        const url = backEndServerAddress + `/user/todo/${arg.id}`;
 
         const data = new FormData();
         const headers = new Headers();
@@ -73,7 +73,12 @@ export class Todo {
             method: 'PUT',
             headers: headers,
             body: data
-        }).catch((error) => {
+        })
+        .then((Response)=>{
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.error(error);
         });
 
@@ -81,14 +86,19 @@ export class Todo {
     }
 
     async requestUserTodoDelete(arg) {
-        const url = backEndServerAddress + "/user/todo/manage" + `/delete/${arg.id}`;
+        const url = backEndServerAddress + `/user/todo/${arg.id}`;
         var result = await fetch(url, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
             }
-        }).catch((error) => {
+        })
+        .then((Response)=>{
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.error(error);
         });
 
@@ -96,7 +106,7 @@ export class Todo {
     }
 
     async requestSaveCommentByTodoId(arg) {
-        const url = backEndServerAddress + `/comment/add/${arg.id}`;
+        const url = backEndServerAddress + `/comment/${arg.id}`;
 
         var result = await fetch(url, {
             method: 'POST',
@@ -107,7 +117,12 @@ export class Todo {
             body: JSON.stringify({
                 comment : arg.comment
             }),
-        }).catch((error) => {
+        })
+        .then((Response)=>{
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.error(error);
         });
 
@@ -122,7 +137,12 @@ export class Todo {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
             }
-        }).catch((error) => {
+        })
+        .then((Response)=>{
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.error(error);
         });
 
@@ -130,22 +150,27 @@ export class Todo {
     }
 
     async requestCancleHeart(arg) {
-        const url = backEndServerAddress + `/heart/cancle/todo/${arg.id}`;
+        const url = backEndServerAddress + `/heart/todo/${arg.id}`;
         var result = await fetch(url, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
             }
-        }).catch((error) => {
+        })
+        .then((Response)=>{
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.error(error);
         });
 
-        return result.json();
+        return result.text();
     }
 
     async requestChangePublish(arg) {
-        const url = backEndServerAddress + "/user/todo/update/publish" + `/${arg.id}`;
+        const url = backEndServerAddress + "/user/todo/publish" + `/${arg.id}`;
 
         var result = await fetch(url, {
             method: 'PUT',
@@ -153,7 +178,12 @@ export class Todo {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
             }
-        }).catch((error) => {
+        })
+        .then((Response)=>{
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.error(error);
         });
 
@@ -169,7 +199,12 @@ export class Todo {
                 "Content-Type": "application/json",
                 "authorization": auth.getJsonToken()
             },
-        }).catch((error) => {
+        })
+        .then((Response)=>{
+            auth.setJsonTokenFromResponseHeader(Response);
+            return Response;
+        })
+        .catch((error) => {
             console.error(error);
         });
 

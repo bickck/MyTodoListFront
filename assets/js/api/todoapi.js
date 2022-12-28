@@ -105,6 +105,35 @@ export class TodoApi {
             });
 
         return result.json();
+    }
 
+    async requestUserTodosByUserName(username) {
+        const url = backEndServerAddress + `/todo/api/${username}/todos`;
+        var result = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        return result.json();
+    }
+
+    async requestUserLikeTodoByUserName(username) {
+        const url = backEndServerAddress + `/todo/api/like/${username}`;
+        var result = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        return result.json();
     }
 }

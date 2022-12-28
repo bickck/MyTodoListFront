@@ -1,6 +1,6 @@
 import {
     Auth
-} from "../account/Auth.js";
+} from "../account/auth.js";
 import {
     Account
 } from "../server/account.js"
@@ -76,7 +76,7 @@ function login(event) {
     var redirectedUrl = "";
     
     result.then((data) => {
-        if (data.status != "400") {
+        if (data.status != "403") {
             redirectedUrl = mainPageAddress;
             return data.text();
         }

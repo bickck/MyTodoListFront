@@ -1,18 +1,36 @@
+import {
+    TodoApi
+} from "../../api/todoapi.js";
+import {
+    Todo
+} from "../../server/todo.js";
+import {
+    Comment
+} from "./../../util/comment.js"
+
 var layer;
-var main;
-
-function openCommentLayer(event) {
-
-    var targetId = event.target.id.split("-")[2];
-    main = document.querySelector("body");
-
-    layer = comment.createCommentLayer({
-        id: targetId
-    }, addComment, closeCommentLayer);
+const main = document.querySelector("body");
+const wrapper = document.querySelector("#wrapper");
+const comment = new Comment();
+const todoapi = new TodoApi();
+const todo = new Todo();
 
 
-    var result = todoApi.requestTodoCommentsByTodoId({
-        id: targetId
+function disableScroll() {
+    main.classList.add("stop-scrolling");
+    wrapper.classList.add("stop-click");
+}
+
+function enableScroll() {
+    main.classList.remove("stop-scrolling");
+    wrapper.classList.remove("stop-click");
+
+}
+
+function setCommentInLayer(todoId) {
+
+    var result = todoapi.requestTodoCommentsByTodoId({
+        id: todoId
     });
 
     result.then((data) => {
@@ -23,7 +41,7 @@ function openCommentLayer(event) {
 
             var section = comment.createCommentElement(arg);
             layer.commentContainer.appendChild(section);
-            main.appendChild(layer.commentLayer);
+            main.appendChild(layer.commentSection);
 
         } else {
 
@@ -31,9 +49,17 @@ function openCommentLayer(event) {
                 var section = comment.createCommentElement(data.content[i]);
                 layer.commentContainer.appendChild(section);
             }
-            main.appendChild(layer.commentLayer);
+            main.appendChild(layer.commentSection);
         }
     });
+}
+
+function openCommentLayer(todoId) {
+    disableScroll();
+    layer = comment.createCommentLayer({
+        id: todoId
+    }, addComment, closeCommentLayer);
+    setCommentInLayer(todoId);
 }
 
 function reloadTodoCommeandData(todoId) {
@@ -44,7 +70,7 @@ function reloadTodoCommeandData(todoId) {
 
     clearCommentList();
 
-    var result = todoApi.requestTodoCommentsByTodoId({
+    var result = todoapi.requestTodoCommentsByTodoId({
         id: todoId
     });
 
@@ -53,7 +79,7 @@ function reloadTodoCommeandData(todoId) {
             var section = comment.createCommentElement(data.content[i]);
             layer.commentContainer.appendChild(section);
         }
-        main.appendChild(layer.commentLayer);
+        main.appendChild(layer.commentSection);
 
     });
 }
@@ -62,7 +88,7 @@ function addComment(event) {
     const todo_Id = document.querySelector("#TodoID").getAttribute("todo_id");
     const comment = document.getElementById("comment_form").elements[0].value;
 
-    var result = todoServer.requestSaveCommentByTodoId({
+    var result = todo.requestSaveCommentByTodoId({
         id: todo_Id,
         comment: comment
     });
@@ -72,6 +98,10 @@ function addComment(event) {
             reloadTodoCommeandData(todo_Id);
         }
     })
+}
+
+function deleteComment() {
+
 }
 
 
@@ -84,5 +114,18 @@ function clearCommentList(todoId) {
 }
 
 function closeCommentLayer(event) {
+    enableScroll();
     comment.removeCommentLayer();
 }
+
+
+function setCommentEvent(todoId, comment, commnetContainer) {
+    commnetContainer.innerText = comment;
+    commnetContainer.addEventListener("click", function () {
+        openCommentLayer(todoId);
+    });
+}
+
+export {
+    setCommentEvent
+};

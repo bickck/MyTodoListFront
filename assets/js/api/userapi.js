@@ -2,31 +2,36 @@
  *  User API를 호출하는 파일
  */
 
+import {
+    Auth
+} from "./../account/auth.js";
+const auth = new Auth();
+
+const token = auth.getJsonToken();
+
 
 export class UserApi {
-
 
     /**
      * 유저가 작성한 TODO
      */
 
     // 유저 정보 요청
-    // async requestUserDetails(arg) {
-    //     const url = backEndServerAddress + `/user/api/intro`;
-    //     var result = await fetch(url, {
-    //         method: 'POST',
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "authorization": `${auth.getJsonToken()}`
-    //         },
-    //     }).catch((error) => {
-    //         console.log(error);
-    //     });
+    async requestUserDetails(username) {
+        const url = backEndServerAddress + `/api/intro/${username}`;
+        var result = await fetch(url, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).catch((error) => {
+            console.log(error);
+        });
         
-    //     return result.json();
-    // }
+        return result.json();
+    }
 
-    async requestUserTodos(arg) {
+    async requestUserTodos() {
         const url = backEndServerAddress + "/user/api/todos";
 
 
@@ -34,7 +39,7 @@ export class UserApi {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                    "authorization": `${arg.authorization}`
+                    "authorization": `${token}`
                 },
             })
             .catch((error) => {
@@ -48,14 +53,14 @@ export class UserApi {
      * 유저가 작성한 QUOTE
      */
 
-    async requestUserQuotes(arg) {
+    async requestUserQuotes() {
         const url = backEndServerAddress + "/user/api/quotes";
 
         var result = await fetch(url, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                    "authorization": `${arg.authorization}`
+                    "authorization": `${token}`
                 },
             })
             .catch((error) => {
@@ -68,13 +73,13 @@ export class UserApi {
     /**
      * 유저가 좋아요를 누른 Quote
      */
-    async requestUserLikeQuote(arg) {
+    async requestUserLikeQuote() {
         const url = backEndServerAddress + "/user/like/quotes";
         var result = await fetch(url, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                    "authorization": `${arg.authorization}`
+                    "authorization": `${token}`
                 },
             })
             .catch((error) => {
@@ -88,14 +93,14 @@ export class UserApi {
     /**
      * 유저가 좋아요를 누른 Todo
      */
-    async requestUserLikeTodo(arg) {
+    async requestUserLikeTodo() {
 
         const url = backEndServerAddress + "/user/like/todos";
         var result = await fetch(url, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                    "authorization": `${arg.authorization}`
+                    "authorization": `${token}`
                 },
             })
             .catch((error) => {

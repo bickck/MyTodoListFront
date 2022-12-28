@@ -1,17 +1,13 @@
 /**
  * 
  */
-
-import {
-    TodoApi
-} from "./../api/todoapi.js";
-import {
-    NonDataInjector 
-} from "./../util/page.js";
-
-import {
-    PostGenerator
-} from "./../generator/post.js"
+import {TodoApi} from "./../api/todoapi.js";
+import {NonDataInjector} from "./../util/page.js";
+import {PostGenerator} from "./../generator/post.js"
+// import "./../config.js";
+import "./../generator/header.js";
+import "./../generator/footer.js";
+import "./../generator/menu.js";
 
 const todoapi = new TodoApi();
 const nonDataInjector = new NonDataInjector();
@@ -34,7 +30,7 @@ function mainTodoApi() {
 
     mainApiList.then((data) => {
 
-        if (data == null || data == "undefined" || data.totalElements == 0) {
+        if (data.empty == true) {
             mainTodoContainer.appendChild(nonDataInjector.createEmptyMainTodoPost());
             return;
         }
@@ -59,8 +55,8 @@ function recommandTodoApi() {
 
     resposeRecommandTodoList.then((data) => {
 
-        if (data == null || data == "undefined" || data.number == 0) {
-            recommandTodoContainer.appendChild(nonDataInjector.createNonMiniPost());
+        if (data.empty == true) {
+            recommandTodoContainer.appendChild(nonDataInjector.createEmptyMiniPost());
             return;
         }
 
@@ -68,7 +64,6 @@ function recommandTodoApi() {
 
             var content = data.content[i];
             var container = postGenerator.createMiniTodos(content);
-
 
             recommandTodoContainer.appendChild(container);
         }
@@ -86,7 +81,7 @@ function dailyTodoApi() {
 
     dailyQuoteList.then((data) => {
 
-        if (data == null || data == "undefined" || data.number == 0) {
+        if (data.empty == true) {
             dailyTodoContainer.appendChild(nonDataInjector.createEmptyTodoList());
 
             return;
@@ -96,7 +91,6 @@ function dailyTodoApi() {
 
             var content = data.content[i];
             var container = postGenerator.createTodoList(content);
-
 
             dailyTodoContainer.appendChild(container);
         }

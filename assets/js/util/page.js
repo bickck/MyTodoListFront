@@ -5,13 +5,7 @@
 import {
     PostGenerator
 } from "../generator/post.js"
-
-import {
-    Comment
-} from "./../util/comment.js"
-
 const post = new PostGenerator();
-// const comment = new Comment();
 
 export class NonDataInjector {
 
@@ -82,14 +76,15 @@ export class NonDataInjector {
      * <div class="mini-posts">
      */
 
-    createNonMiniPost() {
+    createEmptyMiniPost() {
 
         var arg = {
             title: "데이터가 없어요.",
             isPublish: "publish",
             heart: 0,
             comment: 0,
-            createTimeStamp: "2022-10-13"
+            createTimeStamp: "2022-10-13",
+            postImageCount: 0
         }
 
         var section = post.createMiniTodos(arg);

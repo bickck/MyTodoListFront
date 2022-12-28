@@ -140,32 +140,6 @@ function quoteUpdate(arg) {
     });
 }
 
-/**
- * 
- */
-
-// function quoteDelete(arg) {
-//     const quote = document.querySelector("#quote").value;
-//     const author = document.querySelector("#author").value;
-//     var isCheckPublic = document.querySelector("#non-public").value;
-//     if (isCheckPublic.checked == false) {
-//         isCheckPublic.value = "public";
-//     }
-//     var arg = {
-//         quote: quote,
-//         author: author,
-//         isPublish: isPublish
-//     }
-//     var result = quoteServer.requestUserQuoteUpdate(arg);
-//     result.then((Response) => {
-//         if (Response.status.toString() === "200") {
-//             //window.location.href = mainPageAddress;
-//         }
-//     })
-// }
-// if (delete_btn != null) {
-//     delete_btn.addEventListener("click", quoteDelete);
-// }
 if (update_btn != null) {
     update_btn.addEventListener("click", quoteUpdate);
 }

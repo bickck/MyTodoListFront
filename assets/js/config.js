@@ -5,10 +5,10 @@
 //const mainPageAddress = "https://bickck.github.io/MyTodoListFront";
 
 // local dev IP
- const backEndServerAddress = "http://localhost:8080";
+const backEndServerAddress = "http://localhost:8080";
 //  const backEndServerAddress = `https://www.mybackendpractice.link`
- const frontEndServerAddress = "http://127.0.0.1:5501";
- const mainPageAddress = "http://127.0.0.1:5501/index.html";
+const frontEndServerAddress = "http://127.0.0.1:5501";
+const mainPageAddress = "http://127.0.0.1:5501/index.html";
 
 const userDefaultImageLocation = frontEndServerAddress + "/assets/images/blank-profile-picture-gdf6b93f73_640.png";
 
@@ -31,4 +31,3 @@ const quoteWritePageURL = "";
 const todoPageURL = "/assets/html/todo.html";
 const quotePageURL = "/assets/html/quote.html";
 
-// t4Dr9HKQO7CJIJv9 - mongodb password

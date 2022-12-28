@@ -1,4 +1,12 @@
 import {
+    setUserProfileImageUrl,
+    setUserProfileCommentStr,
+    refreshCommentInputElement
+} from "./../generator/functions.js";
+import "./../generator/header.js";
+import "./../generator/footer.js";
+import "./../generator/menu.js";
+import {
     UserApi
 } from "./../api/userapi.js";
 import {
@@ -19,15 +27,19 @@ import {
 import {
     Quote
 } from "./../server/quote.js";
+import {
+    TodoApi
+} from "../api/todoapi.js";
+import {
+    QuoteApi
+} from "../api/quoteapi.js";
 
 const userimageUpdateButton = document.querySelector("#user-image-update");
 const userimageDeleteButton = document.querySelector("#user-image-delete");
 const userDeleteButton = document.querySelector("#user-delete");
 const userUpdateButton = document.querySelector("#user-update");
 const userIntroSaveButton = document.querySelector("#user-intro-save");
-
 const changeTextViewButton = document.querySelector("#user-update-cancle");
-
 const userInfoButton = document.querySelector("#user-info-button");
 const userTodoButton = document.querySelector("#user-todo-button");
 const userQuoteButton = document.querySelector("#user-quote-button");
@@ -48,21 +60,37 @@ const auth = new Auth();
 const todo = new Todo();
 const quote = new Quote();
 const userapi = new UserApi();
+const todoapi = new TodoApi();
+const quoteapi = new QuoteApi();
 const nonDataInjector = new NonDataInjector();
 const postGenerator = new PostGenerator();
 
+var query = window.location.search;
+var username;
+var permission = "FAILURE";
 
 window.onload = function init() {
+    username = getQueryUserName(query);
+
+    if (username != null && auth.getJsonToken() != null) {
+        var result = auth.isCheckUserPermissionCheck(username);
+        result.then((data) => {
+            permission = data;
+        });
+    }
     setUserTodoPost();
     setSidebarUserIntro();
 }
 
+function getQueryUserName(query) {
+    const username = new URLSearchParams(query).get("username");
+    return username;
+}
 
 function postHiddenActions(event) {
 
     var currEventButton = event.target;
     var eventId = currEventButton.id;
-
     prevPage = currPage;
 
     if (eventId == "user-info-button") {
@@ -90,7 +118,6 @@ function postHiddenActions(event) {
         currPage = post;
         setUserQuoteLikePost();
     }
-
     if (currPage == prevPage) {
         return;
     }
@@ -105,9 +132,13 @@ function setSidebarUserIntro() {
     const userCommentContainer = document.querySelector("#usercomment");
     const userImageContainer = document.querySelector("#userImage");
 
-    var result = user.requestUserDetails({
-        authorization: auth.getJsonToken()
-    })
+    var result;
+
+    if(username != null) {
+        result = userapi.requestUserDetails(username);
+    } else {
+        result = user.requestUserDetails();
+    }
 
     result.then((data) => {
 
@@ -148,7 +179,6 @@ function setUserInfoPost() {
         const introBirthSection = document.querySelector("#intro-birth");
         const introUserImage = document.querySelector(".user-image");
 
-        
         introCommentSection.innerText = setUserProfileCommentStr(comment);
         introUsernameSection.innerText = username;
         introBirthSection.innerText = "";
@@ -162,9 +192,13 @@ function setUserInfoPost() {
 
 function setUserTodoPost() {
 
-    var result = userapi.requestUserTodos({
-        authorization: auth.getJsonToken()
-    });
+    var result;
+
+    if (username != null) {
+        result = todoapi.requestUserTodosByUserName(username);
+    } else {
+        result = userapi.requestUserTodos();
+    }
 
     result.then((data) => {
         const todosSection = document.querySelector(".todo-section");
@@ -183,7 +217,6 @@ function setUserTodoPost() {
             const addedAction = createPostManageActions(container, data.content[i].id, "TODO");
             todosSection.appendChild(addedAction);
         }
-
     });
 }
 
@@ -193,9 +226,13 @@ function setUserTodoPost() {
 
 function setUserQuotePost() {
 
-    var result = userapi.requestUserQuotes({
-        authorization: auth.getJsonToken()
-    });
+    var result;
+
+    if (username != null) {
+        result = quoteapi.requestUserQuoteByUserName(username);
+    } else {
+        result = userapi.requestUserQuotes();
+    }
 
     result.then((data) => {
         const quoteSection = document.querySelector(".quote-section");
@@ -214,21 +251,21 @@ function setUserQuotePost() {
             const addedAction = createPostManageActions(container, data.content[i].id, "QUOTE");
             quoteSection.appendChild(addedAction);
         }
-
-
-
     });
 }
 
 /**
  * 
  */
-
 function setUserTodoLikePost() {
 
-    var result = userapi.requestUserLikeTodo({
-        authorization: auth.getJsonToken()
-    });
+    var result;
+
+    if (username != null) {
+        result = todoapi.requestUserLikeTodoByUserName(username);
+    } else {
+        result = userapi.requestUserLikeTodo();
+    }
 
     result.then((data) => {
         const todoLikeSection = document.querySelector(".todo-like-section");
@@ -246,20 +283,21 @@ function setUserTodoLikePost() {
             todoLikeSection.appendChild(container);
         }
 
-
     });
-
 }
 
 /**
  * 
  */
-
 function setUserQuoteLikePost() {
 
-    var result = userapi.requestUserLikeQuote({
-        authorization: auth.getJsonToken()
-    });
+    var result;
+
+    if (username != null) {
+        result = quoteapi.requestUserLikeQuoteByUserName(username);
+    } else {
+        result = userapi.requestUserLikeQuote();
+    }
 
     result.then((data) => {
 
@@ -281,13 +319,16 @@ function setUserQuoteLikePost() {
     });
 }
 
-
 /**
  * 
  * @param {*} arg 
  */
 
 function createPostManageActions(arg, postid, postKind) {
+
+    if (permission == "FAILURE") {
+        return arg;
+    }
 
     const postActionsContainer = arg.lastChild.firstChild;
 
@@ -441,8 +482,8 @@ function userUpdateAction(event) {
     const viewCommentContainer = document.querySelector(".view-comment");
     const viewUsername = document.querySelector(".view-birth");
 
-    if(cancle.hasAttribute("hidden")) {
-        save.setAttribute("hidden","");
+    if (cancle.hasAttribute("hidden")) {
+        save.setAttribute("hidden", "");
         cancle.removeAttribute("hidden");
     }
 
@@ -492,9 +533,9 @@ function cancleUpdateBtn() {
     const save = document.querySelector(".intro-update-view");
     const cancle = document.querySelector(".intro-update-cancle");
 
-    if(save.hasAttribute("hidden")) {
+    if (save.hasAttribute("hidden")) {
         save.removeAttribute("hidden");
-        cancle.setAttribute("hidden","");
+        cancle.setAttribute("hidden", "");
         userUpdateAction();
     }
 }
@@ -539,6 +580,10 @@ function userIntroSave() {
 
 function clearChildNode(section) {
     section.innerHTML = "";
+}
+
+function checkingUserTokenUser() {
+
 }
 
 changeTextViewButton.addEventListener("click", cancleUpdateBtn);

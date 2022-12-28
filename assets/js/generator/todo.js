@@ -503,3 +503,91 @@ function setDetailPageMoveEvent(id, containerList) {
         });
     }
 }
+
+
+const CreateMainTodoGenerator = (arg) => {
+
+    const path = "images/pic01.jpg";
+    const id = `POST_ID-`;
+    const postTitle = "";
+    const postContent = "";
+    const username = "";
+    const createTimeStamp = "";
+
+    return (
+        <article className="post">
+             <header>
+                 <div className="title">
+                    <p id={id} value="1" hidden></p>
+                     <h2><a href="single.html"></a></h2>
+                     <p></p>
+              </div>
+                 <div className="meta">
+                     <time className="published" dateTime="2015-11-01">{createTimeStamp}</time>
+                     <a href="#" className="author">
+                        <span className="name">{username}</span>
+                        <UserImageGenerator/>
+                    </a>
+                 </div>
+             </header>
+             <TodoImageGenerator path={path}/>
+             <p>{postContent}</p>
+             <footer>
+                 {/* <ul className="actions">
+                     <li><a href="single.html" className="button large">Continue Reading</a></li>
+                 </ul> */}
+                 <ul className="stats">
+                     <li><a id="heart-1" class="icon solid fa-heart heart" value="0">0</a></li>
+                     <li><a id="Comment-PostID-1" class="icon solid fa-comment comment">0</a></li>
+                 </ul>
+             </footer>
+         </article>
+    );
+}
+
+const CreateTodoMiniPostGenerator = (arg) => {
+
+    const todoId = "";
+    const title = "";
+    const createTimeStamp = "";
+    const heart = 0;
+    const comment = 0;
+
+    return (
+        <article className="mini-post">
+            <header>
+                <p id="PostID-undefined" value="" hidden></p>
+                <h3>
+                    <a class="post-details">{title}</a>
+                </h3>
+                <a className="icon solid fa-heart" href="#">{heart}</a>
+                <a className="icon solid fa-comment" href="#">{comment}</a>
+                <time class="published" dataTime="">{createTimeStamp}</time>
+                <UserImageGenerator/>
+            </header>
+            <TodoImageGenerator path={path}/>
+        </article>
+    )
+}
+
+const CreateTodoPostsGenerator = (arg) => {
+
+    const todoId = `TODO_ID-${arg.todoId}`;
+    const title = "";
+    const createTimeStamp = "";
+
+    return ( 
+        <li>
+            <article>
+                <TodoImageGenerator/>
+                <header>
+                <p id={todoId}></p>
+                    <h3>
+                        <a>{title}</a>
+                    </h3>
+                    <time className="published" dateTime="">{createTimeStamp}</time>
+                </header>
+            </article>
+        </li>
+    );
+}
