@@ -21,12 +21,13 @@ export class TodoApi {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin" : "*"
                 },
             })
-            .then((data)=>{
-                data.headers.set("Origin","*")
-                return data;
-            })
+            // .then((data)=>{
+            //     data.headers.set("Origin","*")
+            //     return data;
+            // })
             .catch((error) => {
                 console.log(error);
             });
