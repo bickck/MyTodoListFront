@@ -14,7 +14,12 @@ export class QuoteApi {
             headers: {
                 "Content-Type": "application/json",
             }
-        }).catch((error)=> {
+        })
+        .then((data)=>{
+            data.headers.set("Origin","*")
+            return data;
+        })        
+        .catch((error)=> {
             console.log(error);
         });
 

@@ -2,6 +2,10 @@
  *  Todo API를 호출하는 파일
  */
 
+// const myHeader = new Headers();
+
+// myHeader.set("origin","*");
+// myHeader.append("Content-Type","application/json");
 
 export class TodoApi {
 
@@ -19,9 +23,12 @@ export class TodoApi {
                     "Content-Type": "application/json",
                 },
             })
+            .then((data)=>{
+                data.headers.set("Origin","*")
+                return data;
+            })
             .catch((error) => {
                 console.log(error);
-                console.log("서버 연결에 에러가 발생했습니다.");
             });
 
         return response.json();
@@ -40,6 +47,10 @@ export class TodoApi {
                 headers: {
                     "Content-Type": "application/json",
                 },
+            })
+            .then((data)=>{
+
+                return data;
             })
             .catch((error) => {
                 console.log(error);
@@ -63,6 +74,10 @@ export class TodoApi {
                     "Content-Type": "application/json",
                 },
             })
+            .then((data)=>{
+                
+                return data;
+            })
             .catch((error) => {
                 console.log(error);
             });
@@ -83,6 +98,8 @@ export class TodoApi {
                 headers: {
                     "Content-Type": "application/json",
                 },
+            }).then((data)=>{
+                return data;
             })
             .catch((error) => {
                 console.log(error);

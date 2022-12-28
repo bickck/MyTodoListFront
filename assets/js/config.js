@@ -2,13 +2,13 @@
 //const ipAddress = "52.78.161.7";
 //const backEndServerAddress = `https://${ipAddress}:8080`;
 const frontEndServerAddress = "https://bickck.github.io/MyTodoListFront"
-//const mainPageAddress = "https://bickck.github.io/MyTodoListFront";
+const mainPageAddress = "https://bickck.github.io/MyTodoListFront";
 
 // local dev IP
 //const backEndServerAddress = "http://localhost:8080";
-const backEndServerAddress = `https://www.mybackendpractice.link`
+const backEndServerAddress = `https://www.mybackendpractice.link/`
 // const frontEndServerAddress = "http://127.0.0.1:5501";
-const mainPageAddress = "http://127.0.0.1:5501/index.html";
+//const mainPageAddress = "http://127.0.0.1:5501/index.html";
 
 const userDefaultImageLocation = frontEndServerAddress + "/assets/images/blank-profile-picture-gdf6b93f73_640.png";
 
