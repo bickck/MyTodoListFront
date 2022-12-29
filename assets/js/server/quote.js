@@ -33,7 +33,7 @@ export class Quote {
             console.log(error);
         });
 
-        return result.json();
+        return result.text();
     }
 
     async requestUserQuoteUpdate(arg) {
