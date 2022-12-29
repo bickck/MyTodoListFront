@@ -19,6 +19,9 @@ const imageApi = new ImageApi();
 function setUserIntroImage(imageUUID, imageContainer, parentImageContainer) {
 
     if (imageUUID == null || imageUUID == "") {
+        const imageSource = setUserProfileImageUrl(null, null);
+        imageContainer.setAttribute("src", imageSource);
+        parentImageContainer.appendChild(imageContainer);
         return;
     } else {
 

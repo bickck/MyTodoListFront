@@ -3,7 +3,7 @@ function setUserProfileImageUrl(filePath, fileName) {
 
     var imageSource;
     
-    if (filePath != "DEFAULT") {
+    if (filePath != "DEFAULT" && filePath != null) {
         imageSource = backEndServerAddress + `/image/api/user/source/${filePath}/${fileName}`;
     } else {
         imageSource = frontEndServerAddress + `/images/blank-profile-picture-gdf6b93f73_640.png`;

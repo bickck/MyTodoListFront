@@ -112,7 +112,6 @@ function userDetailInfo() {
     var userIntroData = user.requestUserDetails();
 
     userIntroData.then((data) => {
-        console.log(data);
         postUserIntroData(data);
     });
 }
