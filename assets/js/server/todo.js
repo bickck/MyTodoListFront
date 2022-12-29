@@ -12,7 +12,7 @@ const auth = new Auth();
 export class Todo {
 
     async requestUserTodoInsert(arg) {
-        const url = backEndServerAddress + "/user/todo/";
+        const url = backEndServerAddress + "/user/todo/post";
         const data = new FormData();
         const headers = new Headers();
 

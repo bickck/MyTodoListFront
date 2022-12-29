@@ -32,8 +32,8 @@ function init() {
 function headerLinkInjector() {
     lists[0] = '<li>' + lists[0].replace("#", requestPage.todoPage) + '</li>';
     lists[1] = '<li>' + lists[1].replace("#", requestPage.quotePage) + '</li>';
-    lists[2] = '<li>' + lists[2].replace("#", requestPage.imagePage) + '</li>';
-    lists[3] = '<li>' + lists[3].replace("#", requestPage.communityPage) + '</li>';
+    // lists[2] = '<li>' + lists[2].replace("#", requestPage.imagePage) + '</li>';
+    // lists[3] = '<li>' + lists[3].replace("#", requestPage.communityPage) + '</li>';
 
     $(".lists li").remove();
     $(".lists").append(lists);

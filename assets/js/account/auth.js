@@ -31,13 +31,16 @@ export class Auth {
     }
 
     async isCheckUserPermissionCheck(username) {
-        const url = backEndServerAddress  + `/auth/permission/${username}`;
+        const url = backEndServerAddress  + `/auth/permission`;
 
         var result = await fetch(url, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 "Content-Type": "application/json",
                 "authorization": this.getJsonToken()
+            }, 
+            body : {
+                username : username
             },
         }).catch((error)=> {
             console.log(error);
