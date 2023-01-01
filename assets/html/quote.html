@@ -2,31 +2,31 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quote</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Quote</title>
 
-  
-    <!-- css -->
-    <link rel="stylesheet" href="./../css/main.css">
-    <link rel="stylesheet" href="./../css/custom.css">
+
+	<!-- css -->
+	<link rel="stylesheet" href="./../css/main.css">
+	<link rel="stylesheet" href="./../css/custom.css">
 
 	<!-- jQuery -->
-    <script type="text/javascript" src="./../js/jquery.min.js"></script>
-    <script type="text/javascript" src="./../js/browser.min.js"></script>
-    <script type="text/javascript" src="./../js/breakpoints.min.js"></script>
+	<script type="text/javascript" src="./../js/jquery.min.js"></script>
+	<script type="text/javascript" src="./../js/browser.min.js"></script>
+	<script type="text/javascript" src="./../js/breakpoints.min.js"></script>
 
 	<!-- config -->
-    <script type="text/javascript" src="./../js/config.js"></script>
+	<script type="text/javascript" src="./../js/config.js"></script>
 </head>
 
 <body class="is-preload">
 
-    <!-- Wrapper -->
-    <div id="wrapper">
+	<!-- Wrapper -->
+	<div id="wrapper">
 
-       <!-- Header -->
+		<!-- Header -->
 		<header id="header">
 			<h1><a id="mainLink" href="#main">Future Imperfect</a></h1>
 			<nav class="links page">
@@ -46,7 +46,7 @@
 							<input type="text" name="query" placeholder="Search" />
 						</form>
 					</li>
-                    <li class="alarm">
+					<li class="alarm">
 						<a class="fa-bell" href="#alarm">alarm</a>
 						<form id="search" method="get" action="#">
 							<input type="text" name="query" placeholder="Search" />
@@ -134,59 +134,67 @@
 		</section>
 
 
-        <!-- Main -->
-        <div id="main">
-            <h2>Quotes</h2>
-            
-        </div>
-       
-        <!-- Sidebar -->
-        <section id="sidebar">
-
-            <section class="blurb quote auth">
-                <h2> Write your history</h2>
-               
-                <a href="#" class="button small fit write-quote">Write Quote</a>
-            </section>
-
-            <!-- Mini Posts -->
-            <section>
-                <h2>Daily Quotes <a class="icon solid fa-sync-alt"></a></h2>
-                <ul class="posts quote quote-daily">
-                  
-                </ul>
-            </section>
-
-            <section>
-                <h2>recommand Quotes <a class="icon solid fa-sync-alt"></a></h2>
-                <ul class="posts quote quote-recommand">
-                  
-                </ul>
-            </section>
-
-            <!-- Footer -->
-            <section id="footer">
-                <ul class="icons">
-                    <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-                    <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-                    <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-                    <li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
-                    <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-                </ul>
-                <p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a
-                        href="http://unsplash.com">Unsplash</a>.</p>
-            </section>
-        </section>
-
-    </div>
+		<!-- Main -->
+		<div id="main">
+			<section class="main-title">
+				<h2>Quotes</h2>
+				<section class="pagination-section">
+					<div><button class="small prev-button">prev button</button></div>
+					<div><button class="small next-button">next button</button></div>
+				</section>
+			</section>
 
 
-    <!-- product -->
-    <script src="./../js/util.js"></script>
-    <script src="./../js/main.js"></script>
+		</div>
 
-    <script type="module" src="./../js/index/quote.js"></script>
-    <script type="module" src="./../js/function/quotewrite.js"></script>
+		<!-- Sidebar -->
+		<section id="sidebar">
+
+			<section class="blurb quote auth">
+				<h2> Write your history</h2>
+
+				<a href="#" class="button small fit write-quote">Write Quote</a>
+			</section>
+
+			<!-- Mini Posts -->
+			<section>
+				<h2>Daily Quotes <a class="icon solid fa-sync-alt"></a></h2>
+				<ul class="posts quote quote-daily">
+
+				</ul>
+			</section>
+
+			<section>
+				<h2>recommand Quotes <a class="icon solid fa-sync-alt"></a></h2>
+				<ul class="posts quote quote-recommand">
+
+				</ul>
+			</section>
+
+			<!-- Footer -->
+			<section id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
+					<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+				</ul>
+				<p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a
+						href="http://unsplash.com">Unsplash</a>.</p>
+			</section>
+		</section>
+
+	</div>
+
+
+	<!-- product -->
+	<script src="./../js/util.js"></script>
+	<script src="./../js/main.js"></script>
+
+	<script type="module" src="./../js/index/quote.js"></script>
+	<script type="module" src="./../js/function/quotewrite.js"></script>
 
 </body>
+
 </html>

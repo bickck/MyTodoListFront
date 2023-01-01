@@ -1,15 +1,36 @@
 /**
  * 
  */
-
-import {setUserProfileImageUrl,setUserProfileCommentStr,refreshCommentInputElement} from "./../generator/functions.js";
-import {PostGenerator} from "./../generator/post.js";
-import {Auth} from "./../account/auth.js";
-import {Users} from "./../server/users.js";
-import {TodoApi} from "./../api/todoapi.js";
-import {QuoteApi} from "./../api/quoteapi.js";
-import {ImageApi} from "./../api/imageapi.js";
-import {NonDataInjector} from "./../util/page.js"
+import {
+    paginationMainTodo,
+    paginationMainQuote
+} from "./../util/pageMovement.js"
+import {
+    setUserProfileImageUrl,
+    setUserProfileCommentStr,
+    refreshCommentInputElement
+} from "./../generator/functions.js";
+import {
+    PostGenerator
+} from "./../generator/post.js";
+import {
+    Auth
+} from "./../account/auth.js";
+import {
+    Users
+} from "./../server/users.js";
+import {
+    TodoApi
+} from "./../api/todoapi.js";
+import {
+    QuoteApi
+} from "./../api/quoteapi.js";
+import {
+    ImageApi
+} from "./../api/imageapi.js";
+import {
+    NonDataInjector
+} from "./../util/page.js"
 import "./../config.js";
 import "./../generator/menu.js";
 import "./../generator/header.js";
@@ -33,6 +54,9 @@ const editComment = document.querySelector(".edit-usercomment");
 const recommandSyncButton = document.querySelector(".recommand-sync");
 const dailySyncButton = document.querySelector(".daily-sync");
 const userCommentSaveButton = document.querySelector("#user-comment-save-button");
+
+const prevButton = document.querySelector(".prev-button");
+const nextButton = document.querySelector(".next-button");
 
 window.onload = function init(event) {
     event.preventDefault();
@@ -67,12 +91,11 @@ function requestMainPosts() {
         }
 
         for (var i = 0; i < data.numberOfElements; i++) {
-
             var content = data.content[i];
             var container = post.createMainPost(content);
-
             mainPost.appendChild(container);
         }
+        paginationMainTodo(prevButton, nextButton, mainPost, data);
     });
 }
 

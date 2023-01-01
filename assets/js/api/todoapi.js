@@ -21,7 +21,23 @@ export class TodoApi {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
-                    // "Access-Control-Allow-Origin" : "*"
+                },
+            })
+            // .then((data)=>{
+            //     data.headers.set("Origin","*")
+            //     return data;
+            // })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        return response.json();
+    }
+    async requestMainPostsByUrl(url) {
+        let response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
                 },
             })
             // .then((data)=>{
@@ -76,7 +92,6 @@ export class TodoApi {
                 },
             })
             .then((data)=>{
-                
                 return data;
             })
             .catch((error) => {

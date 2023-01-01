@@ -13,13 +13,23 @@ export class QuoteApi {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-                // "Access-Control-Allow-Origin" : "*"
             }
-        })
-        // .then((data)=>{
-        //     data.headers.set("Origin","*")
-        //     return data;
-        // })        
+        })   
+        .catch((error)=> {
+            console.log(error);
+        });
+
+        return result.json();
+    }
+
+    async requestMainQuotesByUrl(url) {
+        
+        var result = await fetch(url, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })      
         .catch((error)=> {
             console.log(error);
         });

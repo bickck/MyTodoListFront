@@ -456,3 +456,21 @@ ul.comment-contents > li > article {
 }
 
 
+.main-title > h2 {
+    padding-bottom: 0.7em;
+}
+
+.main-title > section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.7em;
+    padding-bottom: 0.7em;
+}
+
+.main-title > section > div {
+    width: 95%;
+    padding-left: 1.2em;
+}
+.main-title > section > div > button{
+    width: 95%;
+}

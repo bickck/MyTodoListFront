@@ -1,10 +1,19 @@
 /**
  * 
  */
-import {TodoApi} from "./../api/todoapi.js";
-import {NonDataInjector} from "./../util/page.js";
-import {PostGenerator} from "./../generator/post.js"
-// import "./../config.js";
+import {
+    paginationMainTodo
+} from "./../util/pageMovement.js"
+import {
+    TodoApi
+} from "./../api/todoapi.js";
+import {
+    NonDataInjector
+} from "./../util/page.js";
+import {
+    PostGenerator
+} from "./../generator/post.js"
+import "./../config.js";
 import "./../generator/header.js";
 import "./../generator/footer.js";
 import "./../generator/menu.js";
@@ -16,6 +25,9 @@ const postGenerator = new PostGenerator();
 const mainTodoContainer = document.querySelector(".main-todo");
 const recommandTodoContainer = document.querySelector(".recommand-todos");
 const dailyTodoContainer = document.querySelector(".daliy-todos");
+
+const prevButton = document.querySelector(".prev-button");
+const nextButton = document.querySelector(".next-button");
 
 window.onload = function init() {
 
@@ -41,6 +53,7 @@ function mainTodoApi() {
             var container = postGenerator.createMainPost(content);
             mainTodoContainer.appendChild(container);
         }
+        paginationMainTodo(prevButton, nextButton, mainTodoContainer, data);
     });
 }
 
@@ -97,4 +110,3 @@ function dailyTodoApi() {
     });
 
 }
-

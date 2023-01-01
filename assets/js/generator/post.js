@@ -148,7 +148,6 @@ export class PostGenerator {
         heart.setAttribute("class", "icon solid fa-heart heart");
         comment.setAttribute("class", "icon solid fa-comment comment");
 
-        console.log(params);
         setUserIntroImage(params.userImageUUID, userImage, userInfoContainer);
         setMainTodoImage(params.id, params.postImgCount, imageContainer);
         setUserPageMovementEventByUserName(params.username, userInfoContainer);
