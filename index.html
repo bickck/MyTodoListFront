@@ -7,7 +7,7 @@
 <html>
 
 <head>
-	<title>Future Imperfect by HTML5 UP</title>
+	<title>My Todos</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
@@ -29,6 +29,9 @@
 
 	<!-- config -->
 	<script type="text/javascript" src="./assets/js/config.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
 </head>
 
 <body class="is-preload">
@@ -55,9 +58,9 @@
 							<input type="text" name="query" placeholder="Search" />
 						</form>
 					</li>
-					<!-- <li class="alarm">
+					<li class="alarm">
 						<a class="fa-bell" href="#alarm">alarm</a>						
-					</li> -->
+					</li>
 					<li class="menu">
 						<a class="fa-bars" href="#menu">Menu</a>
 					</li>
@@ -65,14 +68,35 @@
 			</nav>
 		</header>
 
-		<!-- <section id="alarm">
-			<ul class="alarm-message" hidden>
-				<li>message-1</li>
-				<li>message-2</li>
-				<li>message-3</li>
-				<li>message-4</li>
-			</ul>
-		</section> -->
+		<!-- Alarm -->
+		<section id="alarm">
+			<section>
+				<form class="search" method="get" action="#">
+					<input type="text" name="query" placeholder="Search" />
+				</form>
+			</section>
+
+			<section>
+				<div>hi</div>
+				<ul class="links">
+					<li>
+						<a href="#userManagePage">
+							<h3>User Manage</h3>
+						</a>
+					</li>
+					<li>
+						<a href="#userTodoWritePage">
+							<h3>Write Todo</h3>
+						</a>
+					</li>
+					<li>
+						<a href="#userQuoteWritePage">
+							<h3>Write Quote</h3>
+						</a>
+					</li>
+				</ul>
+			</section>
+		</section>
 
 		<!-- Menu -->
 		<section id="menu">
@@ -134,8 +158,12 @@
 				<ul class="actions stacked">
 					<li class="loginPage"><a href="#" class="button large fit">Log In</a></li>
 				</ul>
+				<ul class="actions stacked">
+					<li class="registerPage"><a href="#" class="button large fit">Register</a></li>
+				</ul>
 			</section>
 		</section>
+
 		<!-- Main -->
 		<div id="main">
 			<section class="main-title">

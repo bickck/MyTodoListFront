@@ -27,7 +27,7 @@ export class Auth {
     }
 
     removeToken() {
-        window.sessionStorage.clear();
+        window.sessionStorage.removeItem(tokenName);
     }
 
     async isCheckUserPermissionCheck(username) {

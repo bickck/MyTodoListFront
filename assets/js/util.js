@@ -112,8 +112,6 @@
 							event.stopPropagation();
 
 						}
-						console.log(event);
-
 					// Hide.
 						config.target.removeClass(config.visibleClass);
 

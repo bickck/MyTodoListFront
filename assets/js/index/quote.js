@@ -38,7 +38,7 @@ function mainQuoteApi() {
     const mainApiList = quoteapi.requestMainQuotes();
 
     mainApiList.then((data) => {
-        if (data == null || data == "undefined" || data.empty == true) {
+        if (data.empty == true) {
             mainQuoteContainer.appendChild(nonDataInjector.createEmptyMainQuotePost());
             return;
         }
@@ -58,7 +58,7 @@ function dailyQuoteApi() {
 
     dailyQuoteList.then((data) => {
 
-        if (data == null || data == "undefined" || data.empty == true) {
+        if (data.empty == true) {
             dailyQuoteContinaer.appendChild(nonDataInjector.createEmptyQuoteList());
             return;
         }
@@ -80,7 +80,7 @@ function recommandQuoteApi() {
 
     recommandQuoteList.then((data) => {
 
-        if (data == null || data == "undefined" || data.empty == true) {
+        if (data.empty == true) {
             recommandQuoteContainer.appendChild(nonDataInjector.createEmptyQuoteList());
             return;
         }

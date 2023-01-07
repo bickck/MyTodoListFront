@@ -35,7 +35,7 @@ import "./../config.js";
 import "./../generator/menu.js";
 import "./../generator/header.js";
 import "./../generator/footer.js";
-
+import "../server/sockMessage.js";
 
 // const mainTodos = new Todo();
 const auth = new Auth();

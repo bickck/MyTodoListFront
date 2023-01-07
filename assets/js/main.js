@@ -9,6 +9,7 @@
 	var	$window = $(window),
 		$body = $('body'),
 		$menu = $('#menu'),
+		$alarm = $('#alarm'),
 		$sidebar = $('#sidebar'),
 		$main = $('#main');
 
@@ -41,6 +42,20 @@
 				target: $body,
 				visibleClass: 'is-menu-visible'
 			});
+
+		$alarm
+			.appendTo($body)
+			.panel({
+				delay: 500,
+				hideOnClick: true,
+				hideOnSwipe: true,
+				resetScroll: true,
+				resetForms: true,
+				side: 'right',
+				target: $body
+				// visibleClass: 'is-alarm-visible'
+			});
+
 
 	// Search (header).
 		var $search = $('#search'),

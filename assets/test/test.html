@@ -11,7 +11,7 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="./../css/main.css">
-    <link rel="stylesheet" href="./../assets/css/custom.css">
+    <link rel="stylesheet" href="./../css/custom.css">
 
     <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
@@ -22,126 +22,23 @@
 
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 </head>
 
 <body class="is-preload">
 
-    <article class="post">
-        <header>
-            <div class="title">
-                <p id="PostID-1" value="1"></p>
-                <h2><a class="post-details">test</a></h2>
-                <p></p>
-            </div>
-            <div class="meta"><time datetime="undefined" class="published">December 14. 2022</time><a
-                    class="author"><span class="name">donghyeon1124</span><img
-                        src="http://127.0.0.1:5501/images/blank-profile-picture-gdf6b93f73_640.png"
-                        style="width:44.8px, height:44.8px"></a></div>
-        </header><a href="#detail-page-move" class="image featured"></a>
-        <p>1234</p>
-        <footer>
-            <ul class="actions"></ul>
-            <ul class="stats">
-                <li><a id="heart-1" class="icon solid fa-heart heart" value="0">0</a></li>
-                <li><a id="Comment-PostID-1" class="icon solid fa-comment comment">0</a></li>
-            </ul>
-        </footer>
-    </article>
-
-    <article class="post">
-        <header>
-            <div class="title">
-                <p id="PostID-5" value="5"></p>
-                <h2><a class="post-details">test</a></h2>
-                <p></p>
-            </div>
-            <div class="meta"><time datetime="undefined" class="published">December 23. 2022</time><a
-                    class="author"><span class="name">test</span><img
-                        src="http://localhost:8080/image/api/user/source/6094850e477947d39fe4eee0c20d70a6/1cb7abb236c4c875478f9053b45d36beb631da4e965e4ce2474ad97a2a6852e0.jpg"
-                        style="width:44.8px, height:44.8px"></a></div>
-        </header>
-        <a href="#detail-page-move" class="image featured">
-            <img src="http://localhost:8080/image/api/source/caa939c69bbf4e0084b45465f1c1c47b/1a9978357056abb3fc2cab7e1a8553ba5139bdc4a697830005cf0defb569a594.jpeg"
-                class="POST-img"></a>
-        <p>test1234</p>
-        <footer>
-            <ul class="actions"></ul>
-            <ul class="stats">
-                <li><a id="heart-5" class="icon solid fa-heart heart" isexists="false" uuid="null" value="0">0</a></li>
-                <li><a id="Comment-PostID-5" class="icon solid fa-comment comment">0</a></li>
-            </ul>
-        </footer>
-    </article>
-
-    <article class="mini-post">
-        <header>
-            <p hidden="" id="PostID-undefined" value="undefined"></p>
-            <h3><a class="post-details">데이터가 없어요.</a></h3><a class="icon solid fa-heart" href="#">0</a><a
-                class="icon solid fa-comment" href="#">0</a><time class="published" datatime="2022-10-13">October 13.
-                2022</time><a class="author"></a>
-        </header><a class="image"></a>
-    </article>
-
-    <ul class="posts daliy-todos">
-
-        <li>
-            <article><a class="image"></a>
-                <header>
-                    <p id="PostID-undefined"></p>
-                    <h3><a>데이터가 없어요.</a></h3><time class="published" datetime="undefined">undefined</time>
-                </header>
-            </article>
-        </li>
-    </ul>
-
-    <article class="post quote">
-        <header>
-            <div class="title">
-                <p id="QuoteID-undefined" value="undefined" hidden="">undefined</p>
-                <h3 id="quote" value="데이터가 없어요. Quote">데이터가 없어요. Quote</h3>
-                <p id="author" value="undefined">undefined</p>
-            </div>
-            <div class="meta">
-                <time class="published" datetime="undefined">undefined</time>
-                <a class="author" href="#user">
-                    <span class="username" value="undefined">undefined</span>
-                </a>
-            </div>
-        </header>
-        <footer>
-            <ul class="stats">
-                <li><a class="icon solid fa-heart heart" value="0"></a></li>
-            </ul>
-        </footer>
-    </article>
-
-    <li>
-        <article>
-            <header>
-                <h3 value="undefined">undefined</h3>
-                <p value="undefined"> undefined </p>
-                <ul class="stats">
-                    <li><a class="icon solid fa-heart"></a></li>
-                    <li><time class="published" datetime="undefined">undefined</time></li>
-                </ul>
-            </header>
-        </article>
-    </li>
-
 
     <div id="root"></div>
 
-    <script type="text/babel" src="test.js">
-
-
+    <!-- <script type="text/babel" src="test.js">
     </script>
-
-
     <script type="text/babel">
 
         ReactDOM.render(<MainTodoGenerator/>, document.getElementById("root"));
         ReactDOM.render(<CreateTodoPostsGenerator/>, document.getElementById("root"));
-    </script>
+    </script> -->
+
+    <script src="./socket.js" type="module"></script>
 
 </body>
 

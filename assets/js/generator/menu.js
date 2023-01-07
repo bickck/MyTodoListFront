@@ -1,9 +1,16 @@
+import {
+    Users
+} from "./../server/users.js";
+import {
+    Auth
+} from "./../account/auth.js";
+
+const auth = new Auth();
+const user = new Users();
 const authLinks = document.querySelector("#menu > .auth .links");
 const nonAuthLinks = document.querySelector("#menu > .non-auth .links");
 const logout = document.querySelector("#logout");
-const userinfo = document.querySelector("#menu > .auth .actions > li a");
 
-userinfo.href = frontEndServerAddress + "";
 function authlinkInjector() {
 
     for (var i = 0; i < authLinks.childElementCount; i++) {
@@ -36,18 +43,30 @@ function nonAuthLinkInjector() {
         if (link.includes("#pagequote")) {
             link = frontEndServerAddress + "/assets/html/quote.html";
         }
-        nonAuthLinks.children[i].lastElementChild.href = link; 
+        nonAuthLinks.children[i].lastElementChild.href = link;
     }
 }
 
-function logoutEvent() {
+function logoutEvent(event) {
+    event.preventDefault();
 
+    if (auth.getJsonToken() == null) {
+        return;
+    }
+
+    auth.removeToken();
+    var result = fetch(backEndServerAddress + "/auth/logout", {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+    window.location.href = mainPageAddress;
 }
 
-if(logout != null) {
-    logout.addEventListener("click",logoutEvent);
-
-}
+logout.addEventListener("click", logoutEvent);
 
 authlinkInjector();
 nonAuthLinkInjector();

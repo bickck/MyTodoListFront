@@ -96,27 +96,6 @@ function login(event) {
 
 }
 
-
-function loginout(event) {
-    event.preventDefault();
-
-    var result = fetch(url, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            email: `${email.value}`,
-            password: `${password.value}`,
-        }),
-    }).then(Response => Response.text()).then((data) => {
-        auth.setJsonToken(data);
-        window.location.href = mainPageAddress;
-    }).catch((error) => {
-        console.log(error);
-    });
-}
-
 function isEmptyCheck(arg) {
     var isPass = true;
 

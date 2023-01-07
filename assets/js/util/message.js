@@ -3,7 +3,7 @@
     $.fn.appearSuccessMessage = function (className) {
 
         //No Element
-        if (className == null || typeof className == "undefined") {
+        if (className == null || typeof className == undefined) {
             return null;
         }
 
@@ -19,11 +19,10 @@
      * @returns 
      */
 
-
     $.fn.appearErrorMessage = function (className) {
 
         //No Element
-        if (className == null || typeof className == "undefined") {
+        if (className == null || typeof className == undefined) {
             return null;
         }
 
@@ -42,7 +41,7 @@
     $.fn.disappearErrorMessage = function (className) {
 
         //No Element
-        if (className == null || typeof className == "undefined") {
+        if (className == null || typeof className == undefined) {
             return null;
         }
 
@@ -61,11 +60,11 @@
     $.fn.setErrorMessage = function (className, message) {
 
 
-        if (className == null || typeof className == "undefined") {
+        if (className == null || typeof className == undefined) {
             return null;
         }
 
-        if (message == null || typeof message == "undefined") {
+        if (message == null || typeof message == undefined) {
             return null;
         }
 
@@ -75,11 +74,11 @@
 
     $.fn.setSuccessMessage = function (className, message) {
 
-        if (className == null || typeof className == "undefined") {
+        if (className == null || typeof className == undefined) {
             return null;
         }
 
-        if (message == null || typeof message == "undefined") {
+        if (message == null || typeof message == undefined) {
             return null;
         }
 
@@ -90,6 +89,4 @@
     $.fn.setResultStatusMessage = function (className, message) {
 
     }
-
-
 })(jQuery);
